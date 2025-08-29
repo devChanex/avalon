@@ -13,7 +13,7 @@ if (($origin === $allowedOrigin && $_SERVER['REQUEST_METHOD'] === 'POST') || $is
     header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 } else {
     http_response_code(403);
-    echo json_encode(["status" => "error", "message" => "Forbidden Access");
+    echo json_encode(["status" => "error", "message" => "Forbidden Access"]);
     exit;
 }
 ?>
