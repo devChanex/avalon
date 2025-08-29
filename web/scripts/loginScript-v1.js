@@ -29,7 +29,7 @@ function login() {
                 }
             },
             error: function (xhr) {
-                alert("Error: " + xhr.responseText);
+                promptError('Login Failed', "Error: " + xhr.responseText);
             }
 
         });

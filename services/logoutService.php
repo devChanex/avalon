@@ -1,4 +1,5 @@
 <?php
+require_once('processValidator.php');
 session_start();
 session_destroy();
 

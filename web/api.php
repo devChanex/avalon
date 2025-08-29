@@ -1,11 +1,12 @@
 <?php
 header('Content-Type: application/json');
 // Only allow requests from this origin
+$isLocal = false;
 $allowedOrigin = "https://system.avalonwoundcare.ph";
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
 // Check if request comes from allowed origin
-if ($origin === $allowedOrigin && $_SERVER['REQUEST_METHOD'] === 'POST') {
+if (($origin === $allowedOrigin && $_SERVER['REQUEST_METHOD'] === 'POST') || $isLocal) {
     header("Access-Control-Allow-Origin: $origin");
     header("Access-Control-Allow-Credentials: true");
     header("Access-Control-Allow-Methods: POST");

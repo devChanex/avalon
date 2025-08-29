@@ -12,7 +12,7 @@ function logout() {
             window.location.href = "index.php";
         },
         error: function (xhr) {
-            alert("Error: " + xhr + " | Message" + xhr.responseText);
+            promptError('Logout Failed', "Error: " + xhr.responseText);
         }
     });
 
@@ -40,7 +40,7 @@ function loginChecker() {
             }
         },
         error: function (xhr) {
-            alert("Error: " + xhr.responseText);
+            promptError('Login', "Error: " + xhr.responseText);
         }
     });
 
