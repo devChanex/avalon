@@ -1,7 +1,7 @@
 function logout() {
 
     var fd = new FormData();
-    fd.append("service", "logOutService");
+    fd.append("service", "logoutService");
     $.ajax({
         url: "api.php",
         data: fd,
