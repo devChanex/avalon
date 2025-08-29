@@ -1,5 +1,20 @@
 <?php
 header('Content-Type: application/json');
+// Only allow requests from this origin
+$allowedOrigin = "https://system.avalonwoundcare.ph";
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+
+// Check if request comes from allowed origin
+if ($origin === $allowedOrigin && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Credentials: true");
+    header("Access-Control-Allow-Methods: POST");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+} else {
+    http_response_code(403);
+    echo json_encode(["status" => "error", "message" => "Forbidden origin" . " method:" . $_SERVER['REQUEST_METHOD']]);
+    exit;
+}
 
 // Decide which service to run
 $service = $_POST['service'] ?? null;
