@@ -1,4 +1,6 @@
 <?php
+
+header("Access-Control-Allow-Origin: https://system.avalonwoundcare.ph");
 require_once('databaseService.php');
 $service = new ServiceClass();
 $result = $service->process($_POST);
