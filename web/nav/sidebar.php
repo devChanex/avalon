@@ -12,7 +12,7 @@ $patientRecordActive = in_array($page, $patientRecord) ? 'active' : '';
 echo '
   <div class="app-sidebar colored">
                 <div class="sidebar-header">
-                    <a class="header-brand" href="index.html">
+                    <a class="header-brand" href="#">
                         <div class="logo-img">
                             <img src="img/logo/square-logo.png" class="header-brand-img" style="max-height:30px;" alt="lavalite">
                         </div>
