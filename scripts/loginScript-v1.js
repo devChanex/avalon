@@ -14,7 +14,7 @@ function login() {
         fd.append('username', username);
         fd.append('password', password);
         $.ajax({
-            url: "services/loginService.php",
+            url: "https://core.avalonwoundcare.ph/loginService.php",
             data: fd,
             processData: false,
             contentType: false,
