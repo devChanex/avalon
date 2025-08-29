@@ -8,7 +8,7 @@ function loginChecker() {
 
     var fd = new FormData();
     $.ajax({
-        url: "services/loggedChecker.php",
+        url: "services/loggedChecker-1.php",
         data: fd,
         processData: false,
         contentType: false,
