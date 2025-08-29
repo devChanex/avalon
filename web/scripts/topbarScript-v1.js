@@ -12,7 +12,7 @@ function logout() {
             window.location.href = "index.php";
         },
         error: function (xhr) {
-            alert("Error: " + xhr.responseText);
+            alert("Error: " + xhr + " | Message" + xhr.responseText);
         }
     });
 
