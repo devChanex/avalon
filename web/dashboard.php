@@ -31,6 +31,8 @@ require_once 'properties.php';
     <link rel="stylesheet" href="node_modules/perfect-scrollbar/css/perfect-scrollbar.css">
     <link rel="stylesheet" href="node_modules/owl.carousel/dist/assets/owl.carousel.css">
     <link rel="stylesheet" href="node_modules/owl.carousel/dist/assets/owl.theme.default.css">
+
+    <link rel="stylesheet" href="node_modules/jquery-toast-plugin/dist/jquery.toast.min.css">
     <link rel="stylesheet" href="dist/css/theme.min.css">
     <script src="src/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -84,6 +86,8 @@ require_once 'properties.php';
     <script src="js/widgets.js"></script>
     <script src="js/charts.js"></script>
     <script src="dist/js/theme.min.js"></script>
+    <script src="node_modules/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
+
 
     <!-- other plugins -->
     <script src="scripts/promptScript-v1.js"></script>
