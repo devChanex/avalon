@@ -1,5 +1,16 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+
+// Allow requests from your frontend
+header("Access-Control-Allow-Origin: https://system.avalonwoundcare.ph");
+
+// Allow credentials if you are using sessions/cookies
+header("Access-Control-Allow-Credentials: true");
+
+// Allow the required methods
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+
+// Allow the required headers
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 ?>
 <?php
 date_default_timezone_set("Asia/Manila");
