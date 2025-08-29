@@ -14,11 +14,12 @@ function login() {
         fd.append('username', username);
         fd.append('password', password);
         $.ajax({
-            url: "../system/core/loginService.php",
+            url: "https://core.avalonwoundcare.ph/loginService.php",
             data: fd,
             processData: false,
             contentType: false,
             type: 'POST',
+            crossDomain: true,
             success: function (result) {
 
                 if (result.success) {
