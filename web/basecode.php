@@ -86,6 +86,7 @@ require_once 'properties.php';
     <script src="dist/js/theme.min.js"></script>
 
     <!-- other plugins -->
+    <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v1.js"></script>
 
