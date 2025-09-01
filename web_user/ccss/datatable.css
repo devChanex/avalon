@@ -1,0 +1,10 @@
+#datatable {
+    font-size: 12px;
+    /* smaller text */
+}
+
+#datatable td,
+#datatable th {
+    padding: 4px 8px;
+    /* tighter spacing */
+}

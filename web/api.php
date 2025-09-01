@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 // Only allow requests from this origin
-$isLocal = false;
+$isLocal = true;
 $allowedOrigin = "https://system.avalonwoundcare.ph";
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
