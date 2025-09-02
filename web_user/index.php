@@ -194,7 +194,7 @@ require_once 'properties.php';
                                 <hr>
                                 <div class="row">
 
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Phllhealth Card #</label>
                                             <input type="text" class="form-control" id="exampleInputUsername1"
@@ -202,21 +202,26 @@ require_once 'properties.php';
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleSelectGender">Account Type</label>
                                             <select class="form-control" id="accountType">
-                                                <option value="">-- Select Membership Type --</option>
-                                                <option value="FormalEconomy">Formal Economy (Employed)</option>
-                                                <option value="InformalEconomy">Informal Economy (Self-employed, OFWs,
-                                                    etc.)</option>
-                                                <option value="Indigent">Indigent (DSWD-identified)</option>
-                                                <option value="Sponsored">Sponsored (LGU/NGA/organization pays)</option>
-                                                <option value="Lifetime">Lifetime Member (≥120 months paid, retired)
+                                                <option value="">-- Select Account Type --</option>
+                                                <option value="Personal">Personal</option>
+                                                <option value="InformalEconomy">Company</option>
+                                                <option value="Company">HMO</option>
+
                                                 </option>
                                                 <option value="SeniorCitizen">Senior Citizen (60 years & above,
                                                     automatic)</option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername1">Please, Specify</label>
+                                            <input type="text" class="form-control" id="exampleInputUsername1"
+                                                placeholder="Please specify if HMO or Company">
                                         </div>
                                     </div>
 
