@@ -58,7 +58,7 @@ require_once 'properties.php';
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Firstname</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
+                                            <input type="text" class="form-control" id="Firstname"
                                                 placeholder="Firstname">
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@ require_once 'properties.php';
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Middlename</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
+                                            <input type="text" class="form-control" id="Middlename"
                                                 placeholder="Middlename">
                                         </div>
                                     </div>
@@ -74,7 +74,7 @@ require_once 'properties.php';
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Lastname</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
+                                            <input type="text" class="form-control" id="Lastname"
                                                 placeholder="Lastname">
                                         </div>
                                     </div>
@@ -84,8 +84,7 @@ require_once 'properties.php';
 
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="exampleInputUsername2">Birth
-                                                Date</label>
+                                            <label for="exampleInputUsername2">Birth Date</label>
                                             <input type="text" class="form-control datetimepicker-input" id="datepicker"
                                                 data-toggle="datetimepicker" data-target="#datepicker">
 
@@ -93,15 +92,15 @@ require_once 'properties.php';
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="exampleInputUsername1">Birthplace</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
+                                            <label for="exampleInputUsername1">Birth Place</label>
+                                            <input type="text" class="form-control" id="BirthPlace"
                                                 placeholder="Birthplace">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Nationality</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
+                                            <input type="text" class="form-control" id="Nationality"
                                                 placeholder="Nationality">
                                         </div>
                                     </div>
@@ -111,7 +110,7 @@ require_once 'properties.php';
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleSelectGender">Gender</label>
-                                            <select class="form-control" id="gender">
+                                            <select class="form-control" id="Gender">
                                                 <option value="">-- Select --</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
@@ -121,7 +120,7 @@ require_once 'properties.php';
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleSelectGender">Marital Status</label>
-                                            <select class="form-control" id="maritalstatus">
+                                            <select class="form-control" id="MaritalStatus">
                                                 <option value="">-- Select --</option>
                                                 <option value="Single">Single</option>
                                                 <option value="Married">Married</option>
@@ -137,7 +136,7 @@ require_once 'properties.php';
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Religion</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
+                                            <input type="text" class="form-control" id="Religion"
                                                 placeholder="Religion">
                                         </div>
                                     </div>
@@ -148,24 +147,24 @@ require_once 'properties.php';
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Present Address</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
-                                                placeholder="presentAddress">
+                                            <input type="text" class="form-control" id="PresentAddress"
+                                                placeholder="Present Address">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Contact Number</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
-                                                placeholder="Middlename">
+                                            <input type="text" class="form-control" id="ContactNumber"
+                                                placeholder="Contact Number">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Email Address</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
-                                                placeholder="Lastname">
+                                            <input type="text" class="form-control" id="EmailAddress"
+                                                placeholder="Email Address">
                                         </div>
                                     </div>
 
@@ -176,16 +175,16 @@ require_once 'properties.php';
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Occupation</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
-                                                placeholder="presentAddress">
+                                            <input type="text" class="form-control" id="Occupation"
+                                                placeholder="Occupation">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Office Address</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
-                                                placeholder="Middlename">
+                                            <input type="text" class="form-control" id="OfficeAddress"
+                                                placeholder="Office Address">
                                         </div>
                                     </div>
 
@@ -197,30 +196,27 @@ require_once 'properties.php';
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Phllhealth Card #</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
-                                                placeholder="presentAddress">
+                                            <input type="text" class="form-control" id="PhilHealthNumber"
+                                                placeholder="Phllhealth Card #">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleSelectGender">Account Type</label>
-                                            <select class="form-control" id="accountType">
+                                            <select class="form-control" id="AccountType">
                                                 <option value="">-- Select Account Type --</option>
                                                 <option value="Personal">Personal</option>
-                                                <option value="InformalEconomy">Company</option>
-                                                <option value="Company">HMO</option>
+                                                <option value="Company">Company</option>
+                                                <option value="HMO">HMO</option>
 
-                                                </option>
-                                                <option value="SeniorCitizen">Senior Citizen (60 years & above,
-                                                    automatic)</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Please, Specify</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
+                                            <input type="text" class="form-control" id="PleaseSpecify"
                                                 placeholder="Please specify if HMO or Company">
                                         </div>
                                     </div>
@@ -234,27 +230,39 @@ require_once 'properties.php';
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Emergency Contact Person</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
-                                                placeholder="Firstname">
+                                            <input type="text" class="form-control" id="EmergencyContactPerson"
+                                                placeholder="Emergency Contact Person">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Emergency Contact Number</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
-                                                placeholder="Middlename">
+                                            <input type="text" class="form-control" id="EmergencyContactNumber"
+                                                placeholder="Emergency Contact Number">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Relationship</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1"
-                                                placeholder="Lastname">
+                                            <input type="text" class="form-control" id="Relationship"
+                                                placeholder="Relationship">
                                         </div>
                                     </div>
 
+                                </div>
+                                <hr>
+                                <div class="row">
+
+                                    <div class="col-lg-12 text-left">
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="isAgree">
+                                            <span class="custom-control-label">&nbsp;I hereby confirm that the
+                                                information provided above is true and correct
+                                                to the best of my knowledge.</span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
 
@@ -268,7 +276,7 @@ require_once 'properties.php';
 
 
                     <div class="sign-btn text-center">
-                        <input type="button" class="btn btn-primary btn-block" onclick="register();" value="Submit">
+                        <input type="button" class="btn btn-primary btn-block" onclick="register();" value="Register">
                     </div>
                 </div>
 
@@ -284,7 +292,7 @@ require_once 'properties.php';
     <script>window.jQuery || document.write('<script src="src/js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
     <script src="scripts/indexScript-v1.js"></script>
     <script src="scripts/promptScript-v1.js"></script>
-    <script src="scripts/loginScript-v1.js"></script>
+    <script src="scripts/registerPatient-v1.js"></script>
 
 
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
