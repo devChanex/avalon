@@ -261,15 +261,23 @@ function renderPagination(currentPage, totalPages) {
         </li>
     `;
 
-    // Page numbers
-    for (let i = 1; i <= totalPages; i++) {
+    // --- Page numbers (only show max 4) ---
+    let maxVisible = 3;
+    let start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+    let end = start + maxVisible - 1;
+
+    if (end > totalPages) {
+        end = totalPages;
+        start = Math.max(1, end - maxVisible + 1);
+    }
+
+    for (let i = start; i <= end; i++) {
         paginationList.innerHTML += `
             <li class="page-item ${i === currentPage ? "active" : ""}">
                 <a class="page-link" href="#" data-page="${i}">${i}</a>
             </li>
         `;
     }
-
     // Next button
     paginationList.innerHTML += `
         <li class="page-item ${currentPage === totalPages ? "disabled" : ""}">
@@ -287,6 +295,11 @@ function renderPagination(currentPage, totalPages) {
             </a>
         </li>
     `;
+    // --- Page info text ---
+    let pageInfo = document.getElementById("pageInfo");
+    if (pageInfo) {
+        pageInfo.textContent = `Showing page ${currentPage} of ${totalPages} pages`;
+    }
 
     // Attach click handlers
     document.querySelectorAll("#paginationList a").forEach(el => {

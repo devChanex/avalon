@@ -164,6 +164,7 @@ require_once 'properties.php';
                                         <ul class="pagination mb-0" id="paginationList">
                                             <!-- JS will populate here -->
                                         </ul>
+                                        <div id="pageInfo" class="mt-2 text-muted text-center"></div>
                                     </nav>
                                 </div>
 
@@ -571,7 +572,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v2.js"></script>
-    <script src="scripts/patientrecords-v6.js"></script>
+    <script src="scripts/patientrecords-v7.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 
