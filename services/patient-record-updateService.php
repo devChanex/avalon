@@ -57,7 +57,7 @@ class ServiceClass
                 ];
             }
 
-            $sql = "update patients set first_name=:firstName, middle_name=:middleName, last_name=:lastName, birth_date=:birthDate, birth_place=:birthPlace, nationality=:nationality,gender=:gender, marital_status=:maritalStatus, religion=:religion, present_address=:presentAddress, contact_number=:contactNumber,email_address=:emailAddress,occupation=:occupation, office_address=:officeAddress, philhealth_number=:philHealthNumber, account_type=:accountType, please_specify=:pleaseSpecify,emergency_contact_person=:emergencyContactPerson, emergency_contact_number=:emergencyContactNumber, relationship=:relationship, is_agree=:isAgree,allergies=:allergies,currentmedication=:currentmedication where id=:id";
+            $sql = "update patients set first_name=:firstName, middle_name=:middleName, last_name=:lastName, birth_date=:birthDate, birth_place=:birthPlace, nationality=:nationality,gender=:gender, marital_status=:maritalStatus, religion=:religion, present_address=:presentAddress, contact_number=:contactNumber,email_address=:emailAddress,occupation=:occupation, office_address=:officeAddress, philhealth_number=:philHealthNumber, emergency_contact_person=:emergencyContactPerson, emergency_contact_number=:emergencyContactNumber, relationship=:relationship, is_agree=:isAgree,allergies=:allergies,currentmedication=:currentmedication, suffix=:suffix, member_type=:member_type, philhealth_employer_number=:philhealth_employer_number, philhealth_employer_name=:philhealth_employer_name where id=:id";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -78,8 +78,11 @@ class ServiceClass
             $stmt->bindValue(':occupation', $data['occupation']);
             $stmt->bindValue(':officeAddress', $data['officeAddress']);
             $stmt->bindValue(':philHealthNumber', $data['philHealthNumber']);
-            $stmt->bindValue(':accountType', $data['accountType']);
-            $stmt->bindValue(':pleaseSpecify', $data['pleaseSpecify']);
+            $stmt->bindValue(':suffix', $data['suffix']);
+            $stmt->bindValue(':member_type', $data['memberType']);
+            $stmt->bindValue(':philhealth_employer_number', $data['philHealthEmployerNumber']);
+            $stmt->bindValue(':philhealth_employer_name', $data['philhealthEmployerName']);
+
             $stmt->bindValue(':emergencyContactPerson', $data['emergencyContactPerson']);
             $stmt->bindValue(':emergencyContactNumber', $data['emergencyContactNumber']);
             $stmt->bindValue(':relationship', $data['relationship']);

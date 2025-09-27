@@ -162,7 +162,7 @@ require_once 'properties.php';
 
                                                 <div class="row">
 
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Firstname</label>
                                                             <input type="text" class="form-control" id="Firstname"
@@ -170,7 +170,7 @@ require_once 'properties.php';
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Middlename</label>
                                                             <input type="text" class="form-control" id="Middlename"
@@ -178,11 +178,18 @@ require_once 'properties.php';
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Lastname</label>
                                                             <input type="text" class="form-control" id="Lastname"
                                                                 placeholder="Lastname">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Suffix</label>
+                                                            <input type="text" class="form-control" id="Suffix"
+                                                                placeholder="Suffix">
                                                         </div>
                                                     </div>
 
@@ -302,7 +309,7 @@ require_once 'properties.php';
                                                 <hr>
                                                 <div class="row">
 
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Phllhealth Card #</label>
                                                             <input type="text" class="form-control"
@@ -310,25 +317,51 @@ require_once 'properties.php';
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label for="exampleSelectGender">Account Type</label>
-                                                            <select class="form-control" id="AccountType">
+                                                            <label for="exampleSelectGender">Member Type</label>
+                                                            <select class="form-control" id="MemberType">
                                                                 <option value="">-- Select Account Type --</option>
-                                                                <option value="Personal">Personal</option>
-                                                                <option value="Company">Company</option>
-                                                                <option value="HMO">HMO</option>
-
+                                                                <option value="S - Employed Private">S - Employed
+                                                                    Private</option>
+                                                                <option value="G - Employer Government">G - Employer
+                                                                    Government</option>
+                                                                <option value="I - IndigentI">I - Indigent</option>
+                                                                <option value="NS - Individual Paying">NS - Individual
+                                                                    Paying</option>
+                                                                <option value="NO - OFW">NO - OFW</option>
+                                                                <option value="PS - Non Paying Private">PS - Non Paying
+                                                                    Private</option>
+                                                                <option value="PG - Non Paying Government">PG - Non
+                                                                    Paying Government
+                                                                </option>
+                                                                <option value="P - Lifetime Member">P - Lifetime Member
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label for="exampleInputUsername1">Please, Specify</label>
-                                                            <input type="text" class="form-control" id="PleaseSpecify"
-                                                                placeholder="Please specify if HMO or Company">
+                                                            <label for="exampleSelectGender">Philhealth Employer
+                                                                Number</label>
+                                                            <input type="text" class="form-control"
+                                                                id="PhilHealthEmployerNumber"
+                                                                placeholder="Philhealth Employer Number">
+
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Philhealth Employer
+                                                                Name</label>
+                                                            <input type="text" class="form-control"
+                                                                id="PhilhealthEmployerName"
+                                                                placeholder="Philhealth Employer Name">
+                                                        </div>
+                                                    </div>
+
 
 
                                                 </div>
@@ -514,7 +547,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v1.js"></script>
-    <script src="scripts/patientrecords-v3.js"></script>
+    <script src="scripts/patientrecords-v4.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

@@ -49,6 +49,7 @@ function loadpatient() {
                         document.getElementById("Firstname").value = patient.first_name;
                         document.getElementById("Middlename").value = patient.middle_name;
                         document.getElementById("Lastname").value = patient.last_name;
+                        document.getElementById("Suffix").value = patient.suffix;
                         document.getElementById("datepicker").value = formatDateForDatepicker(patient.birth_date);
                         document.getElementById("patientNo").textContent = formatId(patient.id);
                         document.getElementById("BirthPlace").value = patient.birth_place;
@@ -62,8 +63,9 @@ function loadpatient() {
                         document.getElementById("Occupation").value = patient.occupation;
                         document.getElementById("OfficeAddress").value = patient.office_address;
                         document.getElementById("PhilHealthNumber").value = patient.philhealth_number;
-                        document.getElementById("AccountType").value = patient.account_type;
-                        document.getElementById("PleaseSpecify").value = patient.please_specify;
+                        document.getElementById("MemberType").value = patient.member_type;
+                        document.getElementById("PhilHealthEmployerNumber").value = patient.philhealth_employer_number;
+                        document.getElementById("PhilhealthEmployerName").value = patient.philhealth_employer_name;
                         document.getElementById("EmergencyContactPerson").value = patient.emergency_contact_person;
                         document.getElementById("EmergencyContactNumber").value = patient.emergency_contact_number;
                         document.getElementById("Relationship").value = patient.relationship;
@@ -134,6 +136,7 @@ function UpdateProfile() {
         firstName: document.getElementById("Firstname").value.trim(),
         middleName: document.getElementById("Middlename").value.trim(),
         lastName: document.getElementById("Lastname").value.trim(),
+        suffix: document.getElementById("Suffix").value.trim(),
 
         birthDate: document.getElementById("datepicker").value.trim(),
         birthPlace: document.getElementById("BirthPlace").value.trim(),
@@ -151,8 +154,9 @@ function UpdateProfile() {
         officeAddress: document.getElementById("OfficeAddress").value.trim(),
 
         philHealthNumber: document.getElementById("PhilHealthNumber").value.trim(),
-        accountType: document.getElementById("AccountType").value.trim(),
-        pleaseSpecify: document.getElementById("PleaseSpecify").value.trim(),
+        memberType: document.getElementById("MemberType").value.trim(),
+        philHealthEmployerNumber: document.getElementById("PhilHealthEmployerNumber").value.trim(),
+        philhealthEmployerName: document.getElementById("PhilhealthEmployerName").value.trim(),
 
         emergencyContactPerson: document.getElementById("EmergencyContactPerson").value.trim(),
         emergencyContactNumber: document.getElementById("EmergencyContactNumber").value.trim(),
@@ -196,11 +200,7 @@ function UpdateProfile() {
         }
     }
 
-    // If AccountType = HMO or Company -> PleaseSpecify is required
-    if ((data.accountType === "HMO" || data.accountType === "Company") && !data.pleaseSpecify) {
-        promptError('Registration Failed', 'Please specify the ' + data.accountType + ' name.');
-        return;
-    }
+
 
     // Agreement must be checked
     if (!data.isAgree) {

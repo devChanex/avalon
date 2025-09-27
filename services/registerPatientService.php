@@ -59,12 +59,12 @@ class ServiceClass
             $sql = "INSERT INTO patients 
             (first_name, middle_name, last_name, birth_date, birth_place, nationality, 
              gender, marital_status, religion, present_address, contact_number, email_address, 
-             occupation, office_address, philhealth_number, account_type, please_specify, 
+             occupation, office_address, philhealth_number, suffix, member_type, philhealth_employer_number, philhealth_employer_name,
              emergency_contact_person, emergency_contact_number, relationship, is_agree,allergies,currentmedication)
             VALUES 
             (:firstName, :middleName, :lastName, :birthDate, :birthPlace, :nationality,
              :gender, :maritalStatus, :religion, :presentAddress, :contactNumber, :emailAddress,
-             :occupation, :officeAddress, :philHealthNumber, :accountType, :pleaseSpecify,
+             :occupation, :officeAddress, :philHealthNumber,  :suffix, :member_type, :philhealth_employer_number, :philhealth_employer_name,
              :emergencyContactPerson, :emergencyContactNumber, :relationship, :isAgree,:allergies,:currentmedication)";
 
             $stmt = $this->conn->prepare($sql);
@@ -85,8 +85,12 @@ class ServiceClass
             $stmt->bindValue(':occupation', $data['occupation']);
             $stmt->bindValue(':officeAddress', $data['officeAddress']);
             $stmt->bindValue(':philHealthNumber', $data['philHealthNumber']);
-            $stmt->bindValue(':accountType', $data['accountType']);
-            $stmt->bindValue(':pleaseSpecify', $data['pleaseSpecify']);
+
+            $stmt->bindValue(':suffix', $data['suffix']);
+            $stmt->bindValue(':member_type', $data['memberType']);
+            $stmt->bindValue(':philhealth_employer_number', $data['philHealthEmployerNumber']);
+            $stmt->bindValue(':philhealth_employer_name', $data['philhealthEmployerName']);
+
             $stmt->bindValue(':emergencyContactPerson', $data['emergencyContactPerson']);
             $stmt->bindValue(':emergencyContactNumber', $data['emergencyContactNumber']);
             $stmt->bindValue(':relationship', $data['relationship']);

@@ -4,6 +4,7 @@ function register() {
         firstName: document.getElementById("Firstname").value.trim(),
         middleName: document.getElementById("Middlename").value.trim(),
         lastName: document.getElementById("Lastname").value.trim(),
+        suffix: document.getElementById("Suffix").value.trim(),
 
         birthDate: document.getElementById("datepicker").value.trim(),
         birthPlace: document.getElementById("BirthPlace").value.trim(),
@@ -21,8 +22,9 @@ function register() {
         officeAddress: document.getElementById("OfficeAddress").value.trim(),
 
         philHealthNumber: document.getElementById("PhilHealthNumber").value.trim(),
-        accountType: document.getElementById("AccountType").value.trim(),
-        pleaseSpecify: document.getElementById("PleaseSpecify").value.trim(),
+        memberType: document.getElementById("MemberType").value.trim(),
+        philHealthEmployerNumber: document.getElementById("PhilHealthEmployerNumber").value.trim(),
+        philhealthEmployerName: document.getElementById("PhilhealthEmployerName").value.trim(),
 
         emergencyContactPerson: document.getElementById("EmergencyContactPerson").value.trim(),
         emergencyContactNumber: document.getElementById("EmergencyContactNumber").value.trim(),
@@ -66,11 +68,6 @@ function register() {
         }
     }
 
-    // If AccountType = HMO or Company -> PleaseSpecify is required
-    if ((data.accountType === "HMO" || data.accountType === "Company") && !data.pleaseSpecify) {
-        promptError('Registration Failed', 'Please specify the ' + data.accountType + ' name.');
-        return;
-    }
 
     // Agreement must be checked
     if (!data.isAgree) {
