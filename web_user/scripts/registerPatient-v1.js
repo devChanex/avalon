@@ -28,7 +28,25 @@ function register() {
         emergencyContactNumber: document.getElementById("EmergencyContactNumber").value.trim(),
         relationship: document.getElementById("Relationship").value.trim(),
 
-        isAgree: document.getElementById("isAgree").checked
+        isAgree: document.getElementById("isAgree").checked,
+        allergies: {
+            none: document.getElementById("allergyNone").checked,
+            drug: {
+                checked: document.getElementById("allergyDrug").checked,
+                specify: document.getElementById("drugSpecify").value.trim()
+            },
+            food: {
+                checked: document.getElementById("allergyFood").checked,
+                specify: document.getElementById("foodSpecify").value.trim()
+            },
+            others: {
+                checked: document.getElementById("allergyOthers").checked,
+                specify: document.getElementById("othersSpecify").value.trim()
+            }
+        },
+
+        // New field - Current Medications
+        currentMedications: document.getElementById("currentMedications").value.trim()
     };
 
     // ---------------- VALIDATIONS ----------------

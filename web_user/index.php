@@ -253,6 +253,69 @@ require_once 'properties.php';
 
                                 </div>
                                 <hr>
+                                <div class="row mt-3">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Allergies</label>
+
+                                            <!-- None (Top) -->
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" type="checkbox" id="allergyNone">
+                                                <label class="form-check-label" for="allergyNone">None</label>
+                                            </div>
+
+                                            <!-- Other Options in Same Row -->
+                                            <div class="row">
+                                                <!-- Drug -->
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="allergyDrug">
+                                                        <label class="form-check-label" for="allergyDrug">Drug</label>
+                                                    </div>
+                                                    <input type="text" class="form-control form-control-sm mt-1"
+                                                        placeholder="Please specify" id="drugSpecify">
+                                                </div>
+
+                                                <!-- Food -->
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="allergyFood">
+                                                        <label class="form-check-label" for="allergyFood">Food</label>
+                                                    </div>
+                                                    <input type="text" class="form-control form-control-sm mt-1"
+                                                        placeholder="Please specify" id="foodSpecify">
+                                                </div>
+
+                                                <!-- Others -->
+                                                <div class="col-md-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="allergyOthers">
+                                                        <label class="form-check-label"
+                                                            for="allergyOthers">Others</label>
+                                                    </div>
+                                                    <input type="text" class="form-control form-control-sm mt-1"
+                                                        placeholder="Please specify" id="othersSpecify">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Current Medications -->
+                                <div class="row mt-3">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="currentMedications">Current Medication(s)</label>
+                                            <textarea class="form-control" id="currentMedications" rows="3"
+                                                placeholder="List any current medications..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr>
                                 <div class="row">
 
                                     <div class="col-lg-12 text-left">

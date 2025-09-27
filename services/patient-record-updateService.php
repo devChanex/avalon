@@ -41,11 +41,12 @@ class ServiceClass
             }
 
             //check if patient record exist
-            $checkQuery = "SELECT id FROM patients WHERE first_name = :first_name and last_name=:last_name and middle_name=:middle_name and birth_date=:birth_date LIMIT 1";
+            $checkQuery = "SELECT id FROM patients WHERE first_name = :first_name and last_name=:last_name and middle_name=:middle_name and birth_date=:birth_date  and id<> :id LIMIT 1";
             $checkStmt = $this->conn->prepare($checkQuery);
             $checkStmt->bindValue(':first_name', $data['firstName']);
             $checkStmt->bindValue(':last_name', $data['lastName']);
             $checkStmt->bindValue(':middle_name', $data['middleName']);
+            $checkStmt->bindValue(':id', $data['patientId']);
             $checkStmt->bindValue(':birth_date', $birthDate);
             $checkStmt->execute();
 
@@ -56,20 +57,12 @@ class ServiceClass
                 ];
             }
 
-            $sql = "INSERT INTO patients 
-            (first_name, middle_name, last_name, birth_date, birth_place, nationality, 
-             gender, marital_status, religion, present_address, contact_number, email_address, 
-             occupation, office_address, philhealth_number, account_type, please_specify, 
-             emergency_contact_person, emergency_contact_number, relationship, is_agree,allergies,currentmedication)
-            VALUES 
-            (:firstName, :middleName, :lastName, :birthDate, :birthPlace, :nationality,
-             :gender, :maritalStatus, :religion, :presentAddress, :contactNumber, :emailAddress,
-             :occupation, :officeAddress, :philHealthNumber, :accountType, :pleaseSpecify,
-             :emergencyContactPerson, :emergencyContactNumber, :relationship, :isAgree,:allergies,:currentmedication)";
+            $sql = "update patients set first_name=:firstName, middle_name=:middleName, last_name=:lastName, birth_date=:birthDate, birth_place=:birthPlace, nationality=:nationality,gender=:gender, marital_status=:maritalStatus, religion=:religion, present_address=:presentAddress, contact_number=:contactNumber,email_address=:emailAddress,occupation=:occupation, office_address=:officeAddress, philhealth_number=:philHealthNumber, account_type=:accountType, please_specify=:pleaseSpecify,emergency_contact_person=:emergencyContactPerson, emergency_contact_number=:emergencyContactNumber, relationship=:relationship, is_agree=:isAgree,allergies=:allergies,currentmedication=:currentmedication where id=:id";
 
             $stmt = $this->conn->prepare($sql);
 
             // bind params
+            $stmt->bindValue(':id', $data['patientId']);
             $stmt->bindValue(':firstName', $data['firstName']);
             $stmt->bindValue(':middleName', $data['middleName']);
             $stmt->bindValue(':lastName', $data['lastName']);
@@ -98,7 +91,7 @@ class ServiceClass
 
             return [
                 'success' => true,
-                'message' => 'Patient registered successfully'
+                'message' => 'Patient updated successfully'
             ];
 
 

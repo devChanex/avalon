@@ -65,18 +65,25 @@ require_once 'properties.php';
                                         <!-- Sort By (Left) -->
                                         <div>
                                             Sort By:
-                                            <select class="form-control select2 d-inline-block" style="width: 200px;">
+                                            <select class="form-control select2 d-inline-block" id="sortBy"
+                                                onchange="pageRefresh('sortBy');" style="width: 200px;">
                                                 <option value="PatientNo">PatientNo</option>
                                                 <option value="Fullname">Fullname</option>
                                                 <option value="Birthdate">Birthdate</option>
                                                 <option value="Age">Age</option>
+                                            </select>
+                                            <select class="form-control select2 d-inline-block" id="sort"
+                                                onchange="pageRefresh('sort');" style="width: 200px;">
+                                                <option value="Asc">Asc</option>
+                                                <option value="Desc">Desc</option>
+
                                             </select>
                                         </div>
 
                                         <!-- Search (Right) -->
                                         <div class="search-sm">
                                             <input placeholder="Search..." type="text" class="form-control"
-                                                style="width: 300px;">
+                                                style="width: 300px;" id="searchInput" onkeyup="loadpatient();">
                                         </div>
                                     </div>
 
@@ -94,242 +101,364 @@ require_once 'properties.php';
                                                 <th class="nosort">&nbsp;</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>001</td>
-
-                                                <td>Erich Heaney</td>
-                                                <td>04/03/1994</td>
-                                                <td>Male</td>
-                                                <td>31</td>
-                                                <td>9913292079</td>
-                                                <td>erich@example.com</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <button type="button" class="btn social-btn bg-primary"><i
-                                                                class="ik ik-eye"></i></button>
-                                                        <button type="button" class="btn social-btn bg-success"><i
-                                                                class="ik ik-edit-2"></i></button>
-                                                        <button type="button" class="btn social-btn bg-danger"><i
-                                                                class="ik ik-trash-2"></i></button>
-
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>002</td>
-                                                <td>Olivia Benson</td>
-                                                <td>12/11/1990</td>
-                                                <td>Female</td>
-                                                <td>33</td>
-                                                <td>9876543210</td>
-                                                <td>olivia@example.com</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <button type="button" class="btn social-btn bg-primary"><i
-                                                                class="ik ik-eye"></i></button>
-                                                        <button type="button" class="btn social-btn bg-success"><i
-                                                                class="ik ik-edit-2"></i></button>
-                                                        <button type="button" class="btn social-btn bg-danger"><i
-                                                                class="ik ik-trash-2"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>003</td>
-                                                <td>Liam Smith</td>
-                                                <td>23/07/1988</td>
-                                                <td>Male</td>
-                                                <td>35</td>
-                                                <td>9123456789</td>
-                                                <td>liam@example.com</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <button type="button" class="btn social-btn bg-primary"><i
-                                                                class="ik ik-eye"></i></button>
-                                                        <button type="button" class="btn social-btn bg-success"><i
-                                                                class="ik ik-edit-2"></i></button>
-                                                        <button type="button" class="btn social-btn bg-danger"><i
-                                                                class="ik ik-trash-2"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>004</td>
-                                                <td>Emma Johnson</td>
-                                                <td>15/02/1992</td>
-                                                <td>Female</td>
-                                                <td>31</td>
-                                                <td>9234567890</td>
-                                                <td>emma@example.com</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <button type="button" class="btn social-btn bg-primary"><i
-                                                                class="ik ik-eye"></i></button>
-                                                        <button type="button" class="btn social-btn bg-success"><i
-                                                                class="ik ik-edit-2"></i></button>
-                                                        <button type="button" class="btn social-btn bg-danger"><i
-                                                                class="ik ik-trash-2"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>005</td>
-                                                <td>Noah Davis</td>
-                                                <td>09/09/1995</td>
-                                                <td>Male</td>
-                                                <td>28</td>
-                                                <td>9345678901</td>
-                                                <td>noah@example.com</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <button type="button" class="btn social-btn bg-primary"><i
-                                                                class="ik ik-eye"></i></button>
-                                                        <button type="button" class="btn social-btn bg-success"><i
-                                                                class="ik ik-edit-2"></i></button>
-                                                        <button type="button" class="btn social-btn bg-danger"><i
-                                                                class="ik ik-trash-2"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>006</td>
-                                                <td>Ava Martinez</td>
-                                                <td>30/06/1993</td>
-                                                <td>Female</td>
-                                                <td>30</td>
-                                                <td>9456789012</td>
-                                                <td>ava@example.com</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <button type="button" class="btn social-btn bg-primary"><i
-                                                                class="ik ik-eye"></i></button>
-                                                        <button type="button" class="btn social-btn bg-success"><i
-                                                                class="ik ik-edit-2"></i></button>
-                                                        <button type="button" class="btn social-btn bg-danger"><i
-                                                                class="ik ik-trash-2"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>007</td>
-                                                <td>James Wilson</td>
-                                                <td>18/01/1989</td>
-                                                <td>Male</td>
-                                                <td>36</td>
-                                                <td>9567890123</td>
-                                                <td>james@example.com</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <button type="button" class="btn social-btn bg-primary"><i
-                                                                class="ik ik-eye"></i></button>
-                                                        <button type="button" class="btn social-btn bg-success"><i
-                                                                class="ik ik-edit-2"></i></button>
-                                                        <button type="button" class="btn social-btn bg-danger"><i
-                                                                class="ik ik-trash-2"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>008</td>
-                                                <td>Sophia Taylor</td>
-                                                <td>05/05/1996</td>
-                                                <td>Female</td>
-                                                <td>27</td>
-                                                <td>9678901234</td>
-                                                <td>sophia@example.com</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <button type="button" class="btn social-btn bg-primary"><i
-                                                                class="ik ik-eye"></i></button>
-                                                        <button type="button" class="btn social-btn bg-success"><i
-                                                                class="ik ik-edit-2"></i></button>
-                                                        <button type="button" class="btn social-btn bg-danger"><i
-                                                                class="ik ik-trash-2"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>009</td>
-                                                <td>Benjamin Clark</td>
-                                                <td>22/08/1991</td>
-                                                <td>Male</td>
-                                                <td>32</td>
-                                                <td>9789012345</td>
-                                                <td>benjamin@example.com</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <button type="button" class="btn social-btn bg-primary"><i
-                                                                class="ik ik-eye"></i></button>
-                                                        <button type="button" class="btn social-btn bg-success"><i
-                                                                class="ik ik-edit-2"></i></button>
-                                                        <button type="button" class="btn social-btn bg-danger"><i
-                                                                class="ik ik-trash-2"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>010</td>
-                                                <td>Isabella Moore</td>
-                                                <td>11/12/1994</td>
-                                                <td>Female</td>
-                                                <td>29</td>
-                                                <td>9890123456</td>
-                                                <td>isabella@example.com</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <button type="button" class="btn social-btn bg-primary"><i
-                                                                class="ik ik-eye"></i></button>
-                                                        <button type="button" class="btn social-btn bg-success"><i
-                                                                class="ik ik-edit-2"></i></button>
-                                                        <button type="button" class="btn social-btn bg-danger"><i
-                                                                class="ik ik-trash-2"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-
+                                        <tbody id="patientTableBody">
 
 
                                         </tbody>
                                     </table>
                                 </div>
-                                <input type="hidden" id="currentPage" value="1">
-                                <div id="pagination" class="align-items-center d-flex justify-content-center mb-3">
 
+                                <template id="patientRowTemplate">
+                                    <tr>
+                                        <td class="id"></td>
+                                        <td class="name"></td>
+                                        <td class="birth_date"></td>
+                                        <td class="gender"></td>
+                                        <td class="age"></td>
+                                        <td class="contact"></td>
+                                        <td class="email"></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button type="button"
+                                                    class="btn social-btn bg-primary edit-profile-btn">
+                                                    <i class="ik ik-eye"></i>
+                                                </button>
+
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+
+                                <div id="pagination" class="align-items-center d-flex justify-content-center mb-3">
                                     <nav aria-label="Page navigation example">
-                                        <ul class="pagination mb-0">
-                                            <li class="page-item">
-                                                <a class="page-link first" href="#">
-                                                    <i class="ik ik-chevrons-left"></i>
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link prev" href="#">
-                                                    <i class="ik ik-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">1</a>
-                                            </li>
-                                            <li class="page-item active">
-                                                <a class="page-link" href="#">2</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">3</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link next" href="#" aria-label="Next">
-                                                    <i class="ik ik-chevron-right"></i>
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link last" href="#">
-                                                    <i class="ik ik-chevrons-right"></i>
-                                                </a>
-                                            </li>
+                                        <ul class="pagination mb-0" id="paginationList">
+                                            <!-- JS will populate here -->
                                         </ul>
                                     </nav>
                                 </div>
+
+
+
+
+                                <div class="modal fade" id="patientModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="fullwindowModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg mt-0 mb-0" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="fullwindowModalLabel">Patient No: <span
+                                                        id="patientNo"></span></h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                            <div class="modal-body" style="padding: 50px;">
+
+                                                <input type="hidden" id="patientId">
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Firstname</label>
+                                                            <input type="text" class="form-control" id="Firstname"
+                                                                placeholder="Firstname">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Middlename</label>
+                                                            <input type="text" class="form-control" id="Middlename"
+                                                                placeholder="Middlename">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Lastname</label>
+                                                            <input type="text" class="form-control" id="Lastname"
+                                                                placeholder="Lastname">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername2">Birth Date</label>
+                                                            <input type="text" class="form-control datetimepicker-input"
+                                                                id="datepicker" data-toggle="datetimepicker"
+                                                                data-target="#datepicker">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Birth Place</label>
+                                                            <input type="text" class="form-control" id="BirthPlace"
+                                                                placeholder="Birthplace">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Nationality</label>
+                                                            <input type="text" class="form-control" id="Nationality"
+                                                                placeholder="Nationality">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleSelectGender">Gender</label>
+                                                            <select class="form-control" id="Gender">
+                                                                <option value="">-- Select --</option>
+                                                                <option value="Male">Male</option>
+                                                                <option value="Female">Female</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleSelectGender">Marital Status</label>
+                                                            <select class="form-control" id="MaritalStatus">
+                                                                <option value="">-- Select --</option>
+                                                                <option value="Single">Single</option>
+                                                                <option value="Married">Married</option>
+                                                                <option value="Divorced">Divorced</option>
+                                                                <option value="Widowed">Widowed</option>
+                                                                <option value="Separated">Separated</option>
+                                                                <option value="CivilUnion">Civil Union / Domestic
+                                                                    Partnership</option>
+                                                                <option value="Other">Other</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Religion</label>
+                                                            <input type="text" class="form-control" id="Religion"
+                                                                placeholder="Religion">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Present Address</label>
+                                                            <input type="text" class="form-control" id="PresentAddress"
+                                                                placeholder="Present Address">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Contact Number</label>
+                                                            <input type="text" class="form-control" id="ContactNumber"
+                                                                placeholder="Contact Number">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Email Address</label>
+                                                            <input type="text" class="form-control" id="EmailAddress"
+                                                                placeholder="Email Address">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Occupation</label>
+                                                            <input type="text" class="form-control" id="Occupation"
+                                                                placeholder="Occupation">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Office Address</label>
+                                                            <input type="text" class="form-control" id="OfficeAddress"
+                                                                placeholder="Office Address">
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Phllhealth Card #</label>
+                                                            <input type="text" class="form-control"
+                                                                id="PhilHealthNumber" placeholder="Phllhealth Card #">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleSelectGender">Account Type</label>
+                                                            <select class="form-control" id="AccountType">
+                                                                <option value="">-- Select Account Type --</option>
+                                                                <option value="Personal">Personal</option>
+                                                                <option value="Company">Company</option>
+                                                                <option value="HMO">HMO</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Please, Specify</label>
+                                                            <input type="text" class="form-control" id="PleaseSpecify"
+                                                                placeholder="Please specify if HMO or Company">
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <hr>
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Emergency Contact
+                                                                Person</label>
+                                                            <input type="text" class="form-control"
+                                                                id="EmergencyContactPerson"
+                                                                placeholder="Emergency Contact Person">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Emergency Contact
+                                                                Number</label>
+                                                            <input type="text" class="form-control"
+                                                                id="EmergencyContactNumber"
+                                                                placeholder="Emergency Contact Number">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Relationship</label>
+                                                            <input type="text" class="form-control" id="Relationship"
+                                                                placeholder="Relationship">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <hr>
+                                                <div class="row mt-3">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label>Allergies</label>
+
+                                                            <!-- None (Top) -->
+                                                            <div class="form-check mb-3">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="allergyNone">
+                                                                <label class="form-check-label"
+                                                                    for="allergyNone">None</label>
+                                                            </div>
+
+                                                            <!-- Other Options in Same Row -->
+                                                            <div class="row">
+                                                                <!-- Drug -->
+                                                                <div class="col-md-4">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            id="allergyDrug">
+                                                                        <label class="form-check-label"
+                                                                            for="allergyDrug">Drug</label>
+                                                                    </div>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm mt-1"
+                                                                        placeholder="Please specify" id="drugSpecify">
+                                                                </div>
+
+                                                                <!-- Food -->
+                                                                <div class="col-md-4">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            id="allergyFood">
+                                                                        <label class="form-check-label"
+                                                                            for="allergyFood">Food</label>
+                                                                    </div>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm mt-1"
+                                                                        placeholder="Please specify" id="foodSpecify">
+                                                                </div>
+
+                                                                <!-- Others -->
+                                                                <div class="col-md-4">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            id="allergyOthers">
+                                                                        <label class="form-check-label"
+                                                                            for="allergyOthers">Others</label>
+                                                                    </div>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm mt-1"
+                                                                        placeholder="Please specify" id="othersSpecify">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Current Medications -->
+                                                <div class="row mt-3">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="currentMedications">Current
+                                                                Medication(s)</label>
+                                                            <textarea class="form-control" id="currentMedications"
+                                                                rows="3"
+                                                                placeholder="List any current medications..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+                                                <div class="row">
+
+                                                    <div class="col-lg-12 text-left">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="isAgree" checked disabled>
+                                                            <span class="custom-control-label">&nbsp;I hereby confirm
+                                                                that the
+                                                                information provided above is true and correct
+                                                                to the best of my knowledge.</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    onclick="UpdateProfile();">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -380,6 +509,8 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v1.js"></script>
+    <script src="scripts/patientrecords-v1.js"></script>
+    <script src="scripts/tableScripts-v1.js"></script>
 
 
 </body>

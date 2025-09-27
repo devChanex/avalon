@@ -31,6 +31,7 @@ require_once 'properties.php';
     <link rel="stylesheet" href="node_modules/perfect-scrollbar/css/perfect-scrollbar.css">
     <link rel="stylesheet" href="node_modules/owl.carousel/dist/assets/owl.carousel.css">
     <link rel="stylesheet" href="node_modules/owl.carousel/dist/assets/owl.theme.default.css">
+    <link rel="stylesheet" href="node_modules/chartist/dist/chartist.css">
 
     <link rel="stylesheet" href="node_modules/jquery-toast-plugin/dist/jquery.toast.min.css">
     <link rel="stylesheet" href="dist/css/theme.min.css">
@@ -49,7 +50,87 @@ require_once 'properties.php';
             <?php include_once('nav/sidebar.php'); ?>
             <div class="main-content">
                 <div class="container-fluid">
+                    <div class="row">
+                        <!-- Round Chart statustc card start -->
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-red st-cir-card text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div id="status-round-1" class="chart-shadow st-cir-chart"
+                                                style="width:80px;height:80px">
+                                                <h5>42%</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h3 class=" fw-700 mb-5">2</h3>
+                                            <h6 class="mb-0 ">Patient Profiles</h6>
+                                        </div>
+                                    </div>
+                                    <span class="st-bt-lbl">42</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-blue st-cir-card text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div id="status-round-2" class="chart-shadow st-cir-chart"
+                                                style="width:80px;height:80px">
+                                                <h5>56%</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h3 class="fw-700 mb-5">0</h3>
+                                            <h6 class="mb-0">Out Patient</h6>
+                                        </div>
+                                    </div>
+                                    <span class="st-bt-lbl">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-green st-cir-card text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div id="status-round-3" class="chart-shadow st-cir-chart"
+                                                style="width:80px;height:80px">
+                                                <h5>0</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h3 class="fw-700 mb-5">0</h3>
+                                            <h6 class="mb-0">Ambulatory Surgery Patient</h6>
+                                        </div>
+                                    </div>
+                                    <span class="st-bt-lbl">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-yellow st-cir-card text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div id="status-round-4" class="chart-shadow st-cir-chart"
+                                                style="width:80px;height:80px">
+                                                <h5>42%</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col text-center">
+                                            <h3 class="fw-700 mb-5">0.00</h3>
+                                            <h6 class="mb-0">Net Income</h6>
+                                        </div>
+                                    </div>
+                                    <span class="st-bt-lbl">0.00</span>
+                                </div>
+                            </div>
+                        </div>
 
+
+                    </div>
                 </div>
             </div>
 
@@ -85,7 +166,23 @@ require_once 'properties.php';
     <script src="js/tables.js"></script>
     <script src="js/widgets.js"></script>
     <script src="js/charts.js"></script>
+
+    <script src="node_modules/owl.carousel/dist/owl.carousel.min.js"></script>
+    <script src="node_modules/chartist/dist/chartist.min.js"></script>
+    <script src="node_modules/flot-charts/jquery.flot.js"></script>
+    <script src="node_modules/flot-charts/jquery.flot.categories.js"></script>
+    <script src="node_modules/flot.curvedlines/curvedLines.js"></script>
+    <script src="node_modules/jquery.flot.tooltip/js/jquery.flot.tooltip.js"></script>
+    <script src="node_modules/jquery-knob/dist/jquery.knob.min.js"></script>
+    <script src="node_modules/amcharts3/amcharts/amcharts.js"></script>
+    <script src="node_modules/amcharts3/amcharts/gauge.js"></script>
+    <script src="node_modules/amcharts3/amcharts/serial.js"></script>
+    <script src="node_modules/amcharts3/amcharts/themes/light.js"></script>
+    <script src="node_modules/amcharts3/amcharts/pie.js"></script>
+    <script src="node_modules/ammap3/ammap/ammap.js"></script>
+    <script src="node_modules/ammap3/ammap/maps/js/usaLow.js"></script>
     <script src="dist/js/theme.min.js"></script>
+    <script src="js/widget-chart.js"></script>
     <script src="node_modules/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 
 
@@ -93,6 +190,8 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v1.js"></script>
+
+
 
 
 </body>
