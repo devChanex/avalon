@@ -16,8 +16,8 @@ function loginChecker() {
         type: 'POST',
         success: function (result) {
 
-            if (result == "logged") {
-                location.href = "basecode.php";
+            if (result.message == "Logged") {
+                location.href = "patientrecords.php";
             }
         }
     });

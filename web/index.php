@@ -77,7 +77,7 @@ require_once 'properties.php';
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>window.jQuery || document.write('<script src="src/js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
-    <script src="scripts/indexScript-v1.js"></script>
+    <script src="scripts/indexScript-v2.js"></script>
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/loginScript-v2.js"></script>
 
