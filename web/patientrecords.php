@@ -63,17 +63,22 @@ require_once 'properties.php';
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <!-- Sort By (Left) -->
+                                        <div class="search-md">
+
+                                            <input placeholder="Search..." type="text" class="form-control"
+                                                style="width: 300px;" id="searchInput" onkeyup="loadpatient();">
+                                        </div>
                                         <div>
                                             Sort By:
                                             <select class="form-control select2 d-inline-block" id="sortBy"
-                                                onchange="pageRefresh('sortBy');" style="width: 200px;">
+                                                onchange="pageRefresh('sortBy');" style="width: 120px;">
                                                 <option value="PatientNo">PatientNo</option>
                                                 <option value="Fullname">Fullname</option>
                                                 <option value="Birthdate">Birthdate</option>
                                                 <option value="Age">Age</option>
                                             </select>
                                             <select class="form-control select2 d-inline-block" id="sort"
-                                                onchange="pageRefresh('sort');" style="width: 200px;">
+                                                onchange="pageRefresh('sort');" style="width: 100px;">
                                                 <option value="Asc">Asc</option>
                                                 <option value="Desc">Desc</option>
 
@@ -81,31 +86,31 @@ require_once 'properties.php';
                                         </div>
 
                                         <!-- Search (Right) -->
-                                        <div class="search-sm">
-                                            <input placeholder="Search..." type="text" class="form-control"
-                                                style="width: 300px;" id="searchInput" onkeyup="loadpatient();">
-                                        </div>
+
                                     </div>
 
+                                    <div class="table-responsive">
+                                        <table id="datatable" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>PatientNo</th>
+                                                    <th class="nosort">Fullname</th>
+                                                    <th>Birthdate</th>
+                                                    <th>Gender</th>
+                                                    <th>Age</th>
+                                                    <th>Contact Number</th>
+                                                    <th>Email Address</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="patientTableBody">
 
-                                    <table id="datatable" class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>PatientNo</th>
-                                                <th class="nosort">Fullname</th>
-                                                <th>Birthdate</th>
-                                                <th>Gender</th>
-                                                <th>Age</th>
-                                                <th>Contact Number</th>
-                                                <th>Email Address</th>
-                                                <th class="nosort">&nbsp;</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="patientTableBody">
 
+                                            </tbody>
+                                        </table>
 
-                                        </tbody>
-                                    </table>
+                                    </div>
+
                                 </div>
 
                                 <template id="patientRowTemplate">
