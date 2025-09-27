@@ -82,7 +82,7 @@ require_once 'properties.php';
                                         class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                             class="fas fa-plus fa-sm text-white-50"></i> Register</a>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body" style="min-height: 600px;display: block;  ">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <!-- Sort By (Left) -->
                                         <div class="search-md">
