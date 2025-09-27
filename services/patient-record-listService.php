@@ -31,21 +31,21 @@ class ServiceClass
         if ($sortBy === 'PatientNo') {
             $sortBy = 'id';
         } elseif ($sortBy === 'Fullname') {
-            $sortBy = "CONCAT(last_name, ', ', first_name, ' ', middle_name)";
+            $sortBy = "CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name)";
         } elseif ($sortBy === 'Birthdate') {
             $sortBy = 'birth_date';
         } elseif ($sortBy === 'Age') {
             $sortBy = 'birth_date'; // Sorting by birth_date for age
             $sort = $sort === 'ASC' ? 'DESC' : 'ASC'; // Reverse order for age
         } else {
-            $sortBy = "CONCAT(last_name, ', ', first_name, ' ', middle_name)";
+            $sortBy = "CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name)";
         }
 
         $page = isset($data['page']) && is_numeric($data['page']) ? (int) $data['page'] : 1;
         $limit = 10; // records per page
         $offset = ($page - 1) * $limit;
         $search = isset($data['filter']) ? trim($data['filter']) : '';
-        $searchFields = ['contact_number', 'email_address', 'account_type', 'emergency_contact_person', "CONCAT(last_name, ', ', first_name, ' ', middle_name)"];
+        $searchFields = ['contact_number', 'email_address', 'member_type', 'emergency_contact_person', "CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name)"];
         $dynamics = '';
         if (!empty($search)) {
             $orConditions = [];

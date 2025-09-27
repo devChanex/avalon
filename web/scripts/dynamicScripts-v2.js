@@ -17,6 +17,20 @@ function addQueryParam(key) {
     window.history.pushState({}, "", url);
 }
 
+function addQueryParamWithValue(key, value) {
+
+
+    const url = new URL(window.location.href);
+
+    if (value) {
+        url.searchParams.set(key, value);
+    } else {
+        url.searchParams.delete(key); // remove if empty
+    }
+    // Update the URL without reloading
+    window.history.pushState({}, "", url);
+}
+
 function populateFieldsFromQuery(ref, defaultValue) {
     document.getElementById(ref).value = getQueryParam(ref) || defaultValue;
     addQueryParam(ref);

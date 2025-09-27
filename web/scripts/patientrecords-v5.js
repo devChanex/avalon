@@ -37,7 +37,7 @@ function loadpatient() {
                     let clone = template.content.cloneNode(true);
 
                     clone.querySelector(".id").textContent = formatId(patient.id);
-                    clone.querySelector(".name").textContent = `${patient.first_name} ${patient.middle_name} ${patient.last_name}`;
+                    clone.querySelector(".name").textContent = `${patient.last_name} ${patient.suffix}, ${patient.first_name} ${patient.middle_name}  `;
                     clone.querySelector(".birth_date").textContent = patient.birth_date;
                     clone.querySelector(".gender").textContent = patient.gender;
                     clone.querySelector(".age").textContent = calculateAge(patient.birth_date);
@@ -307,6 +307,8 @@ let debounceTimer;
 document.getElementById("searchInput").addEventListener("input", function () {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
+        addQueryParamWithValue('page', 1); // reset to page 1 on new search
         loadpatient(); // your function
+
     }, 300); // wait 300ms after user stops typing
 });
