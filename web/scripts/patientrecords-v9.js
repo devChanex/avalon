@@ -30,6 +30,7 @@ function loadpatient() {
         type: 'POST',
         success: function (result) {
             if (result.success && result.data) {
+                renderPagination(result.page, result.total_pages);
                 let tbody = document.getElementById("patientTableBody");
                 let template = document.getElementById("patientRowTemplate");
                 tbody.innerHTML = "";
@@ -80,7 +81,7 @@ function loadpatient() {
                     tbody.appendChild(clone);
                 });
 
-                renderPagination(result.page, result.total_pages);
+
                 setTimeout(function () {
                     document.getElementById("loaderOverlay").style.display = "none";
                 }, 500); // <-- simulate 2 sec delay
