@@ -301,3 +301,12 @@ function renderPagination(currentPage, totalPages) {
         });
     });
 }
+
+
+let debounceTimer;
+document.getElementById("searchInput").addEventListener("input", function () {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+        loadpatient(); // your function
+    }, 300); // wait 300ms after user stops typing
+});

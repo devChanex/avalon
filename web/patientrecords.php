@@ -66,7 +66,7 @@ require_once 'properties.php';
                                         <div class="search-md">
 
                                             <input placeholder="Search..." type="text" class="form-control"
-                                                style="width: 300px;" id="searchInput" onkeyup="loadpatient();">
+                                                style="width: 300px;" id="searchInput">
                                         </div>
                                         <div>
                                             Sort By:
@@ -514,7 +514,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v1.js"></script>
-    <script src="scripts/patientrecords-v1.js"></script>
+    <script src="scripts/patientrecords-v2.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 
