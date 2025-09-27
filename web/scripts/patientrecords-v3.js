@@ -81,7 +81,7 @@ function loadpatient() {
             }
         },
         error: function (xhr) {
-            promptError('Login Failed', "Error: " + xhr.responseText);
+            promptError('Process Failed', "Error: " + xhr.responseText);
         }
 
     });
