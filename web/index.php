@@ -79,7 +79,7 @@ require_once 'properties.php';
     <script>window.jQuery || document.write('<script src="src/js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
     <script src="scripts/indexScript-v1.js"></script>
     <script src="scripts/promptScript-v1.js"></script>
-    <script src="scripts/loginScript-v1.js"></script>
+    <script src="scripts/loginScript-v2.js"></script>
 
 
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>

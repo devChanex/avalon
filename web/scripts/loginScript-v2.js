@@ -23,7 +23,7 @@ function login() {
             success: function (result) {
 
                 if (result.success) {
-                    promptSuccessRedirect('Login Successful', 'You will be redirected shortly.', 'basecode.php');
+                    promptSuccessRedirect('Login Successful', 'You will be redirected shortly.', 'patientrecords.php');
                 } else {
                     promptError('Login Failed', result.message);
                 }

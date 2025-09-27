@@ -37,6 +37,26 @@ require_once 'properties.php';
     <script src="src/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- aaddtional css -->
     <link rel="stylesheet" href="ccss/datatable.css">
+
+    <style>
+        /* Optional: simple animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -49,6 +69,8 @@ require_once 'properties.php';
 
         <div class="page-wrap">
             <?php include_once('nav/sidebar.php'); ?>
+
+
             <div class="main-content">
                 <div class="container-fluid">
                     <div class="row">
@@ -90,6 +112,8 @@ require_once 'properties.php';
                                     </div>
 
                                     <div class="table-responsive">
+
+
                                         <table id="datatable" class="table table-hover">
                                             <thead>
                                                 <tr>
@@ -104,7 +128,7 @@ require_once 'properties.php';
                                                 </tr>
                                             </thead>
                                             <tbody id="patientTableBody">
-
+                                                <?php include_once('nav/loader.php'); ?>
 
                                             </tbody>
                                         </table>
@@ -547,7 +571,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v2.js"></script>
-    <script src="scripts/patientrecords-v5.js"></script>
+    <script src="scripts/patientrecords-v6.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 
