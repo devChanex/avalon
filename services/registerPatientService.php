@@ -1,5 +1,5 @@
 <?php
-require_once('databaseService.php');
+require_once('registrationDatabaseService.php');
 $service = new ServiceClass();
 $result = $service->process($_POST);
 header('Content-Type: application/json');
