@@ -9,87 +9,91 @@ fields.forEach(f => populateFieldsFromQuery(f.ref, f.defaultValue));
 
 loadpatient();
 function loadpatient() {
+    document.getElementById("loaderOverlay").style.display = "flex";
     var sortBy = getQueryParam('sortBy');
     var sort = getQueryParam('sort');
     var page = getQueryParam('page');
     var filter = document.getElementById("searchInput").value;
-    document.getElementById("loaderOverlay").style.display = "flex";
-    setTimeout(function () {
-        var fd = new FormData();
-        fd.append('service', 'patient-record-listService');
-        fd.append('sortBy', sortBy);
-        fd.append('sort', sort);
-        fd.append('page', page);
-        fd.append('filter', filter);
-        $.ajax({
-            url: "api.php",
-            data: fd,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            success: function (result) {
-                if (result.success && result.data) {
-                    let tbody = document.getElementById("patientTableBody");
-                    let template = document.getElementById("patientRowTemplate");
-                    tbody.innerHTML = "";
-
-                    result.data.forEach(patient => {
-                        let clone = template.content.cloneNode(true);
-
-                        clone.querySelector(".id").textContent = formatId(patient.id);
-                        clone.querySelector(".name").textContent = `${patient.last_name} ${patient.suffix}, ${patient.first_name} ${patient.middle_name}  `;
-                        clone.querySelector(".birth_date").textContent = patient.birth_date;
-                        clone.querySelector(".gender").textContent = patient.gender;
-                        clone.querySelector(".age").textContent = calculateAge(patient.birth_date);
-                        clone.querySelector(".contact").textContent = patient.contact_number;
-                        clone.querySelector(".email").textContent = patient.email_address;
-                        clone.querySelector(".edit-profile-btn").addEventListener("click", function () {
-
-                            document.getElementById("patientId").value = patient.id;
-                            document.getElementById("Firstname").value = patient.first_name;
-                            document.getElementById("Middlename").value = patient.middle_name;
-                            document.getElementById("Lastname").value = patient.last_name;
-                            document.getElementById("Suffix").value = patient.suffix;
-                            document.getElementById("datepicker").value = formatDateForDatepicker(patient.birth_date);
-                            document.getElementById("patientNo").textContent = formatId(patient.id);
-                            document.getElementById("BirthPlace").value = patient.birth_place;
-                            document.getElementById("Nationality").value = patient.nationality;
-                            document.getElementById("Religion").value = patient.religion;
-                            document.getElementById("Gender").value = patient.gender;
-                            document.getElementById("MaritalStatus").value = patient.marital_status;
-                            document.getElementById("PresentAddress").value = patient.present_address;
-                            document.getElementById("ContactNumber").value = patient.contact_number;
-                            document.getElementById("EmailAddress").value = patient.email_address;
-                            document.getElementById("Occupation").value = patient.occupation;
-                            document.getElementById("OfficeAddress").value = patient.office_address;
-                            document.getElementById("PhilHealthNumber").value = patient.philhealth_number;
-                            document.getElementById("MemberType").value = patient.member_type;
-                            document.getElementById("PhilHealthEmployerNumber").value = patient.philhealth_employer_number;
-                            document.getElementById("PhilhealthEmployerName").value = patient.philhealth_employer_name;
-                            document.getElementById("EmergencyContactPerson").value = patient.emergency_contact_person;
-                            document.getElementById("EmergencyContactNumber").value = patient.emergency_contact_number;
-                            document.getElementById("Relationship").value = patient.relationship;
-                            populateAllergies(patient);
-                            // Show modal (Bootstrap 5 way)
-                            var modal = new bootstrap.Modal(document.getElementById("patientModal"));
-                            modal.show();
-                        });
 
 
-                        tbody.appendChild(clone);
+    var fd = new FormData();
+    fd.append('service', 'patient-record-listService');
+    fd.append('sortBy', sortBy);
+    fd.append('sort', sort);
+    fd.append('page', page);
+    fd.append('filter', filter);
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+            if (result.success && result.data) {
+                let tbody = document.getElementById("patientTableBody");
+                let template = document.getElementById("patientRowTemplate");
+                tbody.innerHTML = "";
+
+                result.data.forEach(patient => {
+                    let clone = template.content.cloneNode(true);
+
+                    clone.querySelector(".id").textContent = formatId(patient.id);
+                    clone.querySelector(".name").textContent = `${patient.last_name} ${patient.suffix}, ${patient.first_name} ${patient.middle_name}  `;
+                    clone.querySelector(".birth_date").textContent = patient.birth_date;
+                    clone.querySelector(".gender").textContent = patient.gender;
+                    clone.querySelector(".age").textContent = calculateAge(patient.birth_date);
+                    clone.querySelector(".contact").textContent = patient.contact_number;
+                    clone.querySelector(".email").textContent = patient.email_address;
+                    clone.querySelector(".edit-profile-btn").addEventListener("click", function () {
+
+                        document.getElementById("patientId").value = patient.id;
+                        document.getElementById("Firstname").value = patient.first_name;
+                        document.getElementById("Middlename").value = patient.middle_name;
+                        document.getElementById("Lastname").value = patient.last_name;
+                        document.getElementById("Suffix").value = patient.suffix;
+                        document.getElementById("datepicker").value = formatDateForDatepicker(patient.birth_date);
+                        document.getElementById("patientNo").textContent = formatId(patient.id);
+                        document.getElementById("BirthPlace").value = patient.birth_place;
+                        document.getElementById("Nationality").value = patient.nationality;
+                        document.getElementById("Religion").value = patient.religion;
+                        document.getElementById("Gender").value = patient.gender;
+                        document.getElementById("MaritalStatus").value = patient.marital_status;
+                        document.getElementById("PresentAddress").value = patient.present_address;
+                        document.getElementById("ContactNumber").value = patient.contact_number;
+                        document.getElementById("EmailAddress").value = patient.email_address;
+                        document.getElementById("Occupation").value = patient.occupation;
+                        document.getElementById("OfficeAddress").value = patient.office_address;
+                        document.getElementById("PhilHealthNumber").value = patient.philhealth_number;
+                        document.getElementById("MemberType").value = patient.member_type;
+                        document.getElementById("PhilHealthEmployerNumber").value = patient.philhealth_employer_number;
+                        document.getElementById("PhilhealthEmployerName").value = patient.philhealth_employer_name;
+                        document.getElementById("EmergencyContactPerson").value = patient.emergency_contact_person;
+                        document.getElementById("EmergencyContactNumber").value = patient.emergency_contact_number;
+                        document.getElementById("Relationship").value = patient.relationship;
+                        populateAllergies(patient);
+                        // Show modal (Bootstrap 5 way)
+                        var modal = new bootstrap.Modal(document.getElementById("patientModal"));
+                        modal.show();
                     });
 
-                    renderPagination(result.page, result.total_pages);
-                }
-            },
-            error: function (xhr) {
-                promptError('Process Failed', "Error: " + xhr.responseText);
+
+                    tbody.appendChild(clone);
+                });
+
+                renderPagination(result.page, result.total_pages);
+                setTimeout(function () {
+                    document.getElementById("loaderOverlay").style.display = "none";
+                }, 500); // <-- simulate 2 sec delay
             }
+        },
+        error: function (xhr) {
+            promptError('Process Failed', "Error: " + xhr.responseText);
+        }
 
-        });
+    });
 
-        document.getElementById("loaderOverlay").style.display = "none";
-    }, 1000); // <-- simulate 2 sec delay
+
+
 
 }
 
