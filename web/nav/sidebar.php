@@ -4,10 +4,14 @@ $page = basename($_SERVER['PHP_SELF']);
 // Define page groups
 $dashboard = ['dashboard.php'];
 $patientRecord = ['patientrecords.php', 'patientregistration.php', 'patientview.php', 'patientedit.php'];
+$configuration = ['supplies.php'];
+$inventory = ['inventory.php', 'supplies.php'];
 
 // Determine active states
 $dashboardActive = in_array($page, $dashboard) ? 'active' : '';
 $patientRecordActive = in_array($page, $patientRecord) ? 'active' : '';
+$configurationActive = in_array($page, $configuration) ? 'active' : '';
+$inventoryActive = in_array($page, $inventory) ? 'active' : '';
 
 echo '
   <div class="app-sidebar colored">
@@ -33,12 +37,27 @@ echo '
                              <div class="nav-item ' . $patientRecordActive . '">
                                 <a href="patientrecords.php"><i class="ik ik-users"></i><span>Patients Record</span></a>
                             </div>
+
+                             <div class="nav-item has-sub ' . $inventoryActive . '">
+                                    <a href="#"><i class="ik ik-box"></i><span>Inventory</span></a>
+                                
+                                     <div class="submenu-content">
+                                        <a href="supplies.php" class="menu-item">Supplies & Others</a>   
+                                    </div>
+                                </div>
+                         
+
+                          
                             
                         </nav>
                     </div>
                 </div>
+
+                
             </div>
 
 ';
-
+// <div class="submenu-content">
+//                                     <a href="inventory.php" class="menu-item">Stock Management</a>   
+//                                 </div>
 ?>

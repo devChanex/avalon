@@ -171,9 +171,9 @@ require_once 'properties.php';
 
 
 
-                                <div class="modal fade" id="patientModal" tabindex="-1" role="dialog"
+                                <div class="modal fade full-window-modal" id="patientModal" tabindex="-1" role="dialog"
                                     aria-labelledby="fullwindowModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg mt-0 mb-0" role="document">
+                                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="fullwindowModalLabel">Patient No: <span
