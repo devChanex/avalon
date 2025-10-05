@@ -45,6 +45,35 @@ function loaddata() {
                     clone.querySelector(".type").textContent = rowdata.type;
                     clone.querySelector(".isConsumable").textContent = (rowdata.isConsumable === "1" || rowdata.isConsumable === 1) ? "Yes" : "No";
                     clone.querySelector(".rsv").textContent = rowdata.rsv;
+                    clone.querySelector(".rsv").textContent = rowdata.rsv;
+                    clone.querySelector(".qtyOnhand").textContent = rowdata.qty_onhand;
+                    clone.querySelector(".remarks").textContent = rowdata.latest_expiry;
+
+                    console.log(rowdata);
+                    const rsv = parseFloat(rowdata.rsv) || 0;
+                    const qty = parseFloat(rowdata.qty_onhand) || 0;
+                    if (rsv > qty) {
+
+                        const rsvCell = clone.querySelector(".qtyOnhand");
+                        rsvCell.style.backgroundColor = "red";
+                        rsvCell.style.color = "white"; // optional, makes text visible
+                        rsvCell.style.fontWeight = "bold";
+                    }
+                    // Highlight red if within 1 month
+                    if (rowdata.latest_expiry && rowdata.latest_expiry !== "0000-00-00") {
+                        const expiryDate = new Date(rowdata.latest_expiry);
+                        const today = new Date();
+                        const diffDays = (expiryDate - today) / (1000 * 60 * 60 * 24);
+
+                        if (diffDays <= 30 && diffDays >= 0) {
+
+                            const rsvCell = clone.querySelector(".remarks");
+                            rsvCell.style.backgroundColor = "red";
+                            rsvCell.style.color = "white"; // optional, makes text visible
+                            rsvCell.style.fontWeight = "bold";
+
+                        }
+                    }
                     clone.querySelector(".status").textContent = rowdata.status;
                     clone.querySelector(".created_at").textContent = rowdata.created_at;
                     clone.querySelector(".updated_at").textContent = rowdata.updated_at;

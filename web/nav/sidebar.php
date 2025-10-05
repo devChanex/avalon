@@ -44,6 +44,10 @@ echo '
                                      <div class="submenu-content">
                                         <a href="supplies.php" class="menu-item">Supplies & Others</a>   
                                     </div>
+
+                                    <div class="submenu-content">
+                                    <a href="inventory.php" class="menu-item">Stock Management</a>   
+                                </div>
                                 </div>
                          
 
@@ -57,7 +61,5 @@ echo '
             </div>
 
 ';
-// <div class="submenu-content">
-//                                     <a href="inventory.php" class="menu-item">Stock Management</a>   
-//                                 </div>
+
 ?>

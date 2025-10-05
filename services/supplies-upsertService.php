@@ -59,12 +59,12 @@ class ServiceClass
             $status = 'Updated';
             if (empty($data['supid'])) {
                 // Insert new record
-                $sql = "INSERT INTO supplies (itemname, description, prize, type, status, isConsumable) VALUES (:itemname, :description, :prize, :type, :status, :isConsumable)";
+                $sql = "INSERT INTO supplies (itemname, description, prize, type, status, isConsumable,rsv) VALUES (:itemname, :description, :prize, :type, :status, :isConsumable, :rsv)";
                 $stmt = $this->conn->prepare($sql);
                 $status = "Added";
             } else {
                 // Update existing record
-                $sql = "UPDATE supplies SET itemname=:itemname, description=:description, prize=:prize, type=:type, isConsumable=:isConsumable ,status=:status WHERE supid=:supid";
+                $sql = "UPDATE supplies SET itemname=:itemname, description=:description, prize=:prize, type=:type, isConsumable=:isConsumable ,status=:status, rsv=:rsv WHERE supid=:supid";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bindValue(':supid', $data['supid']);
             }
@@ -80,6 +80,7 @@ class ServiceClass
             $stmt->bindValue(':description', $data['description']);
             $stmt->bindValue(':prize', $data['prize']);
             $stmt->bindValue(':status', $data['status']);
+            $stmt->bindValue(':rsv', $data['rsv']);
 
 
             $stmt->execute();

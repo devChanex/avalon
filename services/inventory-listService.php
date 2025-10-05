@@ -26,14 +26,14 @@ class ServiceClass
     public function process($data)
     {
 
-        $sortBy = isset($data['sortBy']) ? $data['sortBy'] : 'itemname'; // default sort field
+        $sortBy = isset($data['sortBy']) ? $data['sortBy'] : 'invid'; // default sort field
         $sort = isset($data['sort']) && in_array(strtoupper($data['sort']), ['ASC', 'DESC']) ? strtoupper($data['sort']) : 'ASC'; // default sort order
 
         $page = isset($data['page']) && is_numeric($data['page']) ? (int) $data['page'] : 1;
         $limit = 10; // records per page
         $offset = ($page - 1) * $limit;
         $search = isset($data['filter']) ? trim($data['filter']) : '';
-        $searchFields = ['itemname', 'description', 'type', 'prize', "CONCAT('S', LPAD(supid, 6, '0'))"];
+        $searchFields = ["CONCAT('INV', LPAD(a.invid, 6, '0'))", 'b.itemname', 'date_received', 'date_expiry', 'remarks', "CONCAT('S', LPAD(a.supid, 6, '0'))"];
         $dynamics = '';
         if (!empty($search)) {
             $orConditions = [];
@@ -47,7 +47,7 @@ class ServiceClass
 
         try {
             // Count total patients for pagination
-            $countQuery = "SELECT COUNT(*) as total FROM supplies $dynamics ";
+            $countQuery = "SELECT COUNT(itemname) as total FROM inventory a inner join supplies b on a.supid=b.supid $dynamics ";
             $countStmt = $this->conn->prepare($countQuery);
             if (!empty($search)) {
                 $countStmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
@@ -61,8 +61,7 @@ class ServiceClass
 
 
             // Fetch paginated records
-            $query = "SELECT a.*,IFNULL((select sum(b.qty_onhand) from inventory b where b.supid=a.supid),0) as 'qty_onhand', IFNULL(NULLIF((SELECT date_expiry FROM inventory c WHERE c.supid=a.supid AND c.qty_onhand>0 ORDER BY date_expiry ASC LIMIT 1), '0000-00-00'), '') AS latest_expiry
-               FROM supplies a $dynamics  LIMIT :limit OFFSET :offset";
+            $query = "SELECT a.*,b.itemname FROM inventory a inner join supplies b on a.supid=b.supid $dynamics  LIMIT :limit OFFSET :offset";
             $stmt = $this->conn->prepare($query);
             if (!empty($search)) {
                 $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);

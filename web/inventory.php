@@ -77,10 +77,10 @@ require_once 'properties.php';
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header py-3 d-flex justify-content-between">
-                                    <h6 class="m-0 font-weight-bold">Supplies / Equipments / Other Charges</h6>
+                                    <h6 class="m-0 font-weight-bold">Stocks : Supplies / Equipments / Other Charges</h6>
                                     <a href="#" onclick='openModal();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                            class="fas fa-plus fa-sm text-white-50"></i> Add</a>
+                                            class="fas fa-plus fa-sm text-white-50"></i> Add Stock</a>
                                 </div>
                                 <div class="card-body" style="min-height: 600px;display: block;  ">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
@@ -94,18 +94,18 @@ require_once 'properties.php';
                                             Sort By:
                                             <select class="form-control select2 d-inline-block" id="sortBy"
                                                 onchange="pageRefresh('sortBy');" style="width: 120px;">
+                                                <option value="invid">InvRef#</option>
                                                 <option value="itemname">Name</option>
-                                                <option value="type">Type</option>
-                                                <option value="prize">Prize</option>
-                                                <option value="created_at">Creation</option>
-                                                <option value="updated_at">Updated</option>
-                                                <option value="status">Status</option>
+                                                <option value="date_expiry">Date Expiry</option>
+                                                <option value="qty_onhand">Qty Onhand</option>
+                                                <option value="date_received">Date Received</option>
+                                                <option value="a.updated_at">Updated</option>
+
                                             </select>
                                             <select class="form-control select2 d-inline-block" id="sort"
                                                 onchange="pageRefresh('sort');" style="width: 100px;">
                                                 <option value="Asc">Asc</option>
                                                 <option value="Desc">Desc</option>
-
                                             </select>
                                         </div>
 
@@ -119,18 +119,17 @@ require_once 'properties.php';
                                         <table id="datatable" class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Item Reference No</th>
+                                                    <th>InvRef#</th>
+                                                    <th>ItemRef#</th>
                                                     <th class="nosort">Name</th>
-                                                    <th>Description</th>
-                                                    <th>Prize</th>
-                                                    <th>Type</th>
-                                                    <th>Consumable</th>
-                                                    <th>Revised Stock Level</th>
-                                                    <th>Qty On Hand</th>
-                                                    <th>Earliest Expiration</th>
-                                                    <th>Status</th>
-                                                    <th>Created</th>
-                                                    <th>Updated</th>
+                                                    <th>Date Received</th>
+                                                    <th>Qty Received</th>
+                                                    <th>Qty Onhand</th>
+                                                    <th>Qty Consumed</th>
+                                                    <th>Qty Dispossed</th>
+                                                    <th>Date Expiry</th>
+                                                    <th>Remarks</th>
+                                                    <th>Updated Date</th>
                                                     <th class="nosort">&nbsp;</th>
                                                 </tr>
                                             </thead>
@@ -146,22 +145,30 @@ require_once 'properties.php';
 
                                 <template id="dataRowTemplate">
                                     <tr>
-                                        <td class="id"></td>
-                                        <td class="name"></td>
-                                        <td class="description"></td>
-                                        <td class="prize"></td>
-                                        <td class="type"></td>
-                                        <td class="isConsumable"></td>
-                                        <td class="rsv"></td>
-                                        <td class="qtyOnhand"></td>
+                                        <td class="invid"></td>
+                                        <td class="supid"></td>
+                                        <td class="itemname"></td>
+                                        <td class="date_received"></td>
+                                        <td class="qty_received"></td>
+                                        <td class="qty_onhand"></td>
+                                        <td class="qty_consumed"></td>
+                                        <td class="qty_dispossed"></td>
+                                        <td class="date_expiry"></td>
                                         <td class="remarks"></td>
-
-                                        <td class="status"></td>
-                                        <td class="created_at"></td>
                                         <td class="updated_at"></td>
+
                                         <td>
                                             <div class="table-actions">
                                                 <button type="button" class="btn social-btn bg-primary edit-data-btn">
+                                                    <i class="ik ik-edit"></i>
+                                                </button>
+
+                                                <button type="button" class="btn social-btn bg-danger dispose-data-btn"
+                                                    data-toggle="tooltip" data-placement="top" title="Dispose Item">
+                                                    <i class="ik ik-trash"></i>
+                                                </button>
+                                                <button type="button" class="btn social-btn bg-success history-data-btn"
+                                                    data-toggle="tooltip" data-placement="top" title="Dispose Item">
                                                     <i class="ik ik-eye"></i>
                                                 </button>
 
@@ -188,7 +195,7 @@ require_once 'properties.php';
                                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="fullwindowModalLabel">Item Reference #:
+                                                <h5 class="modal-title" id="fullwindowModalLabel">Inventory Reference #:
                                                     <span id="itemid"></span>
                                                 </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
@@ -200,83 +207,52 @@ require_once 'properties.php';
 
                                                 <div class="row">
 
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-6">
+
+
+                                                        <label for="itemname">Medicine</label>
+
+                                                        <!-- Visible field (user types/sees this one) -->
+                                                        <input list="medicineOptions" id="itemname" class="form-control"
+                                                            placeholder="Type medicine code or name" autocomplete="off"
+                                                            onchange="setSupplyId();">
+
+                                                        <datalist id="medicineOptions">
+
+                                                        </datalist>
+
+                                                        <!-- Hidden field (this is submitted to backend) -->
+                                                        <input type="hidden" id="invidmodal" name="invidmodal">
+
+                                                    </div>
+
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label for="exampleInputUsername1">Name</label>
-                                                            <input type="text" class="form-control" id="itemname"
-                                                                placeholder="Item Name">
+                                                            <label for="exampleInputUsername1">Quantity Received</label>
+                                                            <input type="number" class="form-control" id="qty_received"
+                                                                placeholder="Quantity Received">
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="exampleSelectGender">Type</label>
-                                                            <select class="form-control" id="type">
-                                                                <option value="">-- Select --</option>
-                                                                <option value="Supplies / Medicine">Supplies / Medicine
-                                                                </option>
-                                                                <option value="Equipments">Equipments</option>
-                                                                <option value="Others">Others</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputUsername1">Revised Stock
-                                                                Level</label>
-                                                            <input type="number" class="form-control" id="rsv"
-                                                                placeholder="Revised Stock Level">
-                                                        </div>
-                                                    </div>
 
 
 
                                                 </div>
-
 
                                                 <div class="row">
 
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label for="exampleInputUsername1">Prize</label>
-                                                            <input type="number" class="form-control" id="prize"
+                                                            <label for="exampleInputUsername1">Date Received</label>
+                                                            <input type="date" class="form-control" id="date_received"
                                                                 placeholder="Item Name">
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label for="exampleSelectGender">Status</label>
-                                                            <select class="form-control" id="status">
-                                                                <option value="">-- Select --</option>
-                                                                <option value="Active">Active</option>
-                                                                <option value="Inactive">Inactive</option>
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="exampleSelectGender">Is Consumable</label>
-                                                            <select class="form-control" id="isConsumable">
-                                                                <option value="">-- Select --</option>
-                                                                <option value="1">Yes</option>
-                                                                <option value="0">No</option>
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="row">
-
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputUsername1">Description:</label>
-                                                            <input type="text" class="form-control" id="description"
+                                                            <label for="exampleInputUsername1">Expiration Date</label>
+                                                            <input type="date" class="form-control" id="date_expiry"
                                                                 placeholder="Item Name">
                                                         </div>
                                                     </div>
@@ -284,8 +260,10 @@ require_once 'properties.php';
 
 
 
-
                                                 </div>
+
+
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -297,6 +275,106 @@ require_once 'properties.php';
                                     </div>
                                 </div>
 
+
+                                <div class="modal fade" id="disposaldataModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="fullwindowModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="fullwindowModalLabel">Item Dispossal:
+                                                    <span id="dispossalitemid"></span>
+                                                </h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                            <div class="modal-body" style="padding: 50px;">
+                                                Item Name : <strong><span id="dispossalItemName"></span></strong>
+                                                <input type="hidden" id="dispossal_recordid">
+
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Dispossal Date</label>
+                                                            <input type="date" class="form-control" id="dispossal_date"
+                                                                placeholder="Item Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Dispossal
+                                                                Quantity</label>
+                                                            <input type="number" class="form-control" id="qty_dispossal"
+                                                                placeholder="Dispossal Quantity">
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    onclick="itemdisposal();">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="historydataModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="fullwindowModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="fullwindowModalLabel">Item History:
+                                                    <span id="historyitemid"></span>
+                                                </h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                            <div class="modal-body" style="padding: 50px;">
+                                                Item Name : <strong><span id="historyItemName"></span></strong>
+                                                <input type="hidden" id="history_recordid">
+                                                <table id="datatable" class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>InvRef#</th>
+                                                            <th>Type</th>
+                                                            <th>Qty</th>
+                                                            <th>Date</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="historydataTableBody">
+                                                        <?php include_once('nav/loader.php'); ?>
+
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <template id="historydataRowTemplate">
+                                    <tr>
+                                        <td class="invsubid"></td>
+                                        <td class="type"></td>
+                                        <td class="history_qty"></td>
+                                        <td class="history_date"></td>
+
+                                    </tr>
+                                </template>
 
                             </div>
                         </div>
@@ -348,7 +426,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v3.js"></script>
-    <script src="scripts/suppliesconfig-v2.js"></script>
+    <script src="scripts/inventory-v2.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 
