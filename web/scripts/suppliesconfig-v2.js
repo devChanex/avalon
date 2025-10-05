@@ -49,7 +49,7 @@ function loaddata() {
                     clone.querySelector(".qtyOnhand").textContent = rowdata.qty_onhand;
                     clone.querySelector(".remarks").textContent = rowdata.latest_expiry;
 
-                    console.log(rowdata);
+
                     const rsv = parseFloat(rowdata.rsv) || 0;
                     const qty = parseFloat(rowdata.qty_onhand) || 0;
                     if (rsv > qty) {
@@ -108,6 +108,7 @@ function loaddata() {
             }
         },
         error: function (xhr) {
+            console.log(xhr.responseText);
             promptError('Process Failed', "Error: " + xhr.responseText);
         }
 
