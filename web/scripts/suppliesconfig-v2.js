@@ -29,6 +29,7 @@ function loaddata() {
         contentType: false,
         type: 'POST',
         success: function (result) {
+            console.log(result);
             if (result.success && result.data) {
                 renderPagination(result.page, result.total_pages);
                 let tbody = document.getElementById("dataTableBody");
