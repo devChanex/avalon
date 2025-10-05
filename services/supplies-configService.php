@@ -61,7 +61,7 @@ class ServiceClass
 
 
             // Fetch paginated records
-            $query = "SELECT a.*, IFNULL((SELECT SUM(b.qty_onhand) FROM inventory b WHERE b.supid=a.supid),0) AS qty_onhand, IFNULL((SELECT date_expiry FROM inventory c WHERE c.supid=a.supid AND c.qty_onhand>0 AND c.date_expiry IS NOT NULL AND CAST(c.date_expiry AS CHAR)!='0000-00-00' ORDER BY date_expiry ASC LIMIT 1),'') AS latest_expiry FROM supplies a ORDER BY itemname ASC LIMIT :limit OFFSET :offset;";
+            $query = "SELECT a.*, IFNULL((SELECT SUM(b.qty_onhand) FROM inventory b WHERE b.supid=a.supid),0) AS qty_onhand, IFNULL((SELECT date_expiry FROM inventory c WHERE c.supid=a.supid AND c.qty_onhand>0 AND c.date_expiry IS NOT NULL AND CAST(c.date_expiry AS CHAR)!='0000-00-00' ORDER BY date_expiry ASC LIMIT 1),'') AS latest_expiry FROM supplies a $dynamics LIMIT :limit OFFSET :offset";
 
 
             $stmt = $this->conn->prepare($query);
@@ -89,7 +89,7 @@ class ServiceClass
 
             return [
                 'success' => false,
-                'message' => 'Internal server error. Please try again later.' . $e->getMessage() . '----' . $countQuery . '-=---' . $query
+                'message' => 'Internal server error. Please try again later.' . $e->getMessage() . '----' . $countQuery . '-=---' . $query . "Search:" . $search
             ];
         }
 
