@@ -61,8 +61,8 @@ class ServiceClass
 
 
             // Fetch paginated records
-            $query = "SELECT a.*,IFNULL((select sum(b.qty_onhand) from inventory b where b.supid=a.supid),0) as 'qty_onhand', IFNULL(NULLIF((SELECT date_expiry FROM inventory c WHERE c.supid=a.supid AND c.qty_onhand>0 ORDER BY date_expiry ASC LIMIT 1), '0000-00-00'), '') AS latest_expiry
-               FROM supplies a $dynamics  LIMIT :limit OFFSET :offset";
+            $query = "SELECT a.*, IFNULL((SELECT SUM(b.qty_onhand) FROM inventory b WHERE b.supid=a.supid),0) AS qty_onhand, IFNULL((SELECT date_expiry FROM inventory c WHERE c.supid=a.supid AND c.qty_onhand>0 AND c.date_expiry IS NOT NULL AND c.date_expiry!='0000-00-00' ORDER BY date_expiry ASC LIMIT 1),'') AS latest_expiry FROM supplies a ORDER BY itemname ASC LIMIT :limit OFFSET :offset;";
+
             $stmt = $this->conn->prepare($query);
             if (!empty($search)) {
                 $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
