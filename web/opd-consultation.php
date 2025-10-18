@@ -37,26 +37,9 @@ require_once 'properties.php';
     <script src="src/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- aaddtional css -->
     <link rel="stylesheet" href="ccss/datatable.css">
+    <link rel="stylesheet" href="ccss/custom.css">
 
-    <style>
-        /* Optional: simple animation */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
 
-            50% {
-                transform: scale(1.1);
-                opacity: 0.7;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -77,10 +60,10 @@ require_once 'properties.php';
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header py-3 d-flex justify-content-between">
-                                    <h6 class="m-0 font-weight-bold">Supplies / Equipments / Other Charges</h6>
+                                    <h6 class="m-0 font-weight-bold">OPD Consultation</h6>
                                     <a href="#" onclick='openModal();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                            class="fas fa-plus fa-sm text-white-50"></i> Add</a>
+                                            class="fas fa-plus fa-sm text-white-50"></i> New Consultation</a>
                                 </div>
                                 <div class="card-body" style="min-height: 600px;display: block;  ">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
@@ -94,18 +77,17 @@ require_once 'properties.php';
                                             Sort By:
                                             <select class="form-control select2 d-inline-block" id="sortBy"
                                                 onchange="pageRefresh('sortBy');" style="width: 120px;">
-                                                <option value="itemname">Name</option>
-                                                <option value="type">Type</option>
-                                                <option value="prize">Prize</option>
-                                                <option value="created_at">Creation</option>
-                                                <option value="updated_at">Updated</option>
-                                                <option value="status">Status</option>
+                                                <option value="opdcid">conref#</option>
+                                                <option value="fullname">PatientName</option>
+                                                <option value="consultation_date">Date</option>
+                                                <option value="physician">Physician</option>
+
+
                                             </select>
                                             <select class="form-control select2 d-inline-block" id="sort"
                                                 onchange="pageRefresh('sort');" style="width: 100px;">
                                                 <option value="Asc">Asc</option>
                                                 <option value="Desc">Desc</option>
-
                                             </select>
                                         </div>
 
@@ -119,17 +101,13 @@ require_once 'properties.php';
                                         <table id="datatable" class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Item Reference No</th>
-                                                    <th class="nosort">Name</th>
-                                                    <th>Description</th>
-                                                    <th>Prize</th>
-                                                    <th>Type</th>
-                                                    <th>Consumable</th>
-                                                    <th>Revised Stock Level</th>
-                                                    <th>Qty On Hand</th>
-                                                    <th>Earliest Expiration</th>
-                                                    <th>Status</th>
-                                                    <th>Created</th>
+                                                    <th>conref#</th>
+                                                    <th>PatuentNo</th>
+                                                    <th>Patient Name</th>
+                                                    <th>Service</th>
+                                                    <th>Consultation Date</th>
+                                                    <th>Physician</th>
+                                                    <th>Chief Complaint</th>
                                                     <th>Updated</th>
                                                     <th class="nosort">&nbsp;</th>
                                                 </tr>
@@ -146,23 +124,21 @@ require_once 'properties.php';
 
                                 <template id="dataRowTemplate">
                                     <tr>
-                                        <td class="id"></td>
-                                        <td class="name"></td>
-                                        <td class="description"></td>
-                                        <td class="prize"></td>
-                                        <td class="type"></td>
-                                        <td class="isConsumable"></td>
-                                        <td class="rsv"></td>
-                                        <td class="qtyOnhand"></td>
-                                        <td class="remarks"></td>
-
-                                        <td class="status"></td>
-                                        <td class="created_at"></td>
-                                        <td class="updated_at"></td>
+                                        <td class="conref"></td>
+                                        <td class="patientid"></td>
+                                        <td class="patientname"></td>
+                                        <td class="service"></td>
+                                        <td class="consultation_date"></td>
+                                        <td class="physician"></td>
+                                        <td class="chiefcomplaint"></td>
+                                        <td class="updated"></td>
                                         <td>
                                             <div class="table-actions">
                                                 <button type="button" class="btn social-btn bg-primary edit-data-btn">
-                                                    <i class="ik ik-eye"></i>
+                                                    <i class="ik ik-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn social-btn bg-success print-data-btn">
+                                                    <i class="ik ik-printer"></i>
                                                 </button>
 
 
@@ -185,11 +161,11 @@ require_once 'properties.php';
 
                                 <div class="modal fade" id="dataModal" tabindex="-1" role="dialog"
                                     aria-labelledby="fullwindowModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="fullwindowModalLabel">Item Reference #:
-                                                    <span id="itemid"></span>
+                                                <h5 class="modal-title" id="fullwindowModalLabel">OPD Consultation Form
+
                                                 </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -197,95 +173,170 @@ require_once 'properties.php';
                                             <div class="modal-body" style="padding: 50px;">
 
                                                 <input type="hidden" id="recordid">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Consultation Ref
+                                                                #</label>
+                                                            <input type="text" class="form-control" id="conrefNo"
+                                                                placeholder="Consultation Ref #" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Consultation Date</label>
+                                                            <input type="datetime-local" class="form-control"
+                                                                id="consultation_date" placeholder="Item Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-lg-4">
+                                                        <label for="itemname">Patient Name:</label>
+                                                        <!-- Visible field (user types/sees this one) -->
+                                                        <input list="patientOptions" id="patientname"
+                                                            class="form-control" placeholder="Type patient name"
+                                                            autocomplete="off" onchange="loadPatientDetails();">
+                                                        <datalist id="patientOptions">
+                                                        </datalist>
+
+                                                        <!-- Hidden field (this is submitted to backend) -->
+                                                        <input type="hidden" id="pid" name="invidmodal" onchange="">
+
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <label for="itemname">Attending Physician:</label>
+                                                        <!-- Visible field (user types/sees this one) -->
+                                                        <input list="physicianOptions" id="physician"
+                                                            class="form-control" placeholder="Type Physician Name"
+                                                            autocomplete="off">
+                                                        <datalist id="physicianOptions">
+                                                        </datalist>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <label for="itemname">Service:</label>
+                                                        <!-- Visible field (user types/sees this one) -->
+                                                        <input list="serviceOptions" id="service" class="form-control"
+                                                            placeholder="Select Service" autocomplete="off">
+                                                        <datalist id="serviceOptions">
+                                                        </datalist>
+                                                    </div>
+
+
+                                                </div>
+                                                <hr>
+                                                <strong>Vitals & Allergies</strong>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="bp">Blood Pressure (BP)</label>
+                                                            <input type="text" class="form-control" id="bp"
+                                                                placeholder="e.g. 120/80">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="rr">Respiratory Rate (RR)</label>
+                                                            <input type="text" class="form-control" id="rr"
+                                                                placeholder="breaths/min">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="hr">Heart Rate (HR)</label>
+                                                            <input type="text" class="form-control" id="hr"
+                                                                placeholder="bpm">
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 <div class="row">
 
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label for="exampleInputUsername1">Name</label>
-                                                            <input type="text" class="form-control" id="itemname"
-                                                                placeholder="Item Name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="exampleSelectGender">Type</label>
-                                                            <select class="form-control" id="type">
-                                                                <option value="">-- Select --</option>
-                                                                <option value="Supplies / Medicine">Supplies / Medicine
-                                                                </option>
-                                                                <option value="Equipments">Equipments</option>
-                                                                <option value="Others">Others</option>
-                                                            </select>
+                                                            <label for="temp">Temperature (°C)</label>
+                                                            <input type="text" step="0.1" class="form-control" id="temp"
+                                                                placeholder="°C">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label for="exampleInputUsername1">Revised Stock
-                                                                Level</label>
-                                                            <input type="number" class="form-control" id="rsv"
-                                                                placeholder="Revised Stock Level">
+                                                            <label for="height">Height (cm)</label>
+                                                            <input type="text" class="form-control" id="height"
+                                                                placeholder="cm">
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="weight">Weight (kg)</label>
+                                                            <input type="text" class="form-control" id="weight"
+                                                                placeholder="kg">
+                                                        </div>
+                                                    </div>
+                                                </div>
 
 
 
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="o2sat">O₂ Saturation (SpO₂)</label>
+                                                            <input type="text" class="form-control" id="saturation"
+                                                                placeholder="%">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="o2sat">LMP</label>
+                                                            <input type="date" class="form-control" id="lmp"
+                                                                placeholder="%">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="o2sat">Allergies</label>
+                                                            <input type="text" class="form-control" id="allergies"
+                                                                placeholder="%">
+                                                        </div>
+                                                    </div>
                                                 </div>
 
 
                                                 <div class="row">
-
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputUsername1">Prize</label>
-                                                            <input type="number" class="form-control" id="prize"
-                                                                placeholder="Item Name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="exampleSelectGender">Status</label>
-                                                            <select class="form-control" id="status">
-                                                                <option value="">-- Select --</option>
-                                                                <option value="Active">Active</option>
-                                                                <option value="Inactive">Inactive</option>
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="exampleSelectGender">Is Consumable</label>
-                                                            <select class="form-control" id="isConsumable">
-                                                                <option value="">-- Select --</option>
-                                                                <option value="1">Yes</option>
-                                                                <option value="0">No</option>
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="row">
-
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
-                                                            <label for="exampleInputUsername1">Description:</label>
-                                                            <input type="text" class="form-control" id="description"
-                                                                placeholder="Item Name">
+                                                            <label for="past">Past Illness & Surgery</label>
+                                                            <textarea class="form-control" id="past" rows="3"
+                                                                placeholder="Input Past Illness & Surgery"></textarea>
                                                         </div>
                                                     </div>
-
-
-
-
-
                                                 </div>
+
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="complaint">Chief Complaint</label>
+                                                            <textarea class="form-control" id="chief_complaint" rows="3"
+                                                                placeholder="Input Past Illness & Surgery"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="allergies">Physician's Notes</label>
+                                                            <textarea class="form-control" id="note" rows="5"
+                                                                placeholder="Input Notes"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -296,6 +347,9 @@ require_once 'properties.php';
                                         </div>
                                     </div>
                                 </div>
+
+
+
 
 
                             </div>
@@ -348,7 +402,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v4.js"></script>
-    <script src="scripts/suppliesconfig-v2.js"></script>
+    <script src="scripts/opd-consultation-v1.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

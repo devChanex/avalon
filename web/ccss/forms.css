@@ -1,0 +1,147 @@
+body {
+    font-family: "Times New Roman", Times, serif;
+    margin: 25px 60px;
+    color: #000;
+    background: #fff;
+    line-height: 1.5;
+    font-size: 13pt;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    align-items: center;
+    /* ✅ Vertically centers logo + text */
+    border-bottom: 2px solid #000;
+    padding-bottom: 8px;
+    margin-bottom: 0px;
+}
+
+header img {
+    height: 85px;
+    width: auto;
+    margin-right: 18px;
+}
+
+.clinic-info {
+    text-align: left;
+}
+
+.clinic-info h1 {
+    font-size: 16pt;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: bold;
+}
+
+.clinic-info p {
+    margin: 2px 0;
+    font-size: 8pt;
+}
+
+.form-title {
+    margin-top: 0px;
+    text-align: center;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 10pt;
+    /* margin: 25px 0 10px; */
+    border-bottom: 1px solid #000;
+    /* padding-bottom: 4px; */
+    text-transform: uppercase;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* ensures equal cell width */
+}
+
+.info-table td {
+    width: 50%;
+    /* 2 cells per row → divide equally */
+
+    vertical-align: top;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.info-table strong {
+    display: inline-block;
+    min-width: 100px;
+    /* keeps label neatly aligned */
+    font-weight: 600;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* ✅ makes equal-width cells */
+}
+
+td {
+    vertical-align: top;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.label {
+    width: 180px;
+    font-weight: bold;
+}
+
+.notes-box {
+    border: none;
+    min-height: 150px;
+    padding: 10px;
+    text-indent: 20px;
+    text-align: justify;
+}
+
+footer {
+    margin-top: 60px;
+}
+
+.signature-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.signature-block {
+    width: 45%;
+    text-align: center;
+}
+
+.signature-line {
+    border-bottom: 1px solid #000;
+    margin-bottom: 5px;
+    height: 40px;
+    /* space for writing */
+}
+
+.signature-label {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+
+    body {
+        /* margin: 15mm 20mm; */
+        font-size: 10pt;
+    }
+}

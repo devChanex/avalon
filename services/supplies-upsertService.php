@@ -30,7 +30,7 @@ class ServiceClass
         try {
             $data = isset($_POST['data']) ? json_decode($_POST['data'], true) : [];
 
-            if (empty($data['itemname']) || empty($data['prize']) || empty($data['status']) || empty($data['isConsumable'])) {
+            if (empty($data['itemname']) || empty($data['prize']) || empty($data['status'])) {
                 return [
                     'success' => false,
                     'message' => 'Missing required fields'

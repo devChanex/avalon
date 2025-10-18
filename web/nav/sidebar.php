@@ -6,12 +6,14 @@ $dashboard = ['dashboard.php'];
 $patientRecord = ['patientrecords.php', 'patientregistration.php', 'patientview.php', 'patientedit.php'];
 $configuration = ['supplies.php'];
 $inventory = ['inventory.php', 'supplies.php'];
+$opd = ['opdlist.php'];
 
 // Determine active states
 $dashboardActive = in_array($page, $dashboard) ? 'active' : '';
 $patientRecordActive = in_array($page, $patientRecord) ? 'active' : '';
 $configurationActive = in_array($page, $configuration) ? 'active' : '';
 $inventoryActive = in_array($page, $inventory) ? 'active' : '';
+$clinicalServicesActive = in_array($page, $opd) ? 'active' : '';
 
 echo '
   <div class="app-sidebar colored">
@@ -34,9 +36,28 @@ echo '
                             <div class="nav-item ' . $dashboardActive . '"">
                                 <a href="dashboard.php"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
                             </div>
+                           
+
                              <div class="nav-item ' . $patientRecordActive . '">
                                 <a href="patientrecords.php"><i class="ik ik-users"></i><span>Patients Record</span></a>
                             </div>
+
+                         
+
+                              <div class="nav-item has-sub ' . $clinicalServicesActive . '">
+                                    <a href="#"><i class="ik ik-activity"></i><span>Clinical Services</span></a>
+                                
+                                     <div class="submenu-content">
+                                        <a href="opd-consultation.php" class="menu-item">OPD Consultation</a>   
+                                    </div>
+
+                                     <div class="submenu-content">
+                                        <a href="#" class="menu-item">Ambulatory Surgery</a>   
+                                    </div>
+
+                                   
+                                </div>
+                         
 
                              <div class="nav-item has-sub ' . $inventoryActive . '">
                                     <a href="#"><i class="ik ik-box"></i><span>Inventory</span></a>

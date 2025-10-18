@@ -425,8 +425,8 @@ require_once 'properties.php';
     <!-- other plugins -->
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
-    <script src="scripts/dynamicScripts-v3.js"></script>
-    <script src="scripts/inventory-v2.js"></script>
+    <script src="scripts/dynamicScripts-v4.js"></script>
+    <script src="scripts/inventory-v3.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

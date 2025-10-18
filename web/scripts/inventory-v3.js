@@ -6,7 +6,7 @@ var fields = [
 ];
 fields.forEach(f => populateFieldsFromQuery(f.ref, f.defaultValue));
 
-populateDataList('S', 'medicineOptions', 'datalist-supplies');
+populateDataList('S', 'medicineOptions', 'datalist-supplies', 'v1');
 loaddata();
 function loaddata() {
     document.getElementById("loaderOverlay").style.display = "flex";

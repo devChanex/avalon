@@ -31,7 +31,7 @@ class ServiceClass
 
 
             // Fetch paginated records
-            $query = "SELECT supid as id,itemname as attrVal FROM supplies where status='Active'";
+            $query = "SELECT  id,fullname as attrVal FROM physicians order by attrVal";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
 

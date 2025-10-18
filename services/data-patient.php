@@ -31,8 +31,9 @@ class ServiceClass
 
 
             // Fetch paginated records
-            $query = "SELECT supid as id,itemname as attrVal FROM supplies where status='Active'";
+            $query = "SELECT  *,CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name) as fullname FROM patients where id=:pid";
             $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':pid', $data['pid']);
             $stmt->execute();
 
             $datalist = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -31,7 +31,7 @@ class ServiceClass
 
 
             // Fetch paginated records
-            $query = "SELECT supid as id,itemname as attrVal FROM supplies where status='Active'";
+            $query = "SELECT  svcid as id,service as attrVal FROM services order by attrVal";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
 

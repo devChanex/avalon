@@ -1,0 +1,30 @@
+#note {
+    border: 3px solid #28a745;
+    /* Green border */
+    background-color: #e9ffe9;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+    transition: 0.3s;
+}
+
+#note:focus {
+    border-color: #218838;
+    box-shadow: 0 0 15px rgba(33, 136, 56, 0.7);
+    background-color: #f5fff5;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

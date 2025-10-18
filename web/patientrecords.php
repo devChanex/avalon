@@ -171,7 +171,7 @@ require_once 'properties.php';
 
 
 
-                                <div class="modal fade full-window-modal" id="patientModal" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="patientModal" tabindex="-1" role="dialog"
                                     aria-labelledby="fullwindowModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -571,7 +571,7 @@ require_once 'properties.php';
     <!-- other plugins -->
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
-    <script src="scripts/dynamicScripts-v3.js"></script>
+    <script src="scripts/dynamicScripts-v4.js"></script>
     <script src="scripts/patientrecords-v9.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
