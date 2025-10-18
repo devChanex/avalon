@@ -82,10 +82,28 @@ function loaddata() {
                     });
                     clone.querySelector(".print-data-btn").addEventListener("click", function () {
                         // Convert rowdata to a URL-safe string
-                        const encodedData = encodeURIComponent(JSON.stringify(rowdata));
+                        const form = document.createElement("form");
+                        form.method = "POST";
+                        form.action = "forms/consultation_form.php";
+                        form.target = "_blank"; // Open in a new tab
 
-                        // Open new tab with the print page
-                        window.open(`forms/consultation_form.html?data=${encodedData}`, "_blank");
+                        // Create a hidden input to hold the data
+                        const input = document.createElement("input");
+                        input.type = "hidden";
+                        input.name = "data";
+                        input.value = JSON.stringify(rowdata);
+
+                        // Append input to form
+                        form.appendChild(input);
+
+                        // Append form to body (must be in DOM to submit)
+                        document.body.appendChild(form);
+
+                        // Submit form
+                        form.submit();
+
+                        // Remove form after submission
+                        document.body.removeChild(form);
                     });
 
                     tbody.appendChild(clone);

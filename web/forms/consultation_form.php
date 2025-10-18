@@ -125,11 +125,11 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const params = new URLSearchParams(window.location.search);
-            const data = params.get("data");
-            if (!data) return;
             try {
-                const row = JSON.parse(decodeURIComponent(data));
+                // PHP echoes the POSTed data into JS
+                const data = <?php echo json_encode($_POST['data'] ?? '{}'); ?>;
+                const row = JSON.parse(data);
+
                 for (const key in row) {
                     const el = document.getElementById(key);
                     if (el) el.textContent = row[key] ?? "N/A";
@@ -139,11 +139,12 @@
             }
         });
 
+        // 🖨️ Auto-print after load
         window.addEventListener('load', () => {
             window.print();
         });
 
-        // ✅ Close window after print OR cancel
+        // ✅ Close window after print or cancel
         window.onafterprint = () => {
             window.close();
         };
@@ -156,6 +157,7 @@
             }
         });
     </script>
+
 
 </body>
 
