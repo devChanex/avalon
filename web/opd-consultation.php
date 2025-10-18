@@ -402,7 +402,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v4.js"></script>
-    <script src="scripts/opd-consultation-v2.js"></script>
+    <script src="scripts/opd-consultation-v3.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

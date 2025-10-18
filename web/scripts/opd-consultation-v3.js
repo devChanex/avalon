@@ -4,7 +4,7 @@ var fields = [
 ];
 fields.forEach(f => populateFieldsFromQuery(f.ref, f.defaultValue));
 
-populateDataList('P', 'patientOptions', 'datalist-patient', 'v1');
+populateDataList('AP', 'patientOptions', 'datalist-patient', 'v1');
 populateDataList('', 'physicianOptions', 'datalist-physician', 'v2');
 populateDataList('', 'serviceOptions', 'datalist-services', 'v2');
 loaddata();
@@ -41,7 +41,7 @@ function loaddata() {
                     rowdata.ages = calculateAge(rowdata.birth_date);
                     rowdata.consultation_datetime = formatDateTime(rowdata.consultation_date);
                     clone.querySelector(".conref").textContent = "OPDC" + formatId(rowdata.opdcid);
-                    clone.querySelector(".patientid").textContent = "S" + formatId(rowdata.pid);
+                    clone.querySelector(".patientid").textContent = "AP" + formatId(rowdata.pid);
                     clone.querySelector(".patientname").textContent = rowdata.fullname;
                     clone.querySelector(".service").textContent = rowdata.service;
                     clone.querySelector(".consultation_date").textContent = rowdata.consultation_date;
