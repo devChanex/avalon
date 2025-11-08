@@ -52,7 +52,7 @@ echo '
                                     </div>
 
                                      <div class="submenu-content">
-                                        <a href="#" class="menu-item">Ambulatory Surgery</a>   
+                                        <a href="ambulatory-surgery.php" class="menu-item">Ambulatory Surgery</a>   
                                     </div>
 
                                    

@@ -12,6 +12,23 @@
     background-color: #f5fff5;
 }
 
+/* Sticky footer inside the tab */
+.tab-footer {
+    position: sticky;
+    bottom: 0;
+    background: #f8f9fa;
+    padding: 1rem 2rem;
+    border-top: 1px solid #dee2e6;
+    text-align: right;
+}
+
+.tab-inner {
+    max-width: 80%;
+    margin: 0 auto;
+    padding-bottom: 100px;
+    /* space for footer */
+}
+
 @keyframes pulse {
     0% {
         transform: scale(1);
