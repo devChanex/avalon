@@ -155,21 +155,22 @@ require_once 'properties.php';
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
 
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link " id="info-tab" data-bs-toggle="tab" data-bs-target="#tab1"
-                                        type="button" role="tab">Pre-Requisuites</button>
+                                    <button class="nav-link active" id="info-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tab1" type="button" role="tab">Pre-Requisuites</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="consult-tab" data-bs-toggle="tab"
+                                    <button class="nav-link" id="consult-tab" data-bs-toggle="tab"
                                         data-bs-target="#tab2" type="button" role="tab">Ambulatory Surgery Patient
                                         Data</button>
                                 </li>
+
 
                             </ul>
 
                             <!-- Tabs Content -->
                             <div class="tab-content border border-top-0 p-3" id="myTabContent"
                                 style="height: 800px; overflow-y: auto;">
-                                <div class="tab-pane fade " id="tab1" role="tabpanel"
+                                <div class="tab-pane fade show active" id="tab1" role="tabpanel"
                                     style="max-width:80%;margin: 0 auto;">
                                     <div id="consentFormSection">
                                         <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
@@ -244,7 +245,6 @@ require_once 'properties.php';
                                         <hr>
                                     </div>
 
-                                    <hr>
                                     <div id="PreOpCheckListSection">
                                         <input type="hidden" id="preopid">
 
@@ -402,7 +402,7 @@ require_once 'properties.php';
 
 
                                 </div>
-                                <div class="tab-pane fade show active" id="tab2" role="tabpanel"
+                                <div class="tab-pane fade show" id="tab2" role="tabpanel"
                                     style="max-width:80%;margin: 0 auto;" style="max-width:80%;margin: 0 auto;">
                                     <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
                                         onclick="toggleChecklistDetails('ambulatorydatasheet1', 'toggleIcon-predatasheet')">
@@ -650,7 +650,7 @@ require_once 'properties.php';
                                     </h5>
 
                                     <div id="ambulatorydatasheet2" style="
-                                    /* display: none;  */
+                                    display: none; 
                                     margin-top: 10px;">
 
                                         <div class="row">

@@ -233,23 +233,23 @@
             }
         });
 
-        // // 🖨️ Auto-print after load
-        // window.addEventListener('load', () => {
-        //     window.print();
-        // });
+        // 🖨️ Auto-print after load
+        window.addEventListener('load', () => {
+            window.print();
+        });
 
-        // // ✅ Close window after print or cancel
-        // window.onafterprint = () => {
-        //     window.close();
-        // };
+        // ✅ Close window after print or cancel
+        window.onafterprint = () => {
+            window.close();
+        };
 
-        // // ✅ Extra safety for some browsers
-        // const mediaQueryList = window.matchMedia('print');
-        // mediaQueryList.addEventListener('change', (mql) => {
-        //     if (!mql.matches) {
-        //         window.close();
-        //     }
-        // });
+        // ✅ Extra safety for some browsers
+        const mediaQueryList = window.matchMedia('print');
+        mediaQueryList.addEventListener('change', (mql) => {
+            if (!mql.matches) {
+                window.close();
+            }
+        });
     </script>
 
 
