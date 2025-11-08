@@ -139,3 +139,35 @@ function populateDataList(prefix, datalistid, service, version) {
     });
 
 }
+
+function deleteRecord(table, id, key, callback) {
+    if (confirm("Are you sure you want to delete this record?")) {
+
+        var fd = new FormData();
+        fd.append('service', 'deleteRecord-Service');
+        fd.append('table', table);
+        fd.append('key', key);
+        fd.append('id', id);
+
+        $.ajax({
+            url: "api.php",
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (result) {
+                if (result.success) {
+                    promptSuccess('Result', result.message);
+                    if (callback) callback();
+                } else {
+
+                    promptError('Result', result.message);
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr);
+                promptError('Failed Result:', "Error: " + xhr.responseText);
+            }
+        });
+    }
+}

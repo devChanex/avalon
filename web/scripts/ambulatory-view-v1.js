@@ -1,7 +1,10 @@
 
 loaddata();
 loadgeneraldata();
-loadgeneraldata_2()
+loadgeneraldata_2();
+let vitalDataCache = null;
+let ampoDataCache = null;
+let ampnDataCache = null;
 function loadgeneraldata() {
 
     let ref = document.getElementById("consentpid").value;
@@ -119,7 +122,7 @@ function loaddata() {
                     document.getElementById("preop_weight").value = rowdata.WT ?? '';
 
                     // 🧬 Pre-op Info
-                    document.getElementById("preop_allergies").value = rowdata.allergies ?? '';
+                    document.getElementById("preop_allergies").value = rowdata.allergies ?? 'None';
                     document.getElementById("preop_meal").value = rowdata.last_meal ?? '';
                     document.getElementById("preop_lab").value = rowdata.lab_result ?? '';
                     document.getElementById("preop_dose").value = rowdata.last_dose ?? '';
@@ -231,10 +234,217 @@ function loaddata() {
                         });
                     }
                 });
+                let tbody = document.getElementById("dataTableBody_vital");
+                let template = document.getElementById("vital_rowtemplate");
+                tbody.innerHTML = "";
+                vitalDataCache = result.ambulatoryvital; // cache the latest vital data
+
+                result.ambulatoryvital.forEach(rowdata => {
+                    let clone = template.content.cloneNode(true);
+
+                    const dt = new Date(rowdata.vital_datetime);
+
+                    // Get date only (MM/DD/YYYY)
+                    const dateOnly = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/` +
+                        `${dt.getDate().toString().padStart(2, '0')}/` +
+                        `${dt.getFullYear()}`;
+
+                    // Get time only (HH:MM AM/PM)
+                    let hours = dt.getHours();
+                    const minutes = dt.getMinutes().toString().padStart(2, '0');
+                    const ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours % 12 || 12; // convert 0 -> 12
+                    const timeOnly = `${hours}:${minutes} ${ampm}`;
+                    clone.querySelector(".vital_date").textContent = dateOnly;
+                    clone.querySelector(".vital_time").textContent = timeOnly;
+                    clone.querySelector(".vital_bp").textContent = rowdata.bp;
+                    clone.querySelector(".vital_rr").textContent = rowdata.rr;
+                    clone.querySelector(".vital_pr").textContent = rowdata.pr;
+                    clone.querySelector(".vital_osat").textContent = rowdata.osat;
+
+                    clone.querySelector(".vital_temp").textContent = rowdata.temp;
+                    clone.querySelector(".vital_remarks").textContent = rowdata.remarks;
+
+
+
+                    clone.querySelector(".vital-edit-data-btn").addEventListener("click", function () {
+
+                        document.getElementById("vital_amvid_input").value = rowdata.amvid;
+
+                        document.getElementById("vital_datetime_input").value = rowdata.vital_datetime;
+                        document.getElementById("vital_bp_input").value = rowdata.bp;
+                        document.getElementById("vital_rr_input").value = rowdata.rr;
+
+                        document.getElementById("vital_pr_input").value = rowdata.pr;
+
+                        document.getElementById("vital_osat_input").value = rowdata.osat;
+                        document.getElementById("vital_temp_input").value = rowdata.temp;
+                        document.getElementById("vital_remarks_input").value = rowdata.remarks;
+
+                        // Show modal (Bootstrap 5 way)
+                        var modal = new bootstrap.Modal(document.getElementById("dataModalVital"));
+                        modal.show();
+                    });
+                    clone.querySelector(".vital-delete-data-btn").addEventListener("click", function () {
+                        deleteRecord('ambulatory_vital', rowdata.amvid, 'amvid', loaddata);
+                    });
+
+                    tbody.appendChild(clone);
+                });
+
+                let tbodyampo = document.getElementById("dataTableBody_ampo");
+                let templateampo = document.getElementById("ampo_rowtemplate");
+                tbodyampo.innerHTML = "";
+                ampoDataCache = result.ambulatoryampo; // cache the latest vital data
+
+                result.ambulatoryampo.forEach(rowdata => {
+                    let clone = templateampo.content.cloneNode(true);
+
+                    const dt = new Date(rowdata.ampo_datetime);
+
+                    // Get date only (MM/DD/YYYY)
+                    const dateOnly = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/` +
+                        `${dt.getDate().toString().padStart(2, '0')}/` +
+                        `${dt.getFullYear()}`;
+
+                    // Get time only (HH:MM AM/PM)
+                    let hours = dt.getHours();
+                    const minutes = dt.getMinutes().toString().padStart(2, '0');
+                    const ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours % 12 || 12; // convert 0 -> 12
+                    const timeOnly = `${hours}:${minutes} ${ampm}`;
+                    clone.querySelector(".ampo_date").textContent = dateOnly;
+                    clone.querySelector(".ampo_time").textContent = timeOnly;
+                    clone.querySelector(".ampo_note").textContent = rowdata.ampo_note;
+                    clone.querySelector(".ampo_order").textContent = rowdata.ampo_order;
+
+
+
+                    clone.querySelector(".ampo-edit-data-btn").addEventListener("click", function () {
+
+                        document.getElementById("ampoid_input").value = rowdata.ampoid;
+
+                        document.getElementById("ampo_datetime_input").value = rowdata.ampo_datetime;
+                        document.getElementById("ampo_note_input").value = rowdata.ampo_note;
+                        document.getElementById("ampo_order_input").value = rowdata.ampo_order;
+
+
+                        // Show modal (Bootstrap 5 way)
+                        var modal = new bootstrap.Modal(document.getElementById("dataModalAmpo"));
+                        modal.show();
+                    });
+                    clone.querySelector(".ampo-delete-data-btn").addEventListener("click", function () {
+                        deleteRecord('ambulatory_progress_order', rowdata.ampoid, 'ampoid', loaddata);
+                    });
+
+                    tbodyampo.appendChild(clone);
+                });
+
+                let tbodyampn = document.getElementById("dataTableBody_ampn");
+                let templateampn = document.getElementById("ampn_rowtemplate");
+                tbodyampn.innerHTML = "";
+                ampnDataCache = result.ambulatoryampn; // cache the latest vital data
+
+                result.ambulatoryampn.forEach(rowdata => {
+                    let clone = templateampn.content.cloneNode(true);
+
+                    const dt = new Date(rowdata.ampn_datetime);
+
+                    // Get date only (MM/DD/YYYY)
+                    const dateOnly = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/` +
+                        `${dt.getDate().toString().padStart(2, '0')}/` +
+                        `${dt.getFullYear()}`;
+
+                    // Get time only (HH:MM AM/PM)
+                    let hours = dt.getHours();
+                    const minutes = dt.getMinutes().toString().padStart(2, '0');
+                    const ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours % 12 || 12; // convert 0 -> 12
+                    const timeOnly = `${hours}:${minutes} ${ampm}`;
+                    clone.querySelector(".ampn_date").textContent = dateOnly;
+                    clone.querySelector(".ampn_time").textContent = timeOnly;
+                    clone.querySelector(".ampn_focus").textContent = rowdata.ampn_focus;
+                    clone.querySelector(".ampn_data").textContent = rowdata.ampn_data;
+
+
+
+                    clone.querySelector(".ampn-edit-data-btn").addEventListener("click", function () {
+
+                        document.getElementById("ampnid_input").value = rowdata.ampnid;
+
+                        document.getElementById("ampn_datetime_input").value = rowdata.ampn_datetime;
+                        document.getElementById("ampn_focus_input").value = rowdata.ampn_focus;
+                        document.getElementById("ampn_data_input").value = rowdata.ampn_data;
+
+
+                        // Show modal (Bootstrap 5 way)
+                        var modal = new bootstrap.Modal(document.getElementById("dataModalAmpn"));
+                        modal.show();
+                    });
+                    clone.querySelector(".ampn-delete-data-btn").addEventListener("click", function () {
+                        deleteRecord('ambulatory_progress_nurse', rowdata.ampnid, 'ampnid', loaddata);
+                    });
+
+                    tbodyampn.appendChild(clone);
+                });
+
+                //     let clone = template.content.cloneNode(true);
+
+                //     const dt = new Date(rowdata.vital_datetime);
+
+                //     // Get date only (MM/DD/YYYY)
+                //     const dateOnly = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/` +
+                //         `${dt.getDate().toString().padStart(2, '0')}/` +
+                //         `${dt.getFullYear()}`;
+
+                //     // Get time only (HH:MM AM/PM)
+                //     let hours = dt.getHours();
+                //     const minutes = dt.getMinutes().toString().padStart(2, '0');
+                //     const ampm = hours >= 12 ? 'PM' : 'AM';
+                //     hours = hours % 12 || 12; // convert 0 -> 12
+                //     const timeOnly = `${hours}:${minutes} ${ampm}`;
+                //     clone.querySelector(".vital_date").textContent = dateOnly;
+                //     clone.querySelector(".vital_time").textContent = timeOnly;
+                //     clone.querySelector(".vital_bp").textContent = rowdata.bp;
+                //     clone.querySelector(".vital_rr").textContent = rowdata.rr;
+                //     clone.querySelector(".vital_pr").textContent = rowdata.pr;
+                //     clone.querySelector(".vital_osat").textContent = rowdata.osat;
+
+                //     clone.querySelector(".vital_temp").textContent = rowdata.temp;
+                //     clone.querySelector(".vital_remarks").textContent = rowdata.remarks;
+
+
+
+                //     clone.querySelector(".vital-edit-data-btn").addEventListener("click", function () {
+
+                //         document.getElementById("vital_amvid_input").value = rowdata.amvid;
+
+                //         document.getElementById("vital_datetime_input").value = rowdata.vital_datetime;
+                //         document.getElementById("vital_bp_input").value = rowdata.bp;
+                //         document.getElementById("vital_rr_input").value = rowdata.rr;
+
+                //         document.getElementById("vital_pr_input").value = rowdata.pr;
+
+                //         document.getElementById("vital_osat_input").value = rowdata.osat;
+                //         document.getElementById("vital_temp_input").value = rowdata.temp;
+                //         document.getElementById("vital_remarks_input").value = rowdata.remarks;
+
+                //         // Show modal (Bootstrap 5 way)
+                //         var modal = new bootstrap.Modal(document.getElementById("dataModalVital"));
+                //         modal.show();
+                //     });
+                //     clone.querySelector(".vital-delete-data-btn").addEventListener("click", function () {
+                //         deleteRecord('ambulatory_vital', rowdata.amvid, 'amvid', loaddata);
+                //     });
+
+                //     tbody.appendChild(clone);
+                // });
                 setTimeout(function () {
                     document.getElementById("loaderOverlay").style.display = "none";
                 }, 500); // <-- simulate 2 sec delay
             }
+
+
         },
         error: function (xhr) {
             promptError('Process Failed', "Error: " + xhr.responseText);
@@ -245,6 +455,47 @@ function loaddata() {
 
 
 
+}
+
+
+function openModalVital() {
+    clearModalVital();
+    $("#dataModalVital").modal("show");
+}
+function clearModalVital() {
+    document.getElementById("vital_amvid_input").value = "";
+    document.getElementById("vital_datetime_input").value = "";
+    document.getElementById("vital_bp_input").value = "";
+    document.getElementById("vital_rr_input").value = "";
+    document.getElementById("vital_pr_input").value = "";
+    document.getElementById("vital_osat_input").value = "";
+    document.getElementById("vital_temp_input").value = "";
+    document.getElementById("vital_remarks_input").value = "";
+
+}
+
+function openModalAmpo() {
+    clearModalAmpo();
+    $("#dataModalAmpo").modal("show");
+}
+
+function clearModalAmpo() {
+    document.getElementById("ampoid_input").value = "";
+    document.getElementById("ampo_datetime_input").value = "";
+    document.getElementById("ampo_note_input").value = "";
+    document.getElementById("ampo_order_input").value = "";
+}
+
+function openModalAmpn() {
+    clearModalAmpn();
+    $("#dataModalAmpn").modal("show");
+}
+
+function clearModalAmpn() {
+    document.getElementById("ampnid_input").value = "";
+    document.getElementById("ampn_datetime_input").value = "";
+    document.getElementById("ampn_focus_input").value = "";
+    document.getElementById("ampn_data_input").value = "";
 }
 document.querySelectorAll('.pain-btn').forEach(btn => {
     // apply base inline style
@@ -746,6 +997,258 @@ async function printWHO() {
     // Submit form
     form.submit();
 
+    // Remove form after submission
+    document.body.removeChild(form);
+}
+
+function printVitalSheet() {
+    var records = {};
+    records.vitalSigns = vitalDataCache;
+    records.fullname = document.getElementById("general_fullname").value;
+    records.birthDate = document.getElementById("general_birthdate").value;
+    records.gender = document.getElementById("general_gender").value;
+    records.age = document.getElementById("general_age").value;
+    records.physician = document.getElementById("general_physician").value;
+    records.patientno = document.getElementById("general_pid").value;
+    records.caseno = document.getElementById("general_amid").value;
+    records.phic_no = document.getElementById("general_phic_no").value;
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "forms/ambulatory_vitalsigns_form.php";
+    form.target = "_blank"; // Open in a new tab
+    // Create a hidden input to hold the data
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "data";
+    input.value = JSON.stringify(records);
+    // Append input to form
+    form.appendChild(input);
+    // Append form to body (must be in DOM to submit)
+    document.body.appendChild(form);
+
+    // Submit form
+    form.submit();
+    // Remove form after submission
+    document.body.removeChild(form);
+}
+function UpSertVitalData() {
+
+    var data = {
+        amvid: document.getElementById("vital_amvid_input").value.trim(),
+        amid: document.getElementById("ref").value.trim(),
+        vital_datetime: document.getElementById("vital_datetime_input").value.trim(),
+        bp: document.getElementById("vital_bp_input").value.trim(),
+        rr: document.getElementById("vital_rr_input").value.trim(),
+        pr: document.getElementById("vital_pr_input").value.trim(),
+        osat: document.getElementById("vital_osat_input").value.trim(),
+        temp: document.getElementById("vital_temp_input").value.trim(),
+        remarks: document.getElementById("vital_remarks_input").value.trim()
+    };
+
+
+    // ---------------- VALIDATIONS ----------------
+
+    // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
+    let requiredFields = [
+        "amid", "vital_datetime"
+    ];
+    for (let field of requiredFields) {
+        if (!data[field]) {
+            promptError('Transaction Failed', field.toUpperCase() + ' is required.');
+            return;
+        }
+    }
+    // ---------------- FORM DATA ----------------
+    var fd = new FormData();
+    fd.append('service', 'ambulatory-vital-upsertService');
+    fd.append('data', JSON.stringify(data));
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+            if (result.success) {
+                $('#dataModalVital').modal('hide');
+
+                promptSuccess('Result', result.message);
+                loaddata();
+            } else {
+                promptError('Result', result.message);
+            }
+        },
+        error: function (xhr) {
+            promptError('Failed Result:', "Error: " + xhr.responseText);
+        }
+
+    });
+
+}
+
+function UpSertAmpoData() {
+
+    var data = {
+        ampoid: document.getElementById("ampoid_input").value.trim(),
+        amid: document.getElementById("ref").value.trim(),
+        ampo_datetime: document.getElementById("ampo_datetime_input").value.trim(),
+        ampo_note: document.getElementById("ampo_note_input").value.trim(),
+        ampo_order: document.getElementById("ampo_order_input").value.trim()
+    };
+
+
+    // ---------------- VALIDATIONS ----------------
+
+    // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
+    let requiredFields = [
+        "amid", "ampo_datetime"
+    ];
+    for (let field of requiredFields) {
+        if (!data[field]) {
+            promptError('Transaction Failed', field.toUpperCase() + ' is required.');
+            return;
+        }
+    }
+    // ---------------- FORM DATA ----------------
+    var fd = new FormData();
+    fd.append('service', 'ambulatory-ampo-upsertService');
+    fd.append('data', JSON.stringify(data));
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+            if (result.success) {
+                $('#dataModalAmpo').modal('hide');
+
+                promptSuccess('Result', result.message);
+                loaddata();
+            } else {
+                promptError('Result', result.message);
+            }
+        },
+        error: function (xhr) {
+            promptError('Failed Result:', "Error: " + xhr.responseText);
+        }
+
+    });
+
+}
+
+
+function UpSertAmpnData() {
+
+    var data = {
+        ampnid: document.getElementById("ampnid_input").value.trim(),
+        amid: document.getElementById("ref").value.trim(),
+        ampn_datetime: document.getElementById("ampn_datetime_input").value.trim(),
+        ampn_focus: document.getElementById("ampn_focus_input").value.trim(),
+        ampn_data: document.getElementById("ampn_data_input").value.trim()
+    };
+
+
+    // ---------------- VALIDATIONS ----------------
+
+    // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
+    let requiredFields = [
+        "amid", "ampn_datetime"
+    ];
+    for (let field of requiredFields) {
+        if (!data[field]) {
+            promptError('Transaction Failed', field.toUpperCase() + ' is required.');
+            return;
+        }
+    }
+    // ---------------- FORM DATA ----------------
+    var fd = new FormData();
+    fd.append('service', 'ambulatory-ampn-upsertService');
+    fd.append('data', JSON.stringify(data));
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+            if (result.success) {
+                $('#dataModalAmpn').modal('hide');
+
+                promptSuccess('Result', result.message);
+                loaddata();
+            } else {
+                promptError('Result', result.message);
+            }
+        },
+        error: function (xhr) {
+            promptError('Failed Result:', "Error: " + xhr.responseText);
+        }
+
+    });
+
+}
+
+function printAmpnSheet() {
+    var records = {};
+    records.ampn = ampnDataCache;
+    records.fullname = document.getElementById("general_fullname").value;
+    records.birthDate = document.getElementById("general_birthdate").value;
+    records.gender = document.getElementById("general_gender").value;
+    records.age = document.getElementById("general_age").value;
+    records.physician = document.getElementById("general_physician").value;
+    records.patientno = document.getElementById("general_pid").value;
+    records.caseno = document.getElementById("general_amid").value;
+    records.phic_no = document.getElementById("general_phic_no").value;
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "forms/ambulatory_ampn_form.php";
+    form.target = "_blank"; // Open in a new tab
+    // Create a hidden input to hold the data
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "data";
+    input.value = JSON.stringify(records);
+    // Append input to form
+    form.appendChild(input);
+    // Append form to body (must be in DOM to submit)
+    document.body.appendChild(form);
+
+    // Submit form
+    form.submit();
+    // Remove form after submission
+    document.body.removeChild(form);
+}
+
+function printAmpoSheet() {
+    var records = {};
+    records.ampo = ampoDataCache;
+
+    records.fullname = document.getElementById("general_fullname").value;
+    records.birthDate = document.getElementById("general_birthdate").value;
+    records.gender = document.getElementById("general_gender").value;
+    records.age = document.getElementById("general_age").value;
+    records.physician = document.getElementById("general_physician").value;
+    records.patientno = document.getElementById("general_pid").value;
+    records.caseno = document.getElementById("general_amid").value;
+    records.phic_no = document.getElementById("general_phic_no").value;
+    // console.log(JSON.stringify(records));
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "forms/ambulatory_ampo_form.php";
+    form.target = "_blank"; // Open in a new tab
+    // Create a hidden input to hold the data
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "data";
+    input.value = JSON.stringify(records);
+    // Append input to form
+    form.appendChild(input);
+    // Append form to body (must be in DOM to submit)
+    document.body.appendChild(form);
+
+    // Submit form
+    form.submit();
     // Remove form after submission
     document.body.removeChild(form);
 }

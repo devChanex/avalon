@@ -163,8 +163,18 @@ require_once 'properties.php';
                                         data-bs-target="#tab2" type="button" role="tab">Ambulatory Surgery Patient
                                         Data</button>
                                 </li>
-
-
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="vital-tab" data-bs-toggle="tab" data-bs-target="#tab3"
+                                        type="button" role="tab">Vital Signs Sheet</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="physicianorder-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tab4" type="button" role="tab">Physicians Order Sheet</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="nursesprogress-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tab5" type="button" role="tab">Nurses Progress Notes</button>
+                                </li>
                             </ul>
 
                             <!-- Tabs Content -->
@@ -802,16 +812,385 @@ require_once 'properties.php';
                                     </div>
                                     <hr>
                                 </div>
+                                <div class="tab-pane fade show" id="tab3" role="tabpanel"
+                                    style="max-width:80%;margin: 0 auto;">
+                                    <a href="#" onclick='openModalVital();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
+                                    <a href="#" onclick='printVitalSheet();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+                                            class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
+                                    <hr>
+                                    <div class="table-responsive">
+
+
+                                        <table id="datatable" class="table table-hover">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>Temperature</th>
+                                                    <th>Pulse Rate</th>
+                                                    <th>Respiratory Rate</th>
+                                                    <th>Blood Pressure</th>
+                                                    <th>O₂ Sat</th>
+                                                    <th>Remarks</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_vital">
+
+
+                                            </tbody>
+                                        </table>
+                                        <template id="vital_rowtemplate">
+                                            <tr>
+
+                                                <td class="vital_date"></td>
+                                                <td class="vital_time"></td>
+                                                <td class="vital_temp"></td>
+                                                <td class="vital_pr"></td>
+                                                <td class="vital_rr"></td>
+                                                <td class="vital_bp"></td>
+                                                <td class="vital_osat"></td>
+                                                <td class="vital_remarks"></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button type="button"
+                                                            class="btn social-btn bg-success vital-edit-data-btn">
+                                                            <i class="ik ik-edit"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                            class="btn social-btn bg-danger vital-delete-data-btn">
+                                                            <i class="ik ik-trash"></i>
+                                                        </button>
 
 
 
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="tab-pane fade show" id="tab4" role="tabpanel"
+                                    style="max-width:80%;margin: 0 auto;">
+                                    <a href="#" onclick='openModalAmpo();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
+                                    <a href="#" onclick='printAmpoSheet();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+                                            class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
+                                    <hr>
+                                    <div class="table-responsive">
+
+
+                                        <table id="datatable" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>Progress Note</th>
+                                                    <th>Doctor's Order</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_ampo">
+
+
+                                            </tbody>
+                                        </table>
+                                        <template id="ampo_rowtemplate">
+                                            <tr>
+
+                                                <td class="ampo_date"></td>
+                                                <td class="ampo_time"></td>
+                                                <td class="ampo_note"></td>
+                                                <td class="ampo_order"></td>
+
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button type="button"
+                                                            class="btn social-btn bg-success ampo-edit-data-btn">
+                                                            <i class="ik ik-edit"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                            class="btn social-btn bg-danger ampo-delete-data-btn">
+                                                            <i class="ik ik-trash"></i>
+                                                        </button>
+
+
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane fade show" id="tab5" role="tabpanel"
+                                    style="max-width:80%;margin: 0 auto;">
+                                    <a href="#" onclick='openModalAmpn();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
+                                    <a href="#" onclick='printAmpnSheet();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+                                            class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
+                                    <hr>
+                                    <div class="table-responsive">
+
+
+                                        <table id="datatable" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>Focus</th>
+                                                    <th>Data/Action/Response</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_ampn">
+
+
+                                            </tbody>
+                                        </table>
+                                        <template id="ampn_rowtemplate">
+                                            <tr>
+
+                                                <td class="ampn_date"></td>
+                                                <td class="ampn_time"></td>
+                                                <td class="ampn_focus"></td>
+                                                <td class="ampn_data"></td>
+
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button type="button"
+                                                            class="btn social-btn bg-success ampn-edit-data-btn">
+                                                            <i class="ik ik-edit"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                            class="btn social-btn bg-danger ampn-delete-data-btn">
+                                                            <i class="ik ik-trash"></i>
+                                                        </button>
+
+
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </div>
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="dataModalVital" tabindex="-1" role="dialog"
+                aria-labelledby="fullwindowModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullwindowModalLabel">Vital Sign Form
 
 
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body" style="padding: 50px;">
+                            <input type="hidden" id="vital_amvid_input">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Date Time:</label>
+                                        <input type="datetime-local" class="form-control" id="vital_datetime_input"
+                                            placeholder="Blood Pressure">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Remarks:</label>
+                                        <input type="text" class="form-control" id="vital_remarks_input"
+                                            placeholder="Remarks">
+                                    </div>
+                                </div>
+                            </div>
+                            <strong>Vital Signs:</strong>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Temperature:</label>
+                                        <input type="text" class="form-control" id="vital_temp_input"
+                                            placeholder="Temperature">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="tab2_pr">Pulse Rate (PR):</label>
+                                        <input type="text" class="form-control" id="vital_pr_input"
+                                            placeholder="Pulse Rate (PR)">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="tab2_rr">Respiratory Rate (RR):</label>
+                                        <input type="text" class="form-control" id="vital_rr_input"
+                                            placeholder="Respiratory Rate">
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_temp">Blood Pressure:</label>
+                                        <input type="text" class="form-control" id="vital_bp_input"
+                                            placeholder="Blood Pressure">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_height">O₂ Sat:</label>
+                                        <input type="text" class="form-control" id="vital_osat_input"
+                                            placeholder="O₂ Sat">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary" onclick="UpSertVitalData();">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="dataModalAmpo" tabindex="-1" role="dialog"
+                aria-labelledby="fullwindowModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullwindowModalLabel">Physicians Order
+
+
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body" style="padding: 50px;">
+                            <input type="hidden" id="ampoid_input">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Date Time:</label>
+                                        <input type="datetime-local" class="form-control" id="ampo_datetime_input"
+                                            placeholder="Blood Pressure">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Note:</label>
+                                        <input type="text" class="form-control" id="ampo_note_input" placeholder="Note">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Order:</label>
+                                        <input type="text" class="form-control" id="ampo_order_input"
+                                            placeholder="Doctor's Order">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary" onclick="UpSertAmpoData();">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="dataModalAmpn" tabindex="-1" role="dialog"
+                aria-labelledby="fullwindowModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullwindowModalLabel">Nurse's Progress Note
+
+
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body" style="padding: 50px;">
+                            <input type="hidden" id="ampnid_input">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Date Time:</label>
+                                        <input type="datetime-local" class="form-control" id="ampn_datetime_input"
+                                            placeholder="Blood Pressure">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Focus:</label>
+                                        <input type="text" class="form-control" id="ampn_focus_input"
+                                            placeholder="Focus">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Data/Action/Response:</label>
+                                        <input type="text" class="form-control" id="ampn_data_input"
+                                            placeholder="Data/Action/Response">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary" onclick="UpSertAmpnData();">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php include_once('nav/activityLogs.php'); ?>
             <?php include_once('nav/footer.php'); ?>
 
@@ -850,6 +1229,8 @@ require_once 'properties.php';
     <script src="node_modules/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 
     <!-- other plugins -->
