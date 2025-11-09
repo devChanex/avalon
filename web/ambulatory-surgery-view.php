@@ -175,6 +175,11 @@ require_once 'properties.php';
                                     <button class="nav-link" id="nursesprogress-tab" data-bs-toggle="tab"
                                         data-bs-target="#tab5" type="button" role="tab">Nurses Progress Notes</button>
                                 </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="nursesprogress-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tab6" type="button" role="tab">Operative Technique
+                                        Form</button>
+                                </li>
                             </ul>
 
                             <!-- Tabs Content -->
@@ -991,6 +996,154 @@ require_once 'properties.php';
                                     </div>
 
 
+                                </div>
+                                <div class="tab-pane fade show" id="tab6" role="tabpanel"
+                                    style="max-width:80%;margin: 0 auto;" style="max-width:80%;margin: 0 auto;">
+
+                                    <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
+                                        onclick="toggleChecklistDetails('ambulatory_optech', 'toggleIcon-optech')">
+                                        <span id="toggleIcon-optech" style="transition: transform 0.2s;">▼</span>
+                                        Operative Technique Form
+                                    </h5>
+
+                                    <div id="ambulatory_optech" style="
+                                    /* display: none;  */
+                                    margin-top: 10px;">
+                                        <input type="hidden" id="amtechid_input">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="consent_surgery_date">Date/Time Started:</label>
+                                                    <input type="datetime-local" class="form-control"
+                                                        id="optech_datetime_started">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="consent_surgery_date">Date/Time Ended:</label>
+                                                    <input type="datetime-local" class="form-control"
+                                                        id="optech_datetime_ended">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <br>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Preoperative Diagnosis:</label>
+                                                    <input type="text" class="form-control"
+                                                        id="optech_preop_diagnosis_input"
+                                                        placeholder="Preoperative Diagnosis">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Operative Procedure(s):</label>
+                                                    <input type="text" class="form-control"
+                                                        id="optech_op_procedure_input"
+                                                        placeholder="Operative Procedure">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Postoperative Diagnosis:</label>
+                                                    <input type="text" class="form-control"
+                                                        id="optech_posop_diagnosis_input"
+                                                        placeholder="Postoperative Diagnosis">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Narrative of Technique with Operative
+                                                        Findings:</label>
+                                                    <textarea class="form-control" id="optech_narative_input" rows="3"
+                                                        placeholder="Narrative of Technique with Operative Findings"></textarea>
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Surgeon:</label>
+                                                    <input type="text" class="form-control" id="optech_surgeon_input"
+                                                        placeholder="Surgeon">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Assistant:</label>
+                                                    <input type="text" class="form-control" id="optech_assistant_input"
+                                                        placeholder="Assistant">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Anethesiologist:</label>
+                                                    <input type="text" class="form-control"
+                                                        id="optech_anesthesiologist_input"
+                                                        placeholder="Anethesiologist">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Scrub Nurse:</label>
+                                                    <input type="text" class="form-control"
+                                                        id="optech_scrub_nurse_input" placeholder="Scrub Nurse">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Circulating Nurse:</label>
+                                                    <input type="text" class="form-control"
+                                                        id="optech_circulating_nurse_input"
+                                                        placeholder="Circulating Nurse">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Instrument Count:</label>
+                                                    <input type="text" class="form-control"
+                                                        id="optech_instrument_count_input"
+                                                        placeholder="Instrument Count">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Needle Count:</label>
+                                                    <input type="text" class="form-control"
+                                                        id="optech_needle_count_input" placeholder="Needle Count">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="tab2_bp">Sponge Count:</label>
+                                                    <input type="text" class="form-control"
+                                                        id="optech_sponge_count_input" placeholder="Sponge Count">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-footer">
+                                            <button type="button" class="btn btn-success px-4"
+                                                onclick="UpSertOperativeTechnique();">
+                                                Save and Print
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <hr>
                                 </div>
                             </div>
                         </div>

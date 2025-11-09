@@ -50,6 +50,7 @@ require_once 'properties.php';
             <?php include_once('nav/sidebar.php'); ?>
             <div class="main-content">
                 <div class="container-fluid">
+                    <?php include_once('nav/loader.php'); ?>
                     <div class="row">
                         <!-- Round Chart statustc card start -->
                         <div class="col-xl-3 col-md-6">
@@ -59,15 +60,15 @@ require_once 'properties.php';
                                         <div class="col-auto">
                                             <div id="status-round-1" class="chart-shadow st-cir-chart"
                                                 style="width:80px;height:80px">
-                                                <h5>42%</h5>
+
                                             </div>
                                         </div>
                                         <div class="col text-center">
-                                            <h3 class=" fw-700 mb-5">2</h3>
+                                            <h3 class="fw-700 mb-5" id="patientCount">0</h3>
                                             <h6 class="mb-0 ">Patient Profiles</h6>
                                         </div>
                                     </div>
-                                    <span class="st-bt-lbl">42</span>
+                                    <span class="st-bt-lbl" id="patientCount-banner">42</span>
                                 </div>
                             </div>
                         </div>
@@ -78,15 +79,15 @@ require_once 'properties.php';
                                         <div class="col-auto">
                                             <div id="status-round-2" class="chart-shadow st-cir-chart"
                                                 style="width:80px;height:80px">
-                                                <h5>56%</h5>
+                                                <h5 id="opd-patientCount-percent">56%</h5>
                                             </div>
                                         </div>
                                         <div class="col text-center">
-                                            <h3 class="fw-700 mb-5">0</h3>
+                                            <h3 class="fw-700 mb-5" id="opd-patientCount">0</h3>
                                             <h6 class="mb-0">Out Patient</h6>
                                         </div>
                                     </div>
-                                    <span class="st-bt-lbl">0</span>
+                                    <span class="st-bt-lbl" id="opd-patientCount-banner">0</span>
                                 </div>
                             </div>
                         </div>
@@ -97,15 +98,15 @@ require_once 'properties.php';
                                         <div class="col-auto">
                                             <div id="status-round-3" class="chart-shadow st-cir-chart"
                                                 style="width:80px;height:80px">
-                                                <h5>0</h5>
+                                                <h5 id="amb-patientCount-percent">0</h5>
                                             </div>
                                         </div>
                                         <div class="col text-center">
-                                            <h3 class="fw-700 mb-5">0</h3>
+                                            <h3 class="fw-700 mb-5" id="amb-patientCount">0</h3>
                                             <h6 class="mb-0">Ambulatory Surgery Patient</h6>
                                         </div>
                                     </div>
-                                    <span class="st-bt-lbl">0</span>
+                                    <span class="st-bt-lbl" id="amb-patientCount-banner">0</span>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +117,7 @@ require_once 'properties.php';
                                         <div class="col-auto">
                                             <div id="status-round-4" class="chart-shadow st-cir-chart"
                                                 style="width:80px;height:80px">
-                                                <h5>42%</h5>
+                                                <h5>0.00%</h5>
                                             </div>
                                         </div>
                                         <div class="col text-center">
@@ -130,6 +131,18 @@ require_once 'properties.php';
                         </div>
 
 
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-xl-12">
+                            <div class="card sale-card">
+                                <div class="card-header">
+                                    <h3>Case Monthly Analytics</h3>
+                                </div>
+                                <div class="card-block">
+                                    <div id="deal-analytic-chart" class="chart-shadow" style="height:300px"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -190,6 +203,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v4.js"></script>
+    <script src="scripts/dashboard-v1.js"></script>
 
 
 

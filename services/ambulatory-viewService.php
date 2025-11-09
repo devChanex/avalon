@@ -80,6 +80,13 @@ class ServiceClass
 
             $ambulatory_ampn = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            $query = "SELECT * FROM ambulatory_technique where amid=:ref";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
+            $stmt->execute();
+
+            $ambulatory_technique = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 
             return [
@@ -89,7 +96,8 @@ class ServiceClass
                 'ambulatorydata' => $ambulatory_data,
                 'ambulatoryvital' => $ambulatory_vital,
                 'ambulatoryampo' => $ambulatory_ampo,
-                'ambulatoryampn' => $ambulatory_ampn
+                'ambulatoryampn' => $ambulatory_ampn,
+                'ambulatorytechnique' => $ambulatory_technique
 
             ];
 

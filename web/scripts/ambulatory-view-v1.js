@@ -387,6 +387,25 @@ function loaddata() {
 
                     tbodyampn.appendChild(clone);
                 });
+                result.ambulatorytechnique.forEach(rowdata => {
+                    document.getElementById("amtechid_input").value = rowdata.amtechid ?? '';
+                    document.getElementById("ref").value = rowdata.amid ?? '';
+                    document.getElementById("optech_datetime_started").value = rowdata.optech_started ?? '';
+                    document.getElementById("optech_datetime_ended").value = rowdata.optech_ended ?? '';
+                    document.getElementById("optech_preop_diagnosis_input").value = rowdata.optech_preop_diagnosis ?? '';
+                    document.getElementById("optech_posop_diagnosis_input").value = rowdata.optech_posop_diagnosis ?? '';
+                    document.getElementById("optech_op_procedure_input").value = rowdata.optech_op_procedure ?? '';
+                    document.getElementById("optech_narative_input").value = rowdata.optech_narative ?? '';
+                    document.getElementById("optech_surgeon_input").value = rowdata.optech_surgeon ?? '';
+                    document.getElementById("optech_anesthesiologist_input").value = rowdata.optech_anesthesiologist ?? '';
+                    document.getElementById("optech_assistant_input").value = rowdata.optech_assistant ?? '';
+                    document.getElementById("optech_scrub_nurse_input").value = rowdata.optech_scrub_nurse ?? '';
+                    document.getElementById("optech_circulating_nurse_input").value = rowdata.optech_circulating_nurse ?? '';
+                    document.getElementById("optech_instrument_count_input").value = rowdata.optech_instrument_count ?? '';
+                    document.getElementById("optech_needle_count_input").value = rowdata.optech_needle_count ?? '';
+                    document.getElementById("optech_sponge_count_input").value = rowdata.optech_sponge_count ?? '';
+                });
+
 
                 //     let clone = template.content.cloneNode(true);
 
@@ -1251,4 +1270,98 @@ function printAmpoSheet() {
     form.submit();
     // Remove form after submission
     document.body.removeChild(form);
+}
+
+// Operative Technique Form
+function UpSertOperativeTechnique() {
+
+    var data = {
+        amtechid: document.getElementById("amtechid_input").value.trim(),
+        amid: document.getElementById("ref").value.trim(),
+        optech_started: document.getElementById("optech_datetime_started").value.trim(),
+        optech_ended: document.getElementById("optech_datetime_ended").value.trim(),
+        optech_preop_diagnosis: document.getElementById("optech_preop_diagnosis_input").value.trim(),
+        optech_posop_diagnosis: document.getElementById("optech_posop_diagnosis_input").value.trim(),
+        optech_op_procedure: document.getElementById("optech_op_procedure_input").value.trim(),
+        optech_narative: document.getElementById("optech_narative_input").value.trim(),
+        optech_surgeon: document.getElementById("optech_surgeon_input").value.trim(),
+        optech_anesthesiologist: document.getElementById("optech_anesthesiologist_input").value.trim(),
+        optech_assistant: document.getElementById("optech_assistant_input").value.trim(),
+        optech_scrub_nurse: document.getElementById("optech_scrub_nurse_input").value.trim(),
+        optech_circulating_nurse: document.getElementById("optech_circulating_nurse_input").value.trim(),
+        optech_instrument_count: document.getElementById("optech_instrument_count_input").value.trim(),
+        optech_needle_count: document.getElementById("optech_needle_count_input").value.trim(),
+        optech_sponge_count: document.getElementById("optech_sponge_count_input").value.trim()
+    };
+
+
+    // ---------------- VALIDATIONS ----------------
+
+    // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
+    let requiredFields = [
+        "optech_started", "optech_preop_diagnosis"
+    ];
+
+    for (let field of requiredFields) {
+        if (!data[field]) {
+            promptError('Transaction Failed', field.toUpperCase() + ' is required.');
+            return;
+        }
+    }
+
+    // ---------------- FORM DATA ----------------
+    var fd = new FormData();
+    fd.append('service', 'ambulatory-optech-upsertService');
+    fd.append('data', JSON.stringify(data));
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+            if (result.success) {
+
+                promptSuccess('Result', result.message);
+                loaddata();
+
+                const form = document.createElement("form");
+                form.method = "POST";
+                form.action = "forms/ambulatory_technique_form.php";
+                form.target = "_blank"; // Open in a new tab
+
+                result.record.caseno = document.getElementById("general_amid").value;
+
+                result.record.patientno = document.getElementById("general_pid").value;
+
+
+                // Create a hidden input to hold the data
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "data";
+                input.value = JSON.stringify(result.record);
+
+                // Append input to form
+                form.appendChild(input);
+
+                // Append form to body (must be in DOM to submit)
+                document.body.appendChild(form);
+
+                // Submit form
+                form.submit();
+
+                // Remove form after submission
+                document.body.removeChild(form);
+
+            } else {
+
+                promptError('Result', result.message);
+            }
+        },
+        error: function (xhr) {
+            promptError('Failed Result:', "Error: " + xhr.responseText);
+        }
+
+    });
+
 }
