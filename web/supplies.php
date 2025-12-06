@@ -96,7 +96,7 @@ require_once 'properties.php';
                                                 onchange="pageRefresh('sortBy');" style="width: 120px;">
                                                 <option value="itemname">Name</option>
                                                 <option value="type">Type</option>
-                                                <option value="prize">Prize</option>
+                                                <option value="prize">Price</option>
                                                 <option value="created_at">Creation</option>
                                                 <option value="updated_at">Updated</option>
                                                 <option value="status">Status</option>
@@ -122,7 +122,7 @@ require_once 'properties.php';
                                                     <th>Item Reference No</th>
                                                     <th class="nosort">Name</th>
                                                     <th>Description</th>
-                                                    <th>Prize</th>
+                                                    <th>Price</th>
                                                     <th>Type</th>
                                                     <th>Consumable</th>
                                                     <th>Revised Stock Level</th>
@@ -238,7 +238,7 @@ require_once 'properties.php';
 
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label for="exampleInputUsername1">Prize</label>
+                                                            <label for="exampleInputUsername1">Price</label>
                                                             <input type="number" class="form-control" id="prize"
                                                                 placeholder="Item Name">
                                                         </div>

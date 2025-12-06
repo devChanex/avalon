@@ -345,13 +345,14 @@ require_once 'properties.php';
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="exampleSelectGender">Member Type</label>
-                                                            <select class="form-control" id="MemberType">
+                                                            <select class="form-control" id="MemberType"
+                                                                onchange="memberTypeChange();">
                                                                 <option value="">-- Select Account Type --</option>
                                                                 <option value="S - Employed Private">S - Employed
                                                                     Private</option>
                                                                 <option value="G - Employer Government">G - Employer
                                                                     Government</option>
-                                                                <option value="I - IndigentI">I - Indigent</option>
+                                                                <option value="I - Indigent">I - Indigent</option>
                                                                 <option value="NS - Individual Paying">NS - Individual
                                                                     Paying</option>
                                                                 <option value="NO - OFW">NO - OFW</option>
@@ -361,6 +362,8 @@ require_once 'properties.php';
                                                                     Paying Government
                                                                 </option>
                                                                 <option value="P - Lifetime Member">P - Lifetime Member
+                                                                </option>
+                                                                <option value="Non Member">Non Member
                                                                 </option>
                                                             </select>
                                                         </div>
@@ -572,7 +575,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v4.js"></script>
-    <script src="scripts/patientrecords-v10.js"></script>
+    <script src="scripts/patientrecords-v11.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

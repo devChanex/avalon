@@ -1,3 +1,11 @@
+function memberTypeChange() {
+    var memberType = document.getElementById("MemberType").value;
+
+    if (memberType === "P - Lifetime Member" || memberType === "Non Member" || memberType === "I - Indigent") {
+        document.getElementById("PhilHealthEmployerNumber").value = "NA";
+        document.getElementById("PhilhealthEmployerName").value = "NA";
+    }
+}
 function register() {
 
     var data = {

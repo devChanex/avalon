@@ -209,17 +209,19 @@ require_once 'properties.php';
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="exampleSelectGender">Member Type</label>
-                                            <select class="form-control" id="MemberType">
+                                            <select class="form-control" id="MemberType" onchange="memberTypeChange();">
                                                 <option value="">-- Select Account Type --</option>
                                                 <option value="S - Employed Private">S - Employed Private</option>
                                                 <option value="G - Employer Government">G - Employer Government</option>
-                                                <option value="I - IndigentI">I - Indigent</option>
+                                                <option value="I - Indigent">I - Indigent</option>
                                                 <option value="NS - Individual Paying">NS - Individual Paying</option>
                                                 <option value="NO - OFW">NO - OFW</option>
                                                 <option value="PS - Non Paying Private">PS - Non Paying Private</option>
                                                 <option value="PG - Non Paying Government">PG - Non Paying Government
                                                 </option>
                                                 <option value="P - Lifetime Member">P - Lifetime Member</option>
+                                                <option value="Non Member">Non Member
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -374,7 +376,7 @@ require_once 'properties.php';
     <script>window.jQuery || document.write('<script src="src/js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
     <script src="scripts/indexScript-v1.js"></script>
     <script src="scripts/promptScript-v1.js"></script>
-    <script src="scripts/registerPatient-v2.js"></script>
+    <script src="scripts/registerPatient-v3.js"></script>
 
 
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
