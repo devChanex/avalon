@@ -102,6 +102,8 @@ function loaddata() {
         type: 'POST',
         success: function (result) {
             // promptSuccess('Process Successful', result.data.fullname);
+            document.getElementById("discharge_surgeon").value = document.getElementById("general_physician").value;
+
             if (result.success && result.data) {
                 result.data.forEach(rowdata => {
                     document.getElementById("consent_fullname").value = rowdata.fullname;
@@ -189,6 +191,7 @@ function loaddata() {
                     document.getElementById("discharge_rr").value = rowdata.discharge_rr ?? '';
                     document.getElementById("discharge_nurse").value = rowdata.discharge_nurse ?? '';
                     document.getElementById("discharge_surgeon").value = rowdata.discharge_surgeon ?? '';
+
                     // discharge condition
                     if (rowdata.discharge_condition) {
                         const conditionInput = document.querySelector(`input[name="condition_of_discharge"][value="${rowdata.discharge_condition}"]`);
