@@ -85,6 +85,10 @@
             <td><strong>Past Illnesses & Surgery:</strong> <span id="past"></span></td>
 
         </tr>
+        <tr>
+            <td><strong>Current Illnesses & Surgery:</strong> <span id="current_medication"></span></td>
+
+        </tr>
 
     </table>
 
@@ -107,8 +111,7 @@
     <footer>
         <div class="signature-container">
             <div class="signature-block">
-                <div class="signature-line"></div>
-                <div class="signature-label">Patient / Guardian Signature</div>
+
             </div>
             <div class="signature-block">
                 <div class="signature-line"></div>

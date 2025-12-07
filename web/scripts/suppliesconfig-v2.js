@@ -41,9 +41,12 @@ function loaddata() {
 
                     clone.querySelector(".id").textContent = "S" + formatId(rowdata.supid);
                     clone.querySelector(".name").textContent = `${rowdata.itemname}`;
-                    clone.querySelector(".description").textContent = rowdata.description;
-                    clone.querySelector(".prize").textContent = rowdata.prize;
+
+                    clone.querySelector(".cash").textContent = (rowdata.price_cash ?? 0.00);
+                    clone.querySelector(".hmo").textContent = rowdata.price_hmo ?? 0.00;
+                    clone.querySelector(".discounted").textContent = rowdata.price_discounted ?? 0.00;
                     clone.querySelector(".type").textContent = rowdata.type;
+                    clone.querySelector(".classification").textContent = rowdata.classification;
                     clone.querySelector(".isConsumable").textContent = (rowdata.isConsumable === "1" || rowdata.isConsumable === 1) ? "Yes" : "No";
                     clone.querySelector(".rsv").textContent = rowdata.rsv;
                     clone.querySelector(".rsv").textContent = rowdata.rsv;
@@ -66,7 +69,7 @@ function loaddata() {
                         const today = new Date();
                         const diffDays = (expiryDate - today) / (1000 * 60 * 60 * 24);
 
-                        if (diffDays <= 30 && diffDays >= 0) {
+                        if (diffDays <= 30) {
 
                             const rsvCell = clone.querySelector(".remarks");
                             rsvCell.style.backgroundColor = "red";
@@ -76,8 +79,7 @@ function loaddata() {
                         }
                     }
                     clone.querySelector(".status").textContent = rowdata.status;
-                    clone.querySelector(".created_at").textContent = rowdata.created_at;
-                    clone.querySelector(".updated_at").textContent = rowdata.updated_at;
+
 
                     clone.querySelector(".edit-data-btn").addEventListener("click", function () {
 
@@ -85,11 +87,14 @@ function loaddata() {
                         document.getElementById("recordid").value = rowdata.supid;
                         document.getElementById("itemname").value = rowdata.itemname;
                         document.getElementById("type").value = rowdata.type;
+                        document.getElementById("classification").value = rowdata.classification;
                         document.getElementById("isConsumable").value = rowdata.isConsumable;
 
                         document.getElementById("description").value = rowdata.description;
                         document.getElementById("status").value = rowdata.status;
-                        document.getElementById("prize").value = rowdata.prize;
+                        document.getElementById("price-cash").value = rowdata.price_cash ?? 0.00;
+                        document.getElementById("price-hmo").value = rowdata.price_hmo ?? 0.00;
+                        document.getElementById("price-discounted").value = rowdata.price_discounted ?? 0.00;
                         document.getElementById("rsv").value = rowdata.rsv;
 
                         // populateAllergies(patient);
@@ -134,6 +139,16 @@ function pageRefresh(key) {
 
 }
 
+function setConsumable() {
+    var type = document.getElementById("type").value;
+    var isConsumableSelect = document.getElementById("isConsumable");
+    if (type === "Supplies / Medicine") {
+        isConsumableSelect.value = "1"; // Yes
+    } else if (type === "OR Charges") {
+        isConsumableSelect.value = "0"; // No
+    }
+}
+
 
 function UpSertData() {
 
@@ -142,8 +157,11 @@ function UpSertData() {
         itemname: document.getElementById("itemname").value.trim(),
         isConsumable: document.getElementById("isConsumable").value,
         type: document.getElementById("type").value.trim(),
+        classification: document.getElementById("classification").value.trim(),
         description: document.getElementById("description").value.trim(),
-        prize: document.getElementById("prize").value,
+        price_cash: document.getElementById("price-cash").value,
+        price_hmo: document.getElementById("price-hmo").value,
+        price_discounted: document.getElementById("price-discounted").value,
         status: document.getElementById("status").value,
         rsv: document.getElementById("rsv").value
     };
@@ -152,7 +170,7 @@ function UpSertData() {
 
     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
     let requiredFields = [
-        "itemname", "prize", "status", "type", "isConsumable"
+        "itemname", "price_cash", "status", "type", "isConsumable", "classification"
     ];
 
     for (let field of requiredFields) {
@@ -204,7 +222,9 @@ function openModal() {
     document.getElementById("isConsumable").value = "";
     document.getElementById("rsv").value = 1.00;
     document.getElementById("description").value = "";
-    document.getElementById("prize").value = 0.00;
+    document.getElementById("price-cash").value = 0.00;
+    document.getElementById("price-hmo").value = 0.00;
+    document.getElementById("price-discounted").value = 0.00;
     document.getElementById("status").value = "";
 
     // Show modal

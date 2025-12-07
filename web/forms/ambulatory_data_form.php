@@ -281,8 +281,7 @@
             <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 6px;">
                     <label style="font-size:10px;">Type of Anesthesia:</label><br>
-                    <div id="anesthesia"
-                        style="margin-left: 10px; font-size: 10px; display: grid; grid-template-columns: repeat(5, 1fr); width: 100%;">
+                    <div id="anesthesia" style="margin-left: 10px; font-size: 10px;  width: 100%;">
                     </div>
                 </td>
             </tr>
@@ -380,7 +379,7 @@
                             slabel.textContent = "0 - No hurt";
                         } else if (value == 1) {
                             srate.textContent = "🙂";
-                            slabel.textContent = "1 - Hurts little bit";
+                            slabel.textContent = "2 - Hurts little bit";
                         } else if (value == 4) {
                             srate.textContent = "😐";
                             slabel.textContent = "4 - Hurts little more";
@@ -446,23 +445,23 @@
             }
         });
 
-        // 🖨️ Auto-print after load
-        window.addEventListener('load', () => {
-            window.print();
-        });
+        // // 🖨️ Auto-print after load
+        // window.addEventListener('load', () => {
+        //     window.print();
+        // });
 
-        // ✅ Close window after print or cancel
-        window.onafterprint = () => {
-            window.close();
-        };
+        // // ✅ Close window after print or cancel
+        // window.onafterprint = () => {
+        //     window.close();
+        // };
 
-        // ✅ Extra safety for some browsers
-        const mediaQueryList = window.matchMedia('print');
-        mediaQueryList.addEventListener('change', (mql) => {
-            if (!mql.matches) {
-                window.close();
-            }
-        });
+        // // ✅ Extra safety for some browsers
+        // const mediaQueryList = window.matchMedia('print');
+        // mediaQueryList.addEventListener('change', (mql) => {
+        //     if (!mql.matches) {
+        //         window.close();
+        //     }
+        // });
     </script>
 
 

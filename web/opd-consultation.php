@@ -314,6 +314,17 @@ require_once 'properties.php';
                                                     </div>
                                                 </div>
 
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="past">Current Illness & Surgery /
+                                                                Medication</label>
+                                                            <textarea class="form-control" id="current" rows="3"
+                                                                placeholder="Input Current Illness & Surgery / Medication"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <hr>
                                                 <div class="row">
                                                     <div class="col-lg-12">

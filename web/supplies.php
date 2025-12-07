@@ -77,7 +77,7 @@ require_once 'properties.php';
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header py-3 d-flex justify-content-between">
-                                    <h6 class="m-0 font-weight-bold">Supplies / Equipments / Other Charges</h6>
+                                    <h6 class="m-0 font-weight-bold">Instrument List</h6>
                                     <a href="#" onclick='openModal();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                             class="fas fa-plus fa-sm text-white-50"></i> Add</a>
@@ -96,6 +96,7 @@ require_once 'properties.php';
                                                 onchange="pageRefresh('sortBy');" style="width: 120px;">
                                                 <option value="itemname">Name</option>
                                                 <option value="type">Type</option>
+                                                <option value="classification">Classification</option>
                                                 <option value="prize">Price</option>
                                                 <option value="created_at">Creation</option>
                                                 <option value="updated_at">Updated</option>
@@ -121,16 +122,19 @@ require_once 'properties.php';
                                                 <tr>
                                                     <th>Item Reference No</th>
                                                     <th class="nosort">Name</th>
-                                                    <th>Description</th>
-                                                    <th>Price</th>
+
+
                                                     <th>Type</th>
+                                                    <th>Classification</th>
                                                     <th>Consumable</th>
                                                     <th>Revised Stock Level</th>
                                                     <th>Qty On Hand</th>
                                                     <th>Earliest Expiration</th>
+                                                    <th>Cash</th>
+                                                    <th>HMO</th>
+                                                    <th>Discounted</th>
                                                     <th>Status</th>
-                                                    <th>Created</th>
-                                                    <th>Updated</th>
+
                                                     <th class="nosort">&nbsp;</th>
                                                 </tr>
                                             </thead>
@@ -148,17 +152,20 @@ require_once 'properties.php';
                                     <tr>
                                         <td class="id"></td>
                                         <td class="name"></td>
-                                        <td class="description"></td>
-                                        <td class="prize"></td>
+
+
+
                                         <td class="type"></td>
+                                        <td class="classification"></td>
                                         <td class="isConsumable"></td>
                                         <td class="rsv"></td>
                                         <td class="qtyOnhand"></td>
                                         <td class="remarks"></td>
-
+                                        <td class="cash"></td>
+                                        <td class="hmo"></td>
+                                        <td class="discounted"></td>
                                         <td class="status"></td>
-                                        <td class="created_at"></td>
-                                        <td class="updated_at"></td>
+
                                         <td>
                                             <div class="table-actions">
                                                 <button type="button" class="btn social-btn bg-primary edit-data-btn">
@@ -211,15 +218,75 @@ require_once 'properties.php';
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label for="exampleSelectGender">Type</label>
-                                                            <select class="form-control" id="type">
+                                                            <select class="form-control" id="type"
+                                                                onchange="setConsumable()">
                                                                 <option value="">-- Select --</option>
                                                                 <option value="Supplies / Medicine">Supplies / Medicine
                                                                 </option>
-                                                                <option value="Equipments">Equipments</option>
-                                                                <option value="Others">Others</option>
+                                                                <option value="OR Charges">OR Charges</option>
                                                             </select>
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleSelectGender">Classification</label>
+                                                            <select class="form-control" id="classification"
+                                                                onchange="setConsumable()">
+                                                                <option value="">-- Select --</option>
+                                                                <option value="Machine / Equipment">Machine / Equipment
+                                                                </option>
+                                                                <option value="Fees">Fees</option>
+                                                                <option value="PPE">PPE</option>
+                                                                <option value="Anesthetic Agents">Anesthetic Agents
+                                                                </option>
+                                                                <option value="Narcotics">Narcotics</option>
+                                                                <option value="IV Fluids">IV Fluids</option>
+                                                                <option value="Gases">Gases</option>
+                                                                <option value="Supplies">Supplies</option>
+                                                                <option value="Sutures">Sutures</option>
+                                                                <option value="Cleansing Agents">Cleansing Agents
+                                                                </option>
+                                                                <option value="Wound Care">Wound Care</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                Pricing:
+                                                <div class="row">
+
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Cash:</label>
+                                                            <input type="number" class="form-control" id="price-cash"
+                                                                placeholder="Item Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">HMO:</label>
+                                                            <input type="number" class="form-control" id="price-hmo"
+                                                                placeholder="Item Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Discounted:</label>
+                                                            <input type="number" class="form-control"
+                                                                id="price-discounted" placeholder="Item Name">
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </div>
+
+                                                <div class="row">
+
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Revised Stock
@@ -228,23 +295,7 @@ require_once 'properties.php';
                                                                 placeholder="Revised Stock Level">
                                                         </div>
                                                     </div>
-
-
-
-                                                </div>
-
-
-                                                <div class="row">
-
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputUsername1">Price</label>
-                                                            <input type="number" class="form-control" id="prize"
-                                                                placeholder="Item Name">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="exampleSelectGender">Status</label>
                                                             <select class="form-control" id="status">
@@ -256,7 +307,7 @@ require_once 'properties.php';
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-6">
                                                         <div class="form-group">
                                                             <label for="exampleSelectGender">Is Consumable</label>
                                                             <select class="form-control" id="isConsumable">

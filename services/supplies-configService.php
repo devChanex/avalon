@@ -33,7 +33,7 @@ class ServiceClass
         $limit = 10; // records per page
         $offset = ($page - 1) * $limit;
         $search = isset($data['filter']) ? trim($data['filter']) : '';
-        $searchFields = ['itemname', 'description', 'type', 'prize', "CONCAT('S', LPAD(supid, 6, '0'))"];
+        $searchFields = ['itemname', 'description', 'type', 'classification', "CONCAT('S', LPAD(supid, 6, '0'))"];
         $dynamics = '';
         if (!empty($search)) {
             $orConditions = [];

@@ -108,6 +108,14 @@ require_once 'properties.php';
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
+                                                <label for="consent_fullname">Birthplace:
+                                                </label>
+                                                <input type="text" class="form-control" id="general_birthplace"
+                                                    readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
                                                 <label for="consent_fullname">Age:
                                                 </label>
                                                 <input type="text" class="form-control" id="general_age" readonly>
@@ -172,6 +180,10 @@ require_once 'properties.php';
                                         data-bs-target="#tab4" type="button" role="tab">Physicians Order Sheet</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="medicationsheet-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tab7" type="button" role="tab">Medication Sheet</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="nursesprogress-tab" data-bs-toggle="tab"
                                         data-bs-target="#tab5" type="button" role="tab">Nurses Progress Notes</button>
                                 </li>
@@ -179,6 +191,10 @@ require_once 'properties.php';
                                     <button class="nav-link" id="nursesprogress-tab" data-bs-toggle="tab"
                                         data-bs-target="#tab6" type="button" role="tab">Operative Technique
                                         Form</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="instumentcountsheet-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tab8" type="button" role="tab">Instrument Count Sheet</button>
                                 </li>
                             </ul>
 
@@ -520,7 +536,7 @@ require_once 'properties.php';
                                                     <button type="button" class="pain-btn" data-value="1"
                                                         style="flex:1;">
                                                         <div style="font-size:2rem;">🙂</div>
-                                                        <div>1 - Hurts little bit</div>
+                                                        <div>2 - Hurts little bit</div>
                                                     </button>
 
                                                     <button type="button" class="pain-btn" data-value="4"
@@ -591,51 +607,36 @@ require_once 'properties.php';
                                             </div>
                                         </div>
                                         <br>
+
+
                                         <div class="row">
-                                            <div class="col-lg-12 d-flex align-items-center flex-wrap"
-                                                style="gap: 15px;">
-                                                <label class="form-label mb-0"><strong>Anesthesia Plan of
-                                                        Care:</strong></label>
+                                            <div class="col-lg-12" style="gap: 15px;">
+
+
+                                                <div class="form-group">
+                                                    <label class="form-label mb-0"><strong>Anesthesia Plan of
+                                                            Care:</strong></label>
+                                                    <select class="form-control" id="anesthesia_plan">
+
+                                                        <option value="">-- Select Anesthesia plan of care --</option>
+                                                        <option value="General anesthesia - IV">General anesthesia - IV
+                                                        </option>
+                                                        <option value="General anesthesia - Inhalation">General
+                                                            anesthesia - Inhalation</option>
+                                                        <option value="Regional-Nerve Block">Regional-Nerve Block
+                                                        </option>
+                                                        <option value="Regional - Spinal">Regional - Spinal</option>
+                                                        <option value="Regional - Epidural">Regional - Epidural</option>
+
+                                                        <!-- 3. Local -->
+                                                        <option value="Local">Local</option>
+                                                    </select>
+                                                </div>
+
 
                                                 <!-- Modality checkboxes -->
-                                                <div class="form-check form-check-inline mb-0">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        id="anesthesia_local" value="local">
-                                                    <label class="form-check-label" for="anesthesia_local">Local</label>
-                                                </div>
 
-                                                <div class="form-check form-check-inline mb-0">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        id="anesthesia_regional" value="regional">
-                                                    <label class="form-check-label"
-                                                        for="anesthesia_regional">Regional</label>
-                                                </div>
 
-                                                <div class="form-check form-check-inline mb-0">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        id="anesthesia_sedation" value="sedation">
-                                                    <label class="form-check-label"
-                                                        for="anesthesia_sedation">Sedation</label>
-                                                </div>
-
-                                                <!-- Separator -->
-                                                <span style="font-weight: bold;">|</span>
-
-                                                <!-- Route radio buttons -->
-                                                <label
-                                                    class="form-label mb-0"><small><strong>Route:</strong></small></label>
-
-                                                <div class="form-check form-check-inline mb-0">
-                                                    <input class="form-check-input" type="radio" name="anesthesia_route"
-                                                        id="route_oral" value="oral" checked>
-                                                    <label class="form-check-label" for="route_oral">Oral</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline mb-0">
-                                                    <input class="form-check-input" type="radio" name="anesthesia_route"
-                                                        id="route_iv" value="iv">
-                                                    <label class="form-check-label" for="route_iv">IV</label>
-                                                </div>
                                             </div>
                                         </div>
                                         <br>
@@ -1145,6 +1146,158 @@ require_once 'properties.php';
                                     </div>
                                     <hr>
                                 </div>
+                                <div class="tab-pane fade show" id="tab7" role="tabpanel"
+                                    style="max-width:80%;margin: 0 auto;">
+                                    <a href="#" onclick='openModalMS();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
+                                    <a href="#" onclick='printMedicationSheet();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+                                            class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
+                                    <hr>
+                                    <div class="table-responsive">
+
+
+                                        <table id="datatable_ms" class="table table-hover">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Medication</th>
+                                                    <th>Stock Dose</th>
+                                                    <th>Dosage</th>
+                                                    <th>Route</th>
+                                                    <th>Frequency</th>
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_ms">
+
+
+                                            </tbody>
+                                        </table>
+                                        <template id="medication_sheet_rowtemplate">
+                                            <tr>
+
+                                                <td class="ms_medication"></td>
+                                                <td class="ms_stock_dose"></td>
+                                                <td class="ms_dosage"></td>
+                                                <td class="ms_route"></td>
+                                                <td class="ms_frequency"></td>
+                                                <td class="ms_date"></td>
+                                                <td class="ms_time"></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button type="button"
+                                                            class="btn social-btn bg-success ms-edit-data-btn">
+                                                            <i class="ik ik-edit"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                            class="btn social-btn bg-danger ms-delete-data-btn">
+                                                            <i class="ik ik-trash"></i>
+                                                        </button>
+
+
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </div>
+                                    <a href="#" onclick='openModalMSNurse();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
+                                    <div class="table-responsive">
+
+
+                                        <table id="datatable_ms_nurse" class="table table-hover">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Nurse</th>
+
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>PRN/STAT/Single Dose Meds</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_ms_nurse">
+
+
+                                            </tbody>
+                                        </table>
+
+
+                                        <template id="medication_sheet_nurse_rowtemplate">
+                                            <tr>
+
+                                                <td class="ms_nurse_nurse"></td>
+                                                <td class="ms_nurse_date"></td>
+                                                <td class="ms_nurse_time"></td>
+                                                <td class="ms_nurse_remarks"></td>
+
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button type="button"
+                                                            class="btn social-btn bg-success ms-nurse-edit-data-btn">
+                                                            <i class="ik ik-edit"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                            class="btn social-btn bg-danger ms-nurse-delete-data-btn">
+                                                            <i class="ik ik-trash"></i>
+                                                        </button>
+
+
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade show" id="tab8" role="tabpanel"
+                                    style="max-width:80%;margin: 0 auto;">
+                                    <a href="#" onclick='saveAllInstruments();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                            class="fas fa-save fa-sm text-white-50"></i> Save</a>
+                                    <a href="#" onclick='printInstrumentCountSheet();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+                                            class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
+                                    <hr>
+                                    <div class="table-responsive">
+
+
+                                        <table id="datatable_ins" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Classification</th>
+                                                    <th>Instrument</th>
+                                                    <th>Qty</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_ins">
+
+
+                                            </tbody>
+                                        </table>
+                                        <template id="instrument_rowtemplate">
+                                            <tr>
+                                                <td class="ins_supid" style="display:none;"></td>
+                                                <td class="ins_classification"></td>
+                                                <td class="ins_instument"></td>
+                                                <td class="ins_qty"></td>
+
+                                            </tr>
+                                        </template>
+
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1340,6 +1493,135 @@ require_once 'properties.php';
                         <div class="modal-footer">
 
                             <button type="button" class="btn btn-primary" onclick="UpSertAmpnData();">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="dataModalMs" tabindex="-1" role="dialog" aria-labelledby="fullwindowModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullwindowModalLabel">Medication Sheet Form
+
+
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body" style="padding: 50px;">
+                            <input type="hidden" id="ms_msid_input">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Date Time:</label>
+                                        <input type="datetime-local" class="form-control" id="ms_datetime_input"
+                                            placeholder="Blood Pressure">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Medication:</label>
+                                        <input type="text" class="form-control" id="ms_medication_input"
+                                            placeholder="Medication">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Stock Dose:</label>
+                                        <input type="text" class="form-control" id="ms_stock_dose_input"
+                                            placeholder="Stock Dose">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Dosage:</label>
+                                        <input type="text" class="form-control" id="ms_dosage_input"
+                                            placeholder="Dosage">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Route:</label>
+                                        <input type="text" class="form-control" id="ms_route_input" placeholder="Route">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Frequency:</label>
+                                        <input type="text" class="form-control" id="ms_frequency_input"
+                                            placeholder="Frequency">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary" onclick="UpSertMSData();">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="modal fade" id="dataModalMsNurse" tabindex="-1" role="dialog"
+                aria-labelledby="fullwindowModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullwindowModalLabel">Medication Sheet Form
+
+
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body" style="padding: 50px;">
+                            <input type="hidden" id="ms_nurse_msnid_input">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Date Time:</label>
+                                        <input type="datetime-local" class="form-control" id="ms_nurse_datetime_input"
+                                            placeholder="Blood Pressure">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Nurse</label>
+                                        <input type="text" class="form-control" id="ms_nurse_nurse_input"
+                                            placeholder="Nurse">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">PRN/Stat/Single Dose Meds:</label>
+                                        <input type="text" class="form-control" id="ms_nurse_remarks_input"
+                                            placeholder="PRN/Stat/Single Dose Meds">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary" onclick="UpSertMSNurseData();">Save</button>
                         </div>
                     </div>
                 </div>

@@ -30,7 +30,7 @@ class ServiceClass
         try {
             $data = isset($_POST['data']) ? json_decode($_POST['data'], true) : [];
 
-            if (empty($data['itemname']) || empty($data['prize']) || empty($data['status'])) {
+            if (empty($data['itemname']) || empty($data['price_cash']) || empty($data['status'])) {
                 return [
                     'success' => false,
                     'message' => 'Missing required fields'
@@ -38,11 +38,10 @@ class ServiceClass
             }
 
             //check if patient record exist
-            $checkQuery = "SELECT supid FROM supplies WHERE itemname = :itemname and description=:description and prize=:prize and type=:type and  isConsumable=:isConsumable  and supid<> :id LIMIT 1";
+            $checkQuery = "SELECT supid FROM supplies WHERE itemname = :itemname and description=:description and type=:type and  isConsumable=:isConsumable  and supid<> :id LIMIT 1";
             $checkStmt = $this->conn->prepare($checkQuery);
             $checkStmt->bindValue(':itemname', $data['itemname']);
             $checkStmt->bindValue(':description', $data['description']);
-            $checkStmt->bindValue(':prize', $data['prize']);
             $checkStmt->bindValue(':id', $data['supid']);
             $checkStmt->bindValue(':type', $data['type']);
             $checkStmt->bindValue(':isConsumable', $data['isConsumable']);
@@ -59,12 +58,12 @@ class ServiceClass
             $status = 'Updated';
             if (empty($data['supid'])) {
                 // Insert new record
-                $sql = "INSERT INTO supplies (itemname, description, prize, type, status, isConsumable,rsv) VALUES (:itemname, :description, :prize, :type, :status, :isConsumable, :rsv)";
+                $sql = "INSERT INTO supplies (itemname, description, price_cash,price_hmo,price_discounted, type,classification, status, isConsumable,rsv) VALUES (:itemname, :description, :price_cash,:price_hmo,:price_discounted, :type,:classification, :status, :isConsumable, :rsv)";
                 $stmt = $this->conn->prepare($sql);
                 $status = "Added";
             } else {
                 // Update existing record
-                $sql = "UPDATE supplies SET itemname=:itemname, description=:description, prize=:prize, type=:type, isConsumable=:isConsumable ,status=:status, rsv=:rsv WHERE supid=:supid";
+                $sql = "UPDATE supplies SET itemname=:itemname, description=:description,  price_cash=:price_cash,price_hmo=:price_hmo,price_discounted=:price_discounted, type=:type,classification=:classification isConsumable=:isConsumable ,status=:status, rsv=:rsv WHERE supid=:supid";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bindValue(':supid', $data['supid']);
             }
@@ -77,8 +76,11 @@ class ServiceClass
             $stmt->bindValue(':itemname', $data['itemname']);
             $stmt->bindValue(':isConsumable', $data['isConsumable']);
             $stmt->bindValue(':type', $data['type']);
+            $stmt->bindValue(':classification', $data['classification']);
             $stmt->bindValue(':description', $data['description']);
-            $stmt->bindValue(':prize', $data['prize']);
+            $stmt->bindValue(':price_cash', $data['price_cash']);
+            $stmt->bindValue(':price_hmo', $data['price_hmo']);
+            $stmt->bindValue(':price_discounted', $data['price_discounted']);
             $stmt->bindValue(':status', $data['status']);
             $stmt->bindValue(':rsv', $data['rsv']);
 

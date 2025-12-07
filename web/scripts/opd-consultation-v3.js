@@ -74,6 +74,8 @@ function loaddata() {
                         document.getElementById("allergies").value = rowdata.allergies;
 
                         document.getElementById("past").value = rowdata.past;
+
+                        document.getElementById("current").value = rowdata.current_medication;
                         document.getElementById("note").value = rowdata.note;
 
                         // Show modal (Bootstrap 5 way)
@@ -207,6 +209,7 @@ function UpSertData() {
         saturation: document.getElementById("saturation").value.trim(),
         allergies: document.getElementById("allergies").value.trim(),
         past: document.getElementById("past").value.trim(),
+        current_medication: document.getElementById("current").value.trim(),
         chief_complaint: document.getElementById("chief_complaint").value.trim(),
         note: document.getElementById("note").value.trim(),
         lmp: document.getElementById("lmp").value.trim()
@@ -277,6 +280,7 @@ function clearModal() {
     document.getElementById("lmp").value = "";
 
     document.getElementById("past").value = "";
+    document.getElementById("current").value = "";
     document.getElementById("note").value = "";
 
 }

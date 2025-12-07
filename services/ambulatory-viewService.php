@@ -87,6 +87,26 @@ class ServiceClass
 
             $ambulatory_technique = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            $query = "SELECT * FROM ambulatory_medication_sheet where amid=:ref";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
+            $stmt->execute();
+
+            $ambulatory_medication_sheet = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $query = "SELECT * FROM ambulatory_medication_sheet_nurse where amid=:ref";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
+            $stmt->execute();
+
+            $ambulatory_medication_sheet_nurse = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Instrument Count Sheet
+            $query = "SELECT s.supid,s.classification,s.itemname,COALESCE(ai.ins_qty,0) AS qty FROM supplies s LEFT JOIN ambulatory_instrument ai ON s.supid=ai.supid AND ai.amid = :ref";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
+            $stmt->execute();
+            $ambulatory_instrument_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
             return [
@@ -97,7 +117,10 @@ class ServiceClass
                 'ambulatoryvital' => $ambulatory_vital,
                 'ambulatoryampo' => $ambulatory_ampo,
                 'ambulatoryampn' => $ambulatory_ampn,
-                'ambulatorytechnique' => $ambulatory_technique
+                'ambulatorytechnique' => $ambulatory_technique,
+                'ambulatorymedicationsheet' => $ambulatory_medication_sheet,
+                'ambulatorymedicationsheetnurse' => $ambulatory_medication_sheet_nurse,
+                'ambulatoryinstrumentcount' => $ambulatory_instrument_count
 
             ];
 

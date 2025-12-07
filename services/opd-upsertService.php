@@ -56,6 +56,7 @@ class ServiceClass
                     'saturation',
                     'allergies',
                     'past',
+                    'current_medication',
                     'note'
                 ];
                 try {
@@ -78,6 +79,7 @@ class ServiceClass
                     saturation,
                     allergies,
                     past,
+                    current_medication,
                     note,
                     lmp
                 ) VALUES (
@@ -97,6 +99,7 @@ class ServiceClass
                     :saturation,
                     :allergies,
                     :past,
+                    :current_medication,
                     :note,
                     :lmp
                 )";
@@ -142,6 +145,7 @@ class ServiceClass
                     'saturation',
                     'allergies',
                     'past',
+                    'current_medication',
                     'note'
                 ];
                 // If recordid exists → UPDATE
@@ -165,6 +169,7 @@ class ServiceClass
                     saturation = :saturation,
                     allergies = :allergies,
                     past = :past,
+                    current_medication = :current_medication,
                     note = :note,
                     lmp = :lmp
                 WHERE opdcid = :recordid";
