@@ -202,6 +202,7 @@ function UpSertData() {
 
                 loaddata();
             } else {
+                console.log(result.message);
                 promptError('Result', result.message);
             }
         },

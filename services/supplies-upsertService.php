@@ -63,7 +63,7 @@ class ServiceClass
                 $status = "Added";
             } else {
                 // Update existing record
-                $sql = "UPDATE supplies SET itemname=:itemname, description=:description,  price_cash=:price_cash,price_hmo=:price_hmo,price_discounted=:price_discounted, type=:type,classification=:classification isConsumable=:isConsumable ,status=:status, rsv=:rsv WHERE supid=:supid";
+                $sql = "UPDATE supplies SET itemname=:itemname, description=:description, price_cash=:pricecash, price_hmo=:pricehmo, price_discounted=:pricediscounted, type=:type, classification=:classification, isConsumable=:isConsumable, status=:status, rsv=:rsv WHERE supid=:supid";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bindValue(':supid', $data['supid']);
             }
@@ -78,9 +78,9 @@ class ServiceClass
             $stmt->bindValue(':type', $data['type']);
             $stmt->bindValue(':classification', $data['classification']);
             $stmt->bindValue(':description', $data['description']);
-            $stmt->bindValue(':price_cash', $data['price_cash']);
-            $stmt->bindValue(':price_hmo', $data['price_hmo']);
-            $stmt->bindValue(':price_discounted', $data['price_discounted']);
+            $stmt->bindValue(':pricecash', $data['price_cash']);
+            $stmt->bindValue(':pricehmo', $data['price_hmo']);
+            $stmt->bindValue(':pricediscounted', $data['price_discounted']);
             $stmt->bindValue(':status', $data['status']);
             $stmt->bindValue(':rsv', $data['rsv']);
 
