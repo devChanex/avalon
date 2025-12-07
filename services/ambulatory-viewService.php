@@ -108,6 +108,13 @@ class ServiceClass
             $stmt->execute();
             $ambulatory_instrument_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            $query = "SELECT * FROM ambulatory_instrument_count where amid=:ref";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
+            $stmt->execute();
+
+            $ambulatory_ics = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
             return [
                 'success' => true,
@@ -120,7 +127,8 @@ class ServiceClass
                 'ambulatorytechnique' => $ambulatory_technique,
                 'ambulatorymedicationsheet' => $ambulatory_medication_sheet,
                 'ambulatorymedicationsheetnurse' => $ambulatory_medication_sheet_nurse,
-                'ambulatoryinstrumentcount' => $ambulatory_instrument_count
+                'ambulatoryinstrumentcount' => $ambulatory_instrument_count,
+                'ambulatoryics' => $ambulatory_ics
 
             ];
 

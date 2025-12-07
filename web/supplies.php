@@ -77,7 +77,7 @@ require_once 'properties.php';
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header py-3 d-flex justify-content-between">
-                                    <h6 class="m-0 font-weight-bold">Instrument List</h6>
+                                    <h6 class="m-0 font-weight-bold">Inventory</h6>
                                     <a href="#" onclick='openModal();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                             class="fas fa-plus fa-sm text-white-50"></i> Add</a>

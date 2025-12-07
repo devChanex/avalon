@@ -194,7 +194,11 @@ require_once 'properties.php';
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="instumentcountsheet-tab" data-bs-toggle="tab"
-                                        data-bs-target="#tab8" type="button" role="tab">Instrument Count Sheet</button>
+                                        data-bs-target="#tab9" type="button" role="tab">Instrument Count Sheet</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="instumentcountsheet-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tab8" type="button" role="tab">OR Charges</button>
                                 </li>
                             </ul>
 
@@ -1264,7 +1268,7 @@ require_once 'properties.php';
                                     <a href="#" onclick='saveAllInstruments();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                             class="fas fa-save fa-sm text-white-50"></i> Save</a>
-                                    <a href="#" onclick='printInstrumentCountSheet();'"
+                                    <a href="#" onclick='printORCharges();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
                                             class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
                                     <hr>
@@ -1297,6 +1301,71 @@ require_once 'properties.php';
 
 
                                     </div>
+                                </div>
+
+                                <div class="tab-pane fade show" id="tab9" role="tabpanel"
+                                    style="max-width:80%;margin: 0 auto;">
+                                    <a href="#" onclick='openModalics();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
+                                    <a href="#" onclick='printInstrumentCountSheet();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+                                            class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
+                                    <hr>
+                                    <div class="table-responsive">
+
+
+                                        <table id="datatableICS" class="table table-hover">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Instrument</th>
+                                                    <th>BaseLine</th>
+                                                    <th>Initial Counting</th>
+                                                    <th>Added</th>
+                                                    <th>Removed</th>
+                                                    <th>Final Count</th>
+                                                    <th>Remarks</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_ICS">
+
+
+                                            </tbody>
+                                        </table>
+                                        <template id="ICS_rowtemplate">
+                                            <tr>
+
+                                                <td class="ics_instrument"></td>
+                                                <td class="ics_baseline"></td>
+                                                <td class="ics_initial_counting"></td>
+                                                <td class="ics_added"></td>
+                                                <td class="ics_removed"></td>
+                                                <td class="ics_final_count"></td>
+                                                <td class="ics_remarks"></td>
+
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button type="button"
+                                                            class="btn social-btn bg-success ics-edit-data-btn">
+                                                            <i class="ik ik-edit"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                            class="btn social-btn bg-danger ics-delete-data-btn">
+                                                            <i class="ik ik-trash"></i>
+                                                        </button>
+
+
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -1622,6 +1691,97 @@ require_once 'properties.php';
                         <div class="modal-footer">
 
                             <button type="button" class="btn btn-primary" onclick="UpSertMSNurseData();">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="dataModalICS" tabindex="-1" role="dialog" aria-labelledby="fullwindowModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullwindowModalLabel">Instrument Count Sheet Form
+
+
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body" style="padding: 50px;">
+                            <input type="hidden" id="ics_icsid_input">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Instrument:</label>
+                                        <input type="text" class="form-control" id="ics_instrument_input"
+                                            placeholder="Instrument">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Baseline:</label>
+                                        <input type="number" class="form-control" id="ics_baseline_input"
+                                            placeholder="Baseline">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_pr">Initial Counting:</label>
+                                        <input type="number" class="form-control" id="ics_initial_counting_input"
+                                            onchange="computeFinalCount();" placeholder="Initial Counting">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_rr">Added:</label>
+                                        <input type="number" class="form-control" id="ics_added_input"
+                                            onchange="computeFinalCount();" placeholder="Added">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_rr">Removed:</label>
+                                        <input type="number" class="form-control" id="ics_removed_input"
+                                            onchange="computeFinalCount();" placeholder="Removed">
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_temp">Final Count:</label>
+                                        <input type="text" class="form-control" id="ics_final_count_input" readonly
+                                            placeholder="Final Count">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_height">Remarks:</label>
+                                        <input type="text" class="form-control" id="ics_remarks_input"
+                                            placeholder="Remarks">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary"
+                                onclick="UpSertInstrumentCountdata();">Save</button>
                         </div>
                     </div>
                 </div>

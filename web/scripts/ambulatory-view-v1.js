@@ -8,6 +8,7 @@ let ampnDataCache = null;
 let msDataCache = null;
 let ms_nurseDataCache = null;
 let instrumentDataCache = null;
+let instrumentCountDataCache = null;
 function loadgeneraldata() {
 
     let ref = document.getElementById("consentpid").value;
@@ -508,6 +509,43 @@ function loaddata() {
                     tbodyinstrument.appendChild(clone);
                 });
 
+                let dataTableBody_ICS = document.getElementById("dataTableBody_ICS");
+                let ICS_rowtemplate = document.getElementById("ICS_rowtemplate");
+                dataTableBody_ICS.innerHTML = "";
+                instrumentCountDataCache = result.ambulatoryics; // cache the latest vital data
+
+                result.ambulatoryics.forEach(rowdata => {
+                    let clone = ICS_rowtemplate.content.cloneNode(true);
+                    clone.querySelector(".ics_baseline").textContent = rowdata.baseline ?? '';
+                    clone.querySelector(".ics_instrument").textContent = rowdata.instrument ?? '';
+                    clone.querySelector(".ics_initial_counting").textContent = rowdata.initial_counting ?? '';
+                    clone.querySelector(".ics_added").textContent = rowdata.added ?? '';
+                    clone.querySelector(".ics_removed").textContent = rowdata.removed ?? '';
+                    clone.querySelector(".ics_final_count").textContent = rowdata.final_count ?? '';
+                    clone.querySelector(".ics_remarks").textContent = rowdata.remarks ?? '';
+
+
+                    clone.querySelector(".ics-edit-data-btn").addEventListener("click", function () {
+
+                        document.getElementById("ics_icsid_input").value = rowdata.icsid ?? '';
+                        document.getElementById("ics_instrument_input").value = rowdata.instrument ?? '';
+                        document.getElementById("ics_baseline_input").value = rowdata.baseline ?? '';
+                        document.getElementById("ics_initial_counting_input").value = rowdata.initial_counting ?? '';
+                        document.getElementById("ics_added_input").value = rowdata.added ?? '';
+                        document.getElementById("ics_removed_input").value = rowdata.removed ?? '';
+                        document.getElementById("ics_final_count_input").value = rowdata.final_count ?? '';
+                        document.getElementById("ics_remarks_input").value = rowdata.remarks ?? '';
+                        // Show modal (Bootstrap 5 way)
+                        var modal = new bootstrap.Modal(document.getElementById("dataModalICS"));
+                        modal.show();
+                    });
+                    clone.querySelector(".ics-delete-data-btn").addEventListener("click", function () {
+                        deleteRecord('ambulatory_instrument_count', rowdata.icsid, 'icsid', loaddata);
+                    });
+
+                    dataTableBody_ICS.appendChild(clone);
+                });
+
 
                 setTimeout(function () {
                     document.getElementById("loaderOverlay").style.display = "none";
@@ -524,6 +562,15 @@ function loaddata() {
 
 
 
+
+}
+
+function computeFinalCount() {
+    const initialCounting = parseInt(document.getElementById("ics_initial_counting_input").value) || 0;
+    const added = parseInt(document.getElementById("ics_added_input").value) || 0;
+    const removed = parseInt(document.getElementById("ics_removed_input").value) || 0;
+    const finalCount = initialCounting + added - removed;
+    document.getElementById("ics_final_count_input").value = finalCount;
 
 }
 function saveAllInstruments() {
@@ -603,13 +650,24 @@ function openModalVital() {
     $("#dataModalVital").modal("show");
 }
 
-function openModalMS() {
+
+function openModalics() {
     clearModalVital();
+    $("#dataModalICS").modal("show");
+}
+function openModalMS() {
+    clearModalMS();
     $("#dataModalMs").modal("show");
 }
 function openModalMSNurse() {
-    clearModalVital();
+    clearModalMSNurse();
     $("#dataModalMsNurse").modal("show");
+}
+function clearModalMSNurse() {
+    document.getElementById("ms_nurse_msnid_input").value = "";
+    document.getElementById("ms_nurse_datetime_input").value = "";
+    document.getElementById("ms_nurse_nurse_input").value = "";
+    document.getElementById("ms_nurse_remarks_input").value = "";
 }
 
 function clearModalMS() {
@@ -1179,6 +1237,73 @@ function printVitalSheet() {
     document.body.removeChild(form);
 }
 
+function printInstrumentCountSheet() {
+    var records = {};
+    records.instrumentcount = instrumentCountDataCache;
+    records.fullname = document.getElementById("general_fullname").value;
+    records.birthDate = document.getElementById("general_birthdate").value;
+    records.birth_place = document.getElementById("general_birthplace").value;
+    records.gender = document.getElementById("general_gender").value;
+    records.age = document.getElementById("general_age").value;
+    records.physician = document.getElementById("general_physician").value;
+    records.patientno = document.getElementById("general_pid").value;
+    records.caseno = document.getElementById("general_amid").value;
+    records.phic_no = document.getElementById("general_phic_no").value;
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "forms/ambulatory_instrument_count_form.php";
+    form.target = "_blank"; // Open in a new tab
+    // Create a hidden input to hold the data
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "data";
+    input.value = JSON.stringify(records);
+    // Append input to form
+    form.appendChild(input);
+    // Append form to body (must be in DOM to submit)
+    document.body.appendChild(form);
+
+    // Submit form
+    form.submit();
+    // Remove form after submission
+    document.body.removeChild(form);
+
+}
+
+
+
+function printORCharges() {
+    var records = {};
+    records.orcharges = instrumentDataCache;
+    records.fullname = document.getElementById("general_fullname").value;
+    records.birthDate = document.getElementById("general_birthdate").value;
+    records.birth_place = document.getElementById("general_birthplace").value;
+    records.gender = document.getElementById("general_gender").value;
+    records.age = document.getElementById("general_age").value;
+    records.physician = document.getElementById("general_physician").value;
+    records.patientno = document.getElementById("general_pid").value;
+    records.caseno = document.getElementById("general_amid").value;
+    records.phic_no = document.getElementById("general_phic_no").value;
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "forms/ambulatory_or_charges_form.php";
+    form.target = "_blank"; // Open in a new tab
+    // Create a hidden input to hold the data
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "data";
+    input.value = JSON.stringify(records);
+    // Append input to form
+    form.appendChild(input);
+    // Append form to body (must be in DOM to submit)
+    document.body.appendChild(form);
+
+    // Submit form
+    form.submit();
+    // Remove form after submission
+    document.body.removeChild(form);
+
+}
 function printMedicationSheet() {
     var records = {};
     records.medication = msDataCache;
@@ -1266,6 +1391,61 @@ function UpSertVitalData() {
 
 }
 
+
+function UpSertInstrumentCountdata() {
+
+    var data = {
+        icsid: document.getElementById("ics_icsid_input").value.trim(),
+        instrument: document.getElementById("ics_instrument_input").value.trim(),
+        baseline: document.getElementById("ics_baseline_input").value.trim(),
+        initial_counting: document.getElementById("ics_initial_counting_input").value.trim(),
+        added: document.getElementById("ics_added_input").value.trim(),
+        removed: document.getElementById("ics_removed_input").value.trim(),
+        final_count: document.getElementById("ics_final_count_input").value.trim(),
+        remarks: document.getElementById("ics_remarks_input").value.trim(),
+        amid: document.getElementById("ref").value.trim()
+    };
+
+
+    // ---------------- VALIDATIONS ----------------
+
+    // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
+    let requiredFields = [
+        "amid", "instrument"
+    ];
+    for (let field of requiredFields) {
+        if (!data[field]) {
+            promptError('Transaction Failed', field.toUpperCase() + ' is required.');
+            return;
+        }
+    }
+    // ---------------- FORM DATA ----------------
+    var fd = new FormData();
+    fd.append('service', 'ambulatory-ics-upsertService');
+    fd.append('data', JSON.stringify(data));
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+            if (result.success) {
+                $('#dataModalICS').modal('hide');
+
+                promptSuccess('Result', result.message);
+                loaddata();
+            } else {
+                promptError('Result', result.message);
+            }
+        },
+        error: function (xhr) {
+            promptError('Failed Result:', "Error: " + xhr.responseText);
+        }
+
+    });
+
+}
 function UpSertAmpoData() {
 
     var data = {
