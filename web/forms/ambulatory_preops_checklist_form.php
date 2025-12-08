@@ -60,8 +60,8 @@
 
         <div class="checklist-item">☐ Allergies reviewed and documented: <span class="underline" id="allergies"></span>
         </div>
-        <div class="checklist-item">☐ Last Meal and Fluid: <span class="underline" id="last_meal"></span></div>
-        <div class="checklist-item">☐ Laboratory and Diagnostic results in: <span class="underline"
+        <div class="checklist-item">☐ Last Meal and Fluid: <span class="underline-2" id="last_meal"></span></div>
+        <div class="checklist-item">☐ Laboratory and Diagnostic results in: <span class="underline-2"
                 id="lab_result"></span></div>
     </div>
     <div class="section">
@@ -151,7 +151,7 @@
             }
         });
 
-        // 🖨️ Auto-print after load
+        // 🖨️ Auto - print after load
         window.addEventListener('load', () => {
             window.print();
         });

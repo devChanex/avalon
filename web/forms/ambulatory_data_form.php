@@ -24,19 +24,17 @@
             <tr>
                 <!-- First column -->
                 <td style="border: 1px solid black; padding: 2px; "><label style="font-size:10px">Patient
-                        No:</label><strong><span class="auto-span" id="patientno" style="margin-left:20px">Dela
-                            Cruz,
-                            Juan Mendoza </span> </strong></td>
+                        No:</label><strong><span class="auto-span" id="patientno" style="margin-left:20px"></span>
+                    </strong></td>
                 <td style="border: 1px solid black; padding: 2px; "><label
                         style="font-size:10px">CaseNo:</label><strong><span class="auto-span" id="caseno"
-                            style="margin-left:20px">Dela
-                            Cruz, Juan Mendoza </span> </strong></td>
+                            style="margin-left:20px"></span> </strong></td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px; "><label style="font-size:10px">Arrival
-                        Date/Time:</label><strong><span class="auto-span" id="arrival" style="margin-left:20px">Dela
-                            Cruz, Juan Mendoza </span> </strong></td>
+                        Date/Time:</label><strong><span class="auto-span" id="arrival" style="margin-left:20px"></span>
+                    </strong></td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;"><label style="font-size:10px">Attending
-                        Physician:</label><strong><span class="auto-span" id="physician" style="margin-left:20px">Dela
-                            Cruz, Juan Mendoza </span> </strong></td>
+                        Physician:</label><strong><span class="auto-span" id="physician"
+                            style="margin-left:20px"></span> </strong></td>
 
             </tr>
 
@@ -45,16 +43,16 @@
                 <!-- First column -->
                 <td colspan="2" style="border: 1px solid black; padding: 2px; width: 50%;"><label
                         style="font-size:10px">Patient Name:</label><strong><span class="auto-span" id="fullname"
-                            style="margin-left:20px">Dela Cruz, Juan Mendoza </span> </strong></td>
+                            style="margin-left:20px"></span> </strong></td>
                 <td colspan="2"
                     style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">PHIC No.: </label><span class="auto-span" id="phic_no"
-                        style="margin-left:20px">AS00001
+                        style="margin-left:20px">
                     </span> </strong>
                 </td>
                 <td colspan="2" style="border-left: 1px solid black; border-right: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Member Type:</label><span class="auto-span" id="membertype"
-                        style="margin-left:20px">123-1234-123123 </span> </strong>
+                        style="margin-left:20px"></span> </strong>
                 </td>
 
             </tr>
@@ -65,24 +63,23 @@
             <tr>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Birthdate:</label><span class="auto-span" id="birthdate"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Birthplace:</label><span class="auto-span" id="birth_place"
-                        style="margin-left:20px">2025-10-30T12:00
+                        style="margin-left:20px">
                     </span>
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Age:</label><span class="auto-span" id="age"
-                        style="margin-left:20px">31
+                    <label style="font-size:10px">Age:</label><span class="auto-span" id="age" style="margin-left:20px">
                     </span>
                 </td>
 
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Gender:</label><span class="auto-span" id="gender"
-                        style="margin-left:20px">Male
+                        style="margin-left:20px">
                     </span>
                 </td>
 
@@ -90,23 +87,23 @@
             <tr>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Nationality:</label><span class="auto-span" id="nationality"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Religion:</label><span class="auto-span" id="religion"
-                        style="margin-left:20px">31
+                        style="margin-left:20px">
                     </span>
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Marital Status:</label><span class="auto-span" id="marital_status"
-                        style="margin-left:20px">2025-10-30T12:00
+                        style="margin-left:20px">
                     </span>
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Contact No.:</label><span class="auto-span" id="contact_number"
-                        style="margin-left:20px">Male
+                        style="margin-left:20px">
                     </span>
                 </td>
 
@@ -114,18 +111,18 @@
             <tr>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Present Address:</label><span class="auto-span" id="present_address"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Office Address:</label><span class="auto-span" id="office_address"
-                        style="margin-left:20px">31
+                        style="margin-left:20px">
                     </span>
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Occupation:</label><span class="auto-span" id="occupation"
-                        style="margin-left:20px">2025-10-30T12:00
+                        style="margin-left:20px">
                     </span>
                 </td>
 
@@ -135,18 +132,18 @@
             <tr>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">In case of Emergency, Please Notify:</label><span class="auto-span"
-                        id="emergency_contact_person" style="margin-left:20px">1994-04-03
+                        id="emergency_contact_person" style="margin-left:20px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Relationship:</label><span class="auto-span"
-                        id="emergency_relationship" style="margin-left:20px">31
+                        id="emergency_relationship" style="margin-left:20px">
                     </span>
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Contact No.:</label><span class="auto-span"
-                        id="emergency_contact_number" style="margin-left:20px">2025-10-30T12:00
+                        id="emergency_contact_number" style="margin-left:20px">
                     </span>
                 </td>
 
@@ -200,7 +197,7 @@
                     <label style="font-size:10px;">Pain Rating Scale:</label><br>
                     <div style="text-align:center;">
                         <span id="smiley" style="margin-left: 10px; font-size: 30px;"></span><br>
-                        <label style="font-size:10px;" id="pain_label"><strong>0 - No hurt</strong>:</label>
+                        <label style="font-size:10px;" id="pain_label"><strong></strong>:</label>
                     </div>
 
 
@@ -219,38 +216,35 @@
 
             <tr>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">BP:</label><span class="auto-span" id="bp"
-                        style="margin-left:20px">1994-04-03
+                    <label style="font-size:10px">BP:</label><span class="auto-span" id="bp" style="margin-left:20px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">PR:</label><span class="auto-span" id="pr"
-                        style="margin-left:20px">1994-04-03
+                    <label style="font-size:10px">PR:</label><span class="auto-span" id="pr" style="margin-left:20px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Temp:</label><span class="auto-span" id="temp"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">RR:</label><span class="auto-span" id="rr"
-                        style="margin-left:20px">1994-04-03
+                    <label style="font-size:10px">RR:</label><span class="auto-span" id="rr" style="margin-left:20px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Height:</label><span class="auto-span" id="height"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Weight:</label><span class="auto-span" id="weight"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
@@ -445,23 +439,23 @@
             }
         });
 
-        // // 🖨️ Auto-print after load
-        // window.addEventListener('load', () => {
-        //     window.print();
-        // });
+        // 🖨️ Auto-print after load
+        window.addEventListener('load', () => {
+            window.print();
+        });
 
-        // // ✅ Close window after print or cancel
-        // window.onafterprint = () => {
-        //     window.close();
-        // };
+        // ✅ Close window after print or cancel
+        window.onafterprint = () => {
+            window.close();
+        };
 
-        // // ✅ Extra safety for some browsers
-        // const mediaQueryList = window.matchMedia('print');
-        // mediaQueryList.addEventListener('change', (mql) => {
-        //     if (!mql.matches) {
-        //         window.close();
-        //     }
-        // });
+        // ✅ Extra safety for some browsers
+        const mediaQueryList = window.matchMedia('print');
+        mediaQueryList.addEventListener('change', (mql) => {
+            if (!mql.matches) {
+                window.close();
+            }
+        });
     </script>
 
 

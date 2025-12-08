@@ -34,6 +34,7 @@ function loadgeneraldata() {
                     document.getElementById("general_birthplace").value = rowdata.birth_place;
                     document.getElementById("general_age").value = calculateAge(rowdata.birth_date);
                     document.getElementById("general_phic_no").value = rowdata.philhealth_number ?? '';
+                    document.getElementById("general_member_type").value = rowdata.member_type ?? '';
 
                 });
 
@@ -896,7 +897,7 @@ function UpSertAmbulatoryData() {
                 form.target = "_blank"; // Open in a new tab
 
                 result.record.fullname = document.getElementById("general_fullname").value;
-                result.record.birthDate = document.getElementById("general_birthdate").value;
+                result.record.birthdate = document.getElementById("general_birthdate").value;
                 result.record.gender = document.getElementById("general_gender").value;
                 result.record.age = document.getElementById("general_age").value;
                 result.record.physician = document.getElementById("general_physician").value;
@@ -1212,7 +1213,7 @@ function printVitalSheet() {
     var records = {};
     records.vitalSigns = vitalDataCache;
     records.fullname = document.getElementById("general_fullname").value;
-    records.birthDate = document.getElementById("general_birthdate").value;
+    records.birthdate = document.getElementById("general_birthdate").value;
     records.birth_place = document.getElementById("general_birthplace").value;
     records.gender = document.getElementById("general_gender").value;
     records.age = document.getElementById("general_age").value;
@@ -1220,6 +1221,8 @@ function printVitalSheet() {
     records.patientno = document.getElementById("general_pid").value;
     records.caseno = document.getElementById("general_amid").value;
     records.phic_no = document.getElementById("general_phic_no").value;
+    records.member_type = document.getElementById("general_member_type").value;
+    records.arrival = document.getElementById("tab2_arrival").value;
     const form = document.createElement("form");
     form.method = "POST";
     form.action = "forms/ambulatory_vitalsigns_form.php";
@@ -1244,7 +1247,7 @@ function printInstrumentCountSheet() {
     var records = {};
     records.instrumentcount = instrumentCountDataCache;
     records.fullname = document.getElementById("general_fullname").value;
-    records.birthDate = document.getElementById("general_birthdate").value;
+    records.birthdate = document.getElementById("general_birthdate").value;
     records.birth_place = document.getElementById("general_birthplace").value;
     records.gender = document.getElementById("general_gender").value;
     records.age = document.getElementById("general_age").value;
@@ -1252,6 +1255,9 @@ function printInstrumentCountSheet() {
     records.patientno = document.getElementById("general_pid").value;
     records.caseno = document.getElementById("general_amid").value;
     records.phic_no = document.getElementById("general_phic_no").value;
+    records.membertype = document.getElementById("general_member_type").value;
+    records.arrival = document.getElementById("tab2_arrival").value;
+    // console.log(JSON.stringify(records));
     const form = document.createElement("form");
     form.method = "POST";
     form.action = "forms/ambulatory_instrument_count_form.php";
@@ -1279,7 +1285,7 @@ function printORCharges() {
     var records = {};
     records.orcharges = instrumentDataCache;
     records.fullname = document.getElementById("general_fullname").value;
-    records.birthDate = document.getElementById("general_birthdate").value;
+    records.birthdate = document.getElementById("general_birthdate").value;
     records.birth_place = document.getElementById("general_birthplace").value;
     records.gender = document.getElementById("general_gender").value;
     records.age = document.getElementById("general_age").value;
@@ -1287,6 +1293,8 @@ function printORCharges() {
     records.patientno = document.getElementById("general_pid").value;
     records.caseno = document.getElementById("general_amid").value;
     records.phic_no = document.getElementById("general_phic_no").value;
+    records.membertype = document.getElementById("general_member_type").value;
+    records.arrival = document.getElementById("tab2_arrival").value;
     const form = document.createElement("form");
     form.method = "POST";
     form.action = "forms/ambulatory_or_charges_form.php";
@@ -1312,7 +1320,7 @@ function printMedicationSheet() {
     records.medication = msDataCache;
     records.nurse_medication = ms_nurseDataCache;
     records.fullname = document.getElementById("general_fullname").value;
-    records.birthDate = document.getElementById("general_birthdate").value;
+    records.birthdate = document.getElementById("general_birthdate").value;
     records.birth_place = document.getElementById("general_birthplace").value;
     records.gender = document.getElementById("general_gender").value;
     records.age = document.getElementById("general_age").value;
@@ -1320,6 +1328,8 @@ function printMedicationSheet() {
     records.patientno = document.getElementById("general_pid").value;
     records.caseno = document.getElementById("general_amid").value;
     records.phic_no = document.getElementById("general_phic_no").value;
+    records.member_type = document.getElementById("general_member_type").value;
+    records.arrival = document.getElementById("tab2_arrival").value;
     const form = document.createElement("form");
     form.method = "POST";
     form.action = "forms/ambulatory_medication_sheet_form.php";
@@ -1661,7 +1671,7 @@ function printAmpnSheet() {
     var records = {};
     records.ampn = ampnDataCache;
     records.fullname = document.getElementById("general_fullname").value;
-    records.birthDate = document.getElementById("general_birthdate").value;
+    records.birthdate = document.getElementById("general_birthdate").value;
     records.birth_place = document.getElementById("general_birthplace").value;
     records.gender = document.getElementById("general_gender").value;
     records.age = document.getElementById("general_age").value;
@@ -1669,6 +1679,8 @@ function printAmpnSheet() {
     records.patientno = document.getElementById("general_pid").value;
     records.caseno = document.getElementById("general_amid").value;
     records.phic_no = document.getElementById("general_phic_no").value;
+    records.membertype = document.getElementById("general_member_type").value;
+    records.arrival = document.getElementById("tab2_arrival").value;
     const form = document.createElement("form");
     form.method = "POST";
     form.action = "forms/ambulatory_ampn_form.php";
@@ -1694,7 +1706,7 @@ function printAmpoSheet() {
     records.ampo = ampoDataCache;
 
     records.fullname = document.getElementById("general_fullname").value;
-    records.birthDate = document.getElementById("general_birthdate").value;
+    records.birthdate = document.getElementById("general_birthdate").value;
     records.birth_place = document.getElementById("general_birthplace").value;
     records.gender = document.getElementById("general_gender").value;
     records.age = document.getElementById("general_age").value;
@@ -1702,6 +1714,8 @@ function printAmpoSheet() {
     records.patientno = document.getElementById("general_pid").value;
     records.caseno = document.getElementById("general_amid").value;
     records.phic_no = document.getElementById("general_phic_no").value;
+    records.member_type = document.getElementById("general_member_type").value;
+    records.arrival = document.getElementById("tab2_arrival").value;
     // console.log(JSON.stringify(records));
     const form = document.createElement("form");
     form.method = "POST";
@@ -1784,7 +1798,13 @@ function UpSertOperativeTechnique() {
                 result.record.caseno = document.getElementById("general_amid").value;
 
                 result.record.patientno = document.getElementById("general_pid").value;
-
+                result.record.fullname = document.getElementById("general_fullname").value;
+                result.record.birth_date = document.getElementById("general_birthdate").value;
+                result.record.birth_place = document.getElementById("general_birthplace").value;
+                result.record.gender = document.getElementById("general_gender").value;
+                result.record.age = document.getElementById("general_age").value;
+                result.record.phic_no = document.getElementById("general_phic_no").value;
+                result.record.member_type = document.getElementById("general_member_type").value;
 
                 // Create a hidden input to hold the data
                 const input = document.createElement("input");

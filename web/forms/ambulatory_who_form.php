@@ -25,15 +25,15 @@
                 <!-- First column -->
                 <td colspan="2" style="border: 1px solid black; padding: 2px; width: 50%;"><label
                         style="font-size:10px">Patient Name:</label><strong><span id="fullname"
-                            style="margin-left:20px">Dela Cruz, Juan Mendoza </span> </strong></td>
+                            style="margin-left:20px"></span> </strong></td>
                 <td
                     style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Case No.: </label><span id="amid" style="margin-left:20px">AS00001
+                    <label style="font-size:10px">Case No.: </label><span id="amid" style="margin-left:20px">
                     </span> </strong>
                 </td>
                 <td style="border-left: 1px solid black; border-right: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">PHIC No.:</label><span class="auto-span" id="phic_no"
-                        style="margin-left:20px">123-1234-123123 </span> </strong>
+                        style="margin-left:20px"></span> </strong>
                 </td>
 
             </tr>
@@ -43,34 +43,33 @@
             <!-- Second row with 3 columns -->
             <tr>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Birthdate:</label><span id="birthdate"
-                        style="margin-left:20px">1994-04-03
+                    <label style="font-size:10px">Birthdate:</label><span id="birthdate" style="margin-left:20px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Age:</label><span id="age" style="margin-left:20px">31
+                    <label style="font-size:10px">Age:</label><span id="age" style="margin-left:20px">
                     </span>
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Gender:</label><span id="gender" style="margin-left:20px">Male
+                    <label style="font-size:10px">Gender:</label><span id="gender" style="margin-left:20px">
                     </span>
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Date/Time:</label><span class="auto-span" id="datetime"
-                        style="margin-left:20px">2025-10-30T12:00
+                        style="margin-left:20px">
                     </span>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Name of Procedure:</label><span id="procedure"
-                        style="margin-left:20px">Leg Operations
+                        style="margin-left:20px">
                     </span>
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Attending Physician:</label><span id="physician"
-                        style="margin-left:20px">Dr. Juan Dela Cruz
+                        style="margin-left:20px">
                     </span>
                 </td>
 
@@ -235,9 +234,11 @@
             try {
                 // PHP echoes the POSTed data into JS
                 const data = <?php echo json_encode($_POST['data'] ?? '{}'); ?>;
+
                 const row = JSON.parse(data);
 
                 for (const key in row) {
+
                     const el = document.getElementById(key);
                     if (!el) continue;
 
@@ -260,7 +261,8 @@
                         }
                     }
                     if (key === "physician") {
-                        document.getElementById("physician2").textContent = value;
+                        document.getElementById("physician").textContent = value;
+
                     }
 
                     el.textContent = value;

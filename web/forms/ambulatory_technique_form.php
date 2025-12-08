@@ -24,20 +24,18 @@
             <tr>
                 <!-- First column -->
                 <td style="border: 1px solid black; padding: 2px; "><label style="font-size:10px">Patient
-                        No:</label><strong><span class="auto-span" id="patientno" style="margin-left:20px">Dela
-                            Cruz,
-                            Juan Mendoza </span> </strong></td>
+                        No:</label><strong><span class="auto-span" id="patientno" style="margin-left:20px"> </span>
+                    </strong></td>
                 <td style="border: 1px solid black; padding: 2px; "><label
                         style="font-size:10px">CaseNo:</label><strong><span class="auto-span" id="caseno"
-                            style="margin-left:20px">Dela
-                            Cruz, Juan Mendoza </span> </strong></td>
+                            style="margin-left:20px"> </span> </strong></td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px; "><label style="font-size:10px">Date Time
                         Started
-                    </label><strong><span class="auto-span" id="optech_started" style="margin-left:20px">Dela
-                            Cruz, Juan Mendoza </span> </strong></td>
+                    </label><strong><span class="auto-span" id="optech_started" style="margin-left:20px"> </span>
+                    </strong></td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;"><label style="font-size:10px">Date Time
-                        Ended:</label><strong><span class="auto-span" id="optech_ended" style="margin-left:20px">Dela
-                            Cruz, Juan Mendoza </span> </strong></td>
+                        Ended:</label><strong><span class="auto-span" id="optech_ended" style="margin-left:20px">
+                        </span> </strong></td>
 
             </tr>
 
@@ -46,16 +44,16 @@
                 <!-- First column -->
                 <td colspan="2" style="border: 1px solid black; padding: 2px; width: 50%;"><label
                         style="font-size:10px">Patient Name:</label><strong><span class="auto-span" id="fullname"
-                            style="margin-left:20px">Dela Cruz, Juan Mendoza </span> </strong></td>
+                            style="margin-left:20px"></span> </strong></td>
                 <td colspan="2"
                     style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">PHIC No.: </label><span class="auto-span" id="phic_no"
-                        style="margin-left:20px">AS00001
+                        style="margin-left:20px">
                     </span> </strong>
                 </td>
                 <td colspan="2" style="border-left: 1px solid black; border-right: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Member Type:</label><span class="auto-span" id="membertype"
-                        style="margin-left:20px">123-1234-123123 </span> </strong>
+                    <label style="font-size:10px">Member Type:</label><span class="auto-span" id="member_type"
+                        style="margin-left:20px"></span> </strong>
                 </td>
 
             </tr>
@@ -65,25 +63,24 @@
             <!-- Second row with 3 columns -->
             <tr>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Birthdate:</label><span class="auto-span" id="birthdate"
-                        style="margin-left:20px">1994-04-03
+                    <label style="font-size:10px">Birthdate:</label><span class="auto-span" id="birth_date"
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Birthplace:</label><span class="auto-span" id="birth_place"
-                        style="margin-left:20px">2025-10-30T12:00
+                        style="margin-left:20px">
                     </span>
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Age:</label><span class="auto-span" id="age"
-                        style="margin-left:20px">31
+                    <label style="font-size:10px">Age:</label><span class="auto-span" id="age" style="margin-left:20px">
                     </span>
                 </td>
 
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Gender:</label><span class="auto-span" id="gender"
-                        style="margin-left:20px">Male
+                        style="margin-left:20px">
                     </span>
                 </td>
 
@@ -91,7 +88,7 @@
             <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Preoperative Diagnosis:</label><span id="optech_preop_diagnosis"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
@@ -99,7 +96,7 @@
             <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Operative Procedures:</label><span id="optech_op_procedure"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
@@ -107,7 +104,7 @@
             <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">PostOperative Diagnisis:</label><span id="optech_posop_diagnosis"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
@@ -115,7 +112,7 @@
             <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 2px; height: 500px; vertical-align: top;">
                     <label style="font-size:10px">Narrative of Technique with operative findings:</label><br>
-                    <span id="optech_narative" style="margin-left:20px">1994-04-03</span>
+                    <span id="optech_narative" style="margin-left:20px"></span>
                 </td>
             </tr>
 
@@ -130,19 +127,19 @@
             <tr>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Surgeon:</label><span class="auto-span" id="optech_surgeon"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Assistant(s):</label><span class="auto-span" id="optech_assistant"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Anesthesiologist:</label><span class="auto-span"
-                        id="optech_anesthesiologist" style="margin-left:20px">1994-04-03
+                        id="optech_anesthesiologist" style="margin-left:20px">
                     </span>
 
                 </td>
@@ -150,13 +147,13 @@
             <tr>
                 <td colspan="3" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Scrub Nurse:</label><span class="auto-span" id="optech_scrub_nurse"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td colspan="3" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Circulating Nurse:</label><span class="auto-span"
-                        id="optech_circulating_nurse" style="margin-left:20px">1994-04-03
+                        id="optech_circulating_nurse" style="margin-left:20px">
                     </span>
 
                 </td>
@@ -165,19 +162,19 @@
             <tr>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Instument Count:</label><span class="auto-span"
-                        id="optech_instrument_count" style="margin-left:20px">1994-04-03
+                        id="optech_instrument_count" style="margin-left:20px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Needle Count:</label><span class="auto-span" id="optech_needle_count"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Sponge Count:</label><span class="auto-span" id="optech_sponge_count"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
@@ -313,22 +310,22 @@
         });
 
         // 🖨️ Auto-print after load
-        // window.addEventListener('load', () => {
-        //     window.print();
-        // });
+        window.addEventListener('load', () => {
+            window.print();
+        });
 
-        // // ✅ Close window after print or cancel
-        // window.onafterprint = () => {
-        //     window.close();
-        // };
+        // ✅ Close window after print or cancel
+        window.onafterprint = () => {
+            window.close();
+        };
 
-        // // ✅ Extra safety for some browsers
-        // const mediaQueryList = window.matchMedia('print');
-        // mediaQueryList.addEventListener('change', (mql) => {
-        //     if (!mql.matches) {
-        //         window.close();
-        //     }
-        // });
+        // ✅ Extra safety for some browsers
+        const mediaQueryList = window.matchMedia('print');
+        mediaQueryList.addEventListener('change', (mql) => {
+            if (!mql.matches) {
+                window.close();
+            }
+        });
     </script>
 
 

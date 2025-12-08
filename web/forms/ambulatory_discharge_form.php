@@ -48,31 +48,31 @@
             <tr>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">BP:</label><span class="auto-span" id="discharge_bp"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">PR:</label><span class="auto-span" id="discharge_pr"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">O₂ Sat:</label><span class="auto-span" id="discharge_osat"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Temp:</label><span class="auto-span" id="discharge_temp"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">RR:</label><span class="auto-span" id="discharge_rr"
-                        style="margin-left:20px">1994-04-03
+                        style="margin-left:20px">
                     </span>
 
                 </td>
