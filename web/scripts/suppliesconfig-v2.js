@@ -159,9 +159,9 @@ function UpSertData() {
         type: document.getElementById("type").value.trim(),
         classification: document.getElementById("classification").value.trim(),
         description: document.getElementById("description").value.trim(),
-        price_cash: document.getElementById("price-cash").value,
-        price_hmo: document.getElementById("price-hmo").value,
-        price_discounted: document.getElementById("price-discounted").value,
+        price_cash: document.getElementById("price-cash").value ?? 0.00,
+        price_hmo: document.getElementById("price-hmo").value ?? 0.00,
+        price_discounted: document.getElementById("price-discounted").value ?? 0.00,
         status: document.getElementById("status").value,
         rsv: document.getElementById("rsv").value
     };
@@ -170,7 +170,7 @@ function UpSertData() {
 
     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
     let requiredFields = [
-        "itemname", "price_cash", "status", "type", "isConsumable", "classification"
+        "itemname", "status", "type", "isConsumable", "classification"
     ];
 
     for (let field of requiredFields) {

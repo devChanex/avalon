@@ -30,10 +30,10 @@ class ServiceClass
         try {
             $data = isset($_POST['data']) ? json_decode($_POST['data'], true) : [];
 
-            if (empty($data['itemname']) || empty($data['price_cash']) || empty($data['status'])) {
+            if (empty($data['itemname']) || empty($data['status'])) {
                 return [
                     'success' => false,
-                    'message' => 'Missing required fields'
+                    'message' => 'Missing required fields:' . json_encode($data)
                 ];
             }
 
@@ -58,7 +58,7 @@ class ServiceClass
             $status = 'Updated';
             if (empty($data['supid'])) {
                 // Insert new record
-                $sql = "INSERT INTO supplies (itemname, description, price_cash,price_hmo,price_discounted, type,classification, status, isConsumable,rsv) VALUES (:itemname, :description, :price_cash,:price_hmo,:price_discounted, :type,:classification, :status, :isConsumable, :rsv)";
+                $sql = "INSERT INTO supplies (itemname, description, price_cash,price_hmo,price_discounted, type,classification, status, isConsumable,rsv) VALUES (:itemname, :description, :pricecash,:pricehmo,:pricediscounted, :type,:classification, :status, :isConsumable, :rsv)";
                 $stmt = $this->conn->prepare($sql);
                 $status = "Added";
             } else {
