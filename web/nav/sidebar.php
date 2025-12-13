@@ -55,6 +55,14 @@ echo '
                                         <a href="ambulatory-surgery.php" class="menu-item">Ambulatory Surgery</a>   
                                     </div>
 
+                                     <div class="submenu-content">
+                                        <a href="prescription.php" class="menu-item">Prescription</a>   
+                                    </div>
+
+                                     <div class="submenu-content">
+                                        <a href="medical-certificate.php" class="menu-item">Medical Certificate</a>   
+                                    </div>
+
                                    
                                 </div>
                          

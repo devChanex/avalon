@@ -60,10 +60,10 @@ require_once 'properties.php';
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header py-3 d-flex justify-content-between">
-                                    <h6 class="m-0 font-weight-bold">OPD Consultation</h6>
+                                    <h6 class="m-0 font-weight-bold">Prescriptions</h6>
                                     <a href="#" onclick='openModal();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                            class="fas fa-plus fa-sm text-white-50"></i> New Consultation</a>
+                                            class="fas fa-plus fa-sm text-white-50"></i> New Prescription</a>
                                 </div>
                                 <div class="card-body" style="min-height: 600px;display: block;  ">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
@@ -77,10 +77,11 @@ require_once 'properties.php';
                                             Sort By:
                                             <select class="form-control select2 d-inline-block" id="sortBy"
                                                 onchange="pageRefresh('sortBy');" style="width: 120px;">
-                                                <option value="opdcid">conref#</option>
+                                                <option value="prescriptid">Ref #</option>
                                                 <option value="fullname">PatientName</option>
-                                                <option value="consultation_date">Date</option>
-                                                <option value="physician">Physician</option>
+                                                <option value="prescription_date">Prescription Date</option>
+                                                <option value="next_appointment">Next Appointment Date</option>
+                                                <option value="physician">prescribed_by</option>
 
 
                                             </select>
@@ -101,13 +102,12 @@ require_once 'properties.php';
                                         <table id="datatable" class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>conref#</th>
-                                                    <th>PatuentNo</th>
+                                                    <th>Prescription Ref #</th>
+                                                    <th>PatientNo</th>
                                                     <th>Patient Name</th>
-                                                    <th>Service</th>
-                                                    <th>Consultation Date</th>
                                                     <th>Physician</th>
-                                                    <th>Chief Complaint</th>
+                                                    <th>Date</th>
+                                                    <th>Next Appointment</th>
                                                     <th>Updated</th>
                                                     <th class="nosort">&nbsp;</th>
                                                 </tr>
@@ -124,13 +124,12 @@ require_once 'properties.php';
 
                                 <template id="dataRowTemplate">
                                     <tr>
-                                        <td class="conref"></td>
+                                        <td class="prescriptid"></td>
                                         <td class="patientid"></td>
                                         <td class="patientname"></td>
-                                        <td class="service"></td>
-                                        <td class="consultation_date"></td>
                                         <td class="physician"></td>
-                                        <td class="chiefcomplaint"></td>
+                                        <td class="prescription_date"></td>
+                                        <td class="next_appointment"></td>
                                         <td class="updated"></td>
                                         <td>
                                             <div class="table-actions">
@@ -140,8 +139,6 @@ require_once 'properties.php';
                                                 <button type="button" class="btn social-btn bg-success print-data-btn">
                                                     <i class="ik ik-printer"></i>
                                                 </button>
-
-
                                             </div>
                                         </td>
                                     </tr>
@@ -164,7 +161,7 @@ require_once 'properties.php';
                                     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="fullwindowModalLabel">OPD Consultation Form
+                                                <h5 class="modal-title" id="fullwindowModalLabel">Prescription Form
 
                                                 </h5>
 
@@ -174,26 +171,10 @@ require_once 'properties.php';
                                             <div class="modal-body" style="padding: 50px;">
 
                                                 <input type="hidden" id="recordid">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputUsername1">Consultation Ref
-                                                                #</label>
-                                                            <input type="text" class="form-control" id="conrefNo"
-                                                                placeholder="Consultation Ref #" readonly>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputUsername1">Consultation Date</label>
-                                                            <input type="datetime-local" class="form-control"
-                                                                id="consultation_date" placeholder="Item Name">
-                                                        </div>
-                                                    </div>
-                                                </div>
+
                                                 <div class="row">
 
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-6">
                                                         <label for="itemname">Patient Name:</label>
                                                         <!-- Visible field (user types/sees this one) -->
                                                         <input list="patientOptions" id="patientname"
@@ -206,8 +187,8 @@ require_once 'properties.php';
                                                         <input type="hidden" id="pid" name="invidmodal" onchange="">
 
                                                     </div>
-                                                    <div class="col-lg-4">
-                                                        <label for="itemname">Attending Physician:</label>
+                                                    <div class="col-lg-6">
+                                                        <label for="itemname">Physician:</label>
                                                         <!-- Visible field (user types/sees this one) -->
                                                         <input list="physicianOptions" id="physician"
                                                             class="form-control" placeholder="Type Physician Name"
@@ -216,101 +197,32 @@ require_once 'properties.php';
                                                         </datalist>
                                                     </div>
 
-                                                    <div class="col-lg-4">
-                                                        <label for="itemname">Service:</label>
-                                                        <!-- Visible field (user types/sees this one) -->
-                                                        <input list="serviceOptions" id="service" class="form-control"
-                                                            placeholder="Select Service" autocomplete="off">
-                                                        <datalist id="serviceOptions">
-                                                        </datalist>
-                                                    </div>
+
 
 
                                                 </div>
-                                                <hr>
-                                                <strong>Vitals & Allergies</strong>
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label for="bp">Blood Pressure (BP)</label>
-                                                            <input type="text" class="form-control" id="bp"
-                                                                placeholder="e.g. 120/80">
+                                                            <label for="exampleInputUsername1">Prescription Ref
+                                                                #</label>
+                                                            <input type="text" class="form-control" id="prescriptno"
+                                                                placeholder="Prescription Ref #" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label for="rr">Respiratory Rate (RR)</label>
-                                                            <input type="text" class="form-control" id="rr"
-                                                                placeholder="breaths/min">
+                                                            <label for="exampleInputUsername1">Prescription Date</label>
+                                                            <input type="datetime-local" class="form-control"
+                                                                id="prescription_date" placeholder="Item Name">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label for="hr">Heart Rate (HR)</label>
-                                                            <input type="text" class="form-control" id="hr"
-                                                                placeholder="bpm">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="temp">Temperature (°C)</label>
-                                                            <input type="text" step="0.1" class="form-control" id="temp"
-                                                                placeholder="°C">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="height">Height (cm)</label>
-                                                            <input type="text" class="form-control" id="height"
-                                                                placeholder="cm">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="weight">Weight (kg)</label>
-                                                            <input type="text" class="form-control" id="weight"
-                                                                placeholder="kg">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="row">
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="o2sat">O₂ Saturation (SpO₂)</label>
-                                                            <input type="text" class="form-control" id="saturation"
-                                                                placeholder="%">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="o2sat">LMP</label>
-                                                            <input type="date" class="form-control" id="lmp"
-                                                                placeholder="%">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <label for="o2sat">Allergies</label>
-                                                            <input type="text" class="form-control" id="allergies"
-                                                                placeholder="%">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group">
-                                                            <label for="past">Past Illness & Surgery</label>
-                                                            <textarea class="form-control" id="past" rows="3"
-                                                                placeholder="Input Past Illness & Surgery"></textarea>
+                                                            <label for="exampleInputUsername1">Next Appointment
+                                                                Date</label>
+                                                            <input type="datetime-local" class="form-control"
+                                                                id="next_appointment" placeholder="Item Name">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -318,37 +230,12 @@ require_once 'properties.php';
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
-                                                            <label for="past">Current Illness & Surgery /
-                                                                Medication</label>
-                                                            <textarea class="form-control" id="current" rows="3"
-                                                                placeholder="Input Current Illness & Surgery / Medication"></textarea>
+                                                            <label for="complaint">Prescription</label>
+                                                            <textarea class="form-control" id="prescription" rows="5"
+                                                                placeholder="Input Prescription"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group">
-                                                            <label for="complaint">Chief Complaint</label>
-                                                            <textarea class="form-control" id="chief_complaint" rows="3"
-                                                                placeholder="Input Past Illness & Surgery"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group">
-                                                            <label for="allergies">Physician's Notes</label>
-                                                            <textarea class="form-control" id="note" rows="5"
-                                                                placeholder="Input Notes"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -416,7 +303,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v4.js"></script>
-    <script src="scripts/opd-consultation-v3.js"></script>
+    <script src="scripts/prescription-v1.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 
