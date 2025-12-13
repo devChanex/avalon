@@ -205,7 +205,7 @@ require_once 'properties.php';
 
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">MedCert Ref
                                                                 #</label>
@@ -213,14 +213,14 @@ require_once 'properties.php';
                                                                 placeholder="Prescription Ref #" readonly>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Date</label>
                                                             <input type="datetime-local" class="form-control"
                                                                 id="cert_date" placeholder="Cert Date">
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Examined
                                                                 Date</label>
@@ -228,23 +228,27 @@ require_once 'properties.php';
                                                                 id="examined_date" placeholder="Item Name">
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label for="complaint">Rest Days</label>
+                                                            <input type="number" class="form-control" id="days"
+                                                                placeholder="Days Count" min="0">
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="row">
-                                                    <div class="col-lg-6">
+
+                                                    <div class="col-lg-12">
+
+
                                                         <div class="form-group">
                                                             <label for="complaint">Diagnosis</label>
-                                                            <input type="text" class="form-control" id="diagnosis"
-                                                                placeholder="Diagnosis">
+                                                            <textarea class="form-control" id="diagnosis" rows="5"
+                                                                placeholder="Input Diagnosis"></textarea>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label for="complaint">Rest Days</label>
-                                                            <input type="text" class="form-control" id="days"
-                                                                placeholder="Days Count">
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

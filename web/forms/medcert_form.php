@@ -100,10 +100,13 @@
         with the following diagnosis:
     </div>
 
-    <div class="diagnosis-box">
-        <span id="diagnosis"></span>
-        <!-- Diagnosis goes here -->
-    </div>
+    <table class="info-table-2">
+        <tr>
+            <td><span id="diagnosis" class="preserve-newline"></td>
+
+        </tr>
+
+    </table>
 
     <div class="content">
         The above injuries / illnesses would require attendance for a duration of <u> <span class="short-line"
@@ -167,23 +170,23 @@
             }
         });
 
-        // // 🖨️ Auto-print after load
-        // window.addEventListener('load', () => {
-        //     window.print();
-        // });
+        // 🖨️ Auto-print after load
+        window.addEventListener('load', () => {
+            window.print();
+        });
 
-        // // ✅ Close window after print or cancel
-        // window.onafterprint = () => {
-        //     window.close();
-        // };
+        // ✅ Close window after print or cancel
+        window.onafterprint = () => {
+            window.close();
+        };
 
-        // // ✅ Extra safety for some browsers
-        // const mediaQueryList = window.matchMedia('print');
-        // mediaQueryList.addEventListener('change', (mql) => {
-        //     if (!mql.matches) {
-        //         window.close();
-        //     }
-        // });
+        // ✅ Extra safety for some browsers
+        const mediaQueryList = window.matchMedia('print');
+        mediaQueryList.addEventListener('change', (mql) => {
+            if (!mql.matches) {
+                window.close();
+            }
+        });
     </script>
 
 

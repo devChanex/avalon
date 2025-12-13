@@ -82,6 +82,15 @@ h2 {
     /* ensures equal cell width */
 }
 
+
+.info-table-2 {
+    margin: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* ensures equal cell width */
+}
+
 .info-table td {
     width: 50%;
     /* 2 cells per row → divide equally */

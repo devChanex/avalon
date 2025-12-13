@@ -199,7 +199,7 @@ function clearModal() {
     document.getElementById("pid").value = "";
     document.getElementById("physician").value = "";
     document.getElementById("diagnosis").value = "";
-    document.getElementById("days").value = "";
+    document.getElementById("days").value = "0";
 
 }
 function openModal() {
