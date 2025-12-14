@@ -60,7 +60,7 @@ require_once 'properties.php';
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header py-3 d-flex justify-content-between">
-                                    <h6 class="m-0 font-weight-bold">Prescriptions</h6>
+                                    <h6 class="m-0 font-weight-bold">Medical Certificate</h6>
                                     <a href="#" onclick='openModal();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                             class="fas fa-plus fa-sm text-white-50"></i> New Medical Certificate</a>
@@ -210,7 +210,7 @@ require_once 'properties.php';
                                                             <label for="exampleInputUsername1">MedCert Ref
                                                                 #</label>
                                                             <input type="text" class="form-control" id="medcertno"
-                                                                placeholder="Prescription Ref #" readonly>
+                                                                placeholder="Medical Certificate Ref #" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3">
