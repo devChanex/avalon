@@ -2,6 +2,28 @@
 loaddata();
 loadgeneraldata();
 loadgeneraldata_2();
+
+loadAllDatalists();
+async function loadAllDatalists() {
+    try {
+        await populateDataList('', 'ms_medication_input_options', 'datalist-medication', 'v2');
+        await populateDataList('', 'consent_nurse_options', 'datalist-nurse', 'v2');
+        await populateDataList('', 'discharge_nurse_options', 'datalist-nurse', 'v2');
+        await populateDataList('', 'discharge_surgeon_options', 'datalist-physician', 'v2');
+        await populateDataList('', 'ms_nurse_nurse_input_options', 'datalist-nurse', 'v2');
+        await populateDataList('', 'optech_surgeon_input_options', 'datalist-physician', 'v2');
+        await populateDataList('', 'optech_assistant_input_options', 'datalist-physician', 'v2');
+        await populateDataList('', 'optech_anesthesiologist_input_options', 'datalist-physician', 'v2');
+        await populateDataList('', 'optech_scrub_nurse_input_options', 'datalist-nurse', 'v2');
+        await populateDataList('', 'optech_circulating_nurse_input_options', 'datalist-nurse', 'v2');
+
+        console.log('All datalists loaded in order');
+    } catch (err) {
+        promptError('Process Failed', err);
+    }
+}
+
+
 let vitalDataCache = null;
 let ampoDataCache = null;
 let ampnDataCache = null;

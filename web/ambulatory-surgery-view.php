@@ -253,11 +253,20 @@ require_once 'properties.php';
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label for="consent_nurse">Nurse In-Charge:</label>
                                                         <input type="text" class="form-control" id="consent_nurse"
                                                             placeholder="Nurse In-Charge">
-                                                    </div>
+                                                    </div> -->
+
+                                                    <label for="itemname">Nurse In-Charge:</label>
+                                                    <!-- Visible field (user types/sees this one) -->
+                                                    <input list="consent_nurse_options" id="consent_nurse"
+                                                        class="form-control" placeholder="Nurse In-Charge"
+                                                        autocomplete="off">
+                                                    <datalist id="consent_nurse_options">
+
+                                                    </datalist>
                                                 </div>
                                             </div>
 
@@ -802,18 +811,23 @@ require_once 'properties.php';
                                         <br>
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="tab2_temp">Nurse-In-Charge:</label>
-                                                    <input type="text" class="form-control" id="discharge_nurse"
-                                                        placeholder="Nurse In Charge">
-                                                </div>
+
+                                                <label for="itemname">Nurse-In-Charge:</label>
+                                                <!-- Visible field (user types/sees this one) -->
+                                                <input list="discharge_nurse_options" id="discharge_nurse"
+                                                    class="form-control" placeholder="Medication" autocomplete="off">
+                                                <datalist id="discharge_nurse_options">
+                                                    <option value="">Loading...</option>
+                                                </datalist>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="tab2_rr">Surgeon:</label>
-                                                    <input type="text" class="form-control" id="discharge_surgeon"
-                                                        placeholder="Surgeon">
-                                                </div>
+
+                                                <label for="itemname">Surgeon:</label>
+                                                <input list="discharge_surgeon_options" id="discharge_surgeon"
+                                                    class="form-control" placeholder="Surgeon" autocomplete="off">
+                                                <datalist id="discharge_surgeon_options">
+                                                    <option value="">Loading...</option>
+                                                </datalist>
                                             </div>
 
                                         </div>
@@ -1085,43 +1099,62 @@ require_once 'properties.php';
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-4">
-                                                <div class="form-group">
-                                                    <label for="tab2_bp">Surgeon:</label>
-                                                    <input type="text" class="form-control" id="optech_surgeon_input"
-                                                        placeholder="Surgeon">
-                                                </div>
+
+
+                                                <label for="itemname">Surgeon:</label>
+                                                <!-- Visible field (user types/sees this one) -->
+                                                <input list="optech_surgeon_input_options" id="optech_surgeon_input"
+                                                    class="form-control" placeholder="Surgeon" autocomplete="off">
+                                                <datalist id="optech_surgeon_input_options">
+                                                    <option value="">Loading...</option>
+                                                </datalist>
                                             </div>
                                             <div class="col-lg-4">
-                                                <div class="form-group">
-                                                    <label for="tab2_bp">Assistant:</label>
-                                                    <input type="text" class="form-control" id="optech_assistant_input"
-                                                        placeholder="Assistant">
-                                                </div>
+
+
+                                                <label for="itemname">Assistant:</label>
+                                                <!-- Visible field (user types/sees this one) -->
+                                                <input list="optech_assistant_input_options" id="optech_assistant_input"
+                                                    class="form-control" placeholder="Assistant" autocomplete="off">
+                                                <datalist id="optech_assistant_input_options">
+                                                    <option value="">Loading...</option>
+                                                </datalist>
                                             </div>
                                             <div class="col-lg-4">
-                                                <div class="form-group">
-                                                    <label for="tab2_bp">Anethesiologist:</label>
-                                                    <input type="text" class="form-control"
-                                                        id="optech_anesthesiologist_input"
-                                                        placeholder="Anethesiologist">
-                                                </div>
+
+                                                <label for="itemname">Anethesiologist:</label>
+                                                <!-- Visible field (user types/sees this one) -->
+                                                <input list="optech_anesthesiologist_input_options"
+                                                    id="optech_anesthesiologist_input" class="form-control"
+                                                    placeholder="Anethesiologist" autocomplete="off">
+                                                <datalist id="optech_anesthesiologist_input_options">
+                                                    <option value="">Loading...</option>
+                                                </datalist>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="tab2_bp">Scrub Nurse:</label>
-                                                    <input type="text" class="form-control"
-                                                        id="optech_scrub_nurse_input" placeholder="Scrub Nurse">
-                                                </div>
+
+                                                <label for="itemname">Scrub Nurse:</label>
+                                                <!-- Visible field (user types/sees this one) -->
+                                                <input list="optech_scrub_nurse_input_options"
+                                                    id="optech_scrub_nurse_input" class="form-control"
+                                                    placeholder="Scrub Nurse" autocomplete="off">
+                                                <datalist id="optech_scrub_nurse_input_options">
+                                                    <option value="">Loading...</option>
+                                                </datalist>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="tab2_bp">Circulating Nurse:</label>
-                                                    <input type="text" class="form-control"
-                                                        id="optech_circulating_nurse_input"
-                                                        placeholder="Circulating Nurse">
-                                                </div>
+
+
+                                                <label for="itemname">Circulating Nurse:</label>
+                                                <!-- Visible field (user types/sees this one) -->
+                                                <input list="optech_circulating_nurse_input_options"
+                                                    id="optech_circulating_nurse_input" class="form-control"
+                                                    placeholder="Circulating Nurse" autocomplete="off">
+                                                <datalist id="optech_circulating_nurse_input_options">
+                                                    <option value="">Loading...</option>
+                                                </datalist>
                                             </div>
 
                                         </div>
@@ -1576,12 +1609,12 @@ require_once 'properties.php';
             </div>
 
 
-            <div class="modal fade" id="dataModalMs" tabindex="-1" role="dialog" aria-labelledby="fullwindowModalLabel"
+            <div class="modal fade" id="dataModalMs" tabindex="-1" role="dialog" aria-labelledby="dataModalMsLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="fullwindowModalLabel">Medication Sheet Form
+                            <h5 class="modal-title" id="dataModalMsLabel">Medication Sheet Form
 
 
                             </h5>
@@ -1599,11 +1632,13 @@ require_once 'properties.php';
                                     </div>
                                 </div>
                                 <div class="col-lg-9">
-                                    <div class="form-group">
-                                        <label for="tab2_bp">Medication:</label>
-                                        <input type="text" class="form-control" id="ms_medication_input"
-                                            placeholder="Medication">
-                                    </div>
+                                    <label for="itemname">Medications:</label>
+                                    <!-- Visible field (user types/sees this one) -->
+                                    <input list="ms_medication_input_options" id="ms_medication_input"
+                                        class="form-control" placeholder="Medication" autocomplete="off">
+                                    <datalist id="ms_medication_input_options">
+                                        <option value="">Loading...</option>
+                                    </datalist>
                                 </div>
                             </div>
 
@@ -1676,11 +1711,15 @@ require_once 'properties.php';
                                     </div>
                                 </div>
                                 <div class="col-lg-9">
-                                    <div class="form-group">
-                                        <label for="tab2_bp">Nurse</label>
-                                        <input type="text" class="form-control" id="ms_nurse_nurse_input"
-                                            placeholder="Nurse">
-                                    </div>
+
+
+                                    <label for="itemname">Nurse:</label>
+                                    <!-- Visible field (user types/sees this one) -->
+                                    <input list="ms_nurse_nurse_input_options" id="ms_nurse_nurse_input"
+                                        class="form-control" placeholder="Nurse" autocomplete="off">
+                                    <datalist id="ms_nurse_nurse_input_options">
+
+                                    </datalist>
                                 </div>
                             </div>
 

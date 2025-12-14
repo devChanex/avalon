@@ -95,7 +95,73 @@ function setDynamicOption(optionid, inputid, hiddenInputId) {
     }
 
 }
+const dataListCache = {}; // key: service, value: result.data
 function populateDataList(prefix, datalistid, service, version) {
+    return new Promise((resolve, reject) => {
+
+        // 🔹 Serve from cache immediately
+        if (dataListCache[service]) {
+            console.log('Serving from cache for service:', service);
+            renderDataList(prefix, datalistid, dataListCache[service], version);
+            resolve();
+            return;
+        }
+        console.log('Fetching data for service:', service);
+        var fd = new FormData();
+        fd.append('service', service);
+
+        $.ajax({
+            url: "api.php",
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (result) {
+                if (result.success && result.data) {
+
+                    // cache per service
+                    dataListCache[service] = result.data;
+
+                    renderDataList(prefix, datalistid, result.data, version);
+                    resolve();
+                } else {
+                    reject('Invalid response');
+                }
+            },
+            error: function (xhr) {
+                reject(xhr.responseText);
+            }
+        });
+    });
+}
+
+function renderDataList(prefix, datalistid, data, version) {
+    let datalist = $("#" + datalistid);
+    datalist.empty();
+
+    data.forEach(function (item) {
+
+        if (version === 'v2') {
+            datalist.append(
+                $("<option>")
+                    .attr("value", item.attrVal)
+                    .attr("data-value", item.attrVal)
+            );
+        } else {
+            datalist.append(
+                $("<option>")
+                    .attr(
+                        "value",
+                        prefix + formatId(item.id) + " - " + item.attrVal
+                    )
+                    .attr("data-value", item.id)
+            );
+        }
+    });
+}
+
+
+function populateDataListold(prefix, datalistid, service, version) {
 
     var fd = new FormData();
     fd.append('service', service);
