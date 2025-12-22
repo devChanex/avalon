@@ -29,9 +29,10 @@ class ServiceClass
 
         try {
             $data = isset($_POST['data']) ? json_decode($_POST['data'], true) : [];
-            $birthDate = !empty($data['birthDate'])
-                ? DateTime::createFromFormat('m/d/Y', $data['birthDate'])->format('Y-m-d')
-                : null;
+            $birthDate = $data['birthDate'];
+            // !empty($data['birthDate'])
+            //     ? DateTime::createFromFormat('m/d/Y', $data['birthDate'])->format('Y-m-d')
+            //     : null;
             //check required fields
             if (empty($data['firstName']) || empty($data['lastName']) || empty($data['birthDate'])) {
                 return [

@@ -224,9 +224,7 @@ require_once 'properties.php';
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername2">Birth Date</label>
-                                                            <input type="text" class="form-control datetimepicker-input"
-                                                                id="datepicker" data-toggle="datetimepicker"
-                                                                data-target="#datepicker">
+                                                            <input type="date" class="form-control" id="datepicker">
 
                                                         </div>
                                                     </div>
@@ -575,7 +573,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v4.js"></script>
-    <script src="scripts/patientrecords-v11.js"></script>
+    <script src="scripts/patientrecords-v12.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

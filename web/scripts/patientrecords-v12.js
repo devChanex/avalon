@@ -59,7 +59,7 @@ function loadpatient() {
                         document.getElementById("Middlename").value = patient.middle_name;
                         document.getElementById("Lastname").value = patient.last_name;
                         document.getElementById("Suffix").value = patient.suffix;
-                        document.getElementById("datepicker").value = formatDateForDatepicker(patient.birth_date);
+                        document.getElementById("datepicker").value = patient.birth_date;
                         document.getElementById("patientNo").textContent = formatId(patient.id);
                         document.getElementById("BirthPlace").value = patient.birth_place;
                         document.getElementById("Nationality").value = patient.nationality;
