@@ -1,7 +1,7 @@
 function memberTypeChange() {
     var memberType = document.getElementById("MemberType").value;
 
-    if (memberType === "P - Lifetime Member" || memberType === "Non Member" || memberType === "I - Indigent") {
+    if (memberType === "P - Lifetime Member" || memberType === "None Member" || memberType === "I - Indigent") {
         document.getElementById("PhilHealthEmployerNumber").value = "N/A";
         document.getElementById("PhilhealthEmployerName").value = "N/A";
     }

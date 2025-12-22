@@ -226,7 +226,7 @@ require_once 'properties.php';
                                                 <option value="PG - Non Paying Government">PG - Non Paying Government
                                                 </option>
                                                 <option value="P - Lifetime Member">P - Lifetime Member</option>
-                                                <option value="Non Member">Non Member
+                                                <option value="None Member">None Member
                                                 </option>
                                             </select>
                                         </div>

@@ -363,7 +363,7 @@ require_once 'properties.php';
                                                                 </option>
                                                                 <option value="P - Lifetime Member">P - Lifetime Member
                                                                 </option>
-                                                                <option value="Non Member">Non Member
+                                                                <option value="None Member">None Member
                                                                 </option>
                                                             </select>
                                                         </div>
