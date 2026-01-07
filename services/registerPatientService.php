@@ -60,12 +60,12 @@ class ServiceClass
             (first_name, middle_name, last_name, birth_date, birth_place, nationality, 
              gender, marital_status, religion, present_address, contact_number, email_address, 
              occupation, office_address, philhealth_number, suffix, member_type, philhealth_employer_number, philhealth_employer_name,
-             emergency_contact_person, emergency_contact_number, relationship, is_agree,allergies,currentmedication)
+             emergency_contact_person, emergency_contact_number, relationship, is_agree,allergies,currentmedication,hmo,hmo_number,valid_id,hmo_member_type,hmo_company)
             VALUES 
             (:firstName, :middleName, :lastName, :birthDate, :birthPlace, :nationality,
              :gender, :maritalStatus, :religion, :presentAddress, :contactNumber, :emailAddress,
              :occupation, :officeAddress, :philHealthNumber,  :suffix, :member_type, :philhealth_employer_number, :philhealth_employer_name,
-             :emergencyContactPerson, :emergencyContactNumber, :relationship, :isAgree,:allergies,:currentmedication)";
+             :emergencyContactPerson, :emergencyContactNumber, :relationship, :isAgree,:allergies,:currentmedication, :hmo, :hmo_number, :valid_id, :hmo_member_type, :hmo_company)";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -97,6 +97,12 @@ class ServiceClass
             $stmt->bindValue(':isAgree', $data['isAgree'] ? 1 : 0, PDO::PARAM_INT);
             $stmt->bindValue(':allergies', json_encode($data['allergies']));
             $stmt->bindValue(':currentmedication', $data['currentMedications']);
+
+            $stmt->bindValue(':hmo', $data['hmo']);
+            $stmt->bindValue(':hmo_number', $data['hmoNumber']);
+            $stmt->bindValue(':valid_id', $data['valid_id']);
+            $stmt->bindValue(':hmo_member_type', $data['hmo_member_type']);
+            $stmt->bindValue(':hmo_company', $data['hmo_company']);
 
             $stmt->execute();
 

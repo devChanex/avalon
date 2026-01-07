@@ -56,7 +56,14 @@ function register() {
         },
 
         // New field - Current Medications
-        currentMedications: document.getElementById("currentMedications").value.trim()
+        currentMedications: document.getElementById("currentMedications").value.trim(),
+        hmo: document.getElementById("hmo").value.trim(),
+        hmoNumber: document.getElementById("hmoNumber").value.trim(),
+        valid_id: document.getElementById("valid_id").value.trim(),
+        hmo_member_type: document.getElementById("hmoMemberType").value.trim(),
+        hmo_company: document.getElementById("hmo_company").value.trim()
+
+
     };
 
     // ---------------- VALIDATIONS ----------------

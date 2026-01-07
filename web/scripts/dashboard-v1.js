@@ -30,7 +30,7 @@ function loaddata() {
                 if (result.success && result.monthlydata) {
 
                     // Create chart dynamically by passing container ID and data
-                    createMonthlyBarChart("deal-analytic-chart", result.monthlydata, 2025);
+                    createMonthlyBarChart("deal-analytic-chart", result.monthlydata, 2026);
                 }
                 setTimeout(function () {
                     document.getElementById("loaderOverlay").style.display = "none";

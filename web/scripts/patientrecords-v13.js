@@ -78,6 +78,12 @@ function loadpatient() {
                         document.getElementById("EmergencyContactPerson").value = patient.emergency_contact_person;
                         document.getElementById("EmergencyContactNumber").value = patient.emergency_contact_number;
                         document.getElementById("Relationship").value = patient.relationship;
+
+                        document.getElementById("hmo").value = patient.hmo;
+                        document.getElementById("hmoNumber").value = patient.hmo_number;
+                        document.getElementById("valid_id").value = patient.valid_id;
+                        document.getElementById("hmoMemberType").value = patient.hmo_member_type;
+                        document.getElementById("hmo_company").value = patient.hmo_company;
                         populateAllergies(patient);
                         // Show modal (Bootstrap 5 way)
                         var modal = new bootstrap.Modal(document.getElementById("patientModal"));
@@ -194,7 +200,14 @@ function UpdateProfile() {
         },
 
         // New field - Current Medications
-        currentMedications: document.getElementById("currentMedications").value.trim()
+
+        currentMedications: document.getElementById("currentMedications").value.trim(),
+        hmo: document.getElementById("hmo").value.trim(),
+        hmoNumber: document.getElementById("hmoNumber").value.trim(),
+        valid_id: document.getElementById("valid_id").value.trim(),
+        hmo_member_type: document.getElementById("hmoMemberType").value.trim(),
+        hmo_company: document.getElementById("hmo_company").value.trim()
+
     };
 
     // ---------------- VALIDATIONS ----------------

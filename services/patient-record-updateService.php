@@ -58,7 +58,7 @@ class ServiceClass
                 ];
             }
 
-            $sql = "update patients set first_name=:firstName, middle_name=:middleName, last_name=:lastName, birth_date=:birthDate, birth_place=:birthPlace, nationality=:nationality,gender=:gender, marital_status=:maritalStatus, religion=:religion, present_address=:presentAddress, contact_number=:contactNumber,email_address=:emailAddress,occupation=:occupation, office_address=:officeAddress, philhealth_number=:philHealthNumber, emergency_contact_person=:emergencyContactPerson, emergency_contact_number=:emergencyContactNumber, relationship=:relationship, is_agree=:isAgree,allergies=:allergies,currentmedication=:currentmedication, suffix=:suffix, member_type=:member_type, philhealth_employer_number=:philhealth_employer_number, philhealth_employer_name=:philhealth_employer_name where id=:id";
+            $sql = "update patients set first_name=:firstName, middle_name=:middleName, last_name=:lastName, birth_date=:birthDate, birth_place=:birthPlace, nationality=:nationality,gender=:gender, marital_status=:maritalStatus, religion=:religion, present_address=:presentAddress, contact_number=:contactNumber,email_address=:emailAddress,occupation=:occupation, office_address=:officeAddress, philhealth_number=:philHealthNumber, emergency_contact_person=:emergencyContactPerson, emergency_contact_number=:emergencyContactNumber, relationship=:relationship, is_agree=:isAgree,allergies=:allergies,currentmedication=:currentmedication, suffix=:suffix, member_type=:member_type, philhealth_employer_number=:philhealth_employer_number, philhealth_employer_name=:philhealth_employer_name, hmo=:hmo, hmo_number=:hmo_number, valid_id=:valid_id, hmo_member_type=:hmo_member_type, hmo_company=:hmo_company where id=:id";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -90,6 +90,11 @@ class ServiceClass
             $stmt->bindValue(':isAgree', $data['isAgree'] ? 1 : 0, PDO::PARAM_INT);
             $stmt->bindValue(':allergies', json_encode($data['allergies']));
             $stmt->bindValue(':currentmedication', $data['currentMedications']);
+            $stmt->bindValue(':hmo', $data['hmo']);
+            $stmt->bindValue(':hmo_number', $data['hmoNumber']);
+            $stmt->bindValue(':valid_id', $data['valid_id']);
+            $stmt->bindValue(':hmo_member_type', $data['hmo_member_type']);
+            $stmt->bindValue(':hmo_company', $data['hmo_company']);
 
             $stmt->execute();
 
