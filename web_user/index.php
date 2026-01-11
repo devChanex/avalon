@@ -251,7 +251,54 @@ require_once 'properties.php';
 
                                 </div>
                                 <hr>
+                                <div class="row">
 
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername1">HMO #:</label>
+                                            <input type="text" class="form-control" id="hmoNumber" placeholder="HMO #"
+                                                onchange="hmo_memberTypeChange();">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="exampleSelectGender">HMO Member Type:</label>
+                                            <select class="form-control" id="hmoMemberType">
+                                                <option value="">-- Select HMO Member Type --</option>
+                                                <option value="NA">N/A</option>
+                                                <option value="Principal">Principal</option>
+                                                <option value="Dependent">Dependent</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="exampleSelectGender">Health Insurance:</label>
+                                            <input type="text" class="form-control" id="hmo"
+                                                placeholder="Health Insurance">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername1">Company:</label>
+                                            <input type="text" class="form-control" id="hmo_company"
+                                                placeholder="Company">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername1">Valid ID Presented:</label>
+                                            <input type="text" class="form-control" id="valid_id"
+                                                placeholder="Valid ID Presented Details">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr>
                                 <div class="row">
 
                                     <div class="col-lg-4">
@@ -382,7 +429,7 @@ require_once 'properties.php';
     <script>window.jQuery || document.write('<script src="src/js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
     <script src="scripts/indexScript-v1.js"></script>
     <script src="scripts/promptScript-v1.js"></script>
-    <script src="scripts/registerPatient-v3.js"></script>
+    <script src="scripts/registerPatient-v5.js"></script>
 
 
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>

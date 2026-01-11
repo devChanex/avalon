@@ -6,6 +6,16 @@ function memberTypeChange() {
         document.getElementById("PhilhealthEmployerName").value = "N/A";
     }
 }
+
+function hmo_memberTypeChange() {
+
+    var hmoNumber = document.getElementById("hmoNumber").value;
+
+    if (hmoNumber === "" || hmoNumber === null || hmoNumber.toUpperCase() === "N/A" || hmoNumber.toUpperCase() === "NA" || hmoNumber.toUpperCase() === "NONE") {
+        document.getElementById("hmoMemberType").value = "NA";
+        document.getElementById("hmo").value = "N/A";
+    }
+}
 function register() {
 
     var data = {

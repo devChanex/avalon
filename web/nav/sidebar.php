@@ -7,6 +7,7 @@ $patientRecord = ['patientrecords.php', 'patientregistration.php', 'patientview.
 $configuration = ['supplies.php'];
 $inventory = ['inventory.php', 'supplies.php'];
 $opd = ['opdlist.php'];
+$billing = ['billing.php'];
 
 // Determine active states
 $dashboardActive = in_array($page, $dashboard) ? 'active' : '';
@@ -14,6 +15,7 @@ $patientRecordActive = in_array($page, $patientRecord) ? 'active' : '';
 $configurationActive = in_array($page, $configuration) ? 'active' : '';
 $inventoryActive = in_array($page, $inventory) ? 'active' : '';
 $clinicalServicesActive = in_array($page, $opd) ? 'active' : '';
+$billingActive = in_array($page, $billing) ? 'active' : '';
 
 echo '
   <div class="app-sidebar colored">
@@ -61,12 +63,12 @@ echo '
 
                                      <div class="submenu-content">
                                         <a href="medical-certificate.php" class="menu-item">Medical Certificate</a>   
-                                    </div>
-
-                                   
+                                    </div> 
                                 </div>
                          
-
+                            <div class="nav-item ' . $billingActive . '">
+                                <a href="billing.php"><i class="ik ik-credit-card"></i><span>Billing</span></a>
+                            </div>
                              <div class="nav-item has-sub ' . $inventoryActive . '">
                                     <a href="#"><i class="ik ik-box"></i><span>Inventory</span></a>
                                 

@@ -398,7 +398,7 @@ require_once 'properties.php';
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">HMO #:</label>
                                                             <input type="text" class="form-control" id="hmoNumber"
-                                                                placeholder="HMO #">
+                                                                onchange="hmo_memberTypeChange();" placeholder="HMO #">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
@@ -406,6 +406,7 @@ require_once 'properties.php';
                                                             <label for="exampleSelectGender">HMO Member Type:</label>
                                                             <select class="form-control" id="hmoMemberType">
                                                                 <option value="">-- Select HMO Member Type --</option>
+                                                                <option value="NA">N/A</option>
                                                                 <option value="Principal">Principal</option>
                                                                 <option value="Dependent">Dependent</option>
                                                             </select>
@@ -620,7 +621,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v4.js"></script>
-    <script src="scripts/patientrecords-v13.js"></script>
+    <script src="scripts/patientrecords-v14.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

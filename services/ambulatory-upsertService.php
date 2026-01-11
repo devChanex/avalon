@@ -67,7 +67,26 @@ class ServiceClass
                     $stmt->execute();
                     $lastId = $this->conn->lastInsertId();
 
+                    //INSERT BILLING
+                    $sql2 = "INSERT INTO billing (
+                        reference_number,
+                        transaction_type,
+                        pid,
+                        physician
+                        ) VALUES (
+                        :reference_number,
+                        :transaction_type,
+                        :pid,
+                        :physician
+                     )";
+                    $stmt2 = $this->conn->prepare($sql2);
+                    $stmt2->bindValue(':reference_number', $lastId);
+                    $stmt2->bindValue(':transaction_type', 'AMBULATORY');
+                    $stmt2->bindValue(':pid', $data['pid']);
+                    $stmt2->bindValue(':physician', $data['physician'] ?? null);
+                    $stmt2->execute();
                     $this->conn->commit();
+
 
                     return [
                         "success" => true,
