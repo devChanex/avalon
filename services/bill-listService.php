@@ -59,7 +59,7 @@ class ServiceClass
 
         try {
             // Count total patients for pagination
-            $countQuery = "SELECT COUNT(billingid) as total FROM billing a inner join patients b on a.pid = a.pid $dynamics ";
+            $countQuery = "SELECT COUNT(billingid) as total FROM billing a inner join patients b on a.pid = b.id $dynamics ";
             $countStmt = $this->conn->prepare($countQuery);
             if (!empty($search)) {
                 $countStmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
