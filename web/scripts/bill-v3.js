@@ -679,7 +679,7 @@ function getPayments() {
             // const mode = row.querySelector("td:nth-child(3) select").value.trim();
             const selectEl = row.querySelector("td:nth-child(3) select");
             const mode = selectEl.options[selectEl.selectedIndex].text.trim();
-            alert(mode);
+
             const paymentDate = row.querySelector("td:nth-child(4) input").value;
 
             if (mode !== "" || amount !== "" || paymentDate !== "") {
