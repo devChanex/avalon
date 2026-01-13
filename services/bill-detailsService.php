@@ -29,48 +29,44 @@ class ServiceClass
 
         try {
 
-            $query = "SELECT * FROM billing_sub where bid=:ref and charge_type='Other'";
-            $stmt = $this->conn->prepare($query);
-            $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
-            $stmt->execute();
-            $othercharges = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             $query = "SELECT * FROM billing_sub where bid=:ref and charge_type='OR'";
             $stmt = $this->conn->prepare($query);
             $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
             $stmt->execute();
-            $orcharges = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $or_charges = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if (empty($orcharges)) {
-                $query = "
-                    SELECT
-                        CONCAT('[', s.type, '] - ', s.itemname, ' (x',ai.ins_qty,')') AS item,
-                        (ai.ins_qty * s.price_cash) AS amount
-                    FROM ambulatory_instrument ai
-                    INNER JOIN supplies s ON s.supid = ai.supid
-                    WHERE ai.amid = :amid and ai.ins_qty > 0
-                ";
+            $query = "SELECT * FROM billing_sub where bid=:ref and charge_type='Other'";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
+            $stmt->execute();
+            $other_charges = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                $stmt = $this->conn->prepare($query);
-                $stmt->bindValue(':amid', (int) $data["reference_number"], PDO::PARAM_INT);
-                $stmt->execute();
 
-                $orcharges = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            }
+            $query = "SELECT * FROM payment where bid=:ref";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
+            $stmt->execute();
+            $payments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 
 
 
 
             return [
                 'success' => true,
-                'other_charges' => $othercharges,
-                'or_charges' => $orcharges
+                'payments' => $payments,
+                'or_charges' => $or_charges,
+                'other_charges' => $other_charges
+
 
 
             ];
 
         } catch (PDOException $e) {
-            error_log("Database error in getSupplies(): " . $e->getMessage());
+            error_log("Database error in payments: " . $e->getMessage());
 
             return [
                 'success' => false,

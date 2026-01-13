@@ -29,10 +29,10 @@ class ServiceClass
             // Decode JSON data from frontend
             $data = isset($_POST['data']) ? json_decode($_POST['data'], true) : [];
 
-            if (empty($data['billdate']) || empty($data['payment_type']) || empty($data['billingid'])) {
+            if (empty($data['payments'])) {
                 return [
                     'success' => false,
-                    'message' => 'Missing required fields: billdate or payment_type or billingid'
+                    'message' => 'Missing required fields: payments'
                 ];
             }
 
@@ -40,59 +40,35 @@ class ServiceClass
 
             try {
                 $this->conn->beginTransaction();
-                $sql = "update billing set
-                        billdate = :billdate,
-                        total_amount = :total_amount,
-                        payment_type = :payment_type
-                        where billingid = :billingid";
-
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bindValue(':billdate', $data['billdate']);
-                $stmt->bindValue(':total_amount', $data['total_amount_due']);
-                $stmt->bindValue(':payment_type', $data['payment_type']);
-                $stmt->bindValue(':billingid', $data['billingid']);
-                $stmt->execute();
 
                 //delete billing_sub
-                $deleteSql = "DELETE FROM billing_sub WHERE bid = :billingid";
+                $deleteSql = "DELETE FROM payment WHERE bid = :billingid";
                 $deleteStmt = $this->conn->prepare($deleteSql);
                 $deleteStmt->bindValue(':billingid', $data['billingid']);
                 $deleteStmt->execute();
 
 
                 // decode charges JSON string
-                $charges = json_decode($data['charges'], true);
+                $payments = json_decode($data['payments'], true);
 
                 // insert billing_sub
                 $insertSubSql = "
-    INSERT INTO billing_sub (bid, item, amount,charge_type)
-    VALUES (:bid, :item, :amount, 'Other')
+    INSERT INTO payment (bid,pid, amount,mode,payment_date)
+    VALUES (:bid, :pid, :amount, :mode, :payment_date)
 ";
                 $insertSubStmt = $this->conn->prepare($insertSubSql);
 
-                foreach ($charges as $charge) {
+                foreach ($payments as $payment) {
                     $insertSubStmt->bindValue(':bid', $data['billingid']);
-                    $insertSubStmt->bindValue(':item', $charge['charge_item']);
-                    $insertSubStmt->bindValue(':amount', $charge['amount']);
+                    $insertSubStmt->bindValue(':pid', $payment['pid']);
+                    $insertSubStmt->bindValue(':mode', $payment['mode_of_payment']);
+                    $insertSubStmt->bindValue(':amount', $payment['amount']);
+                    $insertSubStmt->bindValue(':payment_date', $payment['payment_date']);
                     $insertSubStmt->execute();
                 }
 
 
 
-                // insert billing_sub for orcharges
-                $orcharges = json_decode($data['orcharges'], true);
-                $insertSubSql = "
-    INSERT INTO billing_sub (bid, item, amount,charge_type)
-    VALUES (:bid, :item, :amount, 'OR')
-";
-                $insertSubStmt = $this->conn->prepare($insertSubSql);
-
-                foreach ($orcharges as $charge) {
-                    $insertSubStmt->bindValue(':bid', $data['billingid']);
-                    $insertSubStmt->bindValue(':item', $charge['charge_item']);
-                    $insertSubStmt->bindValue(':amount', $charge['amount']);
-                    $insertSubStmt->execute();
-                }
 
 
                 $this->conn->commit();

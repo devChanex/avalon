@@ -70,7 +70,7 @@ class ServiceClass
             $totalPages = ceil($totalRecords / $limit);
 
             // Fetch paginated records
-            $query = "SELECT * FROM billing a inner join patients b on a.pid = b.id $dynamics  LIMIT :limit OFFSET :offset";
+            $query = "SELECT *,(select sum(amount) FROM payment WHERE bid = a.billingid) as total_payment FROM billing a inner join patients b on a.pid = b.id $dynamics  LIMIT :limit OFFSET :offset";
             $stmt = $this->conn->prepare($query);
             if (!empty($search)) {
                 $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);

@@ -126,6 +126,7 @@ require_once 'properties.php';
                                                     <th>Physician</th>
                                                     <th>Total Amount</th>
                                                     <th>Payment Type</th>
+                                                    <th>Balance</th>
                                                     <th class="nosort">&nbsp;</th>
                                                 </tr>
                                             </thead>
@@ -150,6 +151,7 @@ require_once 'properties.php';
                                         <td class="physician"></td>
                                         <td class="total"></td>
                                         <td class="paymentType"></td>
+                                        <td class="balance"></td>
 
                                         <td>
                                             <div class="table-actions">
@@ -158,6 +160,14 @@ require_once 'properties.php';
                                                     <i class="ik ik-eye"></i>
                                                 </button>
 
+                                                <button type="button"
+                                                    class="btn social-btn bg-warning edit-payment-btn">
+                                                    <i class="ik ik-credit-card"></i>
+                                                </button>
+
+                                                <button type="button" class="btn social-btn bg-success edit-print-btn">
+                                                    <i class="fas fa-print"></i>
+                                                </button>
 
                                             </div>
                                         </td>
@@ -188,7 +198,7 @@ require_once 'properties.php';
                             <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="fullwindowModalLabel">Billing - OPD
+                                        <h5 class="modal-title" id="fullwindowModalLabel">Billing
 
                                         </h5>
 
@@ -247,15 +257,72 @@ require_once 'properties.php';
                                                         <option value="Cash">Cash</option>
                                                         <option value="HMO">HMO</option>
                                                         <option value="PHIC">PhIlhealth</option>
+                                                        <option value="PWD/Senior">PWD/Senior</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
+                                        <hr>
+                                        <strong>OR Charges</strong>
+                                        <!-- Editable Table -->
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-sm align-middle">
+                                                <thead class="table-light text-center">
+                                                    <tr>
+                                                        <th style="width:5%"></th>
+                                                        <th style="width:65%">Charge Item</th>
+                                                        <th style="width:30%">Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="or_charges_table_body">
+                                                    <!-- Default Row -->
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <button type="button"
+                                                                class="btn btn-danger btn-sm remove-row"
+                                                                title="Remove Row" onclick="removeORChargeRow()">
+                                                                ×
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                placeholder="e.g. Consultation Fee">
+                                                        </td>
+                                                        <td>
+                                                            <input type="number"
+                                                                class="form-control form-control-sm text-end"
+                                                                placeholder="0.00" step="0.01"
+                                                                oninput="calculateORChargesTotal()">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr class="table-light fw-bold">
+                                                        <td>
+                                                            <button type="button" class="btn btn-success btn-sm"
+                                                                id="add_row" onclick="addORChargeRow()">
+                                                                +
+                                                            </button>
+
+                                                        </td>
+                                                        <td class="text-end" style="text-align: center;">
+                                                            Total:
+                                                        </td>
+
+                                                        <td class="text-end">
+                                                            <input type="number"
+                                                                class="form-control form-control-sm text-end"
+                                                                id="or_charges_total" placeholder="0.00"
+                                                                style="text-align:right;" readonly>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+
 
                                         <hr>
-                                        <strong>Charges</strong>
-
-
+                                        <strong>Other Charges</strong>
                                         <!-- Editable Table -->
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-sm align-middle">
@@ -284,7 +351,8 @@ require_once 'properties.php';
                                                             <input type="number"
                                                                 class="form-control form-control-sm text-end"
                                                                 placeholder="0.00" step="0.01"
-                                                                oninput="calculateChargesTotal()">
+                                                                oninput="calculateChargesTotal()"
+                                                                style="text-align:right;">
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -304,7 +372,8 @@ require_once 'properties.php';
                                                         <td class="text-end">
                                                             <input type="number"
                                                                 class="form-control form-control-sm text-end"
-                                                                id="charges_total" placeholder="0.00" readonly>
+                                                                id="charges_total" placeholder="0.00"
+                                                                style="text-align:right;" readonly>
                                                         </td>
                                                     </tr>
                                                 </tfoot>
@@ -326,6 +395,180 @@ require_once 'properties.php';
                             </div>
                         </div>
                         <!-- End of OPD Modal -->
+
+
+
+                        <!-- Payment Modal -->
+                        <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog"
+                            aria-labelledby="fullwindowModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="fullwindowModalLabel">Payments
+
+                                        </h5>
+
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body" style="padding: 50px;">
+
+                                        <input type="hidden" id="payment-recordid">
+                                        <input type="hidden" id="payment-patientId">
+                                        <input type="hidden" id="payment-referenceid">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputUsername1">Bill Number</label>
+                                                    <input type="text" class="form-control" id="payment-billno"
+                                                        placeholder="Consultation Ref #" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputUsername1">Transaction Type</label>
+                                                    <input type="text" class="form-control" id="payment-transactiontype"
+                                                        placeholder="Transaction Type" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputUsername1">Bill Date</label>
+                                                    <input type="date" class="form-control" id="payment-billdate"
+                                                        placeholder="Item Name">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputUsername1">Patient Name</label>
+                                                    <input type="text" class="form-control" id="payment-patient"
+                                                        placeholder="Consultation Ref #" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputUsername1">Physician:</label>
+                                                    <input type="text" class="form-control" id="payment-physician"
+                                                        placeholder="Consultation Ref #" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="exampleInputUsername1">Total Amount Due:</label>
+                                                    <input type="text" class="form-control" id="total-amountDue"
+                                                        placeholder="Consultation Ref #" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <strong>Payments</strong>
+                                        <!-- Editable Table -->
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-sm align-middle">
+                                                <thead class="table-light text-center">
+                                                    <tr>
+                                                        <th style="width:5%"></th>
+                                                        <th style="width:30%">Amount</th>
+                                                        <th style="width:30%">Mode of Payment</th>
+                                                        <th style="width:30%">Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="payment_table_body">
+                                                    <!-- Default Row -->
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <button type="button"
+                                                                class="btn btn-danger btn-sm remove-row"
+                                                                title="Remove Row" onclick="removePaymentRow()">
+                                                                ×
+                                                            </button>
+                                                        </td>
+
+                                                        <td>
+                                                            <input type="number"
+                                                                class="form-control form-control-sm text-end"
+                                                                placeholder="0.00" step="0.01"
+                                                                oninput="calculatePaymentTotal()"
+                                                                style="text-align:right;">
+                                                        </td>
+
+                                                        <td>
+                                                            <select class="form-control" id="paymenttype">
+                                                                <option value="Cash">Cash</option>
+                                                                <option value="HMO">HMO</option>
+                                                                <option value="PHIC">PhIlhealth</option>
+                                                                <option value="Bank Transfer">Bank Transfer</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td>
+                                                            <input type="date" class="form-control form-control-sm"
+                                                                placeholder="e.g. Consultation Fee">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr class="table-light fw-bold">
+                                                        <td style="text-align:center;">
+                                                            <button type="button" class="btn btn-success btn-sm"
+                                                                id="add_row" onclick="addPaymentRow()">
+                                                                +
+                                                            </button>
+
+                                                        </td>
+                                                        <td class="text-end" style="text-align: center;" colspan="2">
+                                                            Total:
+                                                        </td>
+
+                                                        <td class="text-end">
+                                                            <input type="number"
+                                                                class="form-control form-control-sm text-end"
+                                                                id="payment_total" placeholder="0.00"
+                                                                style="text-align:right;" readonly>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="table-light fw-bold">
+                                                        <td>
+
+
+                                                        </td>
+                                                        <td class="text-end" style="text-align: center;" colspan="2">
+                                                            Remaining Balance:
+                                                        </td>
+
+                                                        <td class="text-end">
+                                                            <input type="number"
+                                                                class="form-control form-control-sm text-end"
+                                                                id="remaining_balance" placeholder="0.00"
+                                                                style="text-align:right;" readonly>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+
+
+
+
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="updatePayment();">Save</button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Payment Modal -->
                     </div>
                 </div>
             </div>
@@ -374,7 +617,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v4.js"></script>
-    <script src="scripts/bill-v1.js"></script>
+    <script src="scripts/bill-v2.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 
