@@ -102,7 +102,7 @@ require_once 'properties.php';
                                             <thead>
                                                 <tr>
                                                     <th>conref#</th>
-                                                    <th>PatuentNo</th>
+                                                    <th>PatientNo</th>
                                                     <th>Patient Name</th>
                                                     <th>Service</th>
                                                     <th>Consultation Date</th>

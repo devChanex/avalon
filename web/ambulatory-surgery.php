@@ -103,7 +103,7 @@ require_once 'properties.php';
                                             <thead>
                                                 <tr>
                                                     <th>surgref#</th>
-                                                    <th>PatuentNo</th>
+                                                    <th>PatientNo</th>
                                                     <th>Patient Name</th>
                                                     <th>Date</th>
                                                     <th>Physician</th>
