@@ -1094,7 +1094,14 @@ require_once 'properties.php';
                                                 </div>
                                             </div>
 
+                                            <div style="margin-top: 10px;">
+                                                <label>Upload / Paste Images:</label>
 
+                                                <button class="btn btn-primary" id="upload-btn" type="button">Select
+                                                    Images</button>
+                                                <input type="file" id="file-input" multiple style="display:none;">
+                                                <div id="image-preview" style="margin-top:10px;align:center"></div>
+                                            </div>
 
                                         </div>
                                         <div class="row">
@@ -1879,7 +1886,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v4.js"></script>
-    <script src="scripts/ambulatory-view-v3.js"></script>
+    <script src="scripts/ambulatory-view-v4.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

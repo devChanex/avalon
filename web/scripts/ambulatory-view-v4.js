@@ -403,6 +403,7 @@ function loaddata() {
                     document.getElementById("optech_posop_diagnosis_input").value = rowdata.optech_posop_diagnosis ?? '';
                     document.getElementById("optech_op_procedure_input").value = rowdata.optech_op_procedure ?? '';
                     document.getElementById("optech_narative_input").value = rowdata.optech_narative ?? '';
+                    displayImages(rowdata.images ?? '', 'images');
                     document.getElementById("optech_surgeon_input").value = rowdata.optech_surgeon ?? '';
                     document.getElementById("optech_anesthesiologist_input").value = rowdata.optech_anesthesiologist ?? '';
                     document.getElementById("optech_assistant_input").value = rowdata.optech_assistant ?? '';
@@ -590,6 +591,65 @@ function loaddata() {
 
 
 }
+
+function displayImages(imagesJson) {
+    const preview = document.getElementById('image-preview');
+    preview.innerHTML = '';
+
+    if (!imagesJson) return;
+
+    let images;
+    try {
+        images = JSON.parse(imagesJson);
+    } catch (e) {
+        console.error('Invalid images JSON', e);
+        return;
+    }
+
+    images.forEach((imgObj, index) => {
+        const container = document.createElement('div');
+        container.className = 'image-item';
+        container.style.display = 'inline-block';
+        container.style.margin = '5px';
+        container.style.border = '1px solid #ccc';
+        container.style.padding = '5px';
+        container.style.position = 'relative';
+        container.dataset.index = index;
+
+        const img = document.createElement('img');
+        img.src = imgObj.src;
+        img.style.width = '96px';   // 1 inch
+        img.style.height = '96px';
+        img.style.display = 'block';
+
+        const caption = document.createElement('input');
+        caption.type = 'text';
+        caption.value = imgObj.caption || '';
+        caption.placeholder = 'Caption';
+        caption.style.width = '100%';
+
+        // 🔴 REMOVE BUTTON
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = '✖';
+        removeBtn.style.position = 'absolute';
+        removeBtn.style.top = '2px';
+        removeBtn.style.right = '2px';
+        removeBtn.style.background = 'red';
+        removeBtn.style.color = 'white';
+        removeBtn.style.border = 'none';
+        removeBtn.style.cursor = 'pointer';
+        removeBtn.style.fontSize = '12px';
+
+        removeBtn.onclick = () => container.remove();
+
+        container.appendChild(removeBtn);
+        container.appendChild(img);
+        container.appendChild(caption);
+        preview.appendChild(container);
+    });
+}
+
+
 
 function computeFinalCount() {
     const initialCounting = parseInt(document.getElementById("ics_initial_counting_input").value) || 0;
@@ -1771,6 +1831,7 @@ function UpSertOperativeTechnique() {
         optech_posop_diagnosis: document.getElementById("optech_posop_diagnosis_input").value.trim(),
         optech_op_procedure: document.getElementById("optech_op_procedure_input").value.trim(),
         optech_narative: document.getElementById("optech_narative_input").value.trim(),
+        images: JSON.stringify(getImagesWithCaptions()),
         optech_surgeon: document.getElementById("optech_surgeon_input").value.trim(),
         optech_anesthesiologist: document.getElementById("optech_anesthesiologist_input").value.trim(),
         optech_assistant: document.getElementById("optech_assistant_input").value.trim(),
@@ -1858,3 +1919,106 @@ function UpSertOperativeTechnique() {
     });
 
 }
+const uploadBtn = document.getElementById('upload-btn');
+const fileInput = document.getElementById('file-input');
+const preview = document.getElementById('image-preview');
+
+// Click the button → open file picker
+uploadBtn.addEventListener('click', () => fileInput.click());
+
+// Handle file selection
+fileInput.addEventListener('change', e => {
+    for (const file of e.target.files) {
+        addImagePreview(file);
+    }
+});
+
+// Handle pasted images (still works)
+document.addEventListener('paste', e => {
+    const items = e.clipboardData.items;
+    for (const item of items) {
+        if (item.type.indexOf('image') !== -1) {
+            const file = item.getAsFile();
+            addImagePreview(file);
+        }
+    }
+});
+
+// Resize image to 1 inch (96px) + preview
+function addImagePreview(file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const img = new Image();
+        img.onload = function () {
+            const canvas = document.createElement('canvas');
+            canvas.width = 96;  // 1 inch
+            canvas.height = 96; // 1 inch
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, 96, 96);
+            const resizedBase64 = canvas.toDataURL('image/png');
+
+            const container = document.createElement('div');
+            container.style.marginBottom = '10px';
+            container.style.border = '1px solid #ccc';
+            container.style.padding = '5px';
+            container.style.display = 'inline-block';
+            container.style.textAlign = 'center';
+            container.style.position = 'relative';
+
+            const previewImg = document.createElement('img');
+            previewImg.src = resizedBase64;
+            previewImg.style.width = '96px';
+            previewImg.style.height = '96px';
+            previewImg.style.display = 'block';
+            previewImg.style.marginBottom = '5px';
+
+            const caption = document.createElement('input');
+            caption.type = 'text';
+            caption.placeholder = 'Enter caption';
+            caption.style.width = '100%';
+
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = '✖';
+            removeBtn.style.position = 'absolute';
+            removeBtn.style.top = '2px';
+            removeBtn.style.right = '2px';
+            removeBtn.style.background = 'red';
+            removeBtn.style.color = 'white';
+            removeBtn.style.border = 'none';
+            removeBtn.style.cursor = 'pointer';
+            removeBtn.style.fontSize = '10px';
+            removeBtn.addEventListener('click', () => container.remove());
+
+            container.appendChild(previewImg);
+            container.appendChild(caption);
+            container.appendChild(removeBtn);
+            preview.appendChild(container);
+        }
+        img.src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+}
+
+// Collect images + captions
+function getImagesWithCaptions() {
+    const result = [];
+    preview.querySelectorAll('div').forEach(div => {
+        const img = div.querySelector('img');
+        const caption = div.querySelector('input').value;
+        result.push({
+            src: img.src,
+            caption: caption
+        });
+    });
+    return result;
+}
+
+// Example save
+document.getElementById('saveBtn').addEventListener('click', () => {
+    const text = document.getElementById('notes').value;
+    const images = getImagesWithCaptions();
+    const jsonData = JSON.stringify({ text: text, images: images });
+
+    console.log('Data to save:', jsonData);
+    // Send jsonData to your server via AJAX or form submission
+});

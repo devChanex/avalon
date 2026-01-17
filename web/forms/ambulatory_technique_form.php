@@ -110,12 +110,17 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="6" style="border: 1px solid black; padding: 2px; height: 500px; vertical-align: top;">
+                <td colspan="6" style="border: 1px solid black; padding: 2px; height: 400px; vertical-align: top;">
                     <label style="font-size:10px">Narrative of Technique with operative findings:</label><br>
                     <span id="optech_narative" style="margin-left:20px"></span>
                 </td>
             </tr>
-
+            <tr>
+                <td colspan="6" style="border: 1px solid black; padding: 2px; height: 100px; vertical-align: top;">
+                    <label style="font-size:10px">Attachment:</label><br>
+                    <span id="images" style="margin-left:20px"></span>
+                </td>
+            </tr>
 
             <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 2px;">
@@ -242,6 +247,44 @@
                     }
                     if (key === "physician") {
                         document.getElementById("physician").textContent = value;
+                    }
+
+                    if (key === "images") {
+                        const container = el; // the DOM element where you want to show the images
+                        container.innerHTML = ""; // clear existing content
+
+                        if (value.trim()) {
+                            try {
+                                const imagesArray = JSON.parse(value); // parse JSON
+                                imagesArray.forEach(imgObj => {
+                                    const imgContainer = document.createElement('div');
+                                    imgContainer.style.display = 'inline-block';
+                                    imgContainer.style.margin = '5px';
+                                    imgContainer.style.textAlign = 'center';
+
+                                    const img = document.createElement('img');
+                                    img.src = imgObj.src;       // Base64 or URL
+                                    img.style.width = '96px';   // 1 inch
+                                    img.style.height = '96px';  // 1 inch
+                                    img.style.display = 'block';
+                                    img.style.marginBottom = '3px';
+
+                                    const caption = document.createElement('small');
+                                    caption.textContent = imgObj.caption || '';
+
+                                    imgContainer.appendChild(img);
+                                    imgContainer.appendChild(caption);
+                                    container.appendChild(imgContainer);
+                                });
+                            } catch (err) {
+                                container.textContent = "Error parsing images";
+                                console.error(err);
+                            }
+                        } else {
+                            container.textContent = "N/A";
+                        }
+
+                        continue;
                     }
 
 
