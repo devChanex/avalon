@@ -37,8 +37,8 @@ class ServiceClass
             }
 
             // Determine whether to insert or update
-            $isInsert = empty($data['amnpnid']);
-            $table = "ambulatory_nurse_progress_note";
+            $isInsert = empty($data['aminscountid']);
+            $table = "ambulatory_instrument_counts";
 
             // Filter only valid fields (non-null, existing keys)
             $fields = array_keys($data);
@@ -57,7 +57,7 @@ class ServiceClass
                         $updates[] = "{$field} = :{$field}";
                     }
                 }
-                $sql = "UPDATE {$table} SET " . implode(", ", $updates) . " WHERE amnpnid = :amnpnid";
+                $sql = "UPDATE {$table} SET " . implode(", ", $updates) . " WHERE aminscountid = :aminscountid";
             }
 
             try {
@@ -77,10 +77,10 @@ class ServiceClass
                 $stmt->execute();
 
                 // Get the record ID
-                $recordId = $isInsert ? $this->conn->lastInsertId() : $data['amnpnid'];
+                $recordId = $isInsert ? $this->conn->lastInsertId() : $data['aminscountid'];
 
                 // Fetch the saved record
-                $query = "SELECT * FROM {$table} WHERE amnpnid	 = :id";
+                $query = "SELECT * FROM {$table} WHERE aminscountid	 = :id";
                 $stmt2 = $this->conn->prepare($query);
                 $stmt2->bindValue(':id', $recordId, PDO::PARAM_INT);
                 $stmt2->execute();
@@ -92,7 +92,7 @@ class ServiceClass
 
                 return [
                     "success" => true,
-                    "message" => $isInsert ? "Ambulatory record added successfully." : "Ambulatory record updated successfully.",
+                    "message" => $isInsert ? "Inventory Count added successfully." : "Inventory Count updated successfully.",
                     "record" => $record,
 
                 ];

@@ -31,15 +31,34 @@ require_once 'properties.php';
     <link rel="stylesheet" href="node_modules/perfect-scrollbar/css/perfect-scrollbar.css">
     <link rel="stylesheet" href="node_modules/owl.carousel/dist/assets/owl.carousel.css">
     <link rel="stylesheet" href="node_modules/owl.carousel/dist/assets/owl.theme.default.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="node_modules/jquery-toast-plugin/dist/jquery.toast.min.css">
     <link rel="stylesheet" href="dist/css/theme.min.css">
     <script src="src/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- aaddtional css -->
     <link rel="stylesheet" href="ccss/datatable.css">
     <link rel="stylesheet" href="ccss/custom.css">
+    <style>
+        .tab-pane {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: scale(1.2);
+            /* start slightly zoomed */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+        }
 
-
+        .tab-pane.active {
+            opacity: 1;
+            transform: scale(1);
+            /* normal size */
+            pointer-events: all;
+            position: relative;
+        }
+    </style>
 </head>
 
 <body>
@@ -60,115 +79,126 @@ require_once 'properties.php';
                         <input type="hidden" id="ref"
                             value="<?php echo isset($_GET['ref']) ? htmlspecialchars($_GET['ref']) : ''; ?>">
                         <?php include_once('nav/loader.php'); ?>
-                        <div class="col-md-2">
+                        <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header py-3 d-flex justify-content-between">
-                                    <h6 class="m-0 font-weight-bold">General Information</h6>
 
+                                <div class="card-header py-2">
+                                    <h6 class="m-0 small fw-bold">General Information</h6>
                                 </div>
-                                <div class="card-body" style="min-height: 690px;display: block;  ">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">SurgRef No.:
-                                                </label>
-                                                <input type="text" class="form-control" id="general_amid"
-                                                    placeholder="SurgRef No." readonly>
-                                            </div>
+
+                                <div class="card-body py-2">
+                                    <div class="row g-2">
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">SurgRef No.</label>
+                                            <input type="text" class="form-control form-control-sm" id="general_amid"
+                                                readonly>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">Patient No.:
-                                                </label>
-                                                <input type="text" class="form-control" id="general_pid"
-                                                    placeholder="Patient No." readonly>
-                                            </div>
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">Patient No.</label>
+                                            <input type="text" class="form-control form-control-sm" id="general_pid"
+                                                readonly>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">Patient Name:
-                                                </label>
-                                                <input type="text" class="form-control" id="general_fullname"
-                                                    placeholder="Patient Fullname" readonly>
-                                            </div>
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">Patient Name</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                id="general_fullname" readonly>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">Gender:
-                                                </label>
-                                                <input type="text" class="form-control" id="general_gender" readonly>
-                                            </div>
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">Gender</label>
+                                            <input type="text" class="form-control form-control-sm" id="general_gender"
+                                                readonly>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">Birthdate:
-                                                </label>
-                                                <input type="date" class="form-control" id="general_birthdate" readonly>
-                                            </div>
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">Birthdate</label>
+                                            <input type="date" class="form-control form-control-sm"
+                                                id="general_birthdate" readonly>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">Birthplace:
-                                                </label>
-                                                <input type="text" class="form-control" id="general_birthplace"
-                                                    readonly>
-                                            </div>
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">Age</label>
+                                            <input type="text" class="form-control form-control-sm" id="general_age"
+                                                readonly>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">Age:
-                                                </label>
-                                                <input type="text" class="form-control" id="general_age" readonly>
-                                            </div>
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">Birthplace</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                id="general_birthplace" readonly>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">PHIC No.:
-                                                </label>
-                                                <input type="text" class="form-control" id="general_phic_no" readonly>
-                                            </div>
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">PHIC No.</label>
+                                            <input type="text" class="form-control form-control-sm" id="general_phic_no"
+                                                readonly>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">Member Type:
-                                                </label>
-                                                <input type="text" class="form-control" id="general_member_type"
-                                                    readonly>
-                                            </div>
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">Member Type</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                id="general_member_type" readonly>
                                         </div>
-                                        <hr>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">Attending Physician:
-                                                </label>
-                                                <input type="text" class="form-control" id="general_physician" readonly>
-                                            </div>
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">Physician</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                id="general_physician" readonly>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">Name of Procedure:
-                                                </label>
-                                                <input type="text" class="form-control" id="general_procedure" readonly>
-                                            </div>
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">Procedure</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                id="general_procedure" readonly>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="consent_fullname">Date/Time:
-                                                </label>
-                                                <input type="datetime-local" class="form-control" id="general_datetime"
-                                                    readonly>
-                                            </div>
+
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">Date / Time</label>
+                                            <input type="datetime-local" class="form-control form-control-sm"
+                                                id="general_datetime" readonly>
                                         </div>
+
                                     </div>
-
-
-
                                 </div>
+
                             </div>
                         </div>
-                        <div class="col-md-10">
+
+
+                        <div class="col-md-12">
+
+
+                            <div class="input-group bg-primary mb-3">
+                                <span class="input-group-text bg-primary text-white"><i
+                                        class="bi bi-layout-text-sidebar-reverse"></i></span>
+                                <select class="form-select fw-semibold" id="tabSelect">
+                                    <option value="#tab1" style="color: #fff; background-color: #007bff;">
+                                        Pre-Requisites</option>
+                                    <option value="#tab2" style="color: #fff; background-color: #339af0;">
+                                        Ambulatory Surgery Patient Data</option>
+                                    <option value="#tab3" style="color: #fff; background-color: #1c7ed6;">
+                                        Vital Signs Sheet</option>
+                                    <option value="#tab4" style="color: #fff; background-color: #228be6;">
+                                        Physicians Order Sheet</option>
+                                    <option value="#tab7" style="color: #fff; background-color: #1971c2;">
+                                        Medication Sheet</option>
+                                    <option value="#tab5" style="color: #fff; background-color: #1864ab;">
+                                        Nurses Progress Notes</option>
+                                    <option value="#tab6" style="color: #fff; background-color: #0b5ed7;">
+                                        Operative Technique Form</option>
+                                    <option value="#tab9" style="color: #fff; background-color: #0d6efd;">
+                                        Instrument Count Sheet</option>
+                                    <option value="#tab8" style="color: #fff; background-color: #084298;">OR
+                                        Charges</option>
+                                </select>
+                            </div>
+
+
                             <!-- Tabs Navigation -->
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
 
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="info-tab" data-bs-toggle="tab"
@@ -208,13 +238,13 @@ require_once 'properties.php';
                                     <button class="nav-link" id="instumentcountsheet-tab" data-bs-toggle="tab"
                                         data-bs-target="#tab8" type="button" role="tab">OR Charges</button>
                                 </li>
-                            </ul>
+                            </ul> -->
 
                             <!-- Tabs Content -->
-                            <div class="tab-content border border-top-0 p-3" id="myTabContent"
-                                style="height: 800px; overflow-y: auto;">
+                            <div class="tab-content border border-top-0 p-1" id="myTabContent"
+                                style="height: 600px; overflow-y: auto;">
                                 <div class="tab-pane fade show active" id="tab1" role="tabpanel"
-                                    style="max-width:80%;margin: 0 auto;">
+                                    style="max-width:95%;margin: 0 auto;">
                                     <div id="consentFormSection">
                                         <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
                                             onclick="toggleChecklistDetails('consentDetails', 'toggleIcon-consent')">
@@ -455,7 +485,7 @@ require_once 'properties.php';
 
                                 </div>
                                 <div class="tab-pane fade show" id="tab2" role="tabpanel"
-                                    style="max-width:80%;margin: 0 auto;" style="max-width:80%;margin: 0 auto;">
+                                    style="max-width:95%;margin: 0 auto;">
                                     <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
                                         onclick="toggleChecklistDetails('ambulatorydatasheet1', 'toggleIcon-predatasheet')">
                                         <span id="toggleIcon-predatasheet" style="transition: transform 0.2s;">▶</span>
@@ -499,7 +529,7 @@ require_once 'properties.php';
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label for="tab2_height">Height:</label>
+                                                    <label for="tab2_height">Height (cm):</label>
                                                     <input type="text" class="form-control" id="tab2_height"
                                                         placeholder="Height">
                                                 </div>
@@ -529,7 +559,7 @@ require_once 'properties.php';
 
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label for="tab2_weight">Weight:</label>
+                                                    <label for="tab2_weight">Weight (kg):</label>
                                                     <input type="text" class="form-control" id="tab2_weight"
                                                         placeholder="Weight">
                                                 </div>
@@ -845,7 +875,7 @@ require_once 'properties.php';
                                     <hr>
                                 </div>
                                 <div class="tab-pane fade show" id="tab3" role="tabpanel"
-                                    style="max-width:80%;margin: 0 auto;">
+                                    style="max-width:95%;margin: 0 auto;">
                                     <a href="#" onclick='openModalVital();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                             class="fas fa-plus fa-sm text-white-50"></i> Add </a>
@@ -911,7 +941,7 @@ require_once 'properties.php';
                                 </div>
 
                                 <div class="tab-pane fade show" id="tab4" role="tabpanel"
-                                    style="max-width:80%;margin: 0 auto;">
+                                    style="max-width:95%;margin: 0 auto;">
                                     <a href="#" onclick='openModalAmpo();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                             class="fas fa-plus fa-sm text-white-50"></i> Add </a>
@@ -968,15 +998,25 @@ require_once 'properties.php';
 
                                 </div>
                                 <div class="tab-pane fade show" id="tab5" role="tabpanel"
-                                    style="max-width:80%;margin: 0 auto;">
-                                    <a href="#" onclick='openModalAmpn();'"
+                                    style="max-width:95%;margin: 0 auto;">
+                                    <a href="#" onclick='UpSertAmpnData();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
+                                            class="fas fa-plus fa-sm text-white-50"></i> Save </a>
                                     <a href="#" onclick='printAmpnSheet();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
                                             class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
                                     <hr>
-                                    <div class="table-responsive">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <input type="hidden" id="amnpnid">
+                                            <label for="tab2_bp">Nurse Progress Notes:</label>
+                                            <textarea class="form-control" id="nurse_progress_notes" rows="30"
+                                                placeholder="Nurse Progress Notes"></textarea>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="table-responsive">
 
 
                                         <table id="datatable" class="table table-hover">
@@ -1020,12 +1060,12 @@ require_once 'properties.php';
                                                 </td>
                                             </tr>
                                         </template>
-                                    </div>
+                                    </div> -->
 
 
                                 </div>
                                 <div class="tab-pane fade show" id="tab6" role="tabpanel"
-                                    style="max-width:80%;margin: 0 auto;" style="max-width:80%;margin: 0 auto;">
+                                    style="max-width:95%;margin: 0 auto;">
 
                                     <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
                                         onclick="toggleChecklistDetails('ambulatory_optech', 'toggleIcon-optech')">
@@ -1100,7 +1140,7 @@ require_once 'properties.php';
                                                 <button class="btn btn-primary" id="upload-btn" type="button">Select
                                                     Images</button>
                                                 <input type="file" id="file-input" multiple style="display:none;">
-                                                <div id="image-preview" style="margin-top:10px;align:center"></div>
+                                                <div id="image-preview" style="margin-top:10px;"></div>
                                             </div>
 
                                         </div>
@@ -1199,7 +1239,7 @@ require_once 'properties.php';
                                     <hr>
                                 </div>
                                 <div class="tab-pane fade show" id="tab7" role="tabpanel"
-                                    style="max-width:80%;margin: 0 auto;">
+                                    style="max-width:95%;margin: 0 auto;">
                                     <a href="#" onclick='openModalMS();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                             class="fas fa-plus fa-sm text-white-50"></i> Add </a>
@@ -1312,7 +1352,7 @@ require_once 'properties.php';
                                     </div>
                                 </div>
                                 <div class="tab-pane fade show" id="tab8" role="tabpanel"
-                                    style="max-width:80%;margin: 0 auto;">
+                                    style="max-width:95%;margin: 0 auto;">
                                     <a href="#" onclick='saveAllInstruments();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                             class="fas fa-save fa-sm text-white-50"></i> Save</a>
@@ -1352,15 +1392,25 @@ require_once 'properties.php';
                                 </div>
 
                                 <div class="tab-pane fade show" id="tab9" role="tabpanel"
-                                    style="max-width:80%;margin: 0 auto;">
-                                    <a href="#" onclick='openModalics();'"
+                                    style="max-width:95%;margin: 0 auto;">
+                                    <a href="#" onclick='UpSertInstrumentCountdata();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
+                                            class="fas fa-save fa-sm text-white-50"></i> Save </a>
                                     <a href="#" onclick='printInstrumentCountSheet();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
                                             class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
                                     <hr>
-                                    <div class="table-responsive">
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <input type="hidden" id="instument_count_doc_id">
+                                            <label for="tab2_bp">Instrument Count Sheet:</label>
+                                            <textarea class="form-control" id="instrument_count_doc" rows="30"
+                                                placeholder="Instrument Count"></textarea>
+
+                                        </div>
+                                    </div>
+                                    <!-- <div class="table-responsive">
 
 
                                         <table id="datatableICS" class="table table-hover">
@@ -1411,7 +1461,7 @@ require_once 'properties.php';
                                                 </td>
                                             </tr>
                                         </template>
-                                    </div>
+                                    </div> -->
 
 
                                 </div>
@@ -1561,8 +1611,8 @@ require_once 'properties.php';
                     </div>
                 </div>
             </div>
-
-            <div class="modal fade" id="dataModalAmpn" tabindex="-1" role="dialog"
+            <!-- OLD MODAL FOR NURSES PROGRESS NOTES -->
+            <!-- <div class="modal fade" id="dataModalAmpn" tabindex="-1" role="dialog"
                 aria-labelledby="fullwindowModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -1613,7 +1663,7 @@ require_once 'properties.php';
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
             <div class="modal fade" id="dataModalMs" tabindex="-1" role="dialog" aria-labelledby="dataModalMsLabel"
@@ -1880,13 +1930,144 @@ require_once 'properties.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
+
+
+
+    <script>
+        CKEDITOR.config.versionCheck = false;
+        const defaultTable = `
+<table border="1" width="100%" cellspacing="0" cellpadding="5">
+    <thead>
+        <tr>
+            <th style="width:20%;">Time</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        ${'<tr><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(10)}
+    </tbody>
+</table>
+`;
+        const instruments = [
+            "ADSON FORCEP W/ TEETH",
+            "ADSON FORCEP W/O TEETH",
+            "ALLIS",
+            "ARMY NAVY", "BANDAGE SCISSORS", "BLADE HANDLE #3", "BLADE HANDLE #4", "BOBCOCK", "DEAVER", "DEBAKEY FORCEP", "KELLY CLAMPS - Straight", "KELLY CLAMPS - Curved", "MALLEABLE", "MIXTERS", "MOSQUITO - Straight", "MOSQUITO - Curved", "NEEDLE HOLDER", "OVUM FORCEPS", "OCSHNER - Straight", "OCSHNER - Curved", "RICHARDSON", "SCISSORS - Metz", "SCISOORS - Mayo Curve", "SCISSORS - Mayo Straight", "TISSUE FORCEPS", "THUMB FORCEPS", "TOWEL CLIPS", "<strong>NEEDLES</strong>", "", "", "<strong>-SPONGES</strong>", "4X4 OS", "CHERRY BALLS", "COTTONOIDS", "PEANUTS", "<strong>-OTHERS</strong>", "", "", ""
+        ];
+
+        const instrumentRows = instruments.map(name => `
+    <tr>
+        <td>${name}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+`).join('');
+
+
+        const defaultInstrumentCount = `
+<table border="1" width="100%" cellspacing="0" cellpadding="5">
+    <thead>
+        <tr>
+            <th style="width:25%;">Instrument Tray</th>
+            <th>Baseline</th>
+            <th>Initial Counting</th>
+            <th>Added</th>
+            <th>Removed</th>
+            <th>Final Count</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        ${instrumentRows}
+    </tbody>
+</table>
+`;
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+
+            CKEDITOR.replace('nurse_progress_notes', {
+                versionCheck: false,
+                height: 400,
+                toolbar: [
+                    ['Bold', 'Italic', 'Underline', 'TextColor'],
+                    ['NumberedList', 'BulletedList'],
+                    ['Table'],
+                    ['TextColor', 'BGColor'],
+                    ['Undo', 'Redo'],
+
+                ],
+                resize_enabled: false,
+                on: {
+                    instanceReady: function (evt) {
+                        const editor = evt.editor;
+                        if (!editor.getData().trim()) {
+                            editor.setData(defaultTable);
+                        }
+                    }
+                }
+            });
+
+            CKEDITOR.replace('instrument_count_doc', {
+                versionCheck: false,
+                height: 600,
+                toolbar: [
+                    ['Bold', 'Italic', 'Underline', 'TextColor'],
+                    ['NumberedList', 'BulletedList'],
+                    ['Table'],
+                    ['TextColor', 'BGColor'],
+                    ['Undo', 'Redo'],
+
+                ],
+                resize_enabled: false,
+                on: {
+                    instanceReady: function (evt) {
+                        const editor = evt.editor;
+                        if (!editor.getData().trim()) {
+                            editor.setData(defaultInstrumentCount);
+                        }
+                    }
+                }
+            });
+
+        });
+
+
+        const tabSelect = document.getElementById('tabSelect');
+        const tabs = document.querySelectorAll('.tab-pane');
+
+        tabSelect.addEventListener('change', function () {
+            const targetId = this.value.substring(1);
+            const currentTab = document.querySelector('.tab-pane.active');
+            const nextTab = tabs[targetId - 1] || document.getElementById(targetId); // fallback
+
+            if (currentTab === nextTab) return;
+
+            // fade/zoom out current
+            currentTab.classList.remove('active');
+
+            // fade/zoom in next after a short delay
+            setTimeout(() => {
+                nextTab.classList.add('active');
+            }, 50);
+        });
+    </script>
+
 
 
     <!-- other plugins -->
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
-    <script src="scripts/dynamicScripts-v4.js"></script>
-    <script src="scripts/ambulatory-view-v4.js"></script>
+    <script src="scripts/dynamicScripts-v5.js"></script>
+    <script src="scripts/ambulatory-view-v5.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

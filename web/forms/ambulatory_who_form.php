@@ -192,10 +192,14 @@
                 </li>
             </ul>
             <br><br><br><br><br>
-            <div class="who-signature" style="margin-top: auto; text-align: center; padding-top: 10px; 
-                   border-top: 1px solid #ccc; font-weight: bold; color: #333;">
-                Surgeon
+            <div class="who-signature">
+                <div id="physician2" class="sig-name">Dr. Juan</div>
+                <div class="sig-line"></div>
+                <div class="sig-role">Surgeon</div>
             </div>
+
+
+
         </div>
 
         <!-- Column 3 -->
@@ -216,9 +220,10 @@
             </ul>
 
             <br><br><br><br><br><br><br><br><br><br><br><br>
-            <div class="who-signature" style="margin-top: auto; text-align: center; padding-top: 10px; 
-                   border-top: 1px solid #ccc; font-weight: bold; color: #333;">
-                Circulating Nurse
+            <div class="who-signature">
+                <div id="nurse" class="sig-name"></div>
+                <div class="sig-line"></div>
+                <div class="sig-role">Surgeon</div>
             </div>
         </div>
 
@@ -262,8 +267,10 @@
                     }
                     if (key === "physician") {
                         document.getElementById("physician").textContent = value;
-
+                        document.getElementById("physician2").textContent = value;
                     }
+
+
 
                     el.textContent = value;
                 }

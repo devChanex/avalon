@@ -202,7 +202,7 @@ require_once 'properties.php';
     <!-- other plugins -->
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
-    <script src="scripts/dynamicScripts-v4.js"></script>
+    <script src="scripts/dynamicScripts-v5.js"></script>
     <script src="scripts/dashboard-v1.js"></script>
 
 

@@ -168,11 +168,13 @@
                         understand the possible benefits and risks associated with it.
                     </div>
 
-                    <div style="text-align: center; margin-top: 50px;">
-                        <div style="border-top: 1px solid black; width: 70%; margin: 0 auto 2px auto;"></div>
-                        <div style="font-size: 10px;">Signature over Printed Name / Date & Time</div>
-                        <div style="font-size: 10px;">Patient / Guardian</div>
+                    <div class="who-signature" style="margin-top:50px;">
+                        <div id="fullname2" class="sig-name"></div>
+                        <div class="long-sig-line"></div>
+                        <div class="sig-role">Signature over Printed Name / Date & Time<br>Patient / Guardian</div>
                     </div>
+
+
                 </td>
             </tr>
             <tr>
@@ -390,6 +392,10 @@
 
 
                     }
+                    if (key === "fullname") {
+                        document.getElementById("fullname").textContent = value.toUpperCase();
+                        document.getElementById("fullname2").textContent = value.toUpperCase();
+                    }
                     if (key === "anesthesia" && value) {
                         try {
                             const list = JSON.parse(value);
@@ -439,23 +445,23 @@
             }
         });
 
-        // 🖨️ Auto-print after load
-        window.addEventListener('load', () => {
-            window.print();
-        });
+        // // 🖨️ Auto-print after load
+        // window.addEventListener('load', () => {
+        //     window.print();
+        // });
 
-        // ✅ Close window after print or cancel
-        window.onafterprint = () => {
-            window.close();
-        };
+        // // ✅ Close window after print or cancel
+        // window.onafterprint = () => {
+        //     window.close();
+        // };
 
-        // ✅ Extra safety for some browsers
-        const mediaQueryList = window.matchMedia('print');
-        mediaQueryList.addEventListener('change', (mql) => {
-            if (!mql.matches) {
-                window.close();
-            }
-        });
+        // // ✅ Extra safety for some browsers
+        // const mediaQueryList = window.matchMedia('print');
+        // mediaQueryList.addEventListener('change', (mql) => {
+        //     if (!mql.matches) {
+        //         window.close();
+        //     }
+        // });
     </script>
 
 

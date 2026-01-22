@@ -69,12 +69,17 @@
     <footer>
         <div class="signature-container">
             <div class="signature-block">
-                <div class="signature-line"></div>
+                <div class="signature-line">
+                    <span id="fullname2"></span>
+                </div>
                 <div class="signature-label">Signature over Printed Name / Date</div>
                 <div class="signature-label">PATIENT</div>
             </div>
+
             <div class="signature-block">
-                <div class="signature-line"></div>
+                <div class="signature-line">
+                    <span id="physician3"></span>
+                </div>
                 <div class="signature-label">Signature over Printed Name / Date</div>
                 <div class="signature-label">ATTENDING PHYSICIAN</div>
             </div>
@@ -83,13 +88,17 @@
         <div class="signature-container">
 
             <div class="signature-block">
-                <p style="text-align:left;"><i>In case the patient is minor</i></p>
+                <i>In case the patient is minor</i>
                 <div class="signature-line"></div>
                 <div class="signature-label">Signature over Printed Name / Date</div>
-                <div class="signature-label">GUARDIAN/NEAREST KIN</div>
+                <div class="signature-label">GUARDIAN / NEAREST KIN</div>
             </div>
+
             <div class="signature-block">
-                <div class="signature-line"></div>
+                <br>
+                <div class="signature-line">
+                    <span id="nurse_in_charge"></span>
+                </div>
                 <div class="signature-label">Signature over Printed Name / Date</div>
                 <div class="signature-label">NURSE IN-CHARGE</div>
             </div>

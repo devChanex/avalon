@@ -78,8 +78,8 @@ require_once 'properties.php';
                             <div class="card">
                                 <div class="card-header py-3 d-flex justify-content-between">
                                     <h6 class="m-0 font-weight-bold">Patients Record</h6>
-                                    <a href="https://registration.avalonwoundcare.ph/"
-                                          target="_blank"rel="noopener noreferrer"
+                                    <a href="https://registration.avalonwoundcare.ph/" target="_blank"
+                                        rel="noopener noreferrer"
                                         class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                             class="fas fa-plus fa-sm text-white-50"></i> Register</a>
                                 </div>
@@ -621,7 +621,7 @@ require_once 'properties.php';
     <!-- other plugins -->
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
-    <script src="scripts/dynamicScripts-v4.js"></script>
+    <script src="scripts/dynamicScripts-v5.js"></script>
     <script src="scripts/patientrecords-v14.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 

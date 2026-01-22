@@ -144,7 +144,6 @@ footer {
 .signature-container {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
     width: 100%;
     margin-top: 40px;
 }
@@ -155,16 +154,31 @@ footer {
 }
 
 .signature-line {
+    position: relative;
+    height: 40px;
     border-bottom: 1px solid #000;
     margin-bottom: 5px;
-    height: 40px;
-    /* space for writing */
+}
+
+/* Printed name positioned JUST above the line */
+.signature-line span {
+    position: absolute;
+    bottom: 2px;
+    /* distance from line */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
 }
 
 .signature-label {
     font-size: 13px;
     font-weight: 500;
 }
+
+
+
 
 .two-column {
     display: flex;
@@ -307,12 +321,40 @@ footer {
 /* Signature footer area */
 .who-signature {
     text-align: center;
-    margin-top: auto;
-    padding-top: 10px;
-    border-top: 1px solid #ccc;
     font-weight: bold;
     color: #333;
 }
+
+.sig-name {
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+}
+
+.sig-line {
+    border-bottom: 1px solid #333;
+    width: 120px;
+    /* adjust line length */
+    margin: 0 auto;
+    /* center the line */
+}
+
+.long-sig-line {
+    border-bottom: 1px solid #333;
+    width: 400px;
+    /* adjust line length */
+    margin: 0 auto;
+    /* center the line */
+}
+
+.sig-role {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+
+
 
 .discharge-checkbox {
     display: inline-block;

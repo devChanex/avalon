@@ -94,17 +94,25 @@
     </div>
 
 
-    <footer style="margin-top: 40px;">
-        <div class="signature-container" style="display: flex; justify-content: flex-end;">
-            <div class="signature-block" style="text-align: center; margin-right: 40px;">
+    <footer style="margin-top:40px;">
+        <div class="signature-container" style="display:flex; justify-content:flex-end; width:100%;">
+            <div class="signature-block" style="width:45%; text-align:center;">
                 <div class="signature-line"
-                    style=" width: 250px; margin-bottom: 5px; margin-left: auto; margin-right: auto;">
+                    style="position:relative; height:40px; border-bottom:1px solid #000; margin-bottom:5px;">
+                    <span id="nurse"
+                        style="position:absolute; bottom:2px; left:50%; transform:translateX(-50%); font-weight:500;">
+                    </span>
                 </div>
-                <div class="signature-label" style="font-size: 14px;">Signature over Printed Name / Date</div>
-                <div class="signature-label" style="font-size: 14px;">Accomplished By</div>
+                <div class="signature-label" style="font-size:13px; font-weight:500;">
+                    Signature over Printed Name / Date
+                </div>
+                <div class="signature-label" style="font-size:13px; font-weight:500;">
+                    Accomplished By
+                </div>
             </div>
         </div>
     </footer>
+
 
 
 

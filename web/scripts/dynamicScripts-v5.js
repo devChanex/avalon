@@ -237,3 +237,11 @@ function deleteRecord(table, id, key, callback) {
         });
     }
 }
+
+function compressHtml(html) {
+    return html
+        .replace(/\s{2,}/g, ' ')
+        .replace(/>\s+</g, '><')
+        .replace(/\n|\r|\t/g, '')
+        .trim();
+}

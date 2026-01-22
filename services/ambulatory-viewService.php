@@ -73,7 +73,13 @@ class ServiceClass
 
             $ambulatory_ampo = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $query = "SELECT * FROM ambulatory_progress_nurse where amid=:ref";
+            // $query = "SELECT * FROM ambulatory_progress_nurse where amid=:ref";
+            // $stmt = $this->conn->prepare($query);
+            // $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
+            // $stmt->execute();
+            // $ambulatory_ampn = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $query = "SELECT amnpnid,notes FROM ambulatory_nurse_progress_note where amid=:ref";
             $stmt = $this->conn->prepare($query);
             $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
             $stmt->execute();
@@ -108,7 +114,7 @@ class ServiceClass
             $stmt->execute();
             $ambulatory_instrument_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $query = "SELECT * FROM ambulatory_instrument_count where amid=:ref";
+            $query = "SELECT * FROM ambulatory_instrument_counts where amid=:ref";
             $stmt = $this->conn->prepare($query);
             $stmt->bindValue(':ref', (int) $data["ref"], PDO::PARAM_INT);
             $stmt->execute();

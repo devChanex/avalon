@@ -31,6 +31,8 @@ let msDataCache = null;
 let ms_nurseDataCache = null;
 let instrumentDataCache = null;
 let instrumentCountDataCache = null;
+let progress_notes_cache = null;
+let instrument_count_content_cache = null;
 function loadgeneraldata() {
 
     let ref = document.getElementById("consentpid").value;
@@ -128,6 +130,34 @@ function loaddata() {
             document.getElementById("discharge_surgeon").value = document.getElementById("general_physician").value;
 
             if (result.success && result.data) {
+
+
+                result.ambulatoryampn.forEach(rowdata => {
+                    console.log("test:::::" + rowdata.notes);
+
+                    document.getElementById("amnpnid").value = rowdata.amnpnid ?? '';
+                    // document.getElementById("nurse_progress_notes").value = rowdata.notes ?? 'asd';
+                    CKEDITOR.instances.nurse_progress_notes.setData(
+                        rowdata.notes && rowdata.notes.trim() !== ''
+                            ? rowdata.notes
+                            : defaultTable
+                    );
+                    progress_notes_cache = rowdata.notes ?? '';
+                });
+
+
+                result.ambulatoryics.forEach(rowdata => {
+                    console.log("test2:::::" + rowdata.content);
+
+                    document.getElementById("instument_count_doc_id").value = rowdata.aminscountid ?? '';
+                    CKEDITOR.instances.instrument_count_doc.setData(
+                        rowdata.content && rowdata.content.trim() !== ''
+                            ? rowdata.content
+                            : defaultInstrumentCount
+                    );
+                    instrument_count_content_cache = rowdata.content ?? '';
+                });
+
                 result.data.forEach(rowdata => {
                     document.getElementById("consent_fullname").value = rowdata.fullname;
                     document.getElementById("consentid").value = rowdata.acid ?? '';
@@ -347,53 +377,53 @@ function loaddata() {
                     tbodyampo.appendChild(clone);
                 });
 
-                let tbodyampn = document.getElementById("dataTableBody_ampn");
-                let templateampn = document.getElementById("ampn_rowtemplate");
-                tbodyampn.innerHTML = "";
-                ampnDataCache = result.ambulatoryampn; // cache the latest vital data
+                // let tbodyampn = document.getElementById("dataTableBody_ampn");
+                // let templateampn = document.getElementById("ampn_rowtemplate");
+                // tbodyampn.innerHTML = "";
+                // ampnDataCache = result.ambulatoryampn; // cache the latest vital data
 
-                result.ambulatoryampn.forEach(rowdata => {
-                    let clone = templateampn.content.cloneNode(true);
+                // result.ambulatoryampn.forEach(rowdata => {
+                //     let clone = templateampn.content.cloneNode(true);
 
-                    const dt = new Date(rowdata.ampn_datetime);
+                //     const dt = new Date(rowdata.ampn_datetime);
 
-                    // Get date only (MM/DD/YYYY)
-                    const dateOnly = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/` +
-                        `${dt.getDate().toString().padStart(2, '0')}/` +
-                        `${dt.getFullYear()}`;
+                //     // Get date only (MM/DD/YYYY)
+                //     const dateOnly = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/` +
+                //         `${dt.getDate().toString().padStart(2, '0')}/` +
+                //         `${dt.getFullYear()}`;
 
-                    // Get time only (HH:MM AM/PM)
-                    let hours = dt.getHours();
-                    const minutes = dt.getMinutes().toString().padStart(2, '0');
-                    const ampm = hours >= 12 ? 'PM' : 'AM';
-                    hours = hours % 12 || 12; // convert 0 -> 12
-                    const timeOnly = `${hours}:${minutes} ${ampm}`;
-                    clone.querySelector(".ampn_date").textContent = dateOnly;
-                    clone.querySelector(".ampn_time").textContent = timeOnly;
-                    clone.querySelector(".ampn_focus").textContent = rowdata.ampn_focus;
-                    clone.querySelector(".ampn_data").textContent = rowdata.ampn_data;
-
-
-
-                    clone.querySelector(".ampn-edit-data-btn").addEventListener("click", function () {
-
-                        document.getElementById("ampnid_input").value = rowdata.ampnid;
-
-                        document.getElementById("ampn_datetime_input").value = rowdata.ampn_datetime;
-                        document.getElementById("ampn_focus_input").value = rowdata.ampn_focus;
-                        document.getElementById("ampn_data_input").value = rowdata.ampn_data;
+                //     // Get time only (HH:MM AM/PM)
+                //     let hours = dt.getHours();
+                //     const minutes = dt.getMinutes().toString().padStart(2, '0');
+                //     const ampm = hours >= 12 ? 'PM' : 'AM';
+                //     hours = hours % 12 || 12; // convert 0 -> 12
+                //     const timeOnly = `${hours}:${minutes} ${ampm}`;
+                //     clone.querySelector(".ampn_date").textContent = dateOnly;
+                //     clone.querySelector(".ampn_time").textContent = timeOnly;
+                //     clone.querySelector(".ampn_focus").textContent = rowdata.ampn_focus;
+                //     clone.querySelector(".ampn_data").textContent = rowdata.ampn_data;
 
 
-                        // Show modal (Bootstrap 5 way)
-                        var modal = new bootstrap.Modal(document.getElementById("dataModalAmpn"));
-                        modal.show();
-                    });
-                    clone.querySelector(".ampn-delete-data-btn").addEventListener("click", function () {
-                        deleteRecord('ambulatory_progress_nurse', rowdata.ampnid, 'ampnid', loaddata);
-                    });
 
-                    tbodyampn.appendChild(clone);
-                });
+                //     clone.querySelector(".ampn-edit-data-btn").addEventListener("click", function () {
+
+                //         document.getElementById("ampnid_input").value = rowdata.ampnid;
+
+                //         document.getElementById("ampn_datetime_input").value = rowdata.ampn_datetime;
+                //         document.getElementById("ampn_focus_input").value = rowdata.ampn_focus;
+                //         document.getElementById("ampn_data_input").value = rowdata.ampn_data;
+
+
+                //         // Show modal (Bootstrap 5 way)
+                //         var modal = new bootstrap.Modal(document.getElementById("dataModalAmpn"));
+                //         modal.show();
+                //     });
+                //     clone.querySelector(".ampn-delete-data-btn").addEventListener("click", function () {
+                //         deleteRecord('ambulatory_progress_nurse', rowdata.ampnid, 'ampnid', loaddata);
+                //     });
+
+                //     tbodyampn.appendChild(clone);
+                // });
                 result.ambulatorytechnique.forEach(rowdata => {
                     document.getElementById("amtechid_input").value = rowdata.amtechid ?? '';
                     document.getElementById("ref").value = rowdata.amid ?? '';
@@ -520,7 +550,7 @@ function loaddata() {
                 });
 
 
-                //instrument count
+                // instrument count
                 let tbodyinstrument = document.getElementById("dataTableBody_ins");
                 let template_instrument = document.getElementById("instrument_rowtemplate");
                 tbodyinstrument.innerHTML = "";
@@ -536,42 +566,42 @@ function loaddata() {
                     tbodyinstrument.appendChild(clone);
                 });
 
-                let dataTableBody_ICS = document.getElementById("dataTableBody_ICS");
-                let ICS_rowtemplate = document.getElementById("ICS_rowtemplate");
-                dataTableBody_ICS.innerHTML = "";
-                instrumentCountDataCache = result.ambulatoryics; // cache the latest vital data
+                // let dataTableBody_ICS = document.getElementById("dataTableBody_ICS");
+                // let ICS_rowtemplate = document.getElementById("ICS_rowtemplate");
+                // dataTableBody_ICS.innerHTML = "";
+                // instrumentCountDataCache = result.ambulatoryics; // cache the latest vital data
 
-                result.ambulatoryics.forEach(rowdata => {
-                    let clone = ICS_rowtemplate.content.cloneNode(true);
-                    clone.querySelector(".ics_baseline").textContent = rowdata.baseline ?? '';
-                    clone.querySelector(".ics_instrument").textContent = rowdata.instrument ?? '';
-                    clone.querySelector(".ics_initial_counting").textContent = rowdata.initial_counting ?? '';
-                    clone.querySelector(".ics_added").textContent = rowdata.added ?? '';
-                    clone.querySelector(".ics_removed").textContent = rowdata.removed ?? '';
-                    clone.querySelector(".ics_final_count").textContent = rowdata.final_count ?? '';
-                    clone.querySelector(".ics_remarks").textContent = rowdata.remarks ?? '';
+                // result.ambulatoryics.forEach(rowdata => {
+                //     let clone = ICS_rowtemplate.content.cloneNode(true);
+                //     clone.querySelector(".ics_baseline").textContent = rowdata.baseline ?? '';
+                //     clone.querySelector(".ics_instrument").textContent = rowdata.instrument ?? '';
+                //     clone.querySelector(".ics_initial_counting").textContent = rowdata.initial_counting ?? '';
+                //     clone.querySelector(".ics_added").textContent = rowdata.added ?? '';
+                //     clone.querySelector(".ics_removed").textContent = rowdata.removed ?? '';
+                //     clone.querySelector(".ics_final_count").textContent = rowdata.final_count ?? '';
+                //     clone.querySelector(".ics_remarks").textContent = rowdata.remarks ?? '';
 
 
-                    clone.querySelector(".ics-edit-data-btn").addEventListener("click", function () {
+                //     clone.querySelector(".ics-edit-data-btn").addEventListener("click", function () {
 
-                        document.getElementById("ics_icsid_input").value = rowdata.icsid ?? '';
-                        document.getElementById("ics_instrument_input").value = rowdata.instrument ?? '';
-                        document.getElementById("ics_baseline_input").value = rowdata.baseline ?? '';
-                        document.getElementById("ics_initial_counting_input").value = rowdata.initial_counting ?? '';
-                        document.getElementById("ics_added_input").value = rowdata.added ?? '';
-                        document.getElementById("ics_removed_input").value = rowdata.removed ?? '';
-                        document.getElementById("ics_final_count_input").value = rowdata.final_count ?? '';
-                        document.getElementById("ics_remarks_input").value = rowdata.remarks ?? '';
-                        // Show modal (Bootstrap 5 way)
-                        var modal = new bootstrap.Modal(document.getElementById("dataModalICS"));
-                        modal.show();
-                    });
-                    clone.querySelector(".ics-delete-data-btn").addEventListener("click", function () {
-                        deleteRecord('ambulatory_instrument_count', rowdata.icsid, 'icsid', loaddata);
-                    });
+                //         document.getElementById("ics_icsid_input").value = rowdata.icsid ?? '';
+                //         document.getElementById("ics_instrument_input").value = rowdata.instrument ?? '';
+                //         document.getElementById("ics_baseline_input").value = rowdata.baseline ?? '';
+                //         document.getElementById("ics_initial_counting_input").value = rowdata.initial_counting ?? '';
+                //         document.getElementById("ics_added_input").value = rowdata.added ?? '';
+                //         document.getElementById("ics_removed_input").value = rowdata.removed ?? '';
+                //         document.getElementById("ics_final_count_input").value = rowdata.final_count ?? '';
+                //         document.getElementById("ics_remarks_input").value = rowdata.remarks ?? '';
+                //         // Show modal (Bootstrap 5 way)
+                //         var modal = new bootstrap.Modal(document.getElementById("dataModalICS"));
+                //         modal.show();
+                //     });
+                //     clone.querySelector(".ics-delete-data-btn").addEventListener("click", function () {
+                //         deleteRecord('ambulatory_instrument_count', rowdata.icsid, 'icsid', loaddata);
+                //     });
 
-                    dataTableBody_ICS.appendChild(clone);
-                });
+                //     dataTableBody_ICS.appendChild(clone);
+                // });
 
 
                 setTimeout(function () {
@@ -877,8 +907,10 @@ function UpSertConsentData() {
         contentType: false,
         type: 'POST',
         success: function (result) {
+            console.log("Consent", result);
             if (result.success) {
-
+                result.record.fullname2 = data.fullname;
+                result.record.physician3 = data.physician;
                 promptSuccess('Result', result.message);
                 loaddata();
                 const form = document.createElement("form");
@@ -1107,7 +1139,7 @@ function UpSertAmbulatoryDischarge() {
                 form.target = "_blank"; // Open in a new tab
 
                 result.record.caseno = document.getElementById("general_amid").value;
-
+                result.record.fullname = document.getElementById("general_fullname").value;
 
 
 
@@ -1198,6 +1230,7 @@ function UpSertPreopData() {
                 result.record.birthDate = document.getElementById("general_birthdate").value;
                 result.record.gender = document.getElementById("general_gender").value;
                 result.record.age = document.getElementById("general_age").value;
+                result.record.nurse = document.getElementById("consent_nurse").value;
 
                 const form = document.createElement("form");
                 form.method = "POST";
@@ -1272,6 +1305,7 @@ async function printWHO() {
     form.action = "forms/ambulatory_who_form.php";
     form.target = "_blank"; // Open in a new tab
 
+    data.nurse = document.getElementById("consent_nurse").value.trim();
     // Create a hidden input to hold the data
     const input = document.createElement("input");
     input.type = "hidden";
@@ -1327,7 +1361,7 @@ function printVitalSheet() {
 
 function printInstrumentCountSheet() {
     var records = {};
-    records.instrumentcount = instrumentCountDataCache;
+    records.instrumentcount = instrument_count_content_cache;
     records.fullname = document.getElementById("general_fullname").value;
     records.birthdate = document.getElementById("general_birthdate").value;
     records.birth_place = document.getElementById("general_birthplace").value;
@@ -1486,19 +1520,69 @@ function UpSertVitalData() {
 
 }
 
+// OLD INSTRUMENT COUNT
+// function UpSertInstrumentCountdata() {
+
+//     var data = {
+//         icsid: document.getElementById("ics_icsid_input").value.trim(),
+//         instrument: document.getElementById("ics_instrument_input").value.trim(),
+//         baseline: document.getElementById("ics_baseline_input").value.trim(),
+//         initial_counting: document.getElementById("ics_initial_counting_input").value.trim(),
+//         added: document.getElementById("ics_added_input").value.trim(),
+//         removed: document.getElementById("ics_removed_input").value.trim(),
+//         final_count: document.getElementById("ics_final_count_input").value.trim(),
+//         remarks: document.getElementById("ics_remarks_input").value.trim(),
+//         amid: document.getElementById("ref").value.trim()
+//     };
+
+
+//     // ---------------- VALIDATIONS ----------------
+
+//     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
+//     let requiredFields = [
+//         "amid", "instrument"
+//     ];
+//     for (let field of requiredFields) {
+//         if (!data[field]) {
+//             promptError('Transaction Failed', field.toUpperCase() + ' is required.');
+//             return;
+//         }
+//     }
+//     // ---------------- FORM DATA ----------------
+//     var fd = new FormData();
+//     fd.append('service', 'ambulatory-ics-upsertService');
+//     fd.append('data', JSON.stringify(data));
+//     $.ajax({
+//         url: "api.php",
+//         data: fd,
+//         processData: false,
+//         contentType: false,
+//         type: 'POST',
+//         success: function (result) {
+//             if (result.success) {
+//                 $('#dataModalICS').modal('hide');
+
+//                 promptSuccess('Result', result.message);
+//                 loaddata();
+//             } else {
+//                 promptError('Result', result.message);
+//             }
+//         },
+//         error: function (xhr) {
+//             promptError('Failed Result:', "Error: " + xhr.responseText);
+//         }
+
+//     });
+
+// }
 
 function UpSertInstrumentCountdata() {
-
+    const rawHtml = CKEDITOR.instances.instrument_count_doc.getData();
+    const instrument_count = compressHtml(rawHtml);
     var data = {
-        icsid: document.getElementById("ics_icsid_input").value.trim(),
-        instrument: document.getElementById("ics_instrument_input").value.trim(),
-        baseline: document.getElementById("ics_baseline_input").value.trim(),
-        initial_counting: document.getElementById("ics_initial_counting_input").value.trim(),
-        added: document.getElementById("ics_added_input").value.trim(),
-        removed: document.getElementById("ics_removed_input").value.trim(),
-        final_count: document.getElementById("ics_final_count_input").value.trim(),
-        remarks: document.getElementById("ics_remarks_input").value.trim(),
-        amid: document.getElementById("ref").value.trim()
+        aminscountid: document.getElementById("instument_count_doc_id").value.trim(),
+        amid: document.getElementById("ref").value.trim(),
+        content: instrument_count
     };
 
 
@@ -1506,7 +1590,7 @@ function UpSertInstrumentCountdata() {
 
     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
     let requiredFields = [
-        "amid", "instrument"
+        "amid", "content"
     ];
     for (let field of requiredFields) {
         if (!data[field]) {
@@ -1516,7 +1600,7 @@ function UpSertInstrumentCountdata() {
     }
     // ---------------- FORM DATA ----------------
     var fd = new FormData();
-    fd.append('service', 'ambulatory-ics-upsertService');
+    fd.append('service', 'ambulatory-ics-v2-upsertService');
     fd.append('data', JSON.stringify(data));
     $.ajax({
         url: "api.php",
@@ -1525,8 +1609,8 @@ function UpSertInstrumentCountdata() {
         contentType: false,
         type: 'POST',
         success: function (result) {
+
             if (result.success) {
-                $('#dataModalICS').modal('hide');
 
                 promptSuccess('Result', result.message);
                 loaddata();
@@ -1535,6 +1619,7 @@ function UpSertInstrumentCountdata() {
             }
         },
         error: function (xhr) {
+            console.log(xhr.responseText);
             promptError('Failed Result:', "Error: " + xhr.responseText);
         }
 
@@ -1592,15 +1677,65 @@ function UpSertAmpoData() {
 
 }
 
+// OLD PROGRESS NOTE
+// function UpSertAmpnData() {
+
+//     var data = {
+//         ampnid: document.getElementById("ampnid_input").value.trim(),
+//         amid: document.getElementById("ref").value.trim(),
+//         ampn_datetime: document.getElementById("ampn_datetime_input").value.trim(),
+//         ampn_focus: document.getElementById("ampn_focus_input").value.trim(),
+//         ampn_data: document.getElementById("ampn_data_input").value.trim()
+//     };
+
+
+//     // ---------------- VALIDATIONS ----------------
+
+//     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
+//     let requiredFields = [
+//         "amid", "ampn_datetime"
+//     ];
+//     for (let field of requiredFields) {
+//         if (!data[field]) {
+//             promptError('Transaction Failed', field.toUpperCase() + ' is required.');
+//             return;
+//         }
+//     }
+//     // ---------------- FORM DATA ----------------
+//     var fd = new FormData();
+//     fd.append('service', 'ambulatory-ampn-upsertService');
+//     fd.append('data', JSON.stringify(data));
+//     $.ajax({
+//         url: "api.php",
+//         data: fd,
+//         processData: false,
+//         contentType: false,
+//         type: 'POST',
+//         success: function (result) {
+//             if (result.success) {
+//                 $('#dataModalAmpn').modal('hide');
+
+//                 promptSuccess('Result', result.message);
+//                 loaddata();
+//             } else {
+//                 promptError('Result', result.message);
+//             }
+//         },
+//         error: function (xhr) {
+//             promptError('Failed Result:', "Error: " + xhr.responseText);
+//         }
+
+//     });
+
+// }
 
 function UpSertAmpnData() {
-
+    const rawHtml = CKEDITOR.instances.nurse_progress_notes.getData();
+    const notes = compressHtml(rawHtml);
     var data = {
-        ampnid: document.getElementById("ampnid_input").value.trim(),
+        amnpnid: document.getElementById("amnpnid").value.trim(),
         amid: document.getElementById("ref").value.trim(),
-        ampn_datetime: document.getElementById("ampn_datetime_input").value.trim(),
-        ampn_focus: document.getElementById("ampn_focus_input").value.trim(),
-        ampn_data: document.getElementById("ampn_data_input").value.trim()
+        notes: notes
     };
 
 
@@ -1608,7 +1743,7 @@ function UpSertAmpnData() {
 
     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
     let requiredFields = [
-        "amid", "ampn_datetime"
+        "amid", "notes"
     ];
     for (let field of requiredFields) {
         if (!data[field]) {
@@ -1751,7 +1886,8 @@ function UpSertMSNurseData() {
 
 function printAmpnSheet() {
     var records = {};
-    records.ampn = ampnDataCache;
+    records.ampn = progress_notes_cache;
+    // records.ampn = ampnDataCache;
     records.fullname = document.getElementById("general_fullname").value;
     records.birthdate = document.getElementById("general_birthdate").value;
     records.birth_place = document.getElementById("general_birthplace").value;
@@ -1888,6 +2024,7 @@ function UpSertOperativeTechnique() {
                 result.record.age = document.getElementById("general_age").value;
                 result.record.phic_no = document.getElementById("general_phic_no").value;
                 result.record.member_type = document.getElementById("general_member_type").value;
+                result.record.physician = document.getElementById("general_physician").value;
 
                 // Create a hidden input to hold the data
                 const input = document.createElement("input");
@@ -2013,12 +2150,3 @@ function getImagesWithCaptions() {
     return result;
 }
 
-// Example save
-document.getElementById('saveBtn').addEventListener('click', () => {
-    const text = document.getElementById('notes').value;
-    const images = getImagesWithCaptions();
-    const jsonData = JSON.stringify({ text: text, images: images });
-
-    console.log('Data to save:', jsonData);
-    // Send jsonData to your server via AJAX or form submission
-});

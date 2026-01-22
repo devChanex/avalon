@@ -5,7 +5,27 @@
     <meta charset="UTF-8">
     <title>Consultation Record</title>
     <link rel="stylesheet" href="../ccss/forms.css">
+    <style>
+        #instrumentcount table {
+            font-size: 0.75rem !important;
+            /* smaller text */
+            line-height: 1.1 !important;
+            /* tighter lines */
+            border-collapse: collapse !important;
+            width: 100% !important;
+        }
+
+        #instrumentcount table th,
+        #instrumentcount table td {
+            padding: 2px 4px !important;
+            /* smaller cells */
+            vertical-align: middle !important;
+            border: 1px solid #999 !important;
+            /* optional */
+        }
+    </style>
 </head>
+
 
 <body>
 
@@ -92,20 +112,9 @@
 
         </table>
         <hr>
-        <table id="vitalTable"
+        <table id="data-table"
             style="border: 1px solid black; width: 100%; border-collapse: collapse; text-align: center; font-family: 'Times New Roman', serif; font-size: 11px;">
-            <thead>
-                <tr>
-                    <th style="border: 1px solid black; padding: 6px;">Instruments</th>
-                    <th style="border: 1px solid black; padding: 6px;">Baseline</th>
-                    <th style="border: 1px solid black; padding: 6px;">Initial Counting</th>
-                    <th style="border: 1px solid black; padding: 6px;">Added</th>
-                    <th style="border: 1px solid black; padding: 6px;">Removed</th>
-                    <th style="border: 1px solid black; padding: 6px;">Final Count</th>
-                    <th style="border: 1px solid black; padding: 6px;">Remarks</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
+            <span id="instrumentcount"></span>
         </table>
 
 
@@ -164,48 +173,54 @@
                 }
 
                 // ✅ Handle vital signs table if it exists
-                if (row.instrumentcount && Array.isArray(row.instrumentcount)) {
-                    const vitalTableBody = document.querySelector("#vitalTable tbody");
-                    if (vitalTableBody) {
-                        let count = 0;
 
-                        // Add actual records
-                        row.instrumentcount.forEach(data => {
-                            count++;
-
-
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                    
-                        <td style="border:1px solid black; padding:5px;">${data.instrument || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${data.baseline || '0'}</td>
-                        <td style="border:1px solid black; padding:5px;">${data.initial_counting || '0'}</td>
-                        <td style="border:1px solid black; padding:5px;">${data.added || '0'}</td>
-                        <td style="border:1px solid black; padding:5px;">${data.removed || '0'}</td>
-                        <td style="border:1px solid black; padding:5px;">${data.final_count || '0'}</td>
-                        <td style="border:1px solid black; padding:5px;">${data.remarks || ''}</td>
-            
-                    `;
-                            vitalTableBody.appendChild(tr);
-                        });
-
-                        // Add empty rows until there are at least 10 total
-                        for (let i = count; i < 25; i++) {
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                        <td style="border:1px solid black; padding:5px; height:18px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                       
-                    `;
-                            vitalTableBody.appendChild(tr);
-                        }
-                    }
+                if (row.instrumentcount) {
+                    document.getElementById("instrumentcount").innerHTML =
+                        row.instrumentcount.replace(/\n/g, "<br>");
+                    el.classList.add("instrumentcount-compact"); // add compact styling
                 }
+                // if (row.instrumentcount && Array.isArray(row.instrumentcount)) {
+                //     const vitalTableBody = document.querySelector("#vitalTable tbody");
+                //     if (vitalTableBody) {
+                //         let count = 0;
+
+                //         // Add actual records
+                //         row.instrumentcount.forEach(data => {
+                //             count++;
+
+
+                //             const tr = document.createElement("tr");
+                //             tr.innerHTML = `
+
+                //         <td style="border:1px solid black; padding:5px;">${data.instrument || ''}</td>
+                //         <td style="border:1px solid black; padding:5px;">${data.baseline || '0'}</td>
+                //         <td style="border:1px solid black; padding:5px;">${data.initial_counting || '0'}</td>
+                //         <td style="border:1px solid black; padding:5px;">${data.added || '0'}</td>
+                //         <td style="border:1px solid black; padding:5px;">${data.removed || '0'}</td>
+                //         <td style="border:1px solid black; padding:5px;">${data.final_count || '0'}</td>
+                //         <td style="border:1px solid black; padding:5px;">${data.remarks || ''}</td>
+
+                //     `;
+                //             vitalTableBody.appendChild(tr);
+                //         });
+
+                //         // Add empty rows until there are at least 10 total
+                //         for (let i = count; i < 25; i++) {
+                //             const tr = document.createElement("tr");
+                //             tr.innerHTML = `
+                //         <td style="border:1px solid black; padding:5px; height:18px;">&nbsp;</td>
+                //         <td style="border:1px solid black; padding:5px;">&nbsp;</td>
+                //         <td style="border:1px solid black; padding:5px;">&nbsp;</td>
+                //         <td style="border:1px solid black; padding:5px;">&nbsp;</td>
+                //         <td style="border:1px solid black; padding:5px;">&nbsp;</td>
+                //         <td style="border:1px solid black; padding:5px;">&nbsp;</td>
+                //         <td style="border:1px solid black; padding:5px;">&nbsp;</td>
+
+                //     `;
+                //             vitalTableBody.appendChild(tr);
+                //         }
+                //     }
+                // }
             } catch (e) {
                 console.error("Error reading data:", e);
             }

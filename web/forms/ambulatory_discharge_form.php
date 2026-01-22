@@ -141,7 +141,7 @@
 
 
                         <div style="text-align: center; margin-top: 50px;">
-                            <span id="discharge_surgeon"></span>
+                            <span id="fullname"></span>
                             <div style="border-top: 1px solid black; width: 70%; margin: 0 auto 2px auto;"></div>
                             <div style="font-size: 10px;">Signature over Printed Name / Date & Time</div>
                             <div style="font-size: 10px;">PATIENT/GUARGIAN</div>
