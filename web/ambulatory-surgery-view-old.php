@@ -876,21 +876,65 @@ require_once 'properties.php';
                                 </div>
                                 <div class="tab-pane fade show" id="tab3" role="tabpanel"
                                     style="max-width:95%;margin: 0 auto;">
-                                    <a href="#" onclick='UpSertVitalData();'"
+                                    <a href="#" onclick='openModalVital();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                            class="fas fa-plus fa-sm text-white-50"></i> Save </a>
+                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
                                     <a href="#" onclick='printVitalSheet();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
                                             class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
                                     <hr>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input type="hidden" id="vital_sign_doc_id">
+                                    <div class="table-responsive">
 
-                                            <textarea class="form-control" id="vital_sign_doc" rows="30"
-                                                placeholder="Vital Sign"></textarea>
 
-                                        </div>
+                                        <table id="datatable" class="table table-hover">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>Temperature</th>
+                                                    <th>Pulse Rate</th>
+                                                    <th>Respiratory Rate</th>
+                                                    <th>Blood Pressure</th>
+                                                    <th>O₂ Sat</th>
+                                                    <th>Remarks</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_vital">
+
+
+                                            </tbody>
+                                        </table>
+                                        <template id="vital_rowtemplate">
+                                            <tr>
+
+                                                <td class="vital_date"></td>
+                                                <td class="vital_time"></td>
+                                                <td class="vital_temp"></td>
+                                                <td class="vital_pr"></td>
+                                                <td class="vital_rr"></td>
+                                                <td class="vital_bp"></td>
+                                                <td class="vital_osat"></td>
+                                                <td class="vital_remarks"></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button type="button"
+                                                            class="btn social-btn bg-success vital-edit-data-btn">
+                                                            <i class="ik ik-edit"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                            class="btn social-btn bg-danger vital-delete-data-btn">
+                                                            <i class="ik ik-trash"></i>
+                                                        </button>
+
+
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
                                     </div>
 
 
@@ -898,21 +942,57 @@ require_once 'properties.php';
 
                                 <div class="tab-pane fade show" id="tab4" role="tabpanel"
                                     style="max-width:95%;margin: 0 auto;">
-                                    <a href="#" onclick='UpSertAmpoData();'"
+                                    <a href="#" onclick='openModalAmpo();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                            class="fas fa-plus fa-sm text-white-50"></i> Save </a>
+                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
                                     <a href="#" onclick='printAmpoSheet();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
                                             class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
                                     <hr>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input type="hidden" id="pos_doc_id">
+                                    <div class="table-responsive">
 
-                                            <textarea class="form-control" id="pos_doc" rows="30"
-                                                placeholder=""></textarea>
 
-                                        </div>
+                                        <table id="datatable" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>Progress Note</th>
+                                                    <th>Doctor's Order</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_ampo">
+
+
+                                            </tbody>
+                                        </table>
+                                        <template id="ampo_rowtemplate">
+                                            <tr>
+
+                                                <td class="ampo_date"></td>
+                                                <td class="ampo_time"></td>
+                                                <td class="ampo_note"></td>
+                                                <td class="ampo_order"></td>
+
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button type="button"
+                                                            class="btn social-btn bg-success ampo-edit-data-btn">
+                                                            <i class="ik ik-edit"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                            class="btn social-btn bg-danger ampo-delete-data-btn">
+                                                            <i class="ik ik-trash"></i>
+                                                        </button>
+
+
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
                                     </div>
 
 
@@ -1160,23 +1240,116 @@ require_once 'properties.php';
                                 </div>
                                 <div class="tab-pane fade show" id="tab7" role="tabpanel"
                                     style="max-width:95%;margin: 0 auto;">
-                                    <a href="#" onclick='UpSertMSData();'"
+                                    <a href="#" onclick='openModalMS();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                            class="fas fa-plus fa-sm text-white-50"></i> Save </a>
+                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
                                     <a href="#" onclick='printMedicationSheet();'"
                                         class=" d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
                                             class="fas fa-print fa-sm text-white-50"></i> Print</a><br>
                                     <hr>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <input type="hidden" id="medication_sheet_doc_id">
+                                    <div class="table-responsive">
 
-                                            <textarea class="form-control" id="medication_sheet_doc" rows="0"
-                                                placeholder=""></textarea>
 
-                                        </div>
+                                        <table id="datatable_ms" class="table table-hover">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Medication</th>
+                                                    <th>Stock Dose</th>
+                                                    <th>Dosage</th>
+                                                    <th>Route</th>
+                                                    <th>Frequency</th>
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_ms">
+
+
+                                            </tbody>
+                                        </table>
+                                        <template id="medication_sheet_rowtemplate">
+                                            <tr>
+
+                                                <td class="ms_medication"></td>
+                                                <td class="ms_stock_dose"></td>
+                                                <td class="ms_dosage"></td>
+                                                <td class="ms_route"></td>
+                                                <td class="ms_frequency"></td>
+                                                <td class="ms_date"></td>
+                                                <td class="ms_time"></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button type="button"
+                                                            class="btn social-btn bg-success ms-edit-data-btn">
+                                                            <i class="ik ik-edit"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                            class="btn social-btn bg-danger ms-delete-data-btn">
+                                                            <i class="ik ik-trash"></i>
+                                                        </button>
+
+
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
                                     </div>
+                                    <a href="#" onclick='openModalMSNurse();'"
+                                        class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                            class="fas fa-plus fa-sm text-white-50"></i> Add </a>
+                                    <div class="table-responsive">
 
+
+                                        <table id="datatable_ms_nurse" class="table table-hover">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Nurse</th>
+
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>PRN/STAT/Single Dose Meds</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_ms_nurse">
+
+
+                                            </tbody>
+                                        </table>
+
+
+                                        <template id="medication_sheet_nurse_rowtemplate">
+                                            <tr>
+
+                                                <td class="ms_nurse_nurse"></td>
+                                                <td class="ms_nurse_date"></td>
+                                                <td class="ms_nurse_time"></td>
+                                                <td class="ms_nurse_remarks"></td>
+
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button type="button"
+                                                            class="btn social-btn bg-success ms-nurse-edit-data-btn">
+                                                            <i class="ik ik-edit"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                            class="btn social-btn bg-danger ms-nurse-delete-data-btn">
+                                                            <i class="ik ik-trash"></i>
+                                                        </button>
+
+
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade show" id="tab8" role="tabpanel"
                                     style="max-width:95%;margin: 0 auto;">
@@ -1237,6 +1410,58 @@ require_once 'properties.php';
 
                                         </div>
                                     </div>
+                                    <!-- <div class="table-responsive">
+
+
+                                        <table id="datatableICS" class="table table-hover">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Instrument</th>
+                                                    <th>BaseLine</th>
+                                                    <th>Initial Counting</th>
+                                                    <th>Added</th>
+                                                    <th>Removed</th>
+                                                    <th>Final Count</th>
+                                                    <th>Remarks</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dataTableBody_ICS">
+
+
+                                            </tbody>
+                                        </table>
+                                        <template id="ICS_rowtemplate">
+                                            <tr>
+
+                                                <td class="ics_instrument"></td>
+                                                <td class="ics_baseline"></td>
+                                                <td class="ics_initial_counting"></td>
+                                                <td class="ics_added"></td>
+                                                <td class="ics_removed"></td>
+                                                <td class="ics_final_count"></td>
+                                                <td class="ics_remarks"></td>
+
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button type="button"
+                                                            class="btn social-btn bg-success ics-edit-data-btn">
+                                                            <i class="ik ik-edit"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                            class="btn social-btn bg-danger ics-delete-data-btn">
+                                                            <i class="ik ik-trash"></i>
+                                                        </button>
+
+
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </div> -->
 
 
                                 </div>
@@ -1245,7 +1470,95 @@ require_once 'properties.php';
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="dataModalVital" tabindex="-1" role="dialog"
+                aria-labelledby="fullwindowModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullwindowModalLabel">Vital Sign Form
 
+
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body" style="padding: 50px;">
+                            <input type="hidden" id="vital_amvid_input">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Date Time:</label>
+                                        <input type="datetime-local" class="form-control" id="vital_datetime_input"
+                                            placeholder="Blood Pressure">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Remarks:</label>
+                                        <input type="text" class="form-control" id="vital_remarks_input"
+                                            placeholder="Remarks">
+                                    </div>
+                                </div>
+                            </div>
+                            <strong>Vital Signs:</strong>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Temperature:</label>
+                                        <input type="text" class="form-control" id="vital_temp_input"
+                                            placeholder="Temperature">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="tab2_pr">Pulse Rate (PR):</label>
+                                        <input type="text" class="form-control" id="vital_pr_input"
+                                            placeholder="Pulse Rate (PR)">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="tab2_rr">Respiratory Rate (RR):</label>
+                                        <input type="text" class="form-control" id="vital_rr_input"
+                                            placeholder="Respiratory Rate">
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_temp">Blood Pressure:</label>
+                                        <input type="text" class="form-control" id="vital_bp_input"
+                                            placeholder="Blood Pressure">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_height">O₂ Sat:</label>
+                                        <input type="text" class="form-control" id="vital_osat_input"
+                                            placeholder="O₂ Sat">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary" onclick="UpSertVitalData();">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="modal fade" id="dataModalAmpo" tabindex="-1" role="dialog"
                 aria-labelledby="fullwindowModalLabel" aria-hidden="true">
@@ -1298,6 +1611,59 @@ require_once 'properties.php';
                     </div>
                 </div>
             </div>
+            <!-- OLD MODAL FOR NURSES PROGRESS NOTES -->
+            <!-- <div class="modal fade" id="dataModalAmpn" tabindex="-1" role="dialog"
+                aria-labelledby="fullwindowModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullwindowModalLabel">Nurse's Progress Note
+
+
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body" style="padding: 50px;">
+                            <input type="hidden" id="ampnid_input">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Date Time:</label>
+                                        <input type="datetime-local" class="form-control" id="ampn_datetime_input"
+                                            placeholder="Blood Pressure">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Focus:</label>
+                                        <input type="text" class="form-control" id="ampn_focus_input"
+                                            placeholder="Focus">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Data/Action/Response:</label>
+                                        <input type="text" class="form-control" id="ampn_data_input"
+                                            placeholder="Data/Action/Response">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary" onclick="UpSertAmpnData();">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
 
 
             <div class="modal fade" id="dataModalMs" tabindex="-1" role="dialog" aria-labelledby="dataModalMsLabel"
@@ -1434,7 +1800,96 @@ require_once 'properties.php';
                 </div>
             </div>
 
+            <div class="modal fade" id="dataModalICS" tabindex="-1" role="dialog" aria-labelledby="fullwindowModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fullwindowModalLabel">Instrument Count Sheet Form
 
+
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body" style="padding: 50px;">
+                            <input type="hidden" id="ics_icsid_input">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Instrument:</label>
+                                        <input type="text" class="form-control" id="ics_instrument_input"
+                                            placeholder="Instrument">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_bp">Baseline:</label>
+                                        <input type="number" class="form-control" id="ics_baseline_input"
+                                            placeholder="Baseline">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_pr">Initial Counting:</label>
+                                        <input type="number" class="form-control" id="ics_initial_counting_input"
+                                            onchange="computeFinalCount();" placeholder="Initial Counting">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_rr">Added:</label>
+                                        <input type="number" class="form-control" id="ics_added_input"
+                                            onchange="computeFinalCount();" placeholder="Added">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="tab2_rr">Removed:</label>
+                                        <input type="number" class="form-control" id="ics_removed_input"
+                                            onchange="computeFinalCount();" placeholder="Removed">
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_temp">Final Count:</label>
+                                        <input type="text" class="form-control" id="ics_final_count_input" readonly
+                                            placeholder="Final Count">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="tab2_height">Remarks:</label>
+                                        <input type="text" class="form-control" id="ics_remarks_input"
+                                            placeholder="Remarks">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary"
+                                onclick="UpSertInstrumentCountdata();">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php include_once('nav/activityLogs.php'); ?>
             <?php include_once('nav/footer.php'); ?>
 
@@ -1481,8 +1936,129 @@ require_once 'properties.php';
 
 
     <script>
+        CKEDITOR.config.versionCheck = false;
+        const defaultTable = `
+<table border="1" width="100%" cellspacing="0" cellpadding="5">
+    <thead>
+        <tr>
+            <th style="width:20%;">Time</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        ${'<tr><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(10)}
+    </tbody>
+</table>
+`;
+        const instruments = [
+            "ADSON FORCEP W/ TEETH",
+            "ADSON FORCEP W/O TEETH",
+            "ALLIS",
+            "ARMY NAVY", "BANDAGE SCISSORS", "BLADE HANDLE #3", "BLADE HANDLE #4", "BOBCOCK", "DEAVER", "DEBAKEY FORCEP", "KELLY CLAMPS - Straight", "KELLY CLAMPS - Curved", "MALLEABLE", "MIXTERS", "MOSQUITO - Straight", "MOSQUITO - Curved", "NEEDLE HOLDER", "OVUM FORCEPS", "OCSHNER - Straight", "OCSHNER - Curved", "RICHARDSON", "SCISSORS - Metz", "SCISOORS - Mayo Curve", "SCISSORS - Mayo Straight", "TISSUE FORCEPS", "THUMB FORCEPS", "TOWEL CLIPS", "<strong>NEEDLES</strong>", "", "", "<strong>-SPONGES</strong>", "4X4 OS", "CHERRY BALLS", "COTTONOIDS", "PEANUTS", "<strong>-OTHERS</strong>", "", "", ""
+        ];
+
+        const instrumentRows = instruments.map(name => `
+    <tr>
+        <td>${name}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+`).join('');
 
 
+        const defaultInstrumentCount = `
+<table border="1" width="100%" cellspacing="0" cellpadding="5">
+    <thead>
+        <tr>
+            <th style="width:25%;">Instrument Tray</th>
+            <th>Baseline</th>
+            <th>Initial Counting</th>
+            <th>Added</th>
+            <th>Removed</th>
+            <th>Final Count</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        ${instrumentRows}
+    </tbody>
+</table>
+`;
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+
+            CKEDITOR.replace('nurse_progress_notes', {
+                versionCheck: false,
+                height: 400,
+                toolbar: [
+                    ['Bold', 'Italic', 'Underline', 'TextColor'],
+                    ['NumberedList', 'BulletedList'],
+                    ['Table'],
+                    ['TextColor', 'BGColor'],
+                    ['Undo', 'Redo'],
+
+                ],
+                resize_enabled: false,
+                on: {
+                    instanceReady: function (evt) {
+                        const editor = evt.editor;
+                        if (!editor.getData().trim()) {
+                            editor.setData(defaultTable);
+                        }
+                    }
+                }
+            });
+
+            CKEDITOR.replace('instrument_count_doc', {
+                versionCheck: false,
+                height: 600,
+                toolbar: [
+                    ['Bold', 'Italic', 'Underline', 'TextColor'],
+                    ['NumberedList', 'BulletedList'],
+                    ['Table'],
+                    ['TextColor', 'BGColor'],
+                    ['Undo', 'Redo'],
+
+                ],
+                resize_enabled: false,
+                on: {
+                    instanceReady: function (evt) {
+                        const editor = evt.editor;
+                        if (!editor.getData().trim()) {
+                            editor.setData(defaultInstrumentCount);
+                        }
+                    }
+                }
+            });
+
+        });
+
+
+        const tabSelect = document.getElementById('tabSelect');
+        const tabs = document.querySelectorAll('.tab-pane');
+
+        tabSelect.addEventListener('change', function () {
+            const targetId = this.value.substring(1);
+            const currentTab = document.querySelector('.tab-pane.active');
+            const nextTab = tabs[targetId - 1] || document.getElementById(targetId); // fallback
+
+            if (currentTab === nextTab) return;
+
+            // fade/zoom out current
+            currentTab.classList.remove('active');
+
+            // fade/zoom in next after a short delay
+            setTimeout(() => {
+                nextTab.classList.add('active');
+            }, 50);
+        });
     </script>
 
 
@@ -1490,9 +2066,8 @@ require_once 'properties.php';
     <!-- other plugins -->
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
-    <script src="scripts/constants.js"></script>
     <script src="scripts/dynamicScripts-v5.js"></script>
-    <script src="scripts/ambulatory-view-v6.js"></script>
+    <script src="scripts/ambulatory-view-v5.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

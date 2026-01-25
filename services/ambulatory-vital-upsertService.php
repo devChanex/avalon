@@ -37,8 +37,8 @@ class ServiceClass
             }
 
             // Determine whether to insert or update
-            $isInsert = empty($data['amvid']);
-            $table = "ambulatory_vital";
+            $isInsert = empty($data['vsdocid']);
+            $table = "vital_sign_doc";
 
             // Filter only valid fields (non-null, existing keys)
             $fields = array_keys($data);
@@ -57,7 +57,7 @@ class ServiceClass
                         $updates[] = "{$field} = :{$field}";
                     }
                 }
-                $sql = "UPDATE {$table} SET " . implode(", ", $updates) . " WHERE amvid = :amvid";
+                $sql = "UPDATE {$table} SET " . implode(", ", $updates) . " WHERE vsdocid = :vsdocid";
             }
 
             try {
@@ -66,7 +66,6 @@ class ServiceClass
 
                 // Bind values safely
                 foreach ($fields as $f) {
-                    // Convert arrays (like anesthesia) to JSON
                     if (is_array($data[$f])) {
                         $stmt->bindValue(':' . $f, json_encode($data[$f]));
                     } else {
@@ -77,22 +76,20 @@ class ServiceClass
                 $stmt->execute();
 
                 // Get the record ID
-                $recordId = $isInsert ? $this->conn->lastInsertId() : $data['amvid'];
+                $recordId = $isInsert ? $this->conn->lastInsertId() : $data['vsdocid'];
 
                 // Fetch the saved record
-                $query = "SELECT * FROM {$table} WHERE amvid = :id";
+                $query = "SELECT * FROM {$table} WHERE vsdocid = :id";
                 $stmt2 = $this->conn->prepare($query);
                 $stmt2->bindValue(':id', $recordId, PDO::PARAM_INT);
                 $stmt2->execute();
                 $record = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-
-
                 $this->conn->commit();
 
                 return [
                     "success" => true,
-                    "message" => $isInsert ? "Ambulatory record added successfully." : "Ambulatory record updated successfully.",
+                    "message" => $isInsert ? "Vital Sign added successfully." : "Vital Sign updated successfully.",
                     "record" => $record,
 
                 ];

@@ -245,3 +245,43 @@ function compressHtml(html) {
         .replace(/\n|\r|\t/g, '')
         .trim();
 }
+
+CKEDITOR.config.versionCheck = false;
+
+function initCKEditor(elementId, options = {}) {
+    if (!document.getElementById(elementId)) {
+        console.warn(`CKEditor target not found: ${elementId}`);
+        return;
+    }
+
+    // Avoid double init
+    if (CKEDITOR.instances[elementId]) {
+        CKEDITOR.instances[elementId].destroy(true);
+    }
+
+    CKEDITOR.replace(elementId, {
+        versionCheck: false,
+        height: options.height || 400,
+        toolbar: options.toolbar || [
+            ['Bold', 'Italic', 'Underline', 'TextColor'],
+            ['NumberedList', 'BulletedList'],
+            ['Table'],
+            ['TextColor', 'BGColor'],
+            ['Undo', 'Redo'],
+        ],
+        resize_enabled: false,
+        on: {
+            instanceReady: function (evt) {
+                const editor = evt.editor;
+                if (options.defaultContent && !editor.getData().trim()) {
+                    editor.setData(options.defaultContent);
+                }
+
+                // optional callback
+                if (typeof options.onReady === 'function') {
+                    options.onReady(editor);
+                }
+            }
+        }
+    });
+}

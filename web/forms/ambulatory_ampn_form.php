@@ -5,6 +5,25 @@
     <meta charset="UTF-8">
     <title>Consultation Record</title>
     <link rel="stylesheet" href="../ccss/forms.css">
+    <style>
+        #ampn table {
+            font-size: 0.75rem !important;
+            /* smaller text */
+            line-height: 1.1 !important;
+            /* tighter lines */
+            border-collapse: collapse !important;
+            width: 100% !important;
+        }
+
+        #ampn table th,
+        #ampn table td {
+            padding: 2px 4px !important;
+            /* smaller cells */
+            vertical-align: middle !important;
+            border: 1px solid #999 !important;
+            /* optional */
+        }
+    </style>
 </head>
 
 <body>
@@ -199,7 +218,10 @@
                 if (row.ampn) {
                     document.getElementById("ampn").innerHTML =
                         row.ampn.replace(/\n/g, "<br>");
+                    el.classList.add("content-compact"); // add compact styling
                 }
+
+
 
             } catch (e) {
                 console.error("Error reading data:", e);

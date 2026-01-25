@@ -5,6 +5,25 @@
     <meta charset="UTF-8">
     <title>Consultation Record</title>
     <link rel="stylesheet" href="../ccss/forms.css">
+    <style>
+        #content table {
+            font-size: 0.75rem !important;
+            /* smaller text */
+            line-height: 1.1 !important;
+            /* tighter lines */
+            border-collapse: collapse !important;
+            width: 100% !important;
+        }
+
+        #content table th,
+        #content table td {
+            padding: 2px 4px !important;
+            /* smaller cells */
+            vertical-align: middle !important;
+            border: 1px solid #999 !important;
+            /* optional */
+        }
+    </style>
 </head>
 
 <body>
@@ -92,21 +111,9 @@
 
         </table>
         <hr>
-        <table id="vitalTable"
+        <table id="data-table"
             style="border: 1px solid black; width: 100%; border-collapse: collapse; text-align: center; font-family: 'Times New Roman', serif; font-size: 11px;">
-            <thead>
-                <tr>
-                    <th style="border: 1px solid black; padding: 6px;">Date</th>
-                    <th style="border: 1px solid black; padding: 6px;">Time</th>
-                    <th style="border: 1px solid black; padding: 6px;">Temperature</th>
-                    <th style="border: 1px solid black; padding: 6px;">Pulse Rate</th>
-                    <th style="border: 1px solid black; padding: 6px;">Respiratory Rate</th>
-                    <th style="border: 1px solid black; padding: 6px;">Blood Pressure</th>
-                    <th style="border: 1px solid black; padding: 6px;">O₂ Sat</th>
-                    <th style="border: 1px solid black; padding: 6px;">Remarks</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
+            <span id="content"></span>
         </table>
 
 
@@ -163,57 +170,12 @@
 
                     el.textContent = value;
                 }
-
-                // ✅ Handle vital signs table if it exists
-                if (row.vitalSigns && Array.isArray(row.vitalSigns)) {
-                    const vitalTableBody = document.querySelector("#vitalTable tbody");
-                    if (vitalTableBody) {
-                        let count = 0;
-
-                        // Add actual records
-                        row.vitalSigns.forEach(vital => {
-                            count++;
-                            const dt = new Date(vital.vital_datetime);
-                            const dateOnly = !isNaN(dt)
-                                ? `${(dt.getMonth() + 1).toString().padStart(2, '0')}/${dt.getDate().toString().padStart(2, '0')}/${dt.getFullYear()}`
-                                : "";
-                            let hours = dt.getHours();
-                            const minutes = String(dt.getMinutes()).padStart(2, '0');
-                            const ampm = hours >= 12 ? 'PM' : 'AM';
-                            hours = hours % 12 || 12;
-                            const timeOnly = !isNaN(dt) ? `${hours}:${minutes} ${ampm}` : "";
-
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                        <td style="border:1px solid black; padding:5px;">${dateOnly}</td>
-                        <td style="border:1px solid black; padding:5px;">${timeOnly}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.temp || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.pr || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.rr || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.bp || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.osat || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.remarks || ''}</td>
-                    `;
-                            vitalTableBody.appendChild(tr);
-                        });
-
-                        // Add empty rows until there are at least 10 total
-                        for (let i = count; i < 25; i++) {
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                        <td style="border:1px solid black; padding:5px; height:18px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                    `;
-                            vitalTableBody.appendChild(tr);
-                        }
-                    }
+                if (row.content) {
+                    document.getElementById("content").innerHTML =
+                        row.content.replace(/\n/g, "<br>");
+                    el.classList.add("content-compact"); // add compact styling
                 }
+
             } catch (e) {
                 console.error("Error reading data:", e);
             }

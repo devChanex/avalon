@@ -5,6 +5,25 @@
     <meta charset="UTF-8">
     <title>Consultation Record</title>
     <link rel="stylesheet" href="../ccss/forms.css">
+    <style>
+        #content table {
+            font-size: 0.75rem !important;
+            /* smaller text */
+            line-height: 1.1 !important;
+            /* tighter lines */
+            border-collapse: collapse !important;
+            width: 100% !important;
+        }
+
+        #content table th,
+        #content table td {
+            padding: 2px 4px !important;
+            /* smaller cells */
+            vertical-align: middle !important;
+            border: 1px solid #999 !important;
+            /* optional */
+        }
+    </style>
 </head>
 
 <body>
@@ -92,37 +111,11 @@
 
         </table>
         <hr>
-        <table id="medicationTable"
+        <table id="data-table"
             style="border: 1px solid black; width: 100%; border-collapse: collapse; text-align: center; font-family: 'Times New Roman', serif; font-size: 11px;">
-            <thead>
-                <tr>
-                    <th style="border: 1px solid black; padding: 6px;">Medication</th>
-                    <th style="border: 1px solid black; padding: 6px;">Stock Dose</th>
-                    <th style="border: 1px solid black; padding: 6px;">Dosage</th>
-                    <th style="border: 1px solid black; padding: 6px;">Route</th>
-                    <th style="border: 1px solid black; padding: 6px;">Frequency</th>
-                    <th style="border: 1px solid black; padding: 6px;">Date</th>
-                    <th style="border: 1px solid black; padding: 6px;">Time</th>
-                    <th style="border: 1px solid black; padding: 6px;">Signature</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
+            <span id="content"></span>
         </table>
 
-        <br><br>
-        <table id="medicationNurseTable"
-            style="border: 1px solid black; width: 100%; border-collapse: collapse; text-align: center; font-family: 'Times New Roman', serif; font-size: 11px;">
-            <thead>
-                <tr>
-                    <th style="border: 1px solid black; padding: 6px;">Nurse</th>
-                    <th style="border: 1px solid black; padding: 6px;">Signature</th>
-                    <th style="border: 1px solid black; padding: 6px;">Date</th>
-                    <th style="border: 1px solid black; padding: 6px;">Time</th>
-                    <th style="border: 1px solid black; padding: 6px;">PRN/STAT/SINGLE DOSE MEDS</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
 
     </div>
 
@@ -179,107 +172,10 @@
                 }
 
                 // ✅ Handle vital signs table if it exists
-                if (row.medication && Array.isArray(row.medication)) {
-                    const medicationTableBody = document.querySelector("#medicationTable tbody");
-                    if (medicationTableBody) {
-                        let count = 0;
-
-                        // Add actual records
-                        row.medication.forEach(data => {
-                            count++;
-                            const dt = new Date(data.ms_datetime);
-                            const dateOnly = !isNaN(dt)
-                                ? `${(dt.getMonth() + 1).toString().padStart(2, '0')}/${dt.getDate().toString().padStart(2, '0')}/${dt.getFullYear()}`
-                                : "";
-                            let hours = dt.getHours();
-                            const minutes = String(dt.getMinutes()).padStart(2, '0');
-                            const ampm = hours >= 12 ? 'PM' : 'AM';
-                            hours = hours % 12 || 12;
-                            const timeOnly = !isNaN(dt) ? `${hours}:${minutes} ${ampm}` : "";
-
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                     
-                        <td style="border:1px solid black; padding:5px;">${data.medication || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${data.stock_dose || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${data.dosage || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${data.route || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${data.frequency || ''}</td>
-                           <td style="border:1px solid black; padding:5px;">${dateOnly}</td>
-                        <td style="border:1px solid black; padding:5px;">${timeOnly}</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                    
-                    `;
-                            medicationTableBody.appendChild(tr);
-                        });
-
-                        // Add empty rows until there are at least 10 total
-                        for (let i = count; i < 10; i++) {
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                        <td style="border:1px solid black; padding:5px; height:18px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                       
-                    `;
-                            medicationTableBody.appendChild(tr);
-                        }
-                    }
-                }
-
-                if (row.nurse_medication && Array.isArray(row.nurse_medication)) {
-                    const medicationNurseTableBody = document.querySelector("#medicationNurseTable tbody");
-                    if (medicationNurseTableBody) {
-                        let count = 0;
-
-                        // Add actual records
-                        row.nurse_medication.forEach(data => {
-                            count++;
-                            const dt = new Date(data.ms_nurse_datetime);
-                            const dateOnly = !isNaN(dt)
-                                ? `${(dt.getMonth() + 1).toString().padStart(2, '0')}/${dt.getDate().toString().padStart(2, '0')}/${dt.getFullYear()}`
-                                : "";
-                            let hours = dt.getHours();
-                            const minutes = String(dt.getMinutes()).padStart(2, '0');
-                            const ampm = hours >= 12 ? 'PM' : 'AM';
-                            hours = hours % 12 || 12;
-                            const timeOnly = !isNaN(dt) ? `${hours}:${minutes} ${ampm}` : "";
-
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                     
-                        <td style="border:1px solid black; padding:5px;">${data.nurse || ''}</td>
-                        <td style="border:1px solid black; padding:5px;"></td>
-                     
-                           <td style="border:1px solid black; padding:5px;">${dateOnly}</td>
-                        <td style="border:1px solid black; padding:5px;">${timeOnly}</td>
-                              
-                        <td style="border:1px solid black; padding:5px;">${data.remarks || ''}</td>
-                 
-                    
-                    `;
-                            medicationNurseTableBody.appendChild(tr);
-                        });
-
-                        // Add empty rows until there are at least 10 total
-                        for (let i = count; i < 10; i++) {
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                        <td style="border:1px solid black; padding:5px; height:18px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                       
-                    `;
-                            medicationNurseTableBody.appendChild(tr);
-                        }
-                    }
+                if (row.content) {
+                    document.getElementById("content").innerHTML =
+                        row.content.replace(/\n/g, "<br>");
+                    el.classList.add("content-compact"); // add compact styling
                 }
             } catch (e) {
                 console.error("Error reading data:", e);

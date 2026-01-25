@@ -5,6 +5,26 @@
     <meta charset="UTF-8">
     <title>Consultation Record</title>
     <link rel="stylesheet" href="../ccss/forms.css">
+
+    <style>
+        #content table {
+            font-size: 0.75rem !important;
+            /* smaller text */
+            line-height: 1.1 !important;
+            /* tighter lines */
+            border-collapse: collapse !important;
+            width: 100% !important;
+        }
+
+        #content table th,
+        #content table td {
+            padding: 2px 4px !important;
+            /* smaller cells */
+            vertical-align: middle !important;
+            border: 1px solid #999 !important;
+            /* optional */
+        }
+    </style>
 </head>
 
 <body>
@@ -94,18 +114,8 @@
         <hr>
         <table id="data-table"
             style="border: 1px solid black; width: 100%; border-collapse: collapse; text-align: center; font-family: 'Times New Roman', serif; font-size: 11px;">
-            <thead>
-                <tr>
-                    <th style="border: 1px solid black; padding: 6px;max-width:100px;">DateTime</th>
-
-                    <th style="border: 1px solid black; padding: 6px;">Progress Note</th>
-                    <th style="border: 1px solid black; padding: 6px;">Doctor's Order</th>
-
-                </tr>
-            </thead>
-            <tbody></tbody>
+            <span id="content"></span>
         </table>
-
 
     </div>
 
@@ -160,51 +170,13 @@
 
                     el.textContent = value;
                 }
-
-                // ✅ Handle vital signs table if it exists
-                if (row.ampo && Array.isArray(row.ampo)) {
-
-                    const tbody = document.querySelector("#data-table tbody");
-                    if (tbody) {
-                        let count = 0;
-
-                        // Add actual records
-                        row.ampo.forEach(ampo => {
-
-                            count++;
-                            const dt = new Date(ampo.ampo_datetime);
-                            const dateOnly = !isNaN(dt)
-                                ? `${(dt.getMonth() + 1).toString().padStart(2, '0')}/${dt.getDate().toString().padStart(2, '0')}/${dt.getFullYear()}`
-                                : "";
-                            let hours = dt.getHours();
-                            const minutes = String(dt.getMinutes()).padStart(2, '0');
-                            const ampm = hours >= 12 ? 'PM' : 'AM';
-                            hours = hours % 12 || 12;
-                            const timeOnly = !isNaN(dt) ? `${hours}:${minutes} ${ampm}` : "";
-
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                        <td style="border:1px solid black; padding:5px;max-width:100px;">${dateOnly} ${timeOnly}</td>
-                  
-                        <td style="border:1px solid black; padding:5px;">${ampo.ampo_note || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${ampo.ampo_order || ''}</td>
-                    `;
-                            tbody.appendChild(tr);
-                        });
-
-                        // Add empty rows until there are at least 10 total
-                        for (let i = count; i < 25; i++) {
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                        <td style="border:1px solid black; padding:5px; height:18px;max-width:100px;">&nbsp;</td>
-                     
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                    `;
-                            tbody.appendChild(tr);
-                        }
-                    }
+                if (row.content) {
+                    document.getElementById("content").innerHTML =
+                        row.content.replace(/\n/g, "<br>");
+                    el.classList.add("content-compact"); // add compact styling
                 }
+                // ✅ Handle vital signs table if it exists
+
             } catch (e) {
                 console.error("Error reading data:", e);
             }

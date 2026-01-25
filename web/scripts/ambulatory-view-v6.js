@@ -2,8 +2,55 @@
 loaddata();
 loadgeneraldata();
 loadgeneraldata_2();
-
 loadAllDatalists();
+initCKEditor('nurse_progress_notes', {
+    height: 400,
+    defaultContent: defaultTable
+});
+
+initCKEditor('instrument_count_doc', {
+    height: 600,
+    defaultContent: defaultInstrumentCount
+});
+
+initCKEditor('vital_sign_doc', {
+    height: 600,
+    defaultContent: defaultVitalSignTable
+});
+
+//PROGRESS NOTES TABLE
+initCKEditor('pos_doc', {
+    height: 600,
+    defaultContent: defaultPOSTable
+});
+
+//Medication Sheet TABLE
+initCKEditor('medication_sheet_doc', {
+    height: 800,
+    defaultContent: defaultMedicationSheetTable
+});
+
+
+//TAB SELECTION
+const tabSelect = document.getElementById('tabSelect');
+const tabs = document.querySelectorAll('.tab-pane');
+tabSelect.addEventListener('change', function () {
+    const targetId = this.value.substring(1);
+    const currentTab = document.querySelector('.tab-pane.active');
+    const nextTab = tabs[targetId - 1] || document.getElementById(targetId); // fallback
+
+    if (currentTab === nextTab) return;
+
+    // fade/zoom out current
+    currentTab.classList.remove('active');
+
+    // fade/zoom in next after a short delay
+    setTimeout(() => {
+        nextTab.classList.add('active');
+    }, 50);
+});
+//END TAB SELECTION
+
 async function loadAllDatalists() {
     try {
         await populateDataList('', 'ms_medication_input_options', 'datalist-medication', 'v2');
@@ -147,7 +194,7 @@ function loaddata() {
 
 
                 result.ambulatoryics.forEach(rowdata => {
-                    console.log("test2:::::" + rowdata.content);
+
 
                     document.getElementById("instument_count_doc_id").value = rowdata.aminscountid ?? '';
                     CKEDITOR.instances.instrument_count_doc.setData(
@@ -271,159 +318,33 @@ function loaddata() {
                         });
                     }
                 });
-                let tbody = document.getElementById("dataTableBody_vital");
-                let template = document.getElementById("vital_rowtemplate");
-                tbody.innerHTML = "";
-                vitalDataCache = result.ambulatoryvital; // cache the latest vital data
+
 
                 result.ambulatoryvital.forEach(rowdata => {
-                    let clone = template.content.cloneNode(true);
 
-                    const dt = new Date(rowdata.vital_datetime);
+                    document.getElementById("vital_sign_doc_id").value = rowdata.vsdocid ?? '';
+                    CKEDITOR.instances.vital_sign_doc.setData(
+                        rowdata.content && rowdata.content.trim() !== ''
+                            ? rowdata.content
+                            : defaultVitalSignTable
+                    );
+                    vitalDataCache = rowdata.content ?? '';
 
-                    // Get date only (MM/DD/YYYY)
-                    const dateOnly = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/` +
-                        `${dt.getDate().toString().padStart(2, '0')}/` +
-                        `${dt.getFullYear()}`;
-
-                    // Get time only (HH:MM AM/PM)
-                    let hours = dt.getHours();
-                    const minutes = dt.getMinutes().toString().padStart(2, '0');
-                    const ampm = hours >= 12 ? 'PM' : 'AM';
-                    hours = hours % 12 || 12; // convert 0 -> 12
-                    const timeOnly = `${hours}:${minutes} ${ampm}`;
-                    clone.querySelector(".vital_date").textContent = dateOnly;
-                    clone.querySelector(".vital_time").textContent = timeOnly;
-                    clone.querySelector(".vital_bp").textContent = rowdata.bp;
-                    clone.querySelector(".vital_rr").textContent = rowdata.rr;
-                    clone.querySelector(".vital_pr").textContent = rowdata.pr;
-                    clone.querySelector(".vital_osat").textContent = rowdata.osat;
-
-                    clone.querySelector(".vital_temp").textContent = rowdata.temp;
-                    clone.querySelector(".vital_remarks").textContent = rowdata.remarks;
-
-
-
-                    clone.querySelector(".vital-edit-data-btn").addEventListener("click", function () {
-
-                        document.getElementById("vital_amvid_input").value = rowdata.amvid;
-
-                        document.getElementById("vital_datetime_input").value = rowdata.vital_datetime;
-                        document.getElementById("vital_bp_input").value = rowdata.bp;
-                        document.getElementById("vital_rr_input").value = rowdata.rr;
-
-                        document.getElementById("vital_pr_input").value = rowdata.pr;
-
-                        document.getElementById("vital_osat_input").value = rowdata.osat;
-                        document.getElementById("vital_temp_input").value = rowdata.temp;
-                        document.getElementById("vital_remarks_input").value = rowdata.remarks;
-
-                        // Show modal (Bootstrap 5 way)
-                        var modal = new bootstrap.Modal(document.getElementById("dataModalVital"));
-                        modal.show();
-                    });
-                    clone.querySelector(".vital-delete-data-btn").addEventListener("click", function () {
-                        deleteRecord('ambulatory_vital', rowdata.amvid, 'amvid', loaddata);
-                    });
-
-                    tbody.appendChild(clone);
                 });
 
-                let tbodyampo = document.getElementById("dataTableBody_ampo");
-                let templateampo = document.getElementById("ampo_rowtemplate");
-                tbodyampo.innerHTML = "";
-                ampoDataCache = result.ambulatoryampo; // cache the latest vital data
+
 
                 result.ambulatoryampo.forEach(rowdata => {
-                    let clone = templateampo.content.cloneNode(true);
-
-                    const dt = new Date(rowdata.ampo_datetime);
-
-                    // Get date only (MM/DD/YYYY)
-                    const dateOnly = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/` +
-                        `${dt.getDate().toString().padStart(2, '0')}/` +
-                        `${dt.getFullYear()}`;
-
-                    // Get time only (HH:MM AM/PM)
-                    let hours = dt.getHours();
-                    const minutes = dt.getMinutes().toString().padStart(2, '0');
-                    const ampm = hours >= 12 ? 'PM' : 'AM';
-                    hours = hours % 12 || 12; // convert 0 -> 12
-                    const timeOnly = `${hours}:${minutes} ${ampm}`;
-                    clone.querySelector(".ampo_date").textContent = dateOnly;
-                    clone.querySelector(".ampo_time").textContent = timeOnly;
-                    clone.querySelector(".ampo_note").textContent = rowdata.ampo_note;
-                    clone.querySelector(".ampo_order").textContent = rowdata.ampo_order;
-
-
-
-                    clone.querySelector(".ampo-edit-data-btn").addEventListener("click", function () {
-
-                        document.getElementById("ampoid_input").value = rowdata.ampoid;
-
-                        document.getElementById("ampo_datetime_input").value = rowdata.ampo_datetime;
-                        document.getElementById("ampo_note_input").value = rowdata.ampo_note;
-                        document.getElementById("ampo_order_input").value = rowdata.ampo_order;
-
-
-                        // Show modal (Bootstrap 5 way)
-                        var modal = new bootstrap.Modal(document.getElementById("dataModalAmpo"));
-                        modal.show();
-                    });
-                    clone.querySelector(".ampo-delete-data-btn").addEventListener("click", function () {
-                        deleteRecord('ambulatory_progress_order', rowdata.ampoid, 'ampoid', loaddata);
-                    });
-
-                    tbodyampo.appendChild(clone);
+                    document.getElementById("pos_doc_id").value = rowdata.posdocid ?? '';
+                    CKEDITOR.instances.pos_doc.setData(
+                        rowdata.content && rowdata.content.trim() !== ''
+                            ? rowdata.content
+                            : defaultPOSTable
+                    );
+                    ampoDataCache = rowdata.content ?? '';
                 });
 
-                // let tbodyampn = document.getElementById("dataTableBody_ampn");
-                // let templateampn = document.getElementById("ampn_rowtemplate");
-                // tbodyampn.innerHTML = "";
-                // ampnDataCache = result.ambulatoryampn; // cache the latest vital data
 
-                // result.ambulatoryampn.forEach(rowdata => {
-                //     let clone = templateampn.content.cloneNode(true);
-
-                //     const dt = new Date(rowdata.ampn_datetime);
-
-                //     // Get date only (MM/DD/YYYY)
-                //     const dateOnly = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/` +
-                //         `${dt.getDate().toString().padStart(2, '0')}/` +
-                //         `${dt.getFullYear()}`;
-
-                //     // Get time only (HH:MM AM/PM)
-                //     let hours = dt.getHours();
-                //     const minutes = dt.getMinutes().toString().padStart(2, '0');
-                //     const ampm = hours >= 12 ? 'PM' : 'AM';
-                //     hours = hours % 12 || 12; // convert 0 -> 12
-                //     const timeOnly = `${hours}:${minutes} ${ampm}`;
-                //     clone.querySelector(".ampn_date").textContent = dateOnly;
-                //     clone.querySelector(".ampn_time").textContent = timeOnly;
-                //     clone.querySelector(".ampn_focus").textContent = rowdata.ampn_focus;
-                //     clone.querySelector(".ampn_data").textContent = rowdata.ampn_data;
-
-
-
-                //     clone.querySelector(".ampn-edit-data-btn").addEventListener("click", function () {
-
-                //         document.getElementById("ampnid_input").value = rowdata.ampnid;
-
-                //         document.getElementById("ampn_datetime_input").value = rowdata.ampn_datetime;
-                //         document.getElementById("ampn_focus_input").value = rowdata.ampn_focus;
-                //         document.getElementById("ampn_data_input").value = rowdata.ampn_data;
-
-
-                //         // Show modal (Bootstrap 5 way)
-                //         var modal = new bootstrap.Modal(document.getElementById("dataModalAmpn"));
-                //         modal.show();
-                //     });
-                //     clone.querySelector(".ampn-delete-data-btn").addEventListener("click", function () {
-                //         deleteRecord('ambulatory_progress_nurse', rowdata.ampnid, 'ampnid', loaddata);
-                //     });
-
-                //     tbodyampn.appendChild(clone);
-                // });
                 result.ambulatorytechnique.forEach(rowdata => {
                     document.getElementById("amtechid_input").value = rowdata.amtechid ?? '';
                     document.getElementById("ref").value = rowdata.amid ?? '';
@@ -444,110 +365,18 @@ function loaddata() {
                     document.getElementById("optech_sponge_count_input").value = rowdata.optech_sponge_count ?? '';
                 });
                 //Medication Sheet
-                let tbodyms = document.getElementById("dataTableBody_ms");
-                let templatems = document.getElementById("medication_sheet_rowtemplate");
-                tbodyms.innerHTML = "";
-                msDataCache = result.ambulatorymedicationsheet; // cache the latest vital data
+
 
                 result.ambulatorymedicationsheet.forEach(rowdata => {
-                    let clone = templatems.content.cloneNode(true);
-
-                    const dt = new Date(rowdata.ms_datetime);
-
-                    // Get date only (MM/DD/YYYY)
-                    const dateOnly = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/` +
-                        `${dt.getDate().toString().padStart(2, '0')}/` +
-                        `${dt.getFullYear()}`;
-
-                    // Get time only (HH:MM AM/PM)
-                    let hours = dt.getHours();
-                    const minutes = dt.getMinutes().toString().padStart(2, '0');
-                    const ampm = hours >= 12 ? 'PM' : 'AM';
-                    hours = hours % 12 || 12; // convert 0 -> 12
-                    const timeOnly = `${hours}:${minutes} ${ampm}`;
-                    clone.querySelector(".ms_medication").textContent = rowdata.medication;
-                    clone.querySelector(".ms_stock_dose").textContent = rowdata.stock_dose;
-                    clone.querySelector(".ms_dosage").textContent = rowdata.dosage;
-                    clone.querySelector(".ms_route").textContent = rowdata.route;
-                    clone.querySelector(".ms_frequency").textContent = rowdata.frequency;
-
-                    clone.querySelector(".ms_date").textContent = dateOnly;
-                    clone.querySelector(".ms_time").textContent = timeOnly;
-
-
-                    clone.querySelector(".ms-edit-data-btn").addEventListener("click", function () {
-
-                        document.getElementById("ms_msid_input").value = rowdata.msid;
-
-                        document.getElementById("ms_datetime_input").value = rowdata.ms_datetime;
-                        document.getElementById("ms_medication_input").value = rowdata.medication;
-                        document.getElementById("ms_stock_dose_input").value = rowdata.stock_dose;
-                        document.getElementById("ms_dosage_input").value = rowdata.dosage;
-                        document.getElementById("ms_route_input").value = rowdata.route;
-                        document.getElementById("ms_frequency_input").value = rowdata.frequency;
-
-
-
-                        // Show modal (Bootstrap 5 way)
-                        var modal = new bootstrap.Modal(document.getElementById("dataModalMs"));
-                        modal.show();
-                    });
-                    clone.querySelector(".ms-delete-data-btn").addEventListener("click", function () {
-                        deleteRecord('ambulatory_medication_sheet', rowdata.msid, 'msid', loaddata);
-                    });
-
-                    tbodyms.appendChild(clone);
+                    document.getElementById("medication_sheet_doc_id").value = rowdata.msdocid ?? '';
+                    CKEDITOR.instances.medication_sheet_doc.setData(
+                        rowdata.content && rowdata.content.trim() !== ''
+                            ? rowdata.content
+                            : defaultMedicationSheetTable
+                    );
+                    msDataCache = rowdata.content ?? '';
                 });
 
-                //Medication Sheet Nurse
-                let tbodyms_nurse = document.getElementById("dataTableBody_ms_nurse");
-                let templatems_nurse = document.getElementById("medication_sheet_nurse_rowtemplate");
-                tbodyms_nurse.innerHTML = "";
-                ms_nurseDataCache = result.ambulatorymedicationsheetnurse; // cache the latest vital data
-
-                result.ambulatorymedicationsheetnurse.forEach(rowdata => {
-                    let clone = templatems_nurse.content.cloneNode(true);
-
-                    const dt = new Date(rowdata.ms_nurse_datetime);
-
-                    // Get date only (MM/DD/YYYY)
-                    const dateOnly = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/` +
-                        `${dt.getDate().toString().padStart(2, '0')}/` +
-                        `${dt.getFullYear()}`;
-
-                    // Get time only (HH:MM AM/PM)
-                    let hours = dt.getHours();
-                    const minutes = dt.getMinutes().toString().padStart(2, '0');
-                    const ampm = hours >= 12 ? 'PM' : 'AM';
-                    hours = hours % 12 || 12; // convert 0 -> 12
-                    const timeOnly = `${hours}:${minutes} ${ampm}`;
-                    clone.querySelector(".ms_nurse_nurse").textContent = rowdata.nurse;
-                    clone.querySelector(".ms_nurse_date").textContent = dateOnly;
-                    clone.querySelector(".ms_nurse_time").textContent = timeOnly;
-                    clone.querySelector(".ms_nurse_remarks").textContent = rowdata.remarks;
-
-
-
-                    clone.querySelector(".ms-nurse-edit-data-btn").addEventListener("click", function () {
-
-                        document.getElementById("ms_nurse_msnid_input").value = rowdata.msnid;
-
-                        document.getElementById("ms_nurse_datetime_input").value = rowdata.ms_nurse_datetime;
-                        document.getElementById("ms_nurse_nurse_input").value = rowdata.nurse;
-                        document.getElementById("ms_nurse_remarks_input").value = rowdata.remarks;
-
-
-
-                        // Show modal (Bootstrap 5 way)
-                        var modal = new bootstrap.Modal(document.getElementById("dataModalMsNurse"));
-                        modal.show();
-                    });
-                    clone.querySelector(".ms-nurse-delete-data-btn").addEventListener("click", function () {
-                        deleteRecord('ambulatory_medication_sheet_nurse', rowdata.msnid, 'msnid', loaddata);
-                    });
-
-                    tbodyms_nurse.appendChild(clone);
-                });
 
 
                 // instrument count
@@ -566,42 +395,7 @@ function loaddata() {
                     tbodyinstrument.appendChild(clone);
                 });
 
-                // let dataTableBody_ICS = document.getElementById("dataTableBody_ICS");
-                // let ICS_rowtemplate = document.getElementById("ICS_rowtemplate");
-                // dataTableBody_ICS.innerHTML = "";
-                // instrumentCountDataCache = result.ambulatoryics; // cache the latest vital data
 
-                // result.ambulatoryics.forEach(rowdata => {
-                //     let clone = ICS_rowtemplate.content.cloneNode(true);
-                //     clone.querySelector(".ics_baseline").textContent = rowdata.baseline ?? '';
-                //     clone.querySelector(".ics_instrument").textContent = rowdata.instrument ?? '';
-                //     clone.querySelector(".ics_initial_counting").textContent = rowdata.initial_counting ?? '';
-                //     clone.querySelector(".ics_added").textContent = rowdata.added ?? '';
-                //     clone.querySelector(".ics_removed").textContent = rowdata.removed ?? '';
-                //     clone.querySelector(".ics_final_count").textContent = rowdata.final_count ?? '';
-                //     clone.querySelector(".ics_remarks").textContent = rowdata.remarks ?? '';
-
-
-                //     clone.querySelector(".ics-edit-data-btn").addEventListener("click", function () {
-
-                //         document.getElementById("ics_icsid_input").value = rowdata.icsid ?? '';
-                //         document.getElementById("ics_instrument_input").value = rowdata.instrument ?? '';
-                //         document.getElementById("ics_baseline_input").value = rowdata.baseline ?? '';
-                //         document.getElementById("ics_initial_counting_input").value = rowdata.initial_counting ?? '';
-                //         document.getElementById("ics_added_input").value = rowdata.added ?? '';
-                //         document.getElementById("ics_removed_input").value = rowdata.removed ?? '';
-                //         document.getElementById("ics_final_count_input").value = rowdata.final_count ?? '';
-                //         document.getElementById("ics_remarks_input").value = rowdata.remarks ?? '';
-                //         // Show modal (Bootstrap 5 way)
-                //         var modal = new bootstrap.Modal(document.getElementById("dataModalICS"));
-                //         modal.show();
-                //     });
-                //     clone.querySelector(".ics-delete-data-btn").addEventListener("click", function () {
-                //         deleteRecord('ambulatory_instrument_count', rowdata.icsid, 'icsid', loaddata);
-                //     });
-
-                //     dataTableBody_ICS.appendChild(clone);
-                // });
 
 
                 setTimeout(function () {
@@ -1327,7 +1121,7 @@ async function printWHO() {
 
 function printVitalSheet() {
     var records = {};
-    records.vitalSigns = vitalDataCache;
+    records.content = vitalDataCache;
     records.fullname = document.getElementById("general_fullname").value;
     records.birthdate = document.getElementById("general_birthdate").value;
     records.birth_place = document.getElementById("general_birthplace").value;
@@ -1433,8 +1227,7 @@ function printORCharges() {
 }
 function printMedicationSheet() {
     var records = {};
-    records.medication = msDataCache;
-    records.nurse_medication = ms_nurseDataCache;
+    records.content = msDataCache;
     records.fullname = document.getElementById("general_fullname").value;
     records.birthdate = document.getElementById("general_birthdate").value;
     records.birth_place = document.getElementById("general_birthplace").value;
@@ -1466,17 +1259,12 @@ function printMedicationSheet() {
     document.body.removeChild(form);
 }
 function UpSertVitalData() {
-
+    const rawHtml = CKEDITOR.instances.vital_sign_doc.getData();
+    const content = compressHtml(rawHtml);
     var data = {
-        amvid: document.getElementById("vital_amvid_input").value.trim(),
+        vsdocid: document.getElementById("vital_sign_doc_id").value.trim(),
         amid: document.getElementById("ref").value.trim(),
-        vital_datetime: document.getElementById("vital_datetime_input").value.trim(),
-        bp: document.getElementById("vital_bp_input").value.trim(),
-        rr: document.getElementById("vital_rr_input").value.trim(),
-        pr: document.getElementById("vital_pr_input").value.trim(),
-        osat: document.getElementById("vital_osat_input").value.trim(),
-        temp: document.getElementById("vital_temp_input").value.trim(),
-        remarks: document.getElementById("vital_remarks_input").value.trim()
+        content: content
     };
 
 
@@ -1484,8 +1272,9 @@ function UpSertVitalData() {
 
     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
     let requiredFields = [
-        "amid", "vital_datetime"
+        "amid"
     ];
+
     for (let field of requiredFields) {
         if (!data[field]) {
             promptError('Transaction Failed', field.toUpperCase() + ' is required.');
@@ -1504,7 +1293,7 @@ function UpSertVitalData() {
         type: 'POST',
         success: function (result) {
             if (result.success) {
-                $('#dataModalVital').modal('hide');
+
 
                 promptSuccess('Result', result.message);
                 loaddata();
@@ -1520,61 +1309,6 @@ function UpSertVitalData() {
 
 }
 
-// OLD INSTRUMENT COUNT
-// function UpSertInstrumentCountdata() {
-
-//     var data = {
-//         icsid: document.getElementById("ics_icsid_input").value.trim(),
-//         instrument: document.getElementById("ics_instrument_input").value.trim(),
-//         baseline: document.getElementById("ics_baseline_input").value.trim(),
-//         initial_counting: document.getElementById("ics_initial_counting_input").value.trim(),
-//         added: document.getElementById("ics_added_input").value.trim(),
-//         removed: document.getElementById("ics_removed_input").value.trim(),
-//         final_count: document.getElementById("ics_final_count_input").value.trim(),
-//         remarks: document.getElementById("ics_remarks_input").value.trim(),
-//         amid: document.getElementById("ref").value.trim()
-//     };
-
-
-//     // ---------------- VALIDATIONS ----------------
-
-//     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
-//     let requiredFields = [
-//         "amid", "instrument"
-//     ];
-//     for (let field of requiredFields) {
-//         if (!data[field]) {
-//             promptError('Transaction Failed', field.toUpperCase() + ' is required.');
-//             return;
-//         }
-//     }
-//     // ---------------- FORM DATA ----------------
-//     var fd = new FormData();
-//     fd.append('service', 'ambulatory-ics-upsertService');
-//     fd.append('data', JSON.stringify(data));
-//     $.ajax({
-//         url: "api.php",
-//         data: fd,
-//         processData: false,
-//         contentType: false,
-//         type: 'POST',
-//         success: function (result) {
-//             if (result.success) {
-//                 $('#dataModalICS').modal('hide');
-
-//                 promptSuccess('Result', result.message);
-//                 loaddata();
-//             } else {
-//                 promptError('Result', result.message);
-//             }
-//         },
-//         error: function (xhr) {
-//             promptError('Failed Result:', "Error: " + xhr.responseText);
-//         }
-
-//     });
-
-// }
 
 function UpSertInstrumentCountdata() {
     const rawHtml = CKEDITOR.instances.instrument_count_doc.getData();
@@ -1627,13 +1361,12 @@ function UpSertInstrumentCountdata() {
 
 }
 function UpSertAmpoData() {
-
+    const rawHtml = CKEDITOR.instances.pos_doc.getData();
+    const content = compressHtml(rawHtml);
     var data = {
-        ampoid: document.getElementById("ampoid_input").value.trim(),
+        posdocid: document.getElementById("pos_doc_id").value.trim(),
         amid: document.getElementById("ref").value.trim(),
-        ampo_datetime: document.getElementById("ampo_datetime_input").value.trim(),
-        ampo_note: document.getElementById("ampo_note_input").value.trim(),
-        ampo_order: document.getElementById("ampo_order_input").value.trim()
+        content: content
     };
 
 
@@ -1641,7 +1374,7 @@ function UpSertAmpoData() {
 
     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
     let requiredFields = [
-        "amid", "ampo_datetime"
+        "amid", "content"
     ];
     for (let field of requiredFields) {
         if (!data[field]) {
@@ -1660,8 +1393,8 @@ function UpSertAmpoData() {
         contentType: false,
         type: 'POST',
         success: function (result) {
+
             if (result.success) {
-                $('#dataModalAmpo').modal('hide');
 
                 promptSuccess('Result', result.message);
                 loaddata();
@@ -1670,64 +1403,14 @@ function UpSertAmpoData() {
             }
         },
         error: function (xhr) {
+            console.log(xhr.responseText);
             promptError('Failed Result:', "Error: " + xhr.responseText);
         }
 
     });
-
 }
 
-// OLD PROGRESS NOTE
-// function UpSertAmpnData() {
 
-//     var data = {
-//         ampnid: document.getElementById("ampnid_input").value.trim(),
-//         amid: document.getElementById("ref").value.trim(),
-//         ampn_datetime: document.getElementById("ampn_datetime_input").value.trim(),
-//         ampn_focus: document.getElementById("ampn_focus_input").value.trim(),
-//         ampn_data: document.getElementById("ampn_data_input").value.trim()
-//     };
-
-
-//     // ---------------- VALIDATIONS ----------------
-
-//     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
-//     let requiredFields = [
-//         "amid", "ampn_datetime"
-//     ];
-//     for (let field of requiredFields) {
-//         if (!data[field]) {
-//             promptError('Transaction Failed', field.toUpperCase() + ' is required.');
-//             return;
-//         }
-//     }
-//     // ---------------- FORM DATA ----------------
-//     var fd = new FormData();
-//     fd.append('service', 'ambulatory-ampn-upsertService');
-//     fd.append('data', JSON.stringify(data));
-//     $.ajax({
-//         url: "api.php",
-//         data: fd,
-//         processData: false,
-//         contentType: false,
-//         type: 'POST',
-//         success: function (result) {
-//             if (result.success) {
-//                 $('#dataModalAmpn').modal('hide');
-
-//                 promptSuccess('Result', result.message);
-//                 loaddata();
-//             } else {
-//                 promptError('Result', result.message);
-//             }
-//         },
-//         error: function (xhr) {
-//             promptError('Failed Result:', "Error: " + xhr.responseText);
-//         }
-
-//     });
-
-// }
 
 function UpSertAmpnData() {
     const rawHtml = CKEDITOR.instances.nurse_progress_notes.getData();
@@ -1781,23 +1464,19 @@ function UpSertAmpnData() {
 
 function UpSertMSData() {
 
+    const rawHtml = CKEDITOR.instances.medication_sheet_doc.getData();
+    const content = compressHtml(rawHtml);
     var data = {
-        msid: document.getElementById("ms_msid_input").value.trim(),
+        msdocid: document.getElementById("medication_sheet_doc_id").value.trim(),
         amid: document.getElementById("ref").value.trim(),
-        ms_datetime: document.getElementById("ms_datetime_input").value.trim(),
-        medication: document.getElementById("ms_medication_input").value.trim(),
-        stock_dose: document.getElementById("ms_stock_dose_input").value.trim(),
-        dosage: document.getElementById("ms_dosage_input").value.trim(),
-        route: document.getElementById("ms_route_input").value.trim(),
-        frequency: document.getElementById("ms_frequency_input").value.trim()
+        content: content
     };
 
 
     // ---------------- VALIDATIONS ----------------
-
     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
     let requiredFields = [
-        "amid", "medication"
+        "amid", "content"
     ];
     for (let field of requiredFields) {
         if (!data[field]) {
@@ -1816,8 +1495,8 @@ function UpSertMSData() {
         contentType: false,
         type: 'POST',
         success: function (result) {
+
             if (result.success) {
-                $('#dataModalMs').modal('hide');
 
                 promptSuccess('Result', result.message);
                 loaddata();
@@ -1826,10 +1505,12 @@ function UpSertMSData() {
             }
         },
         error: function (xhr) {
+            console.log(xhr.responseText);
             promptError('Failed Result:', "Error: " + xhr.responseText);
         }
 
     });
+
 
 }
 
@@ -1921,7 +1602,7 @@ function printAmpnSheet() {
 
 function printAmpoSheet() {
     var records = {};
-    records.ampo = ampoDataCache;
+    records.content = ampoDataCache;
 
     records.fullname = document.getElementById("general_fullname").value;
     records.birthdate = document.getElementById("general_birthdate").value;

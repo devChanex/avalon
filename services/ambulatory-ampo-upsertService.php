@@ -37,8 +37,10 @@ class ServiceClass
             }
 
             // Determine whether to insert or update
-            $isInsert = empty($data['ampoid']);
-            $table = "ambulatory_progress_order";
+            $id_key = 'posdocid';
+            $document_key = 'Physician Order Sheet';
+            $isInsert = empty($data[$id_key]);
+            $table = "physician_order_sheet_doc";
 
             // Filter only valid fields (non-null, existing keys)
             $fields = array_keys($data);
@@ -57,7 +59,7 @@ class ServiceClass
                         $updates[] = "{$field} = :{$field}";
                     }
                 }
-                $sql = "UPDATE {$table} SET " . implode(", ", $updates) . " WHERE ampoid = :ampoid";
+                $sql = "UPDATE {$table} SET " . implode(", ", $updates) . " WHERE {$id_key} = :{$id_key}";
             }
 
             try {
@@ -66,7 +68,6 @@ class ServiceClass
 
                 // Bind values safely
                 foreach ($fields as $f) {
-                    // Convert arrays (like anesthesia) to JSON
                     if (is_array($data[$f])) {
                         $stmt->bindValue(':' . $f, json_encode($data[$f]));
                     } else {
@@ -77,22 +78,20 @@ class ServiceClass
                 $stmt->execute();
 
                 // Get the record ID
-                $recordId = $isInsert ? $this->conn->lastInsertId() : $data['ampoid'];
+                $recordId = $isInsert ? $this->conn->lastInsertId() : $data[$id_key];
 
                 // Fetch the saved record
-                $query = "SELECT * FROM {$table} WHERE ampoid = :id";
+                $query = "SELECT * FROM {$table} WHERE {$id_key} = :id";
                 $stmt2 = $this->conn->prepare($query);
                 $stmt2->bindValue(':id', $recordId, PDO::PARAM_INT);
                 $stmt2->execute();
                 $record = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-
-
                 $this->conn->commit();
 
                 return [
                     "success" => true,
-                    "message" => $isInsert ? "Ambulatory record added successfully." : "Ambulatory record updated successfully.",
+                    "message" => $isInsert ? "{$document_key} added successfully." : "{$document_key} updated successfully.",
                     "record" => $record,
 
                 ];
