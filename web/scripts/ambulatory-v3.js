@@ -54,7 +54,7 @@ function loaddata() {
                         document.getElementById("ambrefNo").value = "AS" + formatId(rowdata.amid);
                         document.getElementById("recordid").value = rowdata.amid;
                         document.getElementById("surgery_date").value = rowdata.surgery_date;
-                        document.getElementById("patientname").value = "P" + formatId(rowdata.pid) + " - " + rowdata.fullname;
+                        document.getElementById("patientname").value = rowdata.patient_no + " - " + rowdata.fullname;
                         document.getElementById("pid").value = rowdata.pid;
                         document.getElementById("procedures").value = rowdata.procedures;
                         document.getElementById("physician").value = rowdata.physician;
@@ -87,55 +87,7 @@ function loaddata() {
 }
 
 function loadPatientDetails() {
-    setDynamicOption('patientOptions', 'patientname', 'pid');
-    var recordid = document.getElementById("recordid").value;
-    var pid = document.getElementById("pid").value;
-
-    if (recordid.trim() == "") {
-        var fd = new FormData();
-        fd.append('service', 'data-patient');
-        fd.append('pid', pid);
-        $.ajax({
-            url: "api.php",
-            data: fd,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            success: function (result) {
-                if (result.success && result.data) {
-
-                    result.data.forEach(rowdata => {
-
-                        // document.getElementById("allergies").value = 
-
-                        const data = JSON.parse(rowdata.allergies);
-                        let text = "";
-
-                        if (data.none) {
-                            text = "None";
-                        } else {
-                            const parts = [];
-                            if (data.drug?.checked) parts.push(`Drug: ${data.drug.specify}`);
-                            if (data.food?.checked) parts.push(`Food: ${data.food.specify}`);
-                            if (data.others?.checked) parts.push(`Others: ${data.others.specify}`);
-                            text = parts.join(", ");
-                        }
-
-                        document.getElementById("allergies").value = text;
-                    });
-
-                }
-            },
-            error: function (xhr) {
-                promptError('Process Failed', "Error: " + xhr.responseText);
-            }
-
-        });
-
-
-
-
-    }
+    setDynamicOptionV2('patientOptions', 'patientname', 'pid');
 }
 
 function pageRefresh(key) {

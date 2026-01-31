@@ -2066,7 +2066,7 @@ require_once 'properties.php';
     <!-- other plugins -->
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
-    <script src="scripts/dynamicScripts-v5.js"></script>
+    <script src="scripts/dynamicScripts-v6.js"></script>
     <script src="scripts/ambulatory-view-v5.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 

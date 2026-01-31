@@ -95,6 +95,65 @@ function setDynamicOption(optionid, inputid, hiddenInputId) {
     }
 
 }
+
+
+function setDynamicOptionV2(optionid, inputid, hiddenInputId) {
+    var supplyText = document.getElementById(inputid).value;
+
+    let hiddenInput = document.getElementById(hiddenInputId);
+    let options = document.getElementById(optionid).options;
+
+    hiddenInput.value = ""; // clear first
+    filterValue = '';
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].value === supplyText) {
+            filterValue = options[i].dataset.value;
+            break;
+        }
+    }
+
+    var data = {
+        filter: filterValue
+    };
+    let requiredFields = [
+        "filter"
+    ];
+
+    for (let field of requiredFields) {
+        if (!data[field]) {
+            promptError('Transaction Failed', field.toUpperCase() + ' is required.');
+            return;
+        }
+    }
+
+    // ---------------- FORM DATA ----------------
+    var fd = new FormData();
+    fd.append('service', 'get-pidService');
+    fd.append('data', JSON.stringify(data));
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+
+            if (result.success) {
+                hiddenInput.value = result.data.id;
+            } else {
+                promptError('Result', result.message);
+            }
+        },
+        error: function (xhr) {
+            promptError('Failed Result:', "Error: " + xhr.responseText);
+        }
+
+    });
+
+
+
+}
+
 const dataListCache = {}; // key: service, value: result.data
 function populateDataList(prefix, datalistid, service, version) {
     return new Promise((resolve, reject) => {

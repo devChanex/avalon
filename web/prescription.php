@@ -184,7 +184,7 @@ require_once 'properties.php';
                                                         </datalist>
 
                                                         <!-- Hidden field (this is submitted to backend) -->
-                                                        <input type="hidden" id="pid" name="invidmodal" onchange="">
+                                                        <input type="text" id="pid" name="invidmodal" onchange="">
 
                                                     </div>
                                                     <div class="col-lg-6">
@@ -302,8 +302,8 @@ require_once 'properties.php';
     <!-- other plugins -->
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
-    <script src="scripts/dynamicScripts-v5.js"></script>
-    <script src="scripts/prescription-v2.js"></script>
+    <script src="scripts/dynamicScripts-v6.js"></script>
+    <script src="scripts/prescription-v3.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 
