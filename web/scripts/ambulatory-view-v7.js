@@ -99,7 +99,7 @@ function loadgeneraldata() {
             if (result.success && result.data) {
                 result.data.forEach(rowdata => {
                     document.getElementById("general_fullname").value = rowdata.fullname;
-                    document.getElementById("general_pid").value = "P" + formatId(rowdata.id);
+                    document.getElementById("general_pid").value = rowdata.patient_no;
                     document.getElementById("general_gender").value = rowdata.gender;
                     document.getElementById("general_birthdate").value = rowdata.birth_date;
                     document.getElementById("general_birthplace").value = rowdata.birth_place;

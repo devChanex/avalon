@@ -26,7 +26,6 @@ class ServiceClass
     public function process($data)
     {
 
-
         try {
             $data = isset($_POST['data']) ? json_decode($_POST['data'], true) : [];
             $birthDate = !empty($data['birthDate'])
@@ -55,6 +54,11 @@ class ServiceClass
                     'message' => 'A patient with the same name and birthdate already exists'
                 ];
             }
+
+
+
+
+
 
             $sql = "INSERT INTO patients 
             (first_name, middle_name, last_name, birth_date, birth_place, nationality, 
@@ -104,6 +108,15 @@ class ServiceClass
             $stmt->bindValue(':hmo_member_type', $data['hmo_member_type']);
             $stmt->bindValue(':hmo_company', $data['hmo_company']);
 
+            $stmt->execute();
+            $initialYear = date("Y");
+            $lastid = (int) $this->conn->lastInsertId();
+            $patientNo = $initialYear . "-" . str_pad($lastid, 6, '0', STR_PAD_LEFT);
+
+            $sql = "UPDATE patients SET patient_no = :patient_no WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':patient_no', $patientNo);
+            $stmt->bindValue(':id', $lastid);
             $stmt->execute();
 
             return [

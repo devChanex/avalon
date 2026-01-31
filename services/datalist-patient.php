@@ -31,7 +31,7 @@ class ServiceClass
 
 
             // Fetch paginated records
-            $query = "SELECT  id,CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name) as attrVal FROM patients order by id";
+            $query = "SELECT  patient_no as 'id',CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name) as attrVal FROM patients order by id";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
 

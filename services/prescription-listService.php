@@ -65,7 +65,7 @@ class ServiceClass
 
 
             // Fetch paginated records
-            $query = "SELECT a.*,CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name) as fullname,birth_date,contact_number,gender,present_address FROM prescription a inner join patients b on a.pid=b.id $dynamics  LIMIT :limit OFFSET :offset";
+            $query = "SELECT a.*,CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name) as fullname,birth_date,contact_number,gender,present_address,patient_no FROM prescription a inner join patients b on a.pid=b.id $dynamics  LIMIT :limit OFFSET :offset";
             $stmt = $this->conn->prepare($query);
             if (!empty($search)) {
                 $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);

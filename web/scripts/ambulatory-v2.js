@@ -1,11 +1,12 @@
 var fields = [
-    { ref: "sortBy", defaultValue: "prescriptid" },
+    { ref: "sortBy", defaultValue: "amid" },
     { ref: "sort", defaultValue: "Asc" }
 ];
 fields.forEach(f => populateFieldsFromQuery(f.ref, f.defaultValue));
 
-populateDataList('AP', 'patientOptions', 'datalist-patient', 'v1');
+populateDataList('', 'patientOptions', 'datalist-patient', 'v1');
 populateDataList('', 'physicianOptions', 'datalist-physician', 'v2');
+populateDataList('', 'serviceOptions', 'datalist-services', 'v2');
 loaddata();
 function loaddata() {
     document.getElementById("loaderOverlay").style.display = "flex";
@@ -16,7 +17,7 @@ function loaddata() {
 
 
     var fd = new FormData();
-    fd.append('service', 'prescription-listService');
+    fd.append('service', 'ambulatory-listService');
     fd.append('sortBy', sortBy);
     fd.append('sort', sort);
     fd.append('page', page);
@@ -36,61 +37,34 @@ function loaddata() {
 
                 result.data.forEach(rowdata => {
                     let clone = template.content.cloneNode(true);
-                    rowdata.ref = "PRS" + formatId(rowdata.prescriptid);
-                    rowdata.formatted_prescription_date = formatDateTime(rowdata.prescription_date);
-                    rowdata.formatted_next_appointment = formatDateTime(rowdata.next_appointment);
+                    rowdata.conref = "AS" + formatId(rowdata.opdcid);
                     rowdata.ages = calculateAge(rowdata.birth_date);
-                    clone.querySelector(".prescriptid").textContent = rowdata.ref;
-                    clone.querySelector(".patientid").textContent = "AP" + formatId(rowdata.pid);
+                    rowdata.consultation_datetime = formatDateTime(rowdata.consultation_date);
+                    clone.querySelector(".conref").textContent = "AS" + formatId(rowdata.amid);
+                    clone.querySelector(".patientid").textContent = rowdata.patient_no;
                     clone.querySelector(".patientname").textContent = rowdata.fullname;
-
-                    clone.querySelector(".prescription_date").textContent = rowdata.formatted_prescription_date;
+                    clone.querySelector(".procedures").textContent = rowdata.procedures;
+                    clone.querySelector(".surgery_date").textContent = rowdata.surgery_date;
                     clone.querySelector(".physician").textContent = rowdata.physician;
-                    clone.querySelector(".next_appointment").textContent = rowdata.formatted_next_appointment;
-                    clone.querySelector(".updated").textContent = formatDateTime(rowdata.updated_at);
+
+                    clone.querySelector(".updated").textContent = rowdata.updated_at;
 
 
                     clone.querySelector(".edit-data-btn").addEventListener("click", function () {
-
-                        document.getElementById("prescriptno").value = rowdata.ref;
-                        document.getElementById("recordid").value = rowdata.prescriptid;
-                        document.getElementById("prescription_date").value = rowdata.prescription_date;
-                        document.getElementById("next_appointment").value = rowdata.next_appointment;
-                        document.getElementById("patientname").value = rowdata.fullname;
+                        document.getElementById("ambrefNo").value = "AS" + formatId(rowdata.amid);
+                        document.getElementById("recordid").value = rowdata.amid;
+                        document.getElementById("surgery_date").value = rowdata.surgery_date;
+                        document.getElementById("patientname").value = "P" + formatId(rowdata.pid) + " - " + rowdata.fullname;
                         document.getElementById("pid").value = rowdata.pid;
-                        document.getElementById("physician").value = rowdata.physician
-                        document.getElementById("prescription").value = rowdata.prescription;
-
-
-                        // Show modal (Bootstrap 5 way)
+                        document.getElementById("procedures").value = rowdata.procedures;
+                        document.getElementById("physician").value = rowdata.physician;
                         var modal = new bootstrap.Modal(document.getElementById("dataModal"));
                         modal.show();
                     });
-                    clone.querySelector(".print-data-btn").addEventListener("click", function () {
-                        // Convert rowdata to a URL-safe string
-                        const form = document.createElement("form");
-                        form.method = "POST";
-                        form.action = "forms/prescription_form.php";
-                        form.target = "_blank"; // Open in a new tab
-
-                        // Create a hidden input to hold the data
-                        const input = document.createElement("input");
-                        input.type = "hidden";
-                        input.name = "data";
-                        input.value = JSON.stringify(rowdata);
-
-                        // Append input to form
-                        form.appendChild(input);
-
-                        // Append form to body (must be in DOM to submit)
-                        document.body.appendChild(form);
-
-                        // Submit form
-                        form.submit();
-
-                        // Remove form after submission
-                        document.body.removeChild(form);
+                    clone.querySelector(".view-data-btn").addEventListener("click", function () {
+                        window.location.href = "ambulatory-surgery-view.php?ref=" + rowdata.amid + "&pid=" + rowdata.pid;
                     });
+
 
                     tbody.appendChild(clone);
                 });
@@ -114,7 +88,54 @@ function loaddata() {
 
 function loadPatientDetails() {
     setDynamicOption('patientOptions', 'patientname', 'pid');
+    var recordid = document.getElementById("recordid").value;
+    var pid = document.getElementById("pid").value;
 
+    if (recordid.trim() == "") {
+        var fd = new FormData();
+        fd.append('service', 'data-patient');
+        fd.append('pid', pid);
+        $.ajax({
+            url: "api.php",
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (result) {
+                if (result.success && result.data) {
+
+                    result.data.forEach(rowdata => {
+
+                        // document.getElementById("allergies").value = 
+
+                        const data = JSON.parse(rowdata.allergies);
+                        let text = "";
+
+                        if (data.none) {
+                            text = "None";
+                        } else {
+                            const parts = [];
+                            if (data.drug?.checked) parts.push(`Drug: ${data.drug.specify}`);
+                            if (data.food?.checked) parts.push(`Food: ${data.food.specify}`);
+                            if (data.others?.checked) parts.push(`Others: ${data.others.specify}`);
+                            text = parts.join(", ");
+                        }
+
+                        document.getElementById("allergies").value = text;
+                    });
+
+                }
+            },
+            error: function (xhr) {
+                promptError('Process Failed', "Error: " + xhr.responseText);
+            }
+
+        });
+
+
+
+
+    }
 }
 
 function pageRefresh(key) {
@@ -130,12 +151,21 @@ function UpSertData() {
 
     var data = {
 
-        recordid: document.getElementById("recordid").value.trim(),
-        prescription_date: document.getElementById("prescription_date").value.trim(),
+        // document.getElementById("ambrefNo").value = "AS" + formatId(rowdata.amid);
+        // document.getElementById("recordid").value = rowdata.amid;
+        // document.getElementById("surgery_date").value = rowdata.surgery_date;
+        // document.getElementById("patientname").value = rowdata.fullname;
+        // document.getElementById("pid").value = rowdata.pid;
+        // document.getElementById("procedures").value = rowdata.procedures;
+        // document.getElementById("physician").value = rowdata.physician;
+        ambrefNo: document.getElementById("ambrefNo").value.trim(),
+        amid: document.getElementById("recordid").value.trim(),
+        surgery_date: document.getElementById("surgery_date").value.trim(),
+        patientname: document.getElementById("patientname").value.trim(),
         pid: document.getElementById("pid").value.trim(),
-        prescription: document.getElementById("prescription").value.trim(),
+        procedures: document.getElementById("procedures").value.trim(),
         physician: document.getElementById("physician").value.trim(),
-        next_appointment: document.getElementById("next_appointment").value.trim()
+
     };
 
 
@@ -143,7 +173,7 @@ function UpSertData() {
 
     // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
     let requiredFields = [
-        "pid", "physician", "prescription", "prescription_date"
+        "pid", "physician", "surgery_date", "procedures"
     ];
 
     for (let field of requiredFields) {
@@ -155,7 +185,7 @@ function UpSertData() {
 
     // ---------------- FORM DATA ----------------
     var fd = new FormData();
-    fd.append('service', 'prescription-upsertService');
+    fd.append('service', 'ambulatory-upsertService');
     fd.append('data', JSON.stringify(data));
     $.ajax({
         url: "api.php",
@@ -183,19 +213,14 @@ function UpSertData() {
 
 function clearModal() {
     // Clear inputs
-    document.getElementById("prescriptno").value = "Auto-generated";
+    document.getElementById("ambrefNo").value = "Auto-generated";
     document.getElementById("recordid").value = "";
-    const now = new Date();
-    document.getElementById("prescription_date").value = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
-        .toISOString()
-        .slice(0, 16);
-    // document.getElementById("prescription_date").value = getCurrentDate();
-
-    document.getElementById("next_appointment").value = "";
+    document.getElementById("surgery_date").value = getCurrentDate();
     document.getElementById("patientname").value = "";
     document.getElementById("pid").value = "";
+    document.getElementById("procedures").value = "";
     document.getElementById("physician").value = "";
-    document.getElementById("prescription").value = "";
+
 
 }
 function openModal() {

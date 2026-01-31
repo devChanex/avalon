@@ -1492,7 +1492,7 @@ require_once 'properties.php';
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/constants.js"></script>
     <script src="scripts/dynamicScripts-v5.js"></script>
-    <script src="scripts/ambulatory-view-v6.js"></script>
+    <script src="scripts/ambulatory-view-v7.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

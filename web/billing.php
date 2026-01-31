@@ -617,7 +617,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v5.js"></script>
-    <script src="scripts/bill-v3.js"></script>
+    <script src="scripts/bill-v4.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

@@ -56,7 +56,7 @@ function loadpatient() {
                 result.data.forEach(patient => {
                     let clone = template.content.cloneNode(true);
 
-                    clone.querySelector(".id").textContent = "AP" + formatId(patient.id);
+                    clone.querySelector(".id").textContent = patient.patient_no;
                     clone.querySelector(".name").textContent = `${patient.last_name} ${patient.suffix}, ${patient.first_name} ${patient.middle_name}  `;
                     clone.querySelector(".birth_date").textContent = patient.birth_date;
                     clone.querySelector(".gender").textContent = patient.gender;

@@ -43,7 +43,7 @@ async function loadpatient() {
                     if (record.transaction_type === 'AMBULATORY') {
                         refno = "AS" + formatId(record.reference_number);
                     }
-                    clone.querySelector(".id").textContent = "AP" + formatId(record.pid);
+                    clone.querySelector(".id").textContent = record.patient_no;
                     clone.querySelector(".billid").textContent = "B" + formatId(record.billingid);
                     clone.querySelector(".billdate").textContent = record.billdate;
                     clone.querySelector(".name").textContent = `${record.last_name} ${record.suffix}, ${record.first_name} ${record.middle_name}  `;
@@ -100,7 +100,7 @@ async function loadpatient() {
                         printSoa(
                             record.billingid,
                             record.billdate,
-                            record.pid,
+                            record.patient_no,
                             `${record.last_name} ${record.suffix}, ${record.first_name} ${record.middle_name}`,
                             refno,
                             record.transaction_type,
@@ -954,7 +954,7 @@ function printSoa(billid, billdate, patientno, patientname, referenceno, transac
             if (result.success) {
                 records.billid = "B" + formatId(billid);
                 records.billdate = billdate;
-                records.patientno = "AP" + formatId(patientno);
+                records.patientno = patientno;
                 records.referenceno = referenceno;
                 records.transaction_type = transaction_type;
                 records.patientname = patientname;

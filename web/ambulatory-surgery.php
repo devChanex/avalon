@@ -298,7 +298,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v5.js"></script>
-    <script src="scripts/ambulatory-v1.js"></script>
+    <script src="scripts/ambulatory-v2.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 
