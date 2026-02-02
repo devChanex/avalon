@@ -223,7 +223,7 @@
             <div class="who-signature">
                 <div id="nurse" class="sig-name"></div>
                 <div class="sig-line"></div>
-                <div class="sig-role">Surgeon</div>
+                <div class="sig-role">Circulating Nurse</div>
             </div>
         </div>
 
