@@ -3,12 +3,13 @@ const defaultTable = `
 <table border="1" width="100%" cellspacing="0" cellpadding="5">
     <thead>
         <tr>
-            <th style="width:20%;">Time</th>
-            <th>Notes</th>
+            <th style="width:20%;">Date/Time</th>
+            <th>Focus</th>
+            <th>Data/Action/Response</th>
         </tr>
     </thead>
     <tbody>
-        ${'<tr><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(10)}
+        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(10)}
     </tbody>
 </table>
 `;
