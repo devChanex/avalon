@@ -249,6 +249,12 @@
                         document.getElementById("physician").textContent = value;
                     }
 
+                    if (key === "optech_narative") {
+
+                        el.innerHTML = value.replace(/\n/g, "<br>");
+                        continue;
+                    }
+
                     if (key === "images") {
                         const container = el; // the DOM element where you want to show the images
                         container.innerHTML = ""; // clear existing content
@@ -297,56 +303,6 @@
                     el.textContent = value;
                 }
 
-                // ✅ Handle vital signs table if it exists
-                if (row.vitalSigns && Array.isArray(row.vitalSigns)) {
-                    const vitalTableBody = document.querySelector("#vitalTable tbody");
-                    if (vitalTableBody) {
-                        let count = 0;
-
-                        // Add actual records
-                        row.vitalSigns.forEach(vital => {
-                            count++;
-                            const dt = new Date(vital.vital_datetime);
-                            const dateOnly = !isNaN(dt)
-                                ? `${(dt.getMonth() + 1).toString().padStart(2, '0')}/${dt.getDate().toString().padStart(2, '0')}/${dt.getFullYear()}`
-                                : "";
-                            let hours = dt.getHours();
-                            const minutes = String(dt.getMinutes()).padStart(2, '0');
-                            const ampm = hours >= 12 ? 'PM' : 'AM';
-                            hours = hours % 12 || 12;
-                            const timeOnly = !isNaN(dt) ? `${hours}:${minutes} ${ampm}` : "";
-
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                        <td style="border:1px solid black; padding:5px;">${dateOnly}</td>
-                        <td style="border:1px solid black; padding:5px;">${timeOnly}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.temp || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.pr || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.rr || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.bp || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.osat || ''}</td>
-                        <td style="border:1px solid black; padding:5px;">${vital.remarks || ''}</td>
-                    `;
-                            vitalTableBody.appendChild(tr);
-                        });
-
-                        // Add empty rows until there are at least 10 total
-                        for (let i = count; i < 25; i++) {
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
-                        <td style="border:1px solid black; padding:5px; height:18px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                        <td style="border:1px solid black; padding:5px;">&nbsp;</td>
-                    `;
-                            vitalTableBody.appendChild(tr);
-                        }
-                    }
-                }
             } catch (e) {
                 console.error("Error reading data:", e);
             }
