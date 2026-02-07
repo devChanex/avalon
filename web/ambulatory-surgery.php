@@ -87,8 +87,10 @@ require_once 'properties.php';
                                             </select>
                                             <select class="form-control select2 d-inline-block" id="sort"
                                                 onchange="pageRefresh('sort');" style="width: 100px;">
+
                                                 <option value="Asc">Asc</option>
                                                 <option value="Desc">Desc</option>
+
                                             </select>
                                         </div>
 
@@ -298,7 +300,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v6.js"></script>
-    <script src="scripts/ambulatory-v3.js"></script>
+    <script src="scripts/ambulatory-v4.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

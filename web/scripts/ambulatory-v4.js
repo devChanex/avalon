@@ -1,6 +1,6 @@
 var fields = [
     { ref: "sortBy", defaultValue: "amid" },
-    { ref: "sort", defaultValue: "Asc" }
+    { ref: "sort", defaultValue: "Desc" }
 ];
 fields.forEach(f => populateFieldsFromQuery(f.ref, f.defaultValue));
 
