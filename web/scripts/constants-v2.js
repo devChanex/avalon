@@ -9,7 +9,7 @@ const defaultTable = `
         </tr>
     </thead>
     <tbody>
-        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(10)}
+        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(15)}
     </tbody>
 </table>
 `;
@@ -26,7 +26,7 @@ const defaultPOSTable = `
         </tr>
     </thead>
     <tbody>
-        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(10)}
+        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(15)}
     </tbody>
 </table>
 `;
@@ -47,7 +47,7 @@ const defaultMedicationSheetTable = `
         </tr>
     </thead>
     <tbody>
-        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(10)}
+        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(15)}
     </tbody>
 </table>
 
@@ -63,7 +63,7 @@ const defaultMedicationSheetTable = `
         </tr>
     </thead>
     <tbody>
-        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(10)}
+        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(15)}
     </tbody>
 </table>
 `;
@@ -84,7 +84,7 @@ const defaultVitalSignTable = `
         </tr>
     </thead>
     <tbody>
-        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(10)}
+        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(15)}
     </tbody>
 </table>
 `;
@@ -94,7 +94,7 @@ const instruments = [
     "ADSON FORCEP W/ TEETH",
     "ADSON FORCEP W/O TEETH",
     "ALLIS",
-    "ARMY NAVY", "BANDAGE SCISSORS", "BLADE HANDLE #3", "BLADE HANDLE #4", "BOBCOCK", "DEAVER", "DEBAKEY FORCEP", "KELLY CLAMPS - Straight", "KELLY CLAMPS - Curved", "MALLEABLE", "MIXTERS", "MOSQUITO - Straight", "MOSQUITO - Curved", "NEEDLE HOLDER", "OVUM FORCEPS", "OCSHNER - Straight", "OCSHNER - Curved", "RICHARDSON", "SCISSORS - Metz", "SCISOORS - Mayo Curve", "SCISSORS - Mayo Straight", "TISSUE FORCEPS", "THUMB FORCEPS", "TOWEL CLIPS", "<strong>NEEDLES</strong>", "", "", "<strong>-SPONGES</strong>", "4X4 OS", "CHERRY BALLS", "COTTONOIDS", "PEANUTS", "<strong>-OTHERS</strong>", "", "", ""
+    "ARMY NAVY", "BANDAGE SCISSORS", "BLADE HANDLE #3", "BLADE HANDLE #4", "BOBCOCK", "DEAVER", "DEBAKEY FORCEP", "KELLY CLAMPS - Straight", "KELLY CLAMPS - Curved", "MALLEABLE", "MIXTERS", "MOSQUITO - Straight", "MOSQUITO - Curved", "NEEDLE HOLDER", "OVUM FORCEPS", "OCSHNER - Straight", "OCSHNER - Curved", "RICHARDSON", "SCISSORS - Metz", "SCISSORS - Mayo Curve", "SCISSORS - Mayo Straight", "TISSUE FORCEPS", "THUMB FORCEPS", "TOWEL CLIPS", "<strong>NEEDLES</strong>", "", "", "<strong>-SPONGES</strong>", "4X4 OS", "CHERRY BALLS", "COTTONOIDS", "PEANUTS", "<strong>-OTHERS</strong>", "", "", ""
 ];
 
 const instrumentRows = instruments.map(name => `
