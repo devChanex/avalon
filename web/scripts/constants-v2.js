@@ -1,15 +1,15 @@
 //NURSE PROGRESS NOTES TABLE
 const defaultTable = `
-<table border="1" width="100%" cellspacing="0" cellpadding="5">
+<table border="1" width="100%" cellspacing="0" cellpadding="5" style="text-align: left; vertical-align: top;">
     <thead>
         <tr>
-            <th style="width:20%;">Date/Time</th>
-            <th>Focus</th>
-            <th>Data/Action/Response</th>
+            <th style="width:20%; text-align: left; vertical-align: top;">Date/Time</th>
+            <th style="text-align: left; vertical-align: top;">Focus</th>
+            <th style="text-align: left; vertical-align: top;">Data/Action/Response</th>
         </tr>
     </thead>
     <tbody>
-        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(15)}
+        ${'<tr><td style="text-align: left; vertical-align: top;">&nbsp;</td><td style="text-align: left; vertical-align: top;">&nbsp;</td><td style="text-align: left; vertical-align: top;">&nbsp;</td></tr>'.repeat(1)}
     </tbody>
 </table>
 `;

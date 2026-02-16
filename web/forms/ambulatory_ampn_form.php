@@ -19,7 +19,8 @@
         #ampn table td {
             padding: 2px 4px !important;
             /* smaller cells */
-            vertical-align: middle !important;
+            vertical-align: top !important;
+            text-align: left !important;
             border: 1px solid #999 !important;
             /* optional */
         }
