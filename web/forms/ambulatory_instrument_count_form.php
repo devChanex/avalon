@@ -115,7 +115,40 @@
         <table id="data-table"
             style="border: 1px solid black; width: 100%; border-collapse: collapse; text-align: center; font-family: 'Times New Roman', serif; font-size: 11px;">
             <span id="instrumentcount"></span>
+             
+            <!-- Footer -->
+            
+            <p>Instrument Count Certified as complete</p>
+            
+          <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+    
+    <div style="width: 45%; text-align: left;">
+          <center>_____________________________________________<br>
+      Signature over Printed Name/Date<br>
+        <strong>SCRUB NURSE</strong>
+    </div>
+
+    <div style="width: 45%; text-align: right;">
+        <center>_____________________________________________<br>
+        Signature over Printed Name/Date<br>
+        <strong>CIRCULATING NURSE</strong></center>
+    </div>
+
+</div>
+       <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+    
+    <div style="width: 100%; text-align: center;">
+          <center>_____________________________________________<br>
+      Signature over Printed Name/Date<br>
+        <strong>SURGEON</strong>
+    </div>
+
+
+</div>
+
+
         </table>
+       
 
 
     </div>
