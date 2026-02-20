@@ -30,7 +30,7 @@ class Database
 
     //prod
 
-    private $host = "216.218.206.42";
+    private $host = "localhost";
     private $db_name = "avalonwo_system";
     private $username = "avalonwo_admin";
     private $password = ']=?tcMar*xZ56Z^?';
