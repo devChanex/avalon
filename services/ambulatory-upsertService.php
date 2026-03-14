@@ -64,6 +64,7 @@ class ServiceClass
                     $lastNumber = $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
 
                     $yearToday = date('Y');
+                    $yearToday = date('Y', strtotime($data["surgery_date"]));
                     $nextNumber = $lastNumber + 1;
                     $formattedNumber = str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
 

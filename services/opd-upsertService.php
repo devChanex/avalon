@@ -64,14 +64,11 @@ class ServiceClass
 
                     $countStmt = $this->conn->prepare($countQuery);
                     $countStmt->execute();
-
                     $lastNumber = $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
-
-                    $yearToday = date('Y');
+                    $yearToday = date('Y', strtotime($data["consultation_date"]));
                     $nextNumber = $lastNumber + 1;
                     $formattedNumber = str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
-
-                    $data['caseno'] = "OPD-" . $yearToday . "-" . $formattedNumber;
+                    $data['caseno'] = "OP-" . $yearToday . "-" . $formattedNumber;
                 }
                 $fields = [
 
