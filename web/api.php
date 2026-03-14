@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 // Only allow requests from this origin
 $isLocal = true;
-$allowedOrigin = "https://system.avalonwoundcare.ph";
+$allowedOrigin = "https://staging.avalonwoundcare.ph";
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
 // Check if request comes from allowed origin
