@@ -102,7 +102,7 @@ function loaddata() {
             }
         },
         error: function (xhr) {
-            promptError('Process Failed', "Error: " + xhr.responseText);
+            console.log("Error: " + xhr.responseText);
         }
 
     });

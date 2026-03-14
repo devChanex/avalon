@@ -130,7 +130,7 @@ async function loadpatient() {
         error: function (xhr) {
 
             console.log(xhr.responseText);
-            promptError('Process Failed', "Error: " + xhr.responseText);
+            console.log("Error: " + xhr.responseText);
         }
 
     });
@@ -264,7 +264,7 @@ function populateChargesTable(bid, refno) {
             error: function (xhr) {
 
                 console.log(xhr.responseText);
-                promptError('Process Failed', "Error: " + xhr.responseText);
+                console.log("Error: " + xhr.responseText);
             }
 
         });
@@ -916,7 +916,7 @@ function populatePaymentTable(bid) {
             error: function (xhr) {
 
                 console.log(xhr.responseText);
-                promptError('Process Failed', "Error: " + xhr.responseText);
+                console.log("Error: " + xhr.responseText);
             }
 
         });
@@ -995,7 +995,7 @@ function printSoa(billid, billdate, patientno, patientname, referenceno, transac
         error: function (xhr) {
 
             console.log(xhr.responseText);
-            promptError('Process Failed', "Error: " + xhr.responseText);
+            console.log("Error: " + xhr.responseText);
         }
 
     });
