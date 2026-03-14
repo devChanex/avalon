@@ -90,8 +90,13 @@ require_once 'properties.php';
                                     <div class="row g-2">
 
                                         <div class="col-md-2">
-                                            <label class="form-label small mb-1">SurgRef No.</label>
+                                            <label class="form-label small mb-1">Series No.</label>
                                             <input type="text" class="form-control form-control-sm" id="general_amid"
+                                                readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label small mb-1">Case No.</label>
+                                            <input type="text" class="form-control form-control-sm" id="general_caseno"
                                                 readonly>
                                         </div>
 
@@ -113,13 +118,13 @@ require_once 'properties.php';
                                                 readonly>
                                         </div>
 
-                                        <div class="col-md-2">
+                                        <div class="col-md-1">
                                             <label class="form-label small mb-1">Birthdate</label>
                                             <input type="date" class="form-control form-control-sm"
                                                 id="general_birthdate" readonly>
                                         </div>
 
-                                        <div class="col-md-2">
+                                        <div class="col-md-1">
                                             <label class="form-label small mb-1">Age</label>
                                             <input type="text" class="form-control form-control-sm" id="general_age"
                                                 readonly>
@@ -1492,7 +1497,7 @@ require_once 'properties.php';
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/constants-v2.js"></script>
     <script src="scripts/dynamicScripts-v6.js"></script>
-    <script src="scripts/ambulatory-view-v7.js"></script>
+    <script src="scripts/ambulatory-view-v8.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

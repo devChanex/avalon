@@ -28,7 +28,7 @@
                             style="margin-left:20px"></span> </strong></td>
                 <td
                     style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Case No.: </label><span id="amid" style="margin-left:20px">
+                    <label style="font-size:10px">Case No.: </label><span id="caseno" style="margin-left:20px">
                     </span> </strong>
                 </td>
                 <td style="border-left: 1px solid black; border-right: 1px solid black; padding: 2px;">

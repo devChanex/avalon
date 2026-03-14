@@ -37,7 +37,7 @@ class ServiceClass
         $limit = 10; // records per page
         $offset = ($page - 1) * $limit;
         $search = isset($data['filter']) ? trim($data['filter']) : '';
-        $searchFields = ["CONCAT('OPD', LPAD(opdcid, 6, '0'))", "CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name)", "physician", "consultation_date"];
+        $searchFields = ["CONCAT('OPD', LPAD(opdcid, 6, '0'))", "CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name)", "physician", "consultation_date", "caseno"];
         $dynamics = '';
         if (!empty($search)) {
             $orConditions = [];
@@ -65,7 +65,7 @@ class ServiceClass
 
 
             // Fetch paginated records
-            $query = "SELECT a.*,CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name) as fullname,birth_date,contact_number,gender,present_address,patient_no FROM opd_consultation a inner join patients b on a.pid=b.id $dynamics  LIMIT :limit OFFSET :offset";
+            $query = "SELECT a.*,CONCAT(last_name, ' ', suffix, ', ', first_name, ' ', middle_name) as fullname,birth_date,contact_number,gender,present_address,patient_no,caseno FROM opd_consultation a inner join patients b on a.pid=b.id $dynamics  LIMIT :limit OFFSET :offset";
             $stmt = $this->conn->prepare($query);
             if (!empty($search)) {
                 $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);

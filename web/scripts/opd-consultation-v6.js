@@ -37,10 +37,11 @@ function loaddata() {
 
                 result.data.forEach(rowdata => {
                     let clone = template.content.cloneNode(true);
-                    rowdata.conref = "OPDC" + formatId(rowdata.opdcid);
+                    rowdata.conref = "OPD" + formatId(rowdata.opdcid);
                     rowdata.ages = calculateAge(rowdata.birth_date);
                     rowdata.consultation_datetime = formatDateTime(rowdata.consultation_date);
-                    clone.querySelector(".conref").textContent = "OPDC" + formatId(rowdata.opdcid);
+                    clone.querySelector(".conrefNo").textContent = rowdata.conref;
+                    clone.querySelector(".casenoid").textContent = rowdata.caseno ? rowdata.caseno : "N/A";
                     clone.querySelector(".patientid").textContent = rowdata.patient_no;
                     clone.querySelector(".patientname").textContent = rowdata.fullname;
                     clone.querySelector(".service").textContent = rowdata.service;
@@ -51,13 +52,10 @@ function loaddata() {
 
 
                     clone.querySelector(".edit-data-btn").addEventListener("click", function () {
-
-
-
-                        document.getElementById("conrefNo").value = "OPDC" + formatId(rowdata.opdcid);
+                        document.getElementById("conrefNo").value = rowdata.caseno ? rowdata.caseno : "N/A";
                         document.getElementById("recordid").value = rowdata.opdcid;
                         document.getElementById("consultation_date").value = rowdata.consultation_date;
-                        document.getElementById("patientname").value = "P" + formatId(rowdata.pid) + " - " + rowdata.fullname;
+                        document.getElementById("patientname").value = rowdata.patient_no + " - " + rowdata.fullname;
                         document.getElementById("pid").value = rowdata.pid
                         document.getElementById("service").value = rowdata.service;
                         document.getElementById("physician").value = rowdata.physician

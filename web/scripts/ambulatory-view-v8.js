@@ -138,6 +138,7 @@ function loadgeneraldata_2() {
             if (result.success && result.data) {
                 result.data.forEach(rowdata => {
                     document.getElementById("general_amid").value = "AS" + formatId(rowdata.amid);
+                    document.getElementById("general_caseno").value = rowdata.caseno ?? '';
                     document.getElementById("general_physician").value = rowdata.physician;
                     document.getElementById("general_procedure").value = rowdata.procedures ?? '';
                     document.getElementById("general_datetime").value = rowdata.surgery_date ?? '';
@@ -810,7 +811,7 @@ function UpSertAmbulatoryData() {
                 result.record.age = document.getElementById("general_age").value;
                 result.record.physician = document.getElementById("general_physician").value;
                 result.record.patientno = document.getElementById("general_pid").value;
-                result.record.caseno = document.getElementById("general_amid").value;
+                result.record.caseno = document.getElementById("general_caseno").value;
                 result.record.phic_no = document.getElementById("general_phic_no").value;
                 result.record.membertype = result.patient.member_type;
                 result.record.birth_place = result.patient.birth_place;
@@ -932,7 +933,7 @@ function UpSertAmbulatoryDischarge() {
                 form.action = "forms/ambulatory_discharge_form.php";
                 form.target = "_blank"; // Open in a new tab
 
-                result.record.caseno = document.getElementById("general_amid").value;
+                result.record.caseno = document.getElementById("general_caseno").value;
                 result.record.fullname = document.getElementById("general_fullname").value;
 
 
@@ -1078,6 +1079,7 @@ function toggleChecklistDetails(id, iconId) {
 async function populate_form_data_general() {
     const data = {
         amid: document.getElementById("general_amid").value.trim(),
+        caseno: document.getElementById("general_caseno").value.trim(),
         pid: document.getElementById("general_pid").value.trim(),
         fullname: document.getElementById("general_fullname").value.trim(),
         gender: document.getElementById("general_gender").value.trim(),
@@ -1129,7 +1131,7 @@ function printVitalSheet() {
     records.age = document.getElementById("general_age").value;
     records.physician = document.getElementById("general_physician").value;
     records.patientno = document.getElementById("general_pid").value;
-    records.caseno = document.getElementById("general_amid").value;
+    records.caseno = document.getElementById("general_caseno").value;
     records.phic_no = document.getElementById("general_phic_no").value;
     records.member_type = document.getElementById("general_member_type").value;
     records.arrival = document.getElementById("tab2_arrival").value;
@@ -1163,7 +1165,7 @@ function printInstrumentCountSheet() {
     records.age = document.getElementById("general_age").value;
     records.physician = document.getElementById("general_physician").value;
     records.patientno = document.getElementById("general_pid").value;
-    records.caseno = document.getElementById("general_amid").value;
+    records.caseno = document.getElementById("general_caseno").value;
     records.phic_no = document.getElementById("general_phic_no").value;
     records.membertype = document.getElementById("general_member_type").value;
     records.arrival = document.getElementById("tab2_arrival").value;
@@ -1201,7 +1203,7 @@ function printORCharges() {
     records.age = document.getElementById("general_age").value;
     records.physician = document.getElementById("general_physician").value;
     records.patientno = document.getElementById("general_pid").value;
-    records.caseno = document.getElementById("general_amid").value;
+    records.caseno = document.getElementById("general_caseno").value;
     records.phic_no = document.getElementById("general_phic_no").value;
     records.membertype = document.getElementById("general_member_type").value;
     records.arrival = document.getElementById("tab2_arrival").value;
@@ -1235,7 +1237,7 @@ function printMedicationSheet() {
     records.age = document.getElementById("general_age").value;
     records.physician = document.getElementById("general_physician").value;
     records.patientno = document.getElementById("general_pid").value;
-    records.caseno = document.getElementById("general_amid").value;
+    records.caseno = document.getElementById("general_caseno").value;
     records.phic_no = document.getElementById("general_phic_no").value;
     records.member_type = document.getElementById("general_member_type").value;
     records.arrival = document.getElementById("tab2_arrival").value;
@@ -1576,7 +1578,7 @@ function printAmpnSheet() {
     records.age = document.getElementById("general_age").value;
     records.physician = document.getElementById("general_physician").value;
     records.patientno = document.getElementById("general_pid").value;
-    records.caseno = document.getElementById("general_amid").value;
+    records.caseno = document.getElementById("general_caseno").value;
     records.phic_no = document.getElementById("general_phic_no").value;
     records.membertype = document.getElementById("general_member_type").value;
     records.arrival = document.getElementById("tab2_arrival").value;
@@ -1611,7 +1613,7 @@ function printAmpoSheet() {
     records.age = document.getElementById("general_age").value;
     records.physician = document.getElementById("general_physician").value;
     records.patientno = document.getElementById("general_pid").value;
-    records.caseno = document.getElementById("general_amid").value;
+    records.caseno = document.getElementById("general_caseno").value;
     records.phic_no = document.getElementById("general_phic_no").value;
     records.member_type = document.getElementById("general_member_type").value;
     records.arrival = document.getElementById("tab2_arrival").value;
@@ -1695,7 +1697,7 @@ function UpSertOperativeTechnique() {
                 form.action = "forms/ambulatory_technique_form.php";
                 form.target = "_blank"; // Open in a new tab
 
-                result.record.caseno = document.getElementById("general_amid").value;
+                result.record.caseno = document.getElementById("general_caseno").value;
 
                 result.record.patientno = document.getElementById("general_pid").value;
                 result.record.fullname = document.getElementById("general_fullname").value;

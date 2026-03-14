@@ -41,6 +41,7 @@ function loaddata() {
                     rowdata.ages = calculateAge(rowdata.birth_date);
                     rowdata.consultation_datetime = formatDateTime(rowdata.consultation_date);
                     clone.querySelector(".conref").textContent = "AS" + formatId(rowdata.amid);
+                    clone.querySelector(".casenoid").textContent = rowdata.caseno;
                     clone.querySelector(".patientid").textContent = rowdata.patient_no;
                     clone.querySelector(".patientname").textContent = rowdata.fullname;
                     clone.querySelector(".procedures").textContent = rowdata.procedures;
@@ -53,6 +54,7 @@ function loaddata() {
                     clone.querySelector(".edit-data-btn").addEventListener("click", function () {
                         document.getElementById("ambrefNo").value = "AS" + formatId(rowdata.amid);
                         document.getElementById("recordid").value = rowdata.amid;
+                        document.getElementById("caseNo").value = rowdata.caseno;
                         document.getElementById("surgery_date").value = rowdata.surgery_date;
                         document.getElementById("patientname").value = rowdata.patient_no + " - " + rowdata.fullname;
                         document.getElementById("pid").value = rowdata.pid;
@@ -166,6 +168,7 @@ function UpSertData() {
 function clearModal() {
     // Clear inputs
     document.getElementById("ambrefNo").value = "Auto-generated";
+    document.getElementById("caseNo").value = "Auto-generated";
     document.getElementById("recordid").value = "";
     document.getElementById("surgery_date").value = getCurrentDate();
     document.getElementById("patientname").value = "";

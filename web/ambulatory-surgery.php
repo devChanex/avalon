@@ -104,7 +104,8 @@ require_once 'properties.php';
                                         <table id="datatable" class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>surgref#</th>
+                                                    <th>Series No</th>
+                                                    <th>Case No</th>
                                                     <th>PatientNo</th>
                                                     <th>Patient Name</th>
                                                     <th>Date</th>
@@ -127,6 +128,7 @@ require_once 'properties.php';
                                 <template id="dataRowTemplate">
                                     <tr>
                                         <td class="conref"></td>
+                                        <td class="casenoid"></td>
                                         <td class="patientid"></td>
                                         <td class="patientname"></td>
 
@@ -178,15 +180,21 @@ require_once 'properties.php';
 
                                                 <input type="hidden" id="recordid">
                                                 <div class="row">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label for="exampleInputUsername1">Ambulatory Surgery Ref
-                                                                #</label>
+                                                            <label for="exampleInputUsername1">Series No:</label>
                                                             <input type="text" class="form-control" id="ambrefNo"
                                                                 placeholder="Ambulatory Ref #" readonly>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputUsername1">Case No:</label>
+                                                            <input type="text" class="form-control" id="caseNo"
+                                                                placeholder="Case No" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Surgery Date</label>
                                                             <input type="datetime-local" class="form-control"
@@ -300,7 +308,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v6.js"></script>
-    <script src="scripts/ambulatory-v4.js"></script>
+    <script src="scripts/ambulatory-v5.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

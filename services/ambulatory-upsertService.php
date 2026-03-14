@@ -38,12 +38,43 @@ class ServiceClass
 
             // If recordid is empty → INSERT
             if (empty($data['amid'])) {
+                $checkQuery = "SELECT caseno 
+               FROM ambulatory_main 
+               WHERE pid = :pid 
+               LIMIT 1";
 
+                $checkStmt = $this->conn->prepare($checkQuery);
+                $checkStmt->bindValue(':pid', $data['pid'], PDO::PARAM_INT);
+                $checkStmt->execute();
+
+                $existing = $checkStmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($existing) {
+                    $data['caseno'] = $existing['caseno'];
+
+                } else {
+
+                    // STEP 2: generate new running OPD number
+                    $countQuery = "SELECT COUNT(DISTINCT pid) AS total 
+                   FROM ambulatory_main";
+
+                    $countStmt = $this->conn->prepare($countQuery);
+                    $countStmt->execute();
+
+                    $lastNumber = $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+                    $yearToday = date('Y');
+                    $nextNumber = $lastNumber + 1;
+                    $formattedNumber = str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
+
+                    $data['caseno'] = $yearToday . "-" . $formattedNumber;
+                }
                 $fields = [
                     'surgery_date',
                     'pid',
                     'procedures',
-                    'physician'
+                    'physician',
+                    'caseno'
                 ];
                 try {
                     $this->conn->beginTransaction();
@@ -52,12 +83,14 @@ class ServiceClass
                     surgery_date,
                     pid,
                     procedures,
-                    physician
+                    physician,
+                    caseno
                 ) VALUES (
                     :surgery_date,
                     :pid,
                     :procedures,
-                    :physician
+                    :physician,
+                    :caseno
                 )";
 
                     $stmt = $this->conn->prepare($sql);

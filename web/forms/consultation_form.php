@@ -25,7 +25,7 @@
             <td><strong>Consultation Date: </strong><span id="consultation_datetime"></span></td>
         </tr>
         <tr>
-            <td><strong>Case No:</strong><span id="conref"></span></td>
+            <td><strong>Case No:</strong><span id="caseno"></span></td>
             <td><strong>Service:</strong><span id="service"></span></td>
 
         </tr>

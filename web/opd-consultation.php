@@ -101,7 +101,8 @@ require_once 'properties.php';
                                         <table id="datatable" class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>conref#</th>
+                                                    <th>SeriesNo:</th>
+                                                    <th>CaseNo</th>
                                                     <th>PatientNo</th>
                                                     <th>Patient Name</th>
                                                     <th>Service</th>
@@ -124,7 +125,8 @@ require_once 'properties.php';
 
                                 <template id="dataRowTemplate">
                                     <tr>
-                                        <td class="conref"></td>
+                                        <td class="conrefNo"></td>
+                                        <td class="casenoid"></td>
                                         <td class="patientid"></td>
                                         <td class="patientname"></td>
                                         <td class="service"></td>
@@ -177,10 +179,9 @@ require_once 'properties.php';
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label for="exampleInputUsername1">Consultation Ref
-                                                                #</label>
+                                                            <label for="exampleInputUsername1">OPD Case No:</label>
                                                             <input type="text" class="form-control" id="conrefNo"
-                                                                placeholder="Consultation Ref #" readonly>
+                                                                placeholder="Consultation Case #" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
@@ -416,7 +417,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v6.js"></script>
-    <script src="scripts/opd-consultation-v5.js"></script>
+    <script src="scripts/opd-consultation-v6.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

@@ -39,6 +39,40 @@ class ServiceClass
             // If recordid is empty → INSERT
             if (empty($data['recordid'])) {
 
+                // STEP 1: check existing caseno of patient
+                $checkQuery = "SELECT caseno 
+               FROM opd_consultation 
+               WHERE pid = :pid 
+               LIMIT 1";
+
+                $checkStmt = $this->conn->prepare($checkQuery);
+                $checkStmt->bindValue(':pid', $data['pid'], PDO::PARAM_INT);
+                $checkStmt->execute();
+
+                $existing = $checkStmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($existing) {
+
+                    // ✅ patient already has case number → reuse
+                    $data['caseno'] = $existing['caseno'];
+
+                } else {
+
+                    // STEP 2: generate new running OPD number
+                    $countQuery = "SELECT COUNT(DISTINCT pid) AS total 
+                   FROM opd_consultation";
+
+                    $countStmt = $this->conn->prepare($countQuery);
+                    $countStmt->execute();
+
+                    $lastNumber = $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+                    $yearToday = date('Y');
+                    $nextNumber = $lastNumber + 1;
+                    $formattedNumber = str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
+
+                    $data['caseno'] = "OPD-" . $yearToday . "-" . $formattedNumber;
+                }
                 $fields = [
 
                     'consultation_date',
@@ -57,7 +91,8 @@ class ServiceClass
                     'allergies',
                     'past',
                     'current_medication',
-                    'note'
+                    'note',
+                    'caseno'
                 ];
                 try {
                     $this->conn->beginTransaction();
@@ -65,7 +100,6 @@ class ServiceClass
                     $sql = "INSERT INTO opd_consultation (
          
                     consultation_date,
-                
                     pid,
                     service,
                     physician,
@@ -81,11 +115,10 @@ class ServiceClass
                     past,
                     current_medication,
                     note,
-                    lmp
+                    lmp,
+                    caseno
                 ) VALUES (
-            
                     :consultation_date,
-                  
                     :pid,
                     :service,
                     :physician,
@@ -101,7 +134,8 @@ class ServiceClass
                     :past,
                     :current_medication,
                     :note,
-                    :lmp
+                    :lmp,
+                    :caseno
                 )";
 
                     $stmt = $this->conn->prepare($sql);
@@ -173,9 +207,7 @@ class ServiceClass
                     $this->conn->beginTransaction();
 
                     $sql = "UPDATE opd_consultation SET
-                   
                     consultation_date = :consultation_date,
-                  
                     pid = :pid,
                     service = :service,
                     physician = :physician,
@@ -192,7 +224,7 @@ class ServiceClass
                     current_medication = :current_medication,
                     note = :note,
                     lmp = :lmp
-                WHERE opdcid = :recordid";
+                    WHERE opdcid = :recordid";
 
                     $stmt = $this->conn->prepare($sql);
                     foreach ($fields as $f) {
