@@ -113,7 +113,7 @@
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Office Address:</label><span class="auto-span" id="office_address"
-                        style="margin-left:20px; font-size:12px">
+                        style="margin-left:20px; font-size:10px; overflow-wrap: break-word; word-break: break-word; white-space: normal;">
                     </span>
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
