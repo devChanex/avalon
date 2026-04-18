@@ -70,7 +70,7 @@ const defaultMedicationSheetTable = `
 
 //VITAL SIGNS TABLE
 const defaultVitalSignTable = `
-<table border="1" width="100%" cellspacing="0" cellpadding="5">
+<table border="1" width="100%" cellspacing="0" cellpadding="6">
     <thead>
         <tr>
             <th>Date</th>
@@ -79,12 +79,13 @@ const defaultVitalSignTable = `
               <th>Pulse Rate</th>
                <th>Respiratory Rate</th>
                 <th>O₂ Sat</th>
+                   <th>BP</th>
                  <th>Remarks</th>
                   
         </tr>
     </thead>
     <tbody>
-        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(15)}
+        ${'<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'.repeat(15)}
     </tbody>
 </table>
 `;
