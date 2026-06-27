@@ -292,6 +292,11 @@ function loaddata() {
                     document.getElementById("discharge_rr").value = rowdata.discharge_rr ?? '';
                     document.getElementById("discharge_nurse").value = rowdata.discharge_nurse ?? '';
                     document.getElementById("discharge_surgeon").value = rowdata.discharge_surgeon ?? '';
+                    document.getElementById("tab2_discharge_medication").value = rowdata.discharge_medication ?? '';
+                    document.getElementById("tab2_discharge_allergies").value = rowdata.discharge_allergies ?? '';
+                    document.getElementById("tab2_discharge_follow_up_care").value = rowdata.discharge_followup ?? '';
+                    document.getElementById("tab2_discharge_diet").value = rowdata.discharge_diet ?? '';
+                    document.getElementById("tab2_discharge_activity").value = rowdata.discharge_activity ?? '';
 
                     // discharge condition
                     if (rowdata.discharge_condition) {
@@ -969,6 +974,127 @@ function UpSertAmbulatoryDischarge() {
 
 }
 
+
+function UpSertAmbulatoryDischargeSummary() {
+    var data = {
+        amdataid: document.getElementById("amdataid").value.trim(),
+        pid: document.getElementById("consentpid").value.trim(),
+        amid: document.getElementById("ref").value.trim(),
+        discharge_medication: document.getElementById("tab2_discharge_medication").value.trim(),
+        discharge_allergies: document.getElementById("tab2_discharge_allergies").value.trim(),
+        discharge_followup: document.getElementById("tab2_discharge_follow_up_care").value.trim(),
+        discharge_diet: document.getElementById("tab2_discharge_diet").value.trim(),
+        discharge_activity: document.getElementById("tab2_discharge_activity").value.trim()
+    };
+
+
+    // ---------------- VALIDATIONS ----------------
+
+    // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
+    let requiredFields = [
+
+    ];
+
+    for (let field of requiredFields) {
+        if (!data[field]) {
+            promptError('Transaction Failed', field.toUpperCase() + ' is required.');
+            return;
+        }
+    }
+
+    // ---------------- FORM DATA ----------------
+    var fd = new FormData();
+    fd.append('service', 'ambulatory-discharge-summary-upsertService');
+    fd.append('data', JSON.stringify(data));
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+            if (result.success) {
+
+                promptSuccess('Result', result.message);
+                loaddata();
+
+                const checkedDischargeValues = [];
+                const checkedDischargeLabels = [];
+                document.querySelectorAll('.form-check-input-discharge-param').forEach((box, index) => {
+                    if (box.checked) {
+                        checkedDischargeValues.push(index + 1);
+                        const label = box.closest('.form-check')?.querySelector('.form-check-label')?.textContent?.trim();
+                        if (label) {
+                            checkedDischargeLabels.push(label.replace(/\s+/g, ' '));
+                        }
+                    }
+                });
+
+                const payload = {
+                    ...(result.record || {}),
+                    fullname: document.getElementById("general_fullname").value.trim(),
+                    caseno: document.getElementById("general_caseno").value.trim(),
+                    birthdate: document.getElementById("general_birthdate").value.trim(),
+                    age: document.getElementById("general_age").value.trim(),
+                    gender: document.getElementById("general_gender").value.trim(),
+                    physician: document.getElementById("general_physician").value.trim(),
+                    procedure_datetime: document.getElementById("general_datetime").value.trim(),
+                    discharge_datetime: document.getElementById("discharge_datetime").value.trim(),
+                    reason_procedure: document.getElementById("tab2_chiefComplaint").value.trim(),
+                    history_present_illness: document.getElementById("tab2_illness_history").value.trim(),
+                    type_of_procedure: document.getElementById("general_procedure").value.trim(),
+                    ambulatory_surgical_clinic_course: document.getElementById("tab2_surgical_plan").value.trim(),
+                    discharge_bp: document.getElementById("discharge_bp").value.trim(),
+                    discharge_hr: document.getElementById("discharge_pr").value.trim(),
+                    discharge_rr: document.getElementById("discharge_rr").value.trim(),
+                    discharge_temp: document.getElementById("discharge_temp").value.trim(),
+                    discharge_o2_sat: document.getElementById("discharge_osat").value.trim(),
+                    discharge_condition: checkedDischargeLabels.length ? checkedDischargeLabels.join('; ') : "",
+                    discharge_nurse: document.getElementById("discharge_nurse").value.trim(),
+                    discharge_physician: document.getElementById("discharge_surgeon").value.trim(),
+                    discharge_medication: document.getElementById("tab2_discharge_medication").value.trim(),
+                    discharge_allergies: document.getElementById("tab2_discharge_allergies").value.trim(),
+                    discharge_followup: document.getElementById("tab2_discharge_follow_up_care").value.trim(),
+                    discharge_diet: document.getElementById("tab2_discharge_diet").value.trim(),
+                    discharge_activity: document.getElementById("tab2_discharge_activity").value.trim(),
+                    discharge_parameter: checkedDischargeValues.length ? `{${checkedDischargeValues.join(',')}}` : ""
+                };
+
+                const form = document.createElement("form");
+                form.method = "POST";
+                form.action = "forms/ambulatory_discharge_summary_form.php";
+                form.target = "_blank"; // Open in a new tab
+
+                // Create a hidden input to hold the data
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "data";
+                input.value = JSON.stringify(payload);
+
+                // Append input to form
+                form.appendChild(input);
+
+                // Append form to body (must be in DOM to submit)
+                document.body.appendChild(form);
+
+                // Submit form
+                form.submit();
+
+                // Remove form after submission
+                document.body.removeChild(form);
+
+            } else {
+
+                promptError('Result', result.message);
+            }
+        },
+        error: function (xhr) {
+            promptError('Failed Result:', "Error: " + xhr.responseText);
+        }
+
+    });
+
+}
 
 function UpSertPreopData() {
 

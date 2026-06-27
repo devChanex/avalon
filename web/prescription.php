@@ -184,7 +184,7 @@ require_once 'properties.php';
                                                         </datalist>
 
                                                         <!-- Hidden field (this is submitted to backend) -->
-                                                        <input type="text" id="pid" name="invidmodal" onchange="">
+                                                        <input type="hidden" id="pid" name="invidmodal" onchange="">
 
                                                     </div>
                                                     <div class="col-lg-6">

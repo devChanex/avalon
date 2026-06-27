@@ -878,6 +878,77 @@ require_once 'properties.php';
                                         </div>
                                     </div>
                                     <hr>
+
+                                    <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
+                                        onclick="toggleChecklistDetails('dischargeSummarySheet', 'toggleIcon-dischargeSummary')">
+                                        <span id="toggleIcon-dischargeSummary"
+                                            style="transition: transform 0.2s;">▶</span>
+                                        C. Discharge Summary
+                                    </h5>
+
+                                    <div id="dischargeSummarySheet" style="
+                                    display: none; 
+                                    margin-top: 10px;">
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label for="tab2_discharge_medication" class="form-label">
+                                                    <strong>Medication on Discharge</strong>
+                                                </label>
+                                                <textarea class="form-control" id="tab2_discharge_medication" rows="3"
+                                                    placeholder="Enter medication on discharge here..."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label for="tab2_discharge_allergies" class="form-label">
+                                                    <strong>Allergies</strong>
+                                                </label>
+                                                <textarea class="form-control" id="tab2_discharge_allergies" rows="3"
+                                                    placeholder="Enter allergies here..."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label for="tab2_discharge_follow_up_care" class="form-label">
+                                                    <strong>Follow-up care</strong>
+                                                </label>
+                                                <textarea class="form-control" id="tab2_discharge_follow_up_care"
+                                                    rows="3"
+                                                    placeholder="Enter follow-up care instructions here..."></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label for="tab2_discharge_diet" class="form-label">
+                                                    <strong>Diet</strong>
+                                                </label>
+                                                <textarea class="form-control" id="tab2_discharge_diet" rows="3"
+                                                    placeholder="Enter diet instructions here..."></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label for="tab2_discharge_activity" class="form-label">
+                                                    <strong>Activity</strong>
+                                                </label>
+                                                <textarea class="form-control" id="tab2_discharge_activity" rows="3"
+                                                    placeholder="Enter activity instructions here..."></textarea>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="tab-footer">
+                                            <button type="button" class="btn btn-success px-4"
+                                                onclick="UpSertAmbulatoryDischargeSummary();">
+                                                Save and Print
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <hr>
                                 </div>
                                 <div class="tab-pane fade show" id="tab3" role="tabpanel"
                                     style="max-width:95%;margin: 0 auto;">
@@ -1497,7 +1568,7 @@ require_once 'properties.php';
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/constants-v2.js"></script>
     <script src="scripts/dynamicScripts-v6.js"></script>
-    <script src="scripts/ambulatory-view-v8.js"></script>
+    <script src="scripts/ambulatory-view-v9.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 
