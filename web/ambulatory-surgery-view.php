@@ -460,7 +460,7 @@ require_once 'properties.php';
                                     </div>
 
                                     <hr>
-                                    <div id="WHOCheckListSection">
+                                    <div id="InformationDataCo">
                                         <input type="hidden" id="preopid">
 
                                         <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
@@ -485,7 +485,32 @@ require_once 'properties.php';
                                     </div>
 
                                     <hr>
+                                    <div id="InformationDataConsentSection">
+                                        <input type="hidden" id="preopid">
 
+                                        <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
+                                            onclick="toggleChecklistDetails('InformationDataConsentDetails', 'toggleIcon-InformationDataConsent')">
+                                            <span id="toggleIcon-InformationDataConsent"
+                                                style="transition: transform 0.2s;">▶</span>
+                                            D. Information and Data Consent Form
+                                        </h5>
+
+                                        <div id="InformationDataConsentDetails"
+                                            style="display: none; margin-top: 10px;">
+                                            <p>Our healthcare facility collects and processes your personal and medical
+                                                information to provide safe, accurate and quality
+                                                healthcare services. This includes diagnosis, treatment, medical records
+                                                management, billing and reporting in accordance with Data
+                                                Privacy Act of 2012 and other health authorities.</p>
+                                            <div class="tab-footer">
+                                                <button type="button" class="btn btn-success px-4"
+                                                    onclick="printInformationDataConsent();">
+                                                    Print Information and Data Consent Form
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
 
 
                                 </div>

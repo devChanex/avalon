@@ -1247,6 +1247,33 @@ async function printWHO() {
     document.body.removeChild(form);
 }
 
+async function printInformationDataConsent() {
+    const data = await populate_form_data_general();
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "forms/ambulatory_dpo_form.php";
+    form.target = "_blank"; // Open in a new tab
+
+    data.nurse = document.getElementById("consent_nurse").value.trim();
+    // Create a hidden input to hold the data
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "data";
+    input.value = JSON.stringify(data);
+
+    // Append input to form
+    form.appendChild(input);
+
+    // Append form to body (must be in DOM to submit)
+    document.body.appendChild(form);
+
+    // Submit form
+    form.submit();
+
+    // Remove form after submission
+    document.body.removeChild(form);
+}
+
 function printVitalSheet() {
     var records = {};
     records.content = vitalDataCache;
