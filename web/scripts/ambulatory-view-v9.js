@@ -293,7 +293,7 @@ function loaddata() {
                     document.getElementById("discharge_nurse").value = rowdata.discharge_nurse ?? '';
                     document.getElementById("discharge_surgeon").value = rowdata.discharge_surgeon ?? '';
                     document.getElementById("tab2_discharge_medication").value = rowdata.discharge_medication ?? '';
-                    document.getElementById("tab2_discharge_allergies").value = rowdata.discharge_allergies ?? '';
+                    document.getElementById("tab2_discharge_allergies").value = rowdata.discharge_allergies ?? document.getElementById("preop_allergies").value;
                     document.getElementById("tab2_discharge_follow_up_care").value = rowdata.discharge_followup ?? '';
                     document.getElementById("tab2_discharge_diet").value = rowdata.discharge_diet ?? '';
                     document.getElementById("tab2_discharge_activity").value = rowdata.discharge_activity ?? '';
