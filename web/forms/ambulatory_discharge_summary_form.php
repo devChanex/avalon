@@ -144,8 +144,15 @@
                     if (key === "discharge_condition") {
                         const elCondition = document.getElementById("discharge_condition");
                         if (elCondition) {
-                            const normalizedValue = String(value ?? '').replace(/\s+/g, ' ').trim();
-                            elCondition.textContent = normalizedValue || 'N/A';
+                            const normalizedValue = String(value ?? '')
+                                .replace(/\s*;\s*/g, '\n')
+                                .trim();
+                            elCondition.innerHTML = normalizedValue
+                                .split(/\n+/)
+                                .map(item => item.trim())
+                                .filter(Boolean)
+                                .map(item => `<div style="white-space: nowrap;">${item}</div>`)
+                                .join('');
                         }
                         continue;
                     }
@@ -182,23 +189,23 @@
             }
         });
 
-        // 🖨️ Auto-print after load
-        window.addEventListener('load', () => {
-            window.print();
-        });
+        // // 🖨️ Auto-print after load
+        // window.addEventListener('load', () => {
+        //     window.print();
+        // });
 
-        // ✅ Close window after print or cancel
-        window.onafterprint = () => {
-            window.close();
-        };
+        // // ✅ Close window after print or cancel
+        // window.onafterprint = () => {
+        //     window.close();
+        // };
 
-        // ✅ Extra safety for some browsers
-        const mediaQueryList = window.matchMedia('print');
-        mediaQueryList.addEventListener('change', (mql) => {
-            if (!mql.matches) {
-                window.close();
-            }
-        });
+        // // ✅ Extra safety for some browsers
+        // const mediaQueryList = window.matchMedia('print');
+        // mediaQueryList.addEventListener('change', (mql) => {
+        //     if (!mql.matches) {
+        //         window.close();
+        //     }
+        // });
     </script>
 
 
