@@ -24,38 +24,34 @@
             <tr>
                 <!-- First column -->
                 <td style="border: 1px solid black; padding: 2px; "><label style="font-size:10px">Patient
-                        No:</label><strong><span class="auto-span" id="patientno" style="margin-left:20px"></span>
+                        No:</label><strong><span class="auto-span" id="patientno" style="margin-left:20px; font-size:12px"></span>
                     </strong></td>
                 <td style="border: 1px solid black; padding: 2px; "><label
                         style="font-size:10px">CaseNo:</label><strong><span class="auto-span" id="caseno"
-                            style="margin-left:20px"></span> </strong></td>
+                            style="margin-left:20px; font-size:12px"></span> </strong></td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px; "><label style="font-size:10px">Arrival
-                        Date/Time:</label><strong><span class="auto-span" id="arrival" style="margin-left:20px"></span>
+                        Date/Time:</label><br><strong><span class="auto-span" id="arrival" style="margin-left:20px; font-size:12px"></span>
                     </strong></td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;"><label style="font-size:10px">Attending
                         Physician:</label><strong><span class="auto-span" id="physician"
-                            style="margin-left:20px"></span> </strong></td>
-
-            </tr>
+                            style="margin-left:20px; font-size:12px"></span> </strong></td>
 
             </tr>
             <tr>
                 <!-- First column -->
                 <td colspan="2" style="border: 1px solid black; padding: 2px; width: 50%;"><label
-                        style="font-size:10px">Patient Name:</label><strong><span class="auto-span" id="fullname"
-                            style="margin-left:20px"></span> </strong></td>
+                        style="font-size:10px ">Patient Name:</label><strong><span class="auto-span" id="fullname"
+                            style="margin-left:20px; font-size:12px"></span> </strong></td>
                 <td colspan="2"
                     style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">PHIC No.: </label><span class="auto-span" id="phic_no"
-                        style="margin-left:20px">
-                    </span> </strong>
+                    <label style="font-size:10px">PHIC No.: </label><strong><span class="auto-span" id="phic_no"
+                        style="margin-left:20px; font-size:12px">
+                    </span></strong>
                 </td>
                 <td colspan="2" style="border-left: 1px solid black; border-right: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Member Type:</label><span class="auto-span" id="membertype"
-                        style="margin-left:20px"></span> </strong>
+                    <label style="font-size:10px">Member Type:</label><strong><span class="auto-span" id="membertype"
+                        style="margin-left:20px; font-size:12px"></span></strong>
                 </td>
-
-            </tr>
 
             </tr>
 
@@ -63,23 +59,23 @@
             <tr>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Birthdate:</label><span class="auto-span" id="birthdate"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:12px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Birthplace:</label><span class="auto-span" id="birth_place"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:12px">
                     </span>
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Age:</label><span class="auto-span" id="age" style="margin-left:20px">
+                    <label style="font-size:10px">Age:</label><span class="auto-span" id="age" style="margin-left:20px; font-size:12px">
                     </span>
                 </td>
 
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Gender:</label><span class="auto-span" id="gender"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:12px ">
                     </span>
                 </td>
 
@@ -87,42 +83,42 @@
             <tr>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Nationality:</label><span class="auto-span" id="nationality"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:12px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Religion:</label><span class="auto-span" id="religion"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:12px">
                     </span>
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Marital Status:</label><span class="auto-span" id="marital_status"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:12px">
                     </span>
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Contact No.:</label><span class="auto-span" id="contact_number"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:12px">
                     </span>
                 </td>
 
             </tr>
             <tr>
-                <td colspan="2" style="border: 1px solid black; padding: 2px;">
+                <td colspan="2" style="border: 1px solid black; padding: 2px; word-break: break-word; white-space: normal;">
                     <label style="font-size:10px">Present Address:</label><span class="auto-span" id="present_address"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:10px; overflow-wrap: break-word; word-break: break-word; white-space: normal;">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Office Address:</label><span class="auto-span" id="office_address"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:10px; overflow-wrap: break-word; word-break: break-word; white-space: normal;">
                     </span>
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Occupation:</label><span class="auto-span" id="occupation"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:12px">
                     </span>
                 </td>
 
@@ -132,18 +128,18 @@
             <tr>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">In case of Emergency, Please Notify:</label><span class="auto-span"
-                        id="emergency_contact_person" style="margin-left:20px">
+                        id="emergency_contact_person" style="margin-left:20px; font-size:12px">
                     </span>
 
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Relationship:</label><span class="auto-span"
-                        id="emergency_relationship" style="margin-left:20px">
+                        id="emergency_relationship" style="margin-left:20px; font-size:12px">
                     </span>
                 </td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Contact No.:</label><span class="auto-span"
-                        id="emergency_contact_number" style="margin-left:20px">
+                        id="emergency_contact_number" style="margin-left:20px; font-size:12px">
                     </span>
                 </td>
 
@@ -152,11 +148,11 @@
             <tr>
                 <td colspan="3" style="border: 1px solid black; padding: 4px;">
                     <label style="font-size:10px;">Allergies:</label>
-                    <span id="allergies" style="margin-left: 10px; font-size: 10px;"></span>
+                    <span id="allergies" style="margin-left: 10px; font-size: 12px;"></span>
                 </td>
                 <td colspan="3" style="border: 1px solid black; padding: 4px;">
                     <label style="font-size:10px;">Current Medication:</label>
-                    <span id="currentmedication" style="margin-left: 10px; font-size: 10px;"></span>
+                    <span id="currentmedication" style="margin-left: 10px; font-size: 12px;"></span>
                 </td>
             </tr>
             <tr>
@@ -169,7 +165,7 @@
                     </div>
 
                     <div class="who-signature" style="margin-top:50px;">
-                        <div id="fullname2" class="sig-name"></div>
+                        <div id="fullname2" class="sig-name" style="font-size:12px;"></div>
                         <div class="long-sig-line"></div>
                         <div class="sig-role">Signature over Printed Name / Date & Time<br>Patient / Guardian</div>
                     </div>
@@ -187,7 +183,7 @@
             <tr>
                 <td colspan="5" style="border: 1px solid black; padding: 4px;">
                     <label style="font-size:10px;">Chief Complaint:</label><br>
-                    <span id="chief_complaint" style="margin-left: 10px; font-size: 10px;"></span>
+                    <span id="chief_complaint" style="margin-left: 10px; font-size: 11px;"></span>
                 </td>
 
                 <td colspan="1" style="border: 1px solid black; padding: 4px;">
@@ -218,42 +214,42 @@
 
             <tr>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">BP:</label><span class="auto-span" id="bp" style="margin-left:20px">
+                    <label style="font-size:10px">BP:</label><span class="auto-span" id="bp" style="margin-left:20px ; font-size:12px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">PR:</label><span class="auto-span" id="pr" style="margin-left:20px">
+                    <label style="font-size:10px">PR:</label><span class="auto-span" id="pr" style="margin-left:20px ; font-size:12px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Temp:</label><span class="auto-span" id="temp"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:12px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">RR:</label><span class="auto-span" id="rr" style="margin-left:20px">
+                    <label style="font-size:10px">RR:</label><span class="auto-span" id="rr" style="margin-left:20px; font-size:12px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Height:</label><span class="auto-span" id="height"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:12px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Weight:</label><span class="auto-span" id="weight"
-                        style="margin-left:20px">
+                        style="margin-left:20px; font-size:12px">
                     </span>
 
                 </td>
             <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 4px;">
                     <label style="font-size:10px;">History of Illness:</label><br>
-                    <span id="illness_history" style="margin-left: 10px; font-size: 10px;"></span>
+                    <span id="illness_history" style="margin-left: 10px; font-size: 12px;"></span>
                 </td>
 
 
@@ -262,7 +258,7 @@
             <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 4px;">
                     <label style="font-size:10px;">Past Medical History:</label><br>
-                    <span id="past_medical_history" style="margin-left: 10px; font-size: 10px;"></span>
+                    <span id="past_medical_history" style="margin-left: 10px; font-size: 12px;"></span>
                 </td>
 
 
@@ -271,20 +267,20 @@
             <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 4px;">
                     <label style="font-size:10px;">Initial Impression:</label><br>
-                    <span id="initial_impression" style="margin-left: 10px; font-size: 10px;"></span>
+                    <span id="initial_impression" style="margin-left: 10px; font-size: 12px;"></span>
                 </td>
             </tr>
             <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 6px;">
                     <label style="font-size:10px;">Type of Anesthesia:</label><br>
-                    <div id="anesthesia" style="margin-left: 10px; font-size: 10px;  width: 100%;">
+                    <div id="anesthesia" style="margin-left: 10px; font-size: 12px;  width: 100%;">
                     </div>
                 </td>
             </tr>
             <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 4px;">
                     <label style="font-size:10px;">Pre-op Orders/Preparations:</label><br>
-                    <span id="preop_orders" style="margin-left: 10px; font-size: 10px;"></span>
+                    <span id="preop_orders" style="margin-left: 10px; font-size: 12px;"></span>
                 </td>
             </tr>
 
@@ -421,6 +417,7 @@
                     text-align: center;
                     line-height: 9px;
                     font-size: 8px;
+                    overflow-wrap: break-word;
                 ">
                     ${list.includes(opt.id) ? "✔" : ""}
                 </span>
