@@ -237,7 +237,12 @@ function loaddata() {
                     document.getElementById("preop_dose").value = rowdata.last_dose ?? '';
                     document.getElementById("preop_diagnosis").value = rowdata.diagnosis ?? '';
                 });
-
+                document.getElementById("tab2_bp").value = document.getElementById("preop_bp").value;
+                document.getElementById("tab2_rr").value = document.getElementById("preop_rr").value;
+                document.getElementById("tab2_pr").value = document.getElementById("preop_hr").value;
+                document.getElementById("tab2_temp").value = document.getElementById("preop_temp").value;
+                document.getElementById("tab2_height").value = document.getElementById("preop_height").value;
+                document.getElementById("tab2_weight").value = document.getElementById("preop_weight").value;
                 result.ambulatorydata.forEach(rowdata => {
 
                     // IDs & References
@@ -1146,6 +1151,14 @@ function UpSertPreopData() {
         success: function (result) {
 
             if (result.success) {
+                document.getElementById("tab2_bp").value = data.BP;
+                document.getElementById("tab2_rr").value = data.RR;
+                document.getElementById("tab2_pr").value = data.HR;
+                document.getElementById("tab2_temp").value = data.TEMP;
+                document.getElementById("tab2_height").value = data.HT;
+                document.getElementById("tab2_weight").value = data.WT;
+
+
 
                 promptSuccess('Result', result.message);
                 loaddata();
@@ -1177,6 +1190,8 @@ function UpSertPreopData() {
 
                 // Remove form after submission
                 document.body.removeChild(form);
+
+
 
             } else {
 
