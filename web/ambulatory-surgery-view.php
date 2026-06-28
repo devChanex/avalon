@@ -502,10 +502,58 @@ require_once 'properties.php';
                                                 healthcare services. This includes diagnosis, treatment, medical records
                                                 management, billing and reporting in accordance with Data
                                                 Privacy Act of 2012 and other health authorities.</p>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+
+                                                    <label for="itemname">Health Care Representative:</label>
+                                                    <!-- Visible field (user types/sees this one) -->
+                                                    <input list="representative_options" id="representative"
+                                                        class="form-control" placeholder="representative"
+                                                        autocomplete="off">
+                                                    <datalist id="representative_options">
+                                                        <option value="Jennifer Ibañez">Jennifer Ibañez</option>
+                                                        <option value="EdMark Macaraya">EdMark Macaraya</option>
+                                                    </datalist>
+                                                </div>
+                                            </div>
                                             <div class="tab-footer">
                                                 <button type="button" class="btn btn-success px-4"
                                                     onclick="printInformationDataConsent();">
-                                                    Print Information and Data Consent Form
+                                                    Save and Print Information and Data Consent Form
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <div id="anesthesiaConsentSection">
+                                        <input type="hidden" id="preopid">
+
+                                        <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
+                                            onclick="toggleChecklistDetails('anesthesiaConsentDetails', 'toggleIcon-anesthesiaConsent')">
+                                            <span id="toggleIcon-anesthesiaConsent"
+                                                style="transition: transform 0.2s;">▶</span>
+                                            E. Anesthesia Consent Form
+                                        </h5>
+
+                                        <div id="anesthesiaConsentDetails" style="display: none; margin-top: 10px;">
+                                            <p>Print Anesthesia Consent Form</p>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+
+                                                    <label for="itemname">Anesthesiologist:</label>
+                                                    <!-- Visible field (user types/sees this one) -->
+                                                    <input list="anesthesiologist_options" id="anesthesiologist"
+                                                        class="form-control" placeholder="Anesthesiologist"
+                                                        autocomplete="off">
+                                                    <datalist id="anesthesiologist_options">
+                                                        <option value="">Loading...</option>
+                                                    </datalist>
+                                                </div>
+                                            </div>
+                                            <div class="tab-footer">
+                                                <button type="button" class="btn btn-success px-4"
+                                                    onclick="printAnesthesiaConsent();">
+                                                    Save and Print Anesthesia Consent Form
                                                 </button>
                                             </div>
                                         </div>
@@ -699,15 +747,18 @@ require_once 'properties.php';
                                                             Care:</strong></label>
                                                     <select class="form-control" id="anesthesia_plan">
 
-                                                        <option value="">-- Select Anesthesia plan of care --</option>
-                                                        <option value="General anesthesia - IV">General anesthesia - IV
+                                                        <option value="">-- Select Anesthesia plan of care --
+                                                        </option>
+                                                        <option value="General anesthesia - IV">General anesthesia -
+                                                            IV
                                                         </option>
                                                         <option value="General anesthesia - Inhalation">General
                                                             anesthesia - Inhalation</option>
                                                         <option value="Regional-Nerve Block">Regional-Nerve Block
                                                         </option>
                                                         <option value="Regional - Spinal">Regional - Spinal</option>
-                                                        <option value="Regional - Epidural">Regional - Epidural</option>
+                                                        <option value="Regional - Epidural">Regional - Epidural
+                                                        </option>
 
                                                         <!-- 3. Local -->
                                                         <option value="Local">Local</option>
@@ -835,7 +886,8 @@ require_once 'properties.php';
                                                 <div class="form-check mb-0">
                                                     <input class="form-check-input-discharge-param" type="checkbox"
                                                         id="discharge_param1" value="local">
-                                                    <label class="form-check-label" for="anesthesia_local">Patient is
+                                                    <label class="form-check-label" for="anesthesia_local">Patient
+                                                        is
                                                         fully awake and oriented.</label>
                                                 </div>
                                                 <div class="form-check mb-0">
@@ -847,13 +899,15 @@ require_once 'properties.php';
                                                 <div class="form-check mb-0">
                                                     <input class="form-check-input-discharge-param" type="checkbox"
                                                         id="discharge_param3" value="local">
-                                                    <label class="form-check-label" for="anesthesia_local">Patient has
+                                                    <label class="form-check-label" for="anesthesia_local">Patient
+                                                        has
                                                         stable vital signs.</label>
                                                 </div>
                                                 <div class="form-check mb-0">
                                                     <input class="form-check-input-discharge-param" type="checkbox"
                                                         id="discharge_param4" value="local">
-                                                    <label class="form-check-label" for="anesthesia_local">Patient can
+                                                    <label class="form-check-label" for="anesthesia_local">Patient
+                                                        can
                                                         maintain mobility with minimal assistance.</label>
                                                 </div>
                                                 <div class="form-check mb-0">
@@ -1593,7 +1647,7 @@ require_once 'properties.php';
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/constants-v2.js"></script>
     <script src="scripts/dynamicScripts-v6.js"></script>
-    <script src="scripts/ambulatory-view-v9.js"></script>
+    <script src="scripts/ambulatory-view-v10.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

@@ -56,6 +56,7 @@ async function loadAllDatalists() {
         await populateDataList('', 'ms_medication_input_options', 'datalist-medication', 'v2');
         await populateDataList('', 'consent_nurse_options', 'datalist-nurse', 'v2');
         await populateDataList('', 'discharge_nurse_options', 'datalist-nurse', 'v2');
+        await populateDataList('', 'anesthesiologist_options', 'datalist-anesthesiologist', 'v2');
         await populateDataList('', 'discharge_surgeon_options', 'datalist-physician', 'v2');
         await populateDataList('', 'ms_nurse_nurse_input_options', 'datalist-nurse', 'v2');
         await populateDataList('', 'optech_surgeon_input_options', 'datalist-physician', 'v2');
@@ -241,6 +242,7 @@ function loaddata() {
 
                     // IDs & References
                     document.getElementById("amdataid").value = rowdata.amdataid ?? '';
+                    document.getElementById("anesthesiologist").value = rowdata.anesthesiologist ?? '';
 
                     // 🩺 Clinical Assessment
                     document.getElementById("tab2_bp").value = rowdata.bp ?? '';
@@ -1248,32 +1250,166 @@ async function printWHO() {
 }
 
 async function printInformationDataConsent() {
+
+    var datas = {
+        representative: document.getElementById("representative").value.trim(),
+        amid: document.getElementById("ref").value.trim(),
+        amdataid: document.getElementById("amdataid").value.trim(),
+        pid: document.getElementById("general_pid").value.trim(),
+
+    };
+
+
+    // ---------------- VALIDATIONS ----------------
+
+    // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
+    let requiredFields = [
+        "amid", "representative"
+    ];
+
+    for (let field of requiredFields) {
+        if (!datas[field]) {
+            promptError('Transaction Failed', field.toUpperCase() + ' is required.');
+            return;
+        }
+    }
     const data = await populate_form_data_general();
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = "forms/ambulatory_dpo_form.php";
-    form.target = "_blank"; // Open in a new tab
+    // ---------------- FORM DATA ----------------
+    var fd = new FormData();
+    fd.append('service', 'ambulatory-anesthesiologist-upsertService');
+    fd.append('data', JSON.stringify(datas));
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
 
-    data.nurse = document.getElementById("consent_nurse").value.trim();
-    // Create a hidden input to hold the data
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = "data";
-    input.value = JSON.stringify(data);
+            if (result.success) {
 
-    // Append input to form
-    form.appendChild(input);
+                promptSuccess('Result', result.message);
+                loaddata();
 
-    // Append form to body (must be in DOM to submit)
-    document.body.appendChild(form);
+                const form = document.createElement("form");
+                form.method = "POST";
+                form.action = "forms/ambulatory_dpo_form.php";
+                form.target = "_blank"; // Open in a new tab
 
-    // Submit form
-    form.submit();
+                data.nurse = document.getElementById("consent_nurse").value.trim();
+                data.representative = document.getElementById("representative").value.trim();
+                // Create a hidden input to hold the data
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "data";
+                input.value = JSON.stringify(data);
 
-    // Remove form after submission
-    document.body.removeChild(form);
+                // Append input to form
+                form.appendChild(input);
+
+                // Append form to body (must be in DOM to submit)
+                document.body.appendChild(form);
+
+                // Submit form
+                form.submit();
+
+                // Remove form after submission
+                document.body.removeChild(form);
+
+            } else {
+
+                promptError('Result', result.message);
+            }
+        },
+        error: function (xhr) {
+            promptError('Failed Result:', "Error: " + xhr.responseText);
+        }
+
+    });
+
+
 }
 
+async function printAnesthesiaConsent() {
+
+    var datas = {
+        anesthesiologist: document.getElementById("anesthesiologist").value.trim(),
+        amid: document.getElementById("ref").value.trim(),
+        amdataid: document.getElementById("amdataid").value.trim(),
+        pid: document.getElementById("general_pid").value.trim(),
+
+    };
+
+
+    // ---------------- VALIDATIONS ----------------
+
+    // Required fields (all except philHealthNumber, accountType, pleaseSpecify)
+    let requiredFields = [
+        "amid", "anesthesiologist"
+    ];
+
+    for (let field of requiredFields) {
+        if (!datas[field]) {
+            promptError('Transaction Failed', field.toUpperCase() + ' is required.');
+            return;
+        }
+    }
+    const data = await populate_form_data_general();
+    // ---------------- FORM DATA ----------------
+    var fd = new FormData();
+    fd.append('service', 'ambulatory-anesthesiologist-upsertService');
+    fd.append('data', JSON.stringify(datas));
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+
+            if (result.success) {
+
+                promptSuccess('Result', result.message);
+                loaddata();
+
+                const form = document.createElement("form");
+                form.method = "POST";
+                form.action = "forms/ambulatory_anesthesia_form.php";
+                form.target = "_blank"; // Open in a new tab
+
+                data.nurse = document.getElementById("consent_nurse").value.trim();
+                data.anesthesiologist = document.getElementById("anesthesiologist").value.trim();
+                // Create a hidden input to hold the data
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "data";
+                input.value = JSON.stringify(data);
+
+                // Append input to form
+                form.appendChild(input);
+
+                // Append form to body (must be in DOM to submit)
+                document.body.appendChild(form);
+
+                // Submit form
+                form.submit();
+
+                // Remove form after submission
+                document.body.removeChild(form);
+
+            } else {
+
+                promptError('Result', result.message);
+            }
+        },
+        error: function (xhr) {
+            promptError('Failed Result:', "Error: " + xhr.responseText);
+        }
+
+    });
+
+
+}
 function printVitalSheet() {
     var records = {};
     records.content = vitalDataCache;
