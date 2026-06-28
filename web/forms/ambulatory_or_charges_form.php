@@ -169,10 +169,10 @@
                         // Add actual records
                         row.orcharges.forEach(data => {
                             count++;
-
-
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
+                            console.log(data.classification + " " + data.qty);
+                            if (data.qty != 0) {
+                                const tr = document.createElement("tr");
+                                tr.innerHTML = `
                     
                         <td style="border:1px solid black; padding:5px;">${data.classification || ''}</td>
                         <td style="border:1px solid black; padding:5px;">${data.itemname || '0'}</td>
@@ -180,7 +180,11 @@
                      
             
                     `;
-                            vitalTableBody.appendChild(tr);
+                                vitalTableBody.appendChild(tr);
+
+                            }
+
+
                         });
 
                         // Add empty rows until there are at least 10 total
@@ -203,23 +207,23 @@
             }
         });
 
-        // 🖨️ Auto-print after load
-        window.addEventListener('load', () => {
-            window.print();
-        });
+        // // 🖨️ Auto-print after load
+        // window.addEventListener('load', () => {
+        //     window.print();
+        // });
 
-        // ✅ Close window after print or cancel
-        window.onafterprint = () => {
-            window.close();
-        };
+        // // ✅ Close window after print or cancel
+        // window.onafterprint = () => {
+        //     window.close();
+        // };
 
-        // ✅ Extra safety for some browsers
-        const mediaQueryList = window.matchMedia('print');
-        mediaQueryList.addEventListener('change', (mql) => {
-            if (!mql.matches) {
-                window.close();
-            }
-        });
+        // // ✅ Extra safety for some browsers
+        // const mediaQueryList = window.matchMedia('print');
+        // mediaQueryList.addEventListener('change', (mql) => {
+        //     if (!mql.matches) {
+        //         window.close();
+        //     }
+        // });
     </script>
 
 
