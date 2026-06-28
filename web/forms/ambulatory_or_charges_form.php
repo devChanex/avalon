@@ -168,9 +168,10 @@
 
                         // Add actual records
                         row.orcharges.forEach(data => {
-                            count++;
-                            console.log(data.classification + " " + data.qty);
+
+
                             if (data.qty != 0) {
+                                count++;
                                 const tr = document.createElement("tr");
                                 tr.innerHTML = `
                     
