@@ -180,10 +180,12 @@ require_once 'properties.php';
                                 <span class="input-group-text bg-primary text-white"><i
                                         class="bi bi-layout-text-sidebar-reverse"></i></span>
                                 <select class="form-select fw-semibold" id="tabSelect">
-                                    <option value="#tab1" style="color: #fff; background-color: #007bff;">
-                                        Pre-Requisites</option>
+
                                     <option value="#tab2" style="color: #fff; background-color: #339af0;">
                                         Ambulatory Surgery Patient Data</option>
+
+                                    <option value="#tab1" style="color: #fff; background-color: #007bff;">
+                                        Pre-Requisites</option>
                                     <option value="#tab3" style="color: #fff; background-color: #1c7ed6;">
                                         Vital Signs Sheet</option>
                                     <option value="#tab4" style="color: #fff; background-color: #228be6;">
@@ -248,7 +250,7 @@ require_once 'properties.php';
                             <!-- Tabs Content -->
                             <div class="tab-content border border-top-0 p-1" id="myTabContent"
                                 style="height: 600px; overflow-y: auto;">
-                                <div class="tab-pane fade show active" id="tab1" role="tabpanel"
+                                <div class="tab-pane fade show" id="tab1" role="tabpanel"
                                     style="max-width:95%;margin: 0 auto;">
                                     <div id="consentFormSection">
                                         <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
@@ -562,7 +564,7 @@ require_once 'properties.php';
 
 
                                 </div>
-                                <div class="tab-pane fade show" id="tab2" role="tabpanel"
+                                <div class="tab-pane fade show active" id="tab2" role="tabpanel"
                                     style="max-width:95%;margin: 0 auto;">
                                     <h5 style="cursor: pointer; display: flex; align-items: center; gap: 6px;"
                                         onclick="toggleChecklistDetails('ambulatorydatasheet1', 'toggleIcon-predatasheet')">
@@ -1647,7 +1649,7 @@ require_once 'properties.php';
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/constants-v2.js"></script>
     <script src="scripts/dynamicScripts-v6.js"></script>
-    <script src="scripts/ambulatory-view-v11.js"></script>
+    <script src="scripts/ambulatory-view-v12.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

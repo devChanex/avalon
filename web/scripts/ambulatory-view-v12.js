@@ -237,12 +237,7 @@ function loaddata() {
                     document.getElementById("preop_dose").value = rowdata.last_dose ?? '';
                     document.getElementById("preop_diagnosis").value = rowdata.diagnosis ?? '';
                 });
-                document.getElementById("tab2_bp").value = document.getElementById("preop_bp").value;
-                document.getElementById("tab2_rr").value = document.getElementById("preop_rr").value;
-                document.getElementById("tab2_pr").value = document.getElementById("preop_hr").value;
-                document.getElementById("tab2_temp").value = document.getElementById("preop_temp").value;
-                document.getElementById("tab2_height").value = document.getElementById("preop_height").value;
-                document.getElementById("tab2_weight").value = document.getElementById("preop_weight").value;
+
                 result.ambulatorydata.forEach(rowdata => {
 
                     // IDs & References
@@ -258,6 +253,13 @@ function loaddata() {
                     document.getElementById("tab2_weight").value = rowdata.weight ?? '';
                     document.getElementById("tab2_chiefComplaint").value = rowdata.chief_complaint ?? '';
                     document.getElementById("tab2_arrival").value = rowdata.surgery_date ?? rowdata.arrival;
+
+                    document.getElementById("preop_bp").value = document.getElementById("tab2_bp").value;
+                    document.getElementById("preop_rr").value = document.getElementById("tab2_rr").value;
+                    document.getElementById("preop_hr").value = document.getElementById("tab2_pr").value;
+                    document.getElementById("preop_temp").value = document.getElementById("tab2_temp").value;
+                    document.getElementById("preop_height").value = document.getElementById("tab2_height").value;
+                    document.getElementById("preop_weight").value = document.getElementById("tab2_weight").value;
 
                     // 😖 Pain Rating
                     document.getElementById("painScaleInput").value = rowdata.pain_rating ?? '';
@@ -808,7 +810,12 @@ function UpSertAmbulatoryData() {
         type: 'POST',
         success: function (result) {
             if (result.success) {
-
+                document.getElementById("preop_bp").value = data.BP;
+                document.getElementById("preop_rr").value = data.RR;
+                document.getElementById("preop_hr").value = data.HR;
+                document.getElementById("preop_temp").value = data.TEMP;
+                document.getElementById("preop_height").value = data.HT;
+                document.getElementById("preop_weight").value = data.WT;
                 promptSuccess('Result', result.message);
                 loaddata();
 
