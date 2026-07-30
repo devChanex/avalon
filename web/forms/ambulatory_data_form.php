@@ -24,13 +24,15 @@
             <tr>
                 <!-- First column -->
                 <td style="border: 1px solid black; padding: 2px; "><label style="font-size:10px">Patient
-                        No:</label><strong><span class="auto-span" id="patientno" style="margin-left:20px; font-size:12px"></span>
+                        No:</label><strong><span class="auto-span" id="patientno"
+                            style="margin-left:20px; font-size:12px"></span>
                     </strong></td>
                 <td style="border: 1px solid black; padding: 2px; "><label
                         style="font-size:10px">CaseNo:</label><strong><span class="auto-span" id="caseno"
                             style="margin-left:20px; font-size:12px"></span> </strong></td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px; "><label style="font-size:10px">Arrival
-                        Date/Time:</label><br><strong><span class="auto-span" id="arrival" style="margin-left:20px; font-size:12px"></span>
+                        Date/Time:</label><br><strong><span class="auto-span" id="arrival"
+                            style="margin-left:20px; font-size:12px"></span>
                     </strong></td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;"><label style="font-size:10px">Attending
                         Physician:</label><strong><span class="auto-span" id="physician"
@@ -45,12 +47,12 @@
                 <td colspan="2"
                     style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">PHIC No.: </label><strong><span class="auto-span" id="phic_no"
-                        style="margin-left:20px; font-size:12px">
-                    </span></strong>
+                            style="margin-left:20px; font-size:12px">
+                        </span></strong>
                 </td>
                 <td colspan="2" style="border-left: 1px solid black; border-right: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Member Type:</label><strong><span class="auto-span" id="membertype"
-                        style="margin-left:20px; font-size:12px"></span></strong>
+                            style="margin-left:20px; font-size:12px"></span></strong>
                 </td>
 
             </tr>
@@ -69,7 +71,8 @@
                     </span>
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">Age:</label><span class="auto-span" id="age" style="margin-left:20px; font-size:12px">
+                    <label style="font-size:10px">Age:</label><span class="auto-span" id="age"
+                        style="margin-left:20px; font-size:12px">
                     </span>
                 </td>
 
@@ -105,7 +108,8 @@
 
             </tr>
             <tr>
-                <td colspan="2" style="border: 1px solid black; padding: 2px; word-break: break-word; white-space: normal;">
+                <td colspan="2"
+                    style="border: 1px solid black; padding: 2px; word-break: break-word; white-space: normal;">
                     <label style="font-size:10px">Present Address:</label><span class="auto-span" id="present_address"
                         style="margin-left:20px; font-size:10px; overflow-wrap: break-word; word-break: break-word; white-space: normal;">
                     </span>
@@ -214,23 +218,27 @@
 
             <tr>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">BP:</label><span class="auto-span" id="bp" style="margin-left:20px ; font-size:12px">
+                    <label style="font-size:10px">BP:</label><span class="auto-span" id="bp"
+                        style="margin-left:20px ; font-size:12px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">PR:</label><span class="auto-span" id="pr" style="margin-left:20px ; font-size:12px">
+                    <label style="font-size:10px">PR:</label><span class="auto-span" id="pr"
+                        style="margin-left:20px ; font-size:12px">
+                    </span>
+
+                </td>
+
+                <td style="border: 1px solid black; padding: 2px;">
+                    <label style="font-size:10px">RR:</label><span class="auto-span" id="rr"
+                        style="margin-left:20px; font-size:12px">
                     </span>
 
                 </td>
                 <td style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Temp:</label><span class="auto-span" id="temp"
                         style="margin-left:20px; font-size:12px">
-                    </span>
-
-                </td>
-                <td style="border: 1px solid black; padding: 2px;">
-                    <label style="font-size:10px">RR:</label><span class="auto-span" id="rr" style="margin-left:20px; font-size:12px">
                     </span>
 
                 </td>
