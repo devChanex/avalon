@@ -7,6 +7,11 @@ fields.forEach(f => populateFieldsFromQuery(f.ref, f.defaultValue));
 populateDataList('', 'patientOptions', 'datalist-patient', 'v1');
 populateDataList('', 'physicianOptions', 'datalist-physician', 'v2');
 loaddata();
+
+initCKEditor('prescription', {
+    height: 250,
+    defaultContent: defaultPrescription
+});
 function loaddata() {
     document.getElementById("loaderOverlay").style.display = "flex";
     var sortBy = getQueryParam('sortBy');
@@ -59,7 +64,12 @@ function loaddata() {
                         document.getElementById("patientname").value = rowdata.fullname;
                         document.getElementById("pid").value = rowdata.pid;
                         document.getElementById("physician").value = rowdata.physician
-                        document.getElementById("prescription").value = rowdata.prescription;
+                        // document.getElementById("prescription").value = rowdata.prescription;
+                        CKEDITOR.instances.prescription.setData(
+                            rowdata.prescription && rowdata.prescription.trim() !== ''
+                                ? rowdata.prescription
+                                : defaultPrescription
+                        );
 
 
                         // Show modal (Bootstrap 5 way)
@@ -127,13 +137,14 @@ function pageRefresh(key) {
 
 
 function UpSertData() {
-
+    const rawHtml = CKEDITOR.instances.prescription.getData();
+    const content = compressHtml(rawHtml);
     var data = {
 
         recordid: document.getElementById("recordid").value.trim(),
         prescription_date: document.getElementById("prescription_date").value.trim(),
         pid: document.getElementById("pid").value.trim(),
-        prescription: document.getElementById("prescription").value.trim(),
+        prescription: content,
         physician: document.getElementById("physician").value.trim(),
         next_appointment: document.getElementById("next_appointment").value.trim()
     };
@@ -195,7 +206,11 @@ function clearModal() {
     document.getElementById("patientname").value = "";
     document.getElementById("pid").value = "";
     document.getElementById("physician").value = "";
-    document.getElementById("prescription").value = "";
+
+    initCKEditor('prescription', {
+        height: 250,
+        defaultContent: defaultPrescription
+    });
 
 }
 function openModal() {

@@ -296,14 +296,16 @@ require_once 'properties.php';
     <script src="dist/js/theme.min.js"></script>
     <!-- <script src="js/datatables.js"></script> -->
     <script src="node_modules/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
-
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
 
 
     <!-- other plugins -->
+    <script src="scripts/constants-v2.js"></script>
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v6.js"></script>
-    <script src="scripts/prescription-v3.js"></script>
+    <script src="scripts/prescription-v4.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

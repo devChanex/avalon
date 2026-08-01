@@ -129,3 +129,24 @@ const defaultInstrumentCount = `
     </tbody>
 </table>
 `;
+
+
+const defaultPrescription = `
+<table border="1" width="100%" cellspacing="0" cellpadding="5">
+    <thead>
+        <tr>
+            <th style="width:150px;">Generic Name</th>
+            <th style="width:150px;">Brand Name</th>
+             <th style="width:100px;">Dosage</th>
+              <th style="width:100px;">Preparation</th>
+              <th style="width:100px;">No. of Units</th>
+              <th>Instructions</th>
+             
+        </tr>
+    </thead>
+    <tbody>
+        ${'<tr><td style="width:150px;">&nbsp;</td><td style="width:150px;">&nbsp;</td><td style="width:100px;">&nbsp;</td><td style="width:100px;">&nbsp;</td><td style="width:100px;">&nbsp;</td><td>&nbsp;</td></tr>'.repeat(5)}
+    </tbody>
+</table>
+
+`;
