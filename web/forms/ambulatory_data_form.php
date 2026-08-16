@@ -158,7 +158,7 @@
             </tr>
             <tr>
 
-                <td colspan="3" style="border: 1px solid black; padding: 4px;">
+                <td colspan="6" style="border: 1px solid black; padding: 4px;">
                     <label style="font-size:10px;">Current Medication:</label>
                     <span id="currentmedication" style="margin-left: 10px; font-size: 12px;"></span>
                 </td>
