@@ -172,7 +172,7 @@
                         understand the possible benefits and risks associated with it.
                     </div>
 
-                    <div class="who-signature" style="margin-top:50px;">
+                    <div class="who-signature" style="margin-top:20px;">
                         <div id="fullname2" class="sig-name" style="font-size:12px;"></div>
                         <div class="long-sig-line"></div>
                         <div class="sig-role">Signature over Printed Name / Date & Time<br>Patient / Guardian</div>
