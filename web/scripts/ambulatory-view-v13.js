@@ -237,9 +237,11 @@ function loaddata() {
                     document.getElementById("preop_dose").value = rowdata.last_dose ?? '';
                     document.getElementById("preop_diagnosis").value = rowdata.diagnosis ?? '';
                 });
-
+                let tab2_02sat = '';
+                let tab2_lmp = '';
                 result.ambulatorydata.forEach(rowdata => {
-
+                    tab2_02sat = rowdata.o2sat;
+                    tab2_lmp = rowdata.lmp;
                     // IDs & References
                     document.getElementById("amdataid").value = rowdata.amdataid ?? '';
                     document.getElementById("anesthesiologist").value = rowdata.anesthesiologist ?? '';
@@ -257,6 +259,7 @@ function loaddata() {
                     document.getElementById("preop_bp").value = document.getElementById("tab2_bp").value;
                     document.getElementById("preop_rr").value = document.getElementById("tab2_rr").value;
                     document.getElementById("preop_hr").value = document.getElementById("tab2_pr").value;
+
                     document.getElementById("preop_temp").value = document.getElementById("tab2_temp").value;
                     document.getElementById("preop_height").value = document.getElementById("tab2_height").value;
                     document.getElementById("preop_weight").value = document.getElementById("tab2_weight").value;
@@ -410,7 +413,9 @@ function loaddata() {
                     tbodyinstrument.appendChild(clone);
                 });
 
+                document.getElementById("tab2_o2sat").value = tab2_02sat ?? document.getElementById("preop_o2sat").value;
 
+                document.getElementById("tab2_lmp").value = tab2_lmp ?? document.getElementById("preop_lmp").value;
 
 
                 setTimeout(function () {
@@ -771,7 +776,10 @@ function UpSertAmbulatoryData() {
         rr: document.getElementById("tab2_rr").value.trim(),
         height: document.getElementById("tab2_height").value.trim(),
         weight: document.getElementById("tab2_weight").value.trim(),
+        lmp: document.getElementById("tab2_lmp").value.trim(),
+        o2sat: document.getElementById("tab2_o2sat").value.trim(),
         pain_rating: document.getElementById("painScaleInput").value.trim(),
+
         // Additional notes
         illness_history: document.getElementById("tab2_illness_history").value.trim(),
         past_medical_history: document.getElementById("tab2_past_medical_history").value.trim(),
@@ -816,6 +824,8 @@ function UpSertAmbulatoryData() {
                 document.getElementById("preop_temp").value = data.TEMP;
                 document.getElementById("preop_height").value = data.HT;
                 document.getElementById("preop_weight").value = data.WT;
+                document.getElementById("preop_lmp").value = data.lmp;
+                document.getElementById("preop_o2sat").value = data.o2sat;
                 promptSuccess('Result', result.message);
                 loaddata();
 

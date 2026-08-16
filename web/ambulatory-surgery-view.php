@@ -593,21 +593,28 @@ require_once 'properties.php';
                                         <br>
                                         <strong>Initial Vital Signs:</strong>
                                         <div class="row">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label for="tab2_bp">Blood Pressure (BP):</label>
                                                     <input type="text" class="form-control" id="tab2_bp"
                                                         placeholder="Blood Pressure">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label for="tab2_pr">Pulse Rate (PR):</label>
                                                     <input type="text" class="form-control" id="tab2_pr"
                                                         placeholder="O2 Saturation">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label for="tab2_height">O2 Sat:</label>
+                                                    <input type="text" class="form-control" id="tab2_o2sat"
+                                                        placeholder="O2 Sat">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label for="tab2_height">Height (cm):</label>
                                                     <input type="text" class="form-control" id="tab2_height"
@@ -620,14 +627,14 @@ require_once 'properties.php';
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label for="tab2_temp">Temperature:</label>
                                                     <input type="text" class="form-control" id="tab2_temp"
                                                         placeholder="Temperature">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label for="tab2_rr">Respiratory Rate (RR):</label>
                                                     <input type="text" class="form-control" id="tab2_rr"
@@ -635,9 +642,15 @@ require_once 'properties.php';
                                                 </div>
                                             </div>
 
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label for="tab2_height">LMP:</label>
+                                                    <input type="text" class="form-control" id="tab2_lmp"
+                                                        placeholder="LMP">
+                                                </div>
+                                            </div>
 
-
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label for="tab2_weight">Weight (kg):</label>
                                                     <input type="text" class="form-control" id="tab2_weight"
@@ -1649,7 +1662,7 @@ require_once 'properties.php';
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/constants-v2.js"></script>
     <script src="scripts/dynamicScripts-v6.js"></script>
-    <script src="scripts/ambulatory-view-v12.js"></script>
+    <script src="scripts/ambulatory-view-v13.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 
