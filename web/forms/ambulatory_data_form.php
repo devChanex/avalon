@@ -217,7 +217,7 @@
             </tr>
 
             <tr>
-                <td style="border: 1px solid black; padding: 2px;">
+                <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">BP:</label><span class="auto-span" id="bp"
                         style="margin-left:20px ; font-size:12px">
                     </span>
@@ -236,8 +236,24 @@
                     </span>
 
                 </td>
-                <td style="border: 1px solid black; padding: 2px;">
+                <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Temp:</label><span class="auto-span" id="temp"
+                        style="margin-left:20px; font-size:12px">
+                    </span>
+
+                </td>
+
+            <tr>
+
+            <tr>
+                <td colspan="2" style="border: 1px solid black; padding: 2px;">
+                    <label style="font-size:10px">LMP:</label><span class="auto-span" id="lmp"
+                        style="margin-left:20px; font-size:12px">
+                    </span>
+
+                </td>
+                <td style="border: 1px solid black; padding: 2px;">
+                    <label style="font-size:10px">O2 Sat:</label><span class="auto-span" id="o2sat"
                         style="margin-left:20px; font-size:12px">
                     </span>
 
@@ -248,17 +264,17 @@
                     </span>
 
                 </td>
-                <td style="border: 1px solid black; padding: 2px;">
+                <td colspan="2" style="border: 1px solid black; padding: 2px;">
                     <label style="font-size:10px">Weight:</label><span class="auto-span" id="weight"
                         style="margin-left:20px; font-size:12px">
                     </span>
 
                 </td>
-            <tr>
-                <td colspan="6" style="border: 1px solid black; padding: 4px;">
-                    <label style="font-size:10px;">History of Illness:</label><br>
-                    <span id="illness_history" style="margin-left: 10px; font-size: 12px;"></span>
-                </td>
+            <tr></tr>
+            <td colspan="6" style="border: 1px solid black; padding: 4px;">
+                <label style="font-size:10px;">History of Illness:</label><br>
+                <span id="illness_history" style="margin-left: 10px; font-size: 12px;"></span>
+            </td>
 
 
 
