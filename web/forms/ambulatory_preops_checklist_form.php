@@ -5,6 +5,20 @@
     <meta charset="UTF-8">
     <title>Consultation Record</title>
     <link rel="stylesheet" href="../ccss/forms.css">
+    <style>
+        .preop-checkbox {
+            width: 14px;
+            height: 14px;
+            margin: 0 4px 0 0;
+            vertical-align: middle;
+            accent-color: #000;
+            cursor: pointer;
+        }
+
+        .checklist-item {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,28 +37,36 @@
 
         <div class="two-column">
             <div class="col">
-                <div><span class="label">☐ Patient Name:</span> <span class="value" id="fullname"></span></div>
-                <div><span class="label">☐ Date of Birth:</span> <span class="value" id="birthDate"></span></div>
-                <div><span class="label">☐ Diagnosis:</span> <span class="value" id="diagnosis"></span></div>
+                <div><label class="label"><input type="checkbox" class="preop-checkbox">Patient Name:</label> <span
+                        class="value" id="fullname"></span></div>
+                <div><label class="label"><input type="checkbox" class="preop-checkbox">Date of Birth:</label> <span
+                        class="value" id="birthDate"></span></div>
+                <div><label class="label"><input type="checkbox" class="preop-checkbox">Diagnosis:</label> <span
+                        class="value" id="diagnosis"></span></div>
             </div>
 
             <div class="col">
-                <div><span class="label">☐ Gender:</span> <span class="value" id="gender"></span></div>
-                <div><span class="label">☐ Age:</span> <span class="value" id="age"></span></div>
+                <div><label class="label"><input type="checkbox" class="preop-checkbox">Gender:</label> <span
+                        class="value" id="gender"></span></div>
+                <div><label class="label"><input type="checkbox" class="preop-checkbox">Age:</label> <span
+                        class="value" id="age"></span></div>
             </div>
         </div>
     </div>
 
     <div class="section">
         <strong>CONSENT AND DOCUMENTATION:</strong><br>
-        <div class="checklist-item">☐ Surgical consent form signed / Anesthesia consent form signed</div>
-        <div class="checklist-item">☐ Procedure verified with patient</div>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Surgical consent form signed /
+            Anesthesia consent form signed</label>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Procedure verified with
+            patient</label>
         <div class="checklist-item">____Surgical site marked by surgeon (if applicable)</div>
         <div class="checklist-item">____Pre-op checklist completed and signed</div>
     </div>
     <div class="section">
         <strong>CLINICAL ASSESSMENTS:</strong><br>
-        <div class="checklist-item">☐ Initial vital signs checked and recorded</div>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Initial vital signs checked and
+            recorded</label>
 
         <div class="vitals-grid">
             <div>BP: <span class="underline" id="BP"></span></div>
@@ -58,39 +80,51 @@
             <div>WT: <span class="underline" id="WT"></span></div>
         </div>
 
-        <div class="checklist-item">☐ Allergies reviewed and documented: <span class="underline" id="allergies"></span>
-        </div>
-        <div class="checklist-item">☐ Last Meal and Fluid: <span class="underline-2" id="last_meal"></span></div>
-        <div class="checklist-item">☐ Laboratory and Diagnostic results in: <span class="underline-2"
-                id="lab_result"></span></div>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Allergies reviewed and documented:
+            <span class="underline" id="allergies"></span></label>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Last Meal and Fluid: <span
+                class="underline-2" id="last_meal"></span></label>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Laboratory and Diagnostic results
+            in: <span class="underline-2" id="lab_result"></span></label>
     </div>
+
     <div class="section">
         <strong>MEDICATIONS:</strong><br>
-        <div class="checklist-item">☐ Medications reviewed and documented</div>
-        <div class="checklist-item">☐ Anticoagulant / anti-platelet managed appropriately; Last dose given (date and
-            time): <span class="underline-2" id="last_dose"></span></div>
-        <div class="checklist-item">☐ Pre-op medications given (e.g., antibiotics, sedatives)</div>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Medications reviewed and
+            documented</label>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Anticoagulant / anti-platelet
+            managed appropriately; Last dose given (date and time): <span class="underline-2"
+                id="last_dose"></span></label>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Pre-op medications given (e.g.,
+            antibiotics, sedatives)</label>
     </div>
 
     <div class="section">
         <strong>SKIN AND HYGIENE:</strong><br>
-        <div class="checklist-item">☐ Nail polish, makeup, jewelry removed</div>
-        <div class="checklist-item">☐ Dentures, contact lenses, hearing aids removed or documented</div>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Nail polish, makeup, jewelry
+            removed</label>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Dentures, contact lenses, hearing
+            aids removed or documented</label>
     </div>
 
     <div class="section">
         <strong>PERSONAL PREPARATION AND PATIENT UNDERSTANDING:</strong><br>
-        <div class="checklist-item">☐ Valuables secured</div>
-        <div class="checklist-item">☐ Informed of estimated procedure</div>
-        <div class="checklist-item">☐ Patient explained the procedure, risks, and benefits discussed</div>
-        <div class="checklist-item">☐ Patient questions addressed</div>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Valuables secured</label>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Informed of estimated
+            procedure</label>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Patient explained the procedure,
+            risks, and benefits discussed</label>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Patient questions addressed</label>
     </div>
 
     <div class="section">
         <strong>FINAL CONFIRMATIONS (BEFORE TRANSFER):</strong><br>
-        <div class="checklist-item">☐ Correct procedure, site, and patient confirmed</div>
-        <div class="checklist-item">☐ Surgical team notified and ready</div>
-        <div class="checklist-item">☐ Imaging and required equipment available</div>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Correct procedure, site, and
+            patient confirmed</label>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Surgical team notified and
+            ready</label>
+        <label class="checklist-item"><input type="checkbox" class="preop-checkbox">Imaging and required equipment
+            available</label>
     </div>
 
 
@@ -164,18 +198,18 @@
             window.print();
         });
 
-        // ✅ Close window after print or cancel
-        window.onafterprint = () => {
-            window.close();
-        };
+        // // ✅ Close window after print or cancel
+        // window.onafterprint = () => {
+        //     window.close();
+        // };
 
-        // ✅ Extra safety for some browsers
-        const mediaQueryList = window.matchMedia('print');
-        mediaQueryList.addEventListener('change', (mql) => {
-            if (!mql.matches) {
-                window.close();
-            }
-        });
+        // // ✅ Extra safety for some browsers
+        // const mediaQueryList = window.matchMedia('print');
+        // mediaQueryList.addEventListener('change', (mql) => {
+        //     if (!mql.matches) {
+        //         window.close();
+        //     }
+        // });
     </script>
 
 

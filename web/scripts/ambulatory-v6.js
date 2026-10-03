@@ -66,6 +66,9 @@ function loaddata() {
                     clone.querySelector(".view-data-btn").addEventListener("click", function () {
                         window.location.href = "ambulatory-surgery-view.php?ref=" + rowdata.amid + "&pid=" + rowdata.pid;
                     });
+                    clone.querySelector(".delete-data-btn").addEventListener("click", function () {
+                        deleteAmbulatoryRecord(rowdata.amid);
+                    });
 
 
                     tbody.appendChild(clone);
@@ -86,6 +89,35 @@ function loaddata() {
 
 
 
+}
+
+function deleteAmbulatoryRecord(amid) {
+    if (!confirm("Are you sure you want to delete ambulatory surgery record AS" + formatId(amid) + "?")) {
+        return;
+    }
+
+    var fd = new FormData();
+    fd.append('service', 'ambulatory-deleteService');
+    fd.append('amid', amid);
+
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+            if (result.success) {
+                promptSuccess('Result', result.message);
+                loaddata();
+            } else {
+                promptError('Result', result.message);
+            }
+        },
+        error: function (xhr) {
+            promptError('Failed Result:', "Error: " + (xhr.responseJSON?.message || xhr.responseText));
+        }
+    });
 }
 
 function loadPatientDetails() {

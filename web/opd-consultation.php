@@ -142,6 +142,10 @@ require_once 'properties.php';
                                                 <button type="button" class="btn social-btn bg-success print-data-btn">
                                                     <i class="ik ik-printer"></i>
                                                 </button>
+                                                <button type="button" class="btn social-btn bg-danger delete-data-btn"
+                                                    aria-label="Delete OPD consultation record" title="Delete">
+                                                    <i class="ik ik-trash"></i>
+                                                </button>
 
 
                                             </div>
@@ -417,7 +421,7 @@ require_once 'properties.php';
     <script src="scripts/promptScript-v1.js"></script>
     <script src="scripts/topbarScript-v1.js"></script>
     <script src="scripts/dynamicScripts-v6.js"></script>
-    <script src="scripts/opd-consultation-v6.js"></script>
+    <script src="scripts/opd-consultation-v7.js"></script>
     <script src="scripts/tableScripts-v1.js"></script>
 
 

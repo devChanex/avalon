@@ -105,6 +105,9 @@ function loaddata() {
                         // Remove form after submission
                         document.body.removeChild(form);
                     });
+                    clone.querySelector(".delete-data-btn").addEventListener("click", function () {
+                        deleteOpdConsultation(rowdata.opdcid);
+                    });
 
                     tbody.appendChild(clone);
                 });
@@ -124,6 +127,35 @@ function loaddata() {
 
 
 
+}
+
+function deleteOpdConsultation(opdcid) {
+    if (!confirm("Are you sure you want to delete OPD consultation record OPD" + formatId(opdcid) + "?")) {
+        return;
+    }
+
+    var fd = new FormData();
+    fd.append('service', 'opd-consultation-deleteService');
+    fd.append('opdcid', opdcid);
+
+    $.ajax({
+        url: "api.php",
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+            if (result.success) {
+                promptSuccess('Result', result.message);
+                loaddata();
+            } else {
+                promptError('Result', result.message);
+            }
+        },
+        error: function (xhr) {
+            promptError('Failed Result:', "Error: " + (xhr.responseJSON?.message || xhr.responseText));
+        }
+    });
 }
 
 function loadPatientDetails() {
