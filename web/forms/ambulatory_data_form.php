@@ -299,6 +299,12 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="6" style="border: 1px solid black; padding: 4px;">
+                    <label style="font-size:10px;">Surgical Plan of Care:</label><br>
+                    <span id="surgical_plan" style="margin-left: 10px; font-size: 12px;"></span>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="6" style="border: 1px solid black; padding: 6px;">
                     <label style="font-size:10px;">Type of Anesthesia:</label><br>
                     <div id="anesthesia" style="margin-left: 10px; font-size: 12px;  width: 100%;">

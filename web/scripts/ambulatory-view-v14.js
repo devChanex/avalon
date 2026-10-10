@@ -423,7 +423,7 @@ function loaddata() {
                 }, 500); // <-- simulate 2 sec delay
             }
 
-
+            console.log(0.1 + 0.2);
         },
         error: function (xhr) {
             console.log("Error: " + xhr.responseText);
@@ -856,6 +856,7 @@ function UpSertAmbulatoryData() {
                 result.record.allergies = result.patient.allergies;
                 result.record.currentmedication = result.patient.currentmedication;
                 result.record.nationality = result.patient.nationality;
+                result.record.surgical_plan = document.getElementById("tab2_surgical_plan").value;
 
 
 
