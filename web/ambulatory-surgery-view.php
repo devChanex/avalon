@@ -515,7 +515,7 @@ require_once 'properties.php';
                                                     <datalist id="representative_options">
                                                         <option value="Jennifer Ibañez">Jennifer Ibañez</option>
                                                         <option value="EdMark Macaraya">EdMark Macaraya</option>
-                                                        <option value="Johnny boy b. Presaldo">Johnny boy b. Presaldo</option>
+                                                        <option value="Johnny Boy B. Presaldo">Johnny Boy B. Presaldo</option>
                                                     </datalist>
                                                 </div>
                                             </div>
