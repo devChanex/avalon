@@ -31,7 +31,7 @@
                         style="font-size:10px">CaseNo:</label><strong><span class="auto-span" id="caseno"
                             style="margin-left:20px; font-size:12px"></span> </strong></td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px; "><label style="font-size:10px">Arrival
-                        Date/Time:</label><br><strong><span class="auto-span" id="arrival"
+                        Date / Time:</label><br><strong><span class="auto-span" id="arrival"
                             style="margin-left:20px; font-size:12px"></span>
                     </strong></td>
                 <td colspan="2" style="border: 1px solid black; padding: 2px;"><label style="font-size:10px">Attending
@@ -350,7 +350,7 @@
 
                     let value = row[key] ?? "N/A";
 
-                    // ✅ Format the datetime nicely if key is 'procedure_datetime'
+                    // Format arrival as a date only
                     if (key === "arrival" && value) {
                         const dt = new Date(value);
                         if (!isNaN(dt)) {
@@ -358,12 +358,7 @@
                             const day = String(dt.getDate()).padStart(2, '0');
                             const year = dt.getFullYear();
 
-                            let hours = dt.getHours();
-                            const minutes = String(dt.getMinutes()).padStart(2, '0');
-                            const ampm = hours >= 12 ? 'PM' : 'AM';
-                            hours = hours % 12 || 12; // Convert 0 -> 12 for 12-hour clock
-
-                            value = `${month}-${day}-${year} ${hours}:${minutes} ${ampm}`;
+                            value = `${month}-${day}-${year}`;
                         }
                     }
                     if (key === "physician") {
