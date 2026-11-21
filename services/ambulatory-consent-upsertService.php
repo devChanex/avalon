@@ -90,7 +90,8 @@ class ServiceClass
                     return [
                         "success" => true,
                         "message" => "Consent recorded successfully.",
-                        "data" => $record
+                        "data" => $record,
+                        "record" => $record
                     ];
                 } catch (Exception $e) {
                     $this->conn->rollBack();
